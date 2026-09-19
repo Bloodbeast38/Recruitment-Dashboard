@@ -45,7 +45,6 @@
   <header class="sticky top-0 z-40 bg-[#0f172a]/95 backdrop-blur-md border-b border-slate-800/80 px-4 lg:px-8 py-3.5 shadow-xl">
     <div class="max-w-[1700px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
       
-      <!-- Brand & Title -->
       <div class="flex items-center gap-3.5">
         <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-brand-500/20 text-white font-bold">
           <i data-lucide="briefcase" class="w-6 h-6"></i>
@@ -67,28 +66,23 @@
         </div>
       </div>
 
-      <!-- Action Buttons -->
       <div class="flex flex-wrap items-center gap-2.5 w-full md:w-auto justify-end no-print">
-        <!-- Live OneDrive / Sync Modal Button -->
         <button onclick="openSyncModal()" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700/80 hover:border-slate-600 transition shadow-sm">
           <i data-lucide="cloud" class="w-4 h-4 text-cyan-400"></i>
           <span>Sync OneDrive</span>
         </button>
 
-        <!-- Local File Ingestion -->
         <label class="cursor-pointer inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700/80 hover:border-slate-600 transition shadow-sm">
           <i data-lucide="upload" class="w-4 h-4 text-emerald-400"></i>
           <span>Upload .xlsx</span>
           <input type="file" id="excelFileInput" accept=".xlsx, .xls" class="hidden" onchange="handleFileUpload(event)" />
         </label>
 
-        <!-- Export CSV Button -->
         <button onclick="exportFilteredCSV()" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700/80 hover:border-slate-600 transition shadow-sm">
           <i data-lucide="download" class="w-4 h-4 text-amber-400"></i>
           <span>Export CSV</span>
         </button>
 
-        <!-- Management PDF Print Snapshot -->
         <button onclick="window.print()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold shadow-lg shadow-brand-500/25 transition">
           <i data-lucide="printer" class="w-4 h-4"></i>
           <span>Management Report</span>
@@ -121,22 +115,19 @@
         </button>
       </div>
 
-      <!-- Quick Search input right on tab bar -->
       <div class="relative min-w-[240px] hidden md:block">
         <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
-        <input type="text" id="quickSearchInput" placeholder="Quick search candidate, role, dept..." oninput="handleSearch(this.value)" class="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-900 border border-slate-700/80 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition" />
+        <input type="text" id="quickSearchInput" placeholder="Quick search candidate, role, dept..." oninput="handleSearch(this.value)" class="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-900 border border-slate-700/80 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500 transition" />
       </div>
     </div>
   </header>
 
-  <!-- Global Filter & Slicer Control Ribbon -->
+  <!-- Global Filter Ribbon -->
   <section class="bg-[#0e1626] border-b border-slate-800/80 px-4 lg:px-8 py-3 sticky top-[108px] z-30 shadow-md no-print">
     <div class="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-3">
       
-      <!-- Primary Multi-Slicers -->
       <div class="flex flex-wrap items-center gap-3">
-        
-        <!-- Geography Slicer -->
+        <!-- Geo Slicer -->
         <div class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-inner">
           <span class="text-[11px] font-semibold text-slate-400 px-2.5 flex items-center gap-1.5">
             <i data-lucide="globe" class="w-3.5 h-3.5 text-cyan-400"></i> Geo:
@@ -158,32 +149,30 @@
           <button onclick="setQuarterFilter('Q4')" id="q-Q4" class="q-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition text-slate-400 hover:text-white hover:bg-slate-800">Q4</button>
         </div>
 
-        <!-- Department Select -->
+        <!-- Dept Select -->
         <div class="relative">
-          <select id="deptSelect" onchange="setDeptFilter(this.value)" class="bg-slate-900 text-xs font-medium border border-slate-800 rounded-xl px-3 py-1.5 text-slate-300 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 pr-8 cursor-pointer">
+          <select id="deptSelect" onchange="setDeptFilter(this.value)" class="bg-slate-900 text-xs font-medium border border-slate-800 rounded-xl px-3 py-1.5 text-slate-300 focus:outline-none focus:border-brand-500 pr-8 cursor-pointer">
             <option value="ALL">All Departments</option>
           </select>
         </div>
 
         <!-- Recruiter Select -->
         <div class="relative">
-          <select id="recruiterSelect" onchange="setRecruiterFilter(this.value)" class="bg-slate-900 text-xs font-medium border border-slate-800 rounded-xl px-3 py-1.5 text-slate-300 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 pr-8 cursor-pointer">
+          <select id="recruiterSelect" onchange="setRecruiterFilter(this.value)" class="bg-slate-900 text-xs font-medium border border-slate-800 rounded-xl px-3 py-1.5 text-slate-300 focus:outline-none focus:border-brand-500 pr-8 cursor-pointer">
             <option value="ALL">All Recruiters</option>
           </select>
         </div>
 
-        <!-- Hiring Intent Select (New vs Replacement) -->
+        <!-- Hire Type Select -->
         <div class="relative">
-          <select id="hireTypeSelect" onchange="setHireTypeFilter(this.value)" class="bg-slate-900 text-xs font-medium border border-slate-800 rounded-xl px-3 py-1.5 text-slate-300 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 pr-8 cursor-pointer">
+          <select id="hireTypeSelect" onchange="setHireTypeFilter(this.value)" class="bg-slate-900 text-xs font-medium border border-slate-800 rounded-xl px-3 py-1.5 text-slate-300 focus:outline-none focus:border-brand-500 pr-8 cursor-pointer">
             <option value="ALL">All Hiring Intents (New & Backfill)</option>
             <option value="New">✨ New Growth Headcount</option>
             <option value="Replacement">🔄 Replacement Backfill</option>
           </select>
         </div>
-
       </div>
 
-      <!-- Reset & Active Records Count -->
       <div class="flex items-center gap-3 ml-auto">
         <span id="filteredRecordCount" class="text-xs font-medium text-slate-400">
           Showing <span class="text-white font-bold" id="countDisplay">146</span> positions
@@ -196,17 +185,16 @@
 
     </div>
 
-    <!-- Interactive Active Filter Chips -->
+    <!-- Active Filter Chips -->
     <div id="activeChipsContainer" class="max-w-[1700px] mx-auto mt-2.5 flex flex-wrap items-center gap-2 empty:hidden"></div>
   </section>
 
-  <!-- Main Content Body -->
+  <!-- Main Content -->
   <main class="flex-1 max-w-[1700px] w-full mx-auto p-4 lg:p-8 space-y-6">
 
-    <!-- KPI Scorecards (Always visible on summary, clickable to filter) -->
+    <!-- KPI Cards -->
     <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
       
-      <!-- Total Tracked -->
       <div onclick="handleCardClick('TOTAL')" class="kpi-card cursor-pointer group bg-gradient-to-br from-slate-900 to-[#141e33] border border-slate-800/90 hover:border-brand-500/50 p-4 rounded-2xl shadow-lg transition duration-200">
         <div class="flex items-center justify-between text-slate-400 mb-2">
           <span class="text-[11px] font-bold uppercase tracking-wider">Total Tracked</span>
@@ -221,7 +209,6 @@
         </div>
       </div>
 
-      <!-- Joined YTD -->
       <div onclick="handleCardClick('Joined')" class="kpi-card cursor-pointer group bg-gradient-to-br from-slate-900 to-[#122b26] border border-slate-800/90 hover:border-emerald-500/50 p-4 rounded-2xl shadow-lg transition duration-200">
         <div class="flex items-center justify-between text-slate-400 mb-2">
           <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-400">Joined YTD</span>
@@ -236,7 +223,6 @@
         </div>
       </div>
 
-      <!-- Offers in Hand -->
       <div onclick="handleCardClick('Offered')" class="kpi-card cursor-pointer group bg-gradient-to-br from-slate-900 to-[#272410] border border-slate-800/90 hover:border-amber-500/50 p-4 rounded-2xl shadow-lg transition duration-200">
         <div class="flex items-center justify-between text-slate-400 mb-2">
           <span class="text-[11px] font-bold uppercase tracking-wider text-amber-400">Offers in Hand</span>
@@ -251,7 +237,6 @@
         </div>
       </div>
 
-      <!-- Active Pipeline -->
       <div onclick="handleCardClick('ACTIVE_PIPE')" class="kpi-card cursor-pointer group bg-gradient-to-br from-slate-900 to-[#122838] border border-slate-800/90 hover:border-cyan-500/50 p-4 rounded-2xl shadow-lg transition duration-200">
         <div class="flex items-center justify-between text-slate-400 mb-2">
           <span class="text-[11px] font-bold uppercase tracking-wider text-cyan-400">Active Pipeline</span>
@@ -259,14 +244,13 @@
             <i data-lucide="git-pull-request" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="text-2xl lg:text-3xl font-extrabold text-cyan-400" id="kpiActive">10</div>
+        <div class="text-2xl lg:text-3xl font-extrabold text-cyan-400" id="kpiActive">7</div>
         <div class="mt-1 flex items-center justify-between text-[11px] text-slate-400">
           <span>In Interviews</span>
-          <span class="text-cyan-400 font-semibold" id="kpiActiveSub">Interview / L1 / HR</span>
+          <span class="text-cyan-400 font-semibold" id="kpiActiveSub">India: 5 | USA: 2</span>
         </div>
       </div>
 
-      <!-- Stalled / Freezed -->
       <div onclick="handleCardClick('HOLD_FREEZE')" class="kpi-card cursor-pointer group bg-gradient-to-br from-slate-900 to-[#2c1520] border border-slate-800/90 hover:border-rose-500/50 p-4 rounded-2xl shadow-lg transition duration-200">
         <div class="flex items-center justify-between text-slate-400 mb-2">
           <span class="text-[11px] font-bold uppercase tracking-wider text-rose-400">Stalled / On Hold</span>
@@ -274,14 +258,13 @@
             <i data-lucide="pause-circle" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="text-2xl lg:text-3xl font-extrabold text-rose-400" id="kpiHold">35</div>
+        <div class="text-2xl lg:text-3xl font-extrabold text-rose-400" id="kpiHold">37</div>
         <div class="mt-1 flex items-center justify-between text-[11px] text-slate-400">
           <span>Capacity Review</span>
           <span class="text-rose-400 font-semibold" id="kpiHoldSub">23 Freeze | 12 Suspended</span>
         </div>
       </div>
 
-      <!-- Average Time-to-Offer -->
       <div class="kpi-card bg-gradient-to-br from-slate-900 to-[#1e1c31] border border-slate-800/90 p-4 rounded-2xl shadow-lg">
         <div class="flex items-center justify-between text-slate-400 mb-2">
           <span class="text-[11px] font-bold uppercase tracking-wider text-purple-400">Avg Time-to-Offer</span>
@@ -298,15 +281,10 @@
 
     </section>
 
-    <!-- ============================================================= -->
-    <!-- TAB 1: EXECUTIVE OVERVIEW                                     -->
-    <!-- ============================================================= -->
+    <!-- TAB 1: EXECUTIVE OVERVIEW -->
     <div id="tabContent-overview" class="tab-pane space-y-6">
 
-      <!-- Growth vs Backfill Ribbon + Executive Highlights -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
-        <!-- Hiring Intent Card -->
         <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
@@ -341,7 +319,6 @@
           </div>
         </div>
 
-        <!-- Executive Velocity Metric Card -->
         <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
@@ -355,7 +332,7 @@
               <div class="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
                 <div class="text-xs text-slate-400 font-medium">Avg Sourcing-to-Offer</div>
                 <div class="text-2xl font-bold text-cyan-400 mt-1">18.7 <span class="text-xs text-slate-400">days</span></div>
-                <div class="text-[10px] text-slate-500 mt-1">From requisition open to formal offer</div>
+                <div class="text-[10px] text-slate-500 mt-1">Requisition open to formal offer</div>
               </div>
               <div class="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
                 <div class="text-xs text-slate-400 font-medium">Critical Aging Roles (>60d)</div>
@@ -372,7 +349,6 @@
           </div>
         </div>
 
-        <!-- Management Action Summary Card -->
         <div class="bg-gradient-to-br from-slate-900 to-[#141b2d] border border-brand-500/20 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
@@ -385,7 +361,7 @@
             <ul class="space-y-2.5 text-xs text-slate-300">
               <li class="flex items-start gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 flex-shrink-0"></span>
-                <span><strong>23 Positions Paused:</strong> Pending business resource capacity planning by Karuna & Dharmesh.</span>
+                <span><strong>23 Positions Paused:</strong> Awaiting resource capacity plan from Karuna & Dharmesh.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 flex-shrink-0"></span>
@@ -393,24 +369,20 @@
               </li>
               <li class="flex items-start gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-rose-400 mt-1.5 flex-shrink-0"></span>
-                <span><strong>Talent Pool Scarcity:</strong> Infosec Analyst and CFO searches require agency partnership.</span>
+                <span><strong>Talent Scarcity:</strong> Infosec Analyst and CFO searches require agency partnership.</span>
               </li>
             </ul>
           </div>
           <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-            <span class="text-slate-400">Source: TA Weekly Master File</span>
+            <span class="text-slate-400">Weekly Report Master File- 2026.xlsx</span>
             <button onclick="switchTab('challenges')" class="text-brand-400 hover:text-brand-300 font-semibold flex items-center gap-1">
               View Solutions <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </button>
           </div>
         </div>
-
       </div>
 
-      <!-- Velocity Charts Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        <!-- Joiners Velocity By Month & Quarter -->
         <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
           <div class="flex items-center justify-between mb-4">
             <div>
@@ -418,7 +390,7 @@
                 <i data-lucide="trending-up" class="w-4 h-4 text-emerald-400"></i>
                 Monthly & Quarterly Joiners Velocity (FY 2026)
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">India vs. USA onboarded capacity across calendar months</p>
+              <p class="text-xs text-slate-400 mt-0.5">India (56) vs. USA (36) onboarded capacity across calendar months</p>
             </div>
             <div class="flex items-center gap-3 text-xs">
               <span class="flex items-center gap-1 text-emerald-400"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> India</span>
@@ -430,7 +402,6 @@
           </div>
         </div>
 
-        <!-- Requisitions by Department & Squad -->
         <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
           <div class="flex items-center justify-between mb-4">
             <div>
@@ -438,18 +409,16 @@
                 <i data-lucide="bar-chart-2" class="w-4 h-4 text-brand-400"></i>
                 Requisition Volume by Department
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Volume of requisitions opened across business units</p>
+              <p class="text-xs text-slate-400 mt-0.5">Distribution of requisitions across business units</p>
             </div>
-            <span class="text-xs text-slate-400" id="topDeptLabel">Engineering leads volume</span>
+            <span class="text-xs text-slate-400">Engineering leads demand</span>
           </div>
           <div class="h-64 relative">
             <canvas id="deptDistChart"></canvas>
           </div>
         </div>
-
       </div>
 
-      <!-- Quick Runway of Upcoming Joiners (Next 30–60 Days) -->
       <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
         <div class="flex items-center justify-between mb-4">
           <div>
@@ -477,30 +446,23 @@
                 <th class="py-3 px-4">RAG</th>
               </tr>
             </thead>
-            <tbody id="offersRunwayTableBody" class="divide-y divide-slate-800/60">
-              <!-- Dynamically populated -->
-            </tbody>
+            <tbody id="offersRunwayTableBody" class="divide-y divide-slate-800/60"></tbody>
           </table>
         </div>
       </div>
 
     </div>
 
-    <!-- ============================================================= -->
-    <!-- TAB 2: VELOCITY & SLA AGING ANALYSIS                          -->
-    <!-- ============================================================= -->
+    <!-- TAB 2: VELOCITY & SLA AGING ANALYSIS -->
     <div id="tabContent-sla" class="tab-pane hidden space-y-6">
-
-      <!-- Aging SLA Distribution Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        
         <div class="bg-slate-900 border border-emerald-500/30 p-4 rounded-2xl">
           <div class="flex items-center justify-between text-slate-400">
             <span class="text-xs font-bold uppercase text-emerald-400">0 - 30 Days (On Track)</span>
             <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
           </div>
           <div class="text-3xl font-extrabold text-emerald-400 mt-2" id="aging0to30">59</div>
-          <p class="text-[11px] text-slate-400 mt-1">Active within standard hiring cycle</p>
+          <p class="text-[11px] text-slate-400 mt-1">Within standard hiring cycle</p>
         </div>
 
         <div class="bg-slate-900 border border-amber-500/30 p-4 rounded-2xl">
@@ -509,7 +471,7 @@
             <i data-lucide="alert-circle" class="w-4 h-4 text-amber-400"></i>
           </div>
           <div class="text-3xl font-extrabold text-amber-400 mt-2" id="aging31to60">25</div>
-          <p class="text-[11px] text-slate-400 mt-1">Requires interview pipeline acceleration</p>
+          <p class="text-[11px] text-slate-400 mt-1">Requires interview acceleration</p>
         </div>
 
         <div class="bg-slate-900 border border-orange-500/30 p-4 rounded-2xl">
@@ -518,7 +480,7 @@
             <i data-lucide="alert-triangle" class="w-4 h-4 text-orange-400"></i>
           </div>
           <div class="text-3xl font-extrabold text-orange-400 mt-2" id="aging61to90">13</div>
-          <p class="text-[11px] text-slate-400 mt-1">Exceeding SLA: review JD and compensation</p>
+          <p class="text-[11px] text-slate-400 mt-1">Exceeding standard SLA threshold</p>
         </div>
 
         <div class="bg-slate-900 border border-rose-500/30 p-4 rounded-2xl">
@@ -527,14 +489,11 @@
             <i data-lucide="flame" class="w-4 h-4 text-rose-400"></i>
           </div>
           <div class="text-3xl font-extrabold text-rose-400 mt-2" id="aging90Plus">41</div>
-          <p class="text-[11px] text-slate-400 mt-1">Critical capacity deficit or stalled approval</p>
+          <p class="text-[11px] text-slate-400 mt-1">Capacity deficit or frozen requisition</p>
         </div>
-
       </div>
 
-      <!-- Aging Charts & SLA Analysis -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
         <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
           <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-1">
             <i data-lucide="pie-chart" class="w-4 h-4 text-rose-400"></i>
@@ -556,10 +515,8 @@
             <canvas id="pipelineFunnelChart"></canvas>
           </div>
         </div>
-
       </div>
 
-      <!-- Critical Aging Positions Table -->
       <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
         <div class="flex items-center justify-between mb-4">
           <div>
@@ -567,7 +524,7 @@
               <i data-lucide="alert-octagon" class="w-4 h-4 text-rose-400"></i>
               Severe SLA Delay Drill-Down (Positions with >60 Days Aging)
             </h3>
-            <p class="text-xs text-slate-400 mt-0.5">High-priority requisitions requiring executive intervention or capacity unblocking</p>
+            <p class="text-xs text-slate-400 mt-0.5">High-priority requisitions requiring executive intervention</p>
           </div>
           <span class="text-xs px-2.5 py-1 rounded bg-rose-500/10 text-rose-400 border border-rose-500/30 font-semibold" id="criticalTableBadge">
             54 Positions
@@ -587,23 +544,15 @@
                 <th class="py-3 px-4">Root Cause / Comments</th>
               </tr>
             </thead>
-            <tbody id="criticalAgingTableBody" class="divide-y divide-slate-800/60">
-              <!-- Populated dynamically -->
-            </tbody>
+            <tbody id="criticalAgingTableBody" class="divide-y divide-slate-800/60"></tbody>
           </table>
         </div>
       </div>
-
     </div>
 
-    <!-- ============================================================= -->
-    <!-- TAB 3: LEADERSHIP & RECRUITER ALLOCATION                      -->
-    <!-- ============================================================= -->
+    <!-- TAB 3: LEADERSHIP & RECRUITER ALLOCATION -->
     <div id="tabContent-capacity" class="tab-pane hidden space-y-6">
-
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        <!-- Hiring Manager / Department Head Workload -->
         <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
           <div class="flex items-center justify-between mb-4">
             <div>
@@ -620,7 +569,6 @@
           </div>
         </div>
 
-        <!-- Recruiter Performance & Workload -->
         <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
           <div class="flex items-center justify-between mb-4">
             <div>
@@ -630,16 +578,14 @@
               </h3>
               <p class="text-xs text-slate-400 mt-0.5">Total requisitions handled and joined hires per recruiter</p>
             </div>
-            <span class="text-xs text-slate-400">Internal & Agency Allocation</span>
+            <span class="text-xs text-slate-400">Team Allocation</span>
           </div>
           <div class="h-72 relative">
             <canvas id="recruiterChart"></canvas>
           </div>
         </div>
-
       </div>
 
-      <!-- Recruiter Performance Scorecard Table -->
       <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
         <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-3">
           <i data-lucide="list" class="w-4 h-4 text-emerald-400"></i>
@@ -659,20 +605,14 @@
                 <th class="py-3 px-4">Conversion Rate</th>
               </tr>
             </thead>
-            <tbody id="recruiterTableBody" class="divide-y divide-slate-800/60">
-              <!-- Dynamically populated -->
-            </tbody>
+            <tbody id="recruiterTableBody" class="divide-y divide-slate-800/60"></tbody>
           </table>
         </div>
       </div>
-
     </div>
 
-    <!-- ============================================================= -->
-    <!-- TAB 4: EXECUTIVE CHALLENGES & HR MITIGATIONS                  -->
-    <!-- ============================================================= -->
+    <!-- TAB 4: EXECUTIVE CHALLENGES & HR MITIGATIONS -->
     <div id="tabContent-challenges" class="tab-pane hidden space-y-6">
-
       <div class="bg-gradient-to-br from-slate-900 to-[#1b1c2e] border border-slate-800 rounded-2xl p-6 shadow-xl">
         <div class="flex items-center justify-between mb-4">
           <div>
@@ -681,7 +621,7 @@
               Recruitment Bottlenecks & Executive HR Action Plans
             </h3>
             <p class="text-xs text-slate-400 mt-1">
-              Direct insights compiled from recruitment challenges across India & USA operations, paired with active mitigation plans.
+              Direct insights compiled from recruitment challenges across India & USA operations.
             </p>
           </div>
           <span class="text-xs px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-semibold">
@@ -690,8 +630,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
-          
-          <!-- India Bottleneck 1 -->
           <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 space-y-3">
             <div class="flex items-center justify-between">
               <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300">India • Infosec Practice</span>
@@ -699,14 +637,13 @@
             </div>
             <h4 class="text-sm font-bold text-slate-200">Infosec Analyst Offer Declines & Notice Periods</h4>
             <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-300">
-              <strong>Bottleneck:</strong> 3 candidates (Swapnil, Nitesh, Gauresh) declined offers. Severe shortage of qualified candidates with short notice periods.
+              <strong>Bottleneck:</strong> 3 candidates (Swapnil, Nitesh, Gauresh) declined offers.
             </div>
             <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300">
-              <strong>HR Solution:</strong> Opened search to specialized consulting firms. Scheduling fast-track interviews targeting candidates with active buy-out notice periods.
+              <strong>HR Solution:</strong> Opened search to specialized consulting firms.
             </div>
           </div>
 
-          <!-- India Bottleneck 2 -->
           <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 space-y-3">
             <div class="flex items-center justify-between">
               <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300">India • Payments Practice</span>
@@ -714,14 +651,13 @@
             </div>
             <h4 class="text-sm font-bold text-slate-200">Project Manager Drop-offs & Work-From-Office Preference</h4>
             <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-300">
-              <strong>Bottleneck:</strong> 2 candidates (Bhavik, Harsh) declined offers due to high notice periods and conflicting work location preferences.
+              <strong>Bottleneck:</strong> 2 candidates (Bhavik, Harsh) declined offers due to high notice periods.
             </div>
             <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300">
-              <strong>HR Solution:</strong> Activated consulting firm partners. Fast-tracked former employee (Naveen) for immediate re-hire interview with Ramesh.
+              <strong>HR Solution:</strong> Fast-tracked former employee (Naveen) for immediate re-hire interview.
             </div>
           </div>
 
-          <!-- USA Bottleneck 1 -->
           <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 space-y-3">
             <div class="flex items-center justify-between">
               <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-300">USA • Executive Leadership</span>
@@ -729,14 +665,13 @@
             </div>
             <h4 class="text-sm font-bold text-slate-200">Chief Financial Officer (CFO) Strategic Talent Search</h4>
             <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-300">
-              <strong>Bottleneck:</strong> Standard candidate search yielded limited candidates matching both strategic financial and fintech technical requirements.
+              <strong>Bottleneck:</strong> Limited candidates matching both strategic and fintech technical requirements.
             </div>
             <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300">
-              <strong>HR Solution:</strong> Retained an executive boutique search firm (TPZ) to access passive tier-1 CFO talent beyond standard recruitment channels.
+              <strong>HR Solution:</strong> Retained an executive boutique search firm (TPZ) to access passive tier-1 CFO talent.
             </div>
           </div>
 
-          <!-- USA Bottleneck 2 -->
           <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 space-y-3">
             <div class="flex items-center justify-between">
               <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-300">USA • DevOps Practice</span>
@@ -744,43 +679,28 @@
             </div>
             <h4 class="text-sm font-bold text-slate-200">DevOps Technical Competency & Interview Integrity Concerns</h4>
             <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-300">
-              <strong>Bottleneck:</strong> Applicants exhibited interview integrity discrepancies or failed rigorous hands-on technical architecture assessments.
+              <strong>Bottleneck:</strong> Applicants exhibited interview integrity discrepancies or failed technical assessments.
             </div>
             <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300">
-              <strong>HR Solution:</strong> Broadened high-visibility campaigns on LinkedIn; implementing third-party verified technical assessments before managerial screening.
+              <strong>HR Solution:</strong> Broadened high-visibility campaigns on LinkedIn; third-party verified assessments.
             </div>
           </div>
-
         </div>
 
-        <!-- Stalled Positions Summary -->
         <div class="mt-8 pt-6 border-t border-slate-800">
           <h4 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
             <i data-lucide="pause-circle" class="w-4 h-4 text-rose-400"></i>
             Internal Business Holds: 23 Positions Frozen Pending Capacity Plan
           </h4>
           <p class="text-xs text-slate-400 mb-4">
-            Requisitions across Pune, Chennai, and Charlotte currently awaiting Karuna & Dharmesh’s finalized headcount roadmap before offer approvals are released.
+            Requisitions across Pune, Chennai, and Charlotte currently awaiting finalized headcount roadmap.
           </p>
-          <div class="flex flex-wrap gap-2 text-xs">
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-medium">QA Lead (Pune)</span>
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-medium">Senior QA Analyst (Pune - Ajay)</span>
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-medium">Business Analyst (Charlotte - Naveen)</span>
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-medium">Senior Software Engineer (Pune - Vishal)</span>
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-medium">Associate QA (Pune)</span>
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-medium">Associate Software Engineer (Multiple)</span>
-          </div>
         </div>
-
       </div>
-
     </div>
 
-    <!-- ============================================================= -->
-    <!-- TAB 5: REQUISITION MASTER GRID                                -->
-    <!-- ============================================================= -->
+    <!-- TAB 5: REQUISITION MASTER GRID -->
     <div id="tabContent-master" class="tab-pane hidden space-y-4">
-      
       <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
           <div>
@@ -788,10 +708,10 @@
               <i data-lucide="database" class="w-4 h-4 text-brand-400"></i>
               Master Requisitions Repository
             </h3>
-            <p class="text-xs text-slate-400 mt-0.5">Comprehensive audit log of all tracked positions, timelines, and candidate assignments</p>
+            <p class="text-xs text-slate-400 mt-0.5">Audit log of all tracked positions, timelines, and candidate assignments</p>
           </div>
           <div class="text-xs text-slate-400">
-            Click any row for complete candidate and requisition metadata
+            Click any row for complete candidate metadata
           </div>
         </div>
 
@@ -813,22 +733,15 @@
                 <th class="py-3 px-3.5 font-semibold">RAG</th>
               </tr>
             </thead>
-            <tbody id="masterTableBody" class="divide-y divide-slate-800/60 bg-slate-900/40">
-              <!-- Dynamically populated -->
-            </tbody>
+            <tbody id="masterTableBody" class="divide-y divide-slate-800/60 bg-slate-900/40"></tbody>
           </table>
         </div>
 
-        <!-- Pagination Bar -->
         <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-4 pt-3 border-t border-slate-800 text-xs text-slate-400">
-          <div id="paginationInfo">Showing 1 to 20 of 146 entries</div>
-          <div class="flex items-center gap-1.5" id="paginationControls">
-            <!-- Buttons dynamically added -->
-          </div>
+          <div id="paginationInfo">Showing 1 to 15 of 146 entries</div>
+          <div class="flex items-center gap-1.5" id="paginationControls"></div>
         </div>
-
       </div>
-
     </div>
 
   </main>
@@ -839,9 +752,7 @@
       <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
-      <div id="detailModalContent" class="space-y-4">
-        <!-- Injected via JavaScript -->
-      </div>
+      <div id="detailModalContent" class="space-y-4"></div>
     </div>
   </div>
 
@@ -879,42 +790,180 @@
     </div>
   </div>
 
-  <!-- Raw Cleaned Master Records Injected Directly (146 Complete Records) -->
   <script>
-    // Exact 146 records from Master 2026 sheet
+    // FULL 146 MASTER RECORDS EMBEDDED DIRECTLY AS JSON
+    const RAW_MASTER_DATA = [
+      {"id": 1, "geo": "India", "dept": "Product", "squad": "Account", "pos": "Product Manager", "head": "Ashok", "type": "Replacement", "replaced": "Bhargav/Mahesh", "empType": "Full-time", "loc": "Chennai", "open": "2025-10-08", "offer": "2025-11-14", "join": "2026-03-09", "q": "Q1", "aging": 28, "timeToOffer": 28, "timeToClose": 109, "status": "Suspended", "cand": "", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Narsimha Leela Krishna - Backedout"},
+      {"id": 2, "geo": "USA", "dept": "Infosec", "squad": "Infosec", "pos": "CISO (Change of Role)", "head": "Murthy", "type": "Replacement", "replaced": "Nate", "empType": "Full-time", "loc": "Charlotte", "open": "2025-11-21", "offer": "2026-01-23", "join": "2026-02-02", "q": "Q1", "aging": 52, "timeToOffer": 46, "timeToClose": 52, "status": "Joined", "cand": "Supro", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": "Eric Garcia decided to reject the offer on October 1, 2025."},
+      {"id": 3, "geo": "USA", "dept": "Product", "squad": "Payments", "pos": "Product Owner (Change of Role)", "head": "Vijay", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2025-08-26", "offer": "2025-12-12", "join": "2026-01-20", "q": "Q1", "aging": 106, "timeToOffer": 79, "timeToClose": 106, "status": "Joined", "cand": "Melissa", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": "Melissa will join in January 12, 2025"},
+      {"id": 4, "geo": "USA", "dept": "Engineering", "squad": "Payments", "pos": "Enterprise Architect", "head": "Murthy", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-01-02", "offer": "2026-03-24", "join": "2026-04-20", "q": "Q2", "aging": 77, "timeToOffer": 58, "timeToClose": 77, "status": "Joined", "cand": "Lakshminarayan", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 5, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Senior Software Engineer", "head": "Vinay", "type": "Replacement", "replaced": "Revanth", "empType": "Full-time", "loc": "Chennai", "open": "2025-10-28", "offer": "2025-12-12", "join": "2026-01-20", "q": "Q1", "aging": 34, "timeToOffer": 34, "timeToClose": 61, "status": "Joined", "cand": "Srinivasan", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 6, "geo": "India", "dept": "DevOps", "squad": "DevOps", "pos": "DevOps Engineer", "head": "Prathap", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-01-02", "offer": "2026-03-04", "join": "2026-03-05", "q": "Q1", "aging": 44, "timeToOffer": 44, "timeToClose": 45, "status": "Joined", "cand": "Senthil R", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 7, "geo": "India", "dept": "DevOps", "squad": "DevOps", "pos": "Senior DevOps Engineer", "head": "Prathap", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-07-11", "offer": "", "join": "", "q": "Q3", "aging": 50, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Andleeb/Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Role changed to IT Admin (email from Aarthie)"},
+      {"id": 8, "geo": "India", "dept": "QA", "squad": "Payments", "pos": "Performance Tester", "head": "Divya", "type": "Replacement", "replaced": "Mageshkumar", "empType": "Full-time", "loc": "Chennai", "open": "2026-01-06", "offer": "2026-01-09", "join": "2026-01-19", "q": "Q1", "aging": 4, "timeToOffer": 4, "timeToClose": 10, "status": "Joined", "cand": "Pavithra Devi", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": "Pavithra Devi early attrition"},
+      {"id": 9, "geo": "India", "dept": "Engineering", "squad": "PS", "pos": "Senior Software Engineer", "head": "Kanan", "type": "Replacement", "replaced": "Nikhilesh", "empType": "Consultant", "loc": "Pune", "open": "2025-10-15", "offer": "2026-03-13", "join": "2026-03-23", "q": "Q1", "aging": 108, "timeToOffer": 108, "timeToClose": 114, "status": "Joined", "cand": "Uttkarsh", "rec": "Vendor / Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 10, "geo": "USA", "dept": "DevOps", "squad": "DevOps", "pos": "Director of Infrastructure", "head": "Murthy", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2025-11-04", "offer": "2026-01-20", "join": "2026-02-04", "q": "Q1", "aging": 67, "timeToOffer": 56, "timeToClose": 67, "status": "Joined", "cand": "Manoj", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 11, "geo": "USA", "dept": "DevOps", "squad": "DevOps", "pos": "SecOps - Enterprise Governance", "head": "Murthy", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2025-11-05", "offer": "", "join": "", "q": "Q4", "aging": 228, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": "Murthy asked to temp hold the req until the clarity on business need"},
+      {"id": 12, "geo": "USA", "dept": "Engineering", "squad": "Account", "pos": "Java Architect", "head": "Ashok", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2025-11-18", "offer": "2026-02-23", "join": "2026-04-17", "q": "Q2", "aging": 109, "timeToOffer": 70, "timeToClose": 109, "status": "Joined", "cand": "Esther M", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 13, "geo": "India", "dept": "Engineering", "squad": "Trade", "pos": "Software Engineer", "head": "Raju", "type": "Replacement", "replaced": "Manikandan S", "empType": "Full-time", "loc": "Chennai", "open": "2026-01-02", "offer": "2026-02-04", "join": "2026-05-04", "q": "Q2", "aging": 24, "timeToOffer": 24, "timeToClose": 87, "status": "Joined", "cand": "Sridharan", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Sridharan - Backup / Manikandan Resigned"},
+      {"id": 14, "geo": "USA", "dept": "Finance", "squad": "Finance", "pos": "Chief Finance Officer", "head": "Booshan", "type": "Replacement", "replaced": "Adam", "empType": "Full-time", "loc": "Charlotte", "open": "2025-12-18", "offer": "", "join": "", "q": "Q4", "aging": 197, "timeToOffer": 0, "timeToClose": 0, "status": "Offered", "cand": "Bill Gostkowski", "rec": "TPZ", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 15, "geo": "India", "dept": "Engineering", "squad": "Trade", "pos": "Software Engineer", "head": "Raju", "type": "Replacement", "replaced": "Ambikeshwari", "empType": "Full-time", "loc": "Chennai", "open": "2025-12-24", "offer": "2026-03-26", "join": "2026-03-27", "q": "Q1", "aging": 67, "timeToOffer": 67, "timeToClose": 68, "status": "Joined", "cand": "Elumalai", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Ambikeshwari Resigned"},
+      {"id": 16, "geo": "USA", "dept": "Sales", "squad": "Sales", "pos": "VP of PreSales and Solution Consulting", "head": "Karuna", "type": "New", "replaced": "", "empType": "Full-time", "loc": "USA-Remote", "open": "2025-12-12", "offer": "2025-12-23", "join": "2026-02-09", "q": "Q1", "aging": 42, "timeToOffer": 8, "timeToClose": 42, "status": "Joined", "cand": "Romil", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 17, "geo": "USA", "dept": "Sales", "squad": "Sales", "pos": "VP of Sales - Payments", "head": "Karuna", "type": "New", "replaced": "", "empType": "Full-time", "loc": "USA-Remote", "open": "2025-11-20", "offer": "2025-12-24", "join": "2026-01-09", "q": "Q1", "aging": 37, "timeToOffer": 25, "timeToClose": 37, "status": "Joined", "cand": "Randy", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 18, "geo": "India", "dept": "HR", "squad": "HR", "pos": "HR Executive (HRBP)", "head": "Bharath", "type": "Replacement", "replaced": "Baskaran D", "empType": "Full-time", "loc": "Chennai", "open": "2025-12-22", "offer": "2026-01-25", "join": "2026-01-28", "q": "Q1", "aging": 195, "timeToOffer": 25, "timeToClose": 28, "status": "Joined", "cand": "Janani", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 19, "geo": "India", "dept": "HR", "squad": "HR", "pos": "HR Ops", "head": "Bharath", "type": "Replacement", "replaced": "Baskaran D", "empType": "Full-time", "loc": "Chennai", "open": "2025-12-22", "offer": "2026-01-19", "join": "2026-01-20", "q": "Q1", "aging": 195, "timeToOffer": 21, "timeToClose": 22, "status": "Joined", "cand": "Abirami R", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 20, "geo": "India", "dept": "QA", "squad": "PS", "pos": "Quality Analyst (C2H)", "head": "Kanan", "type": "Replacement", "replaced": "Vineet K", "empType": "Consultant", "loc": "Pune", "open": "2026-01-02", "offer": "2026-01-16", "join": "2026-02-02", "q": "Q1", "aging": 186, "timeToOffer": 11, "timeToClose": 22, "status": "Joined", "cand": "Shubhankar", "rec": "Vendor", "rag": "Green", "buddy": "", "backup": "", "comm": "DOJ Feb 4 - by Synechron"},
+      {"id": 21, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Software Engineer  (Rust)", "head": "Prashant", "type": "Replacement", "replaced": "Ganesh", "empType": "Full-time", "loc": "Pune", "open": "2026-01-12", "offer": "2026-01-30", "join": "2026-02-05", "q": "Q1", "aging": 15, "timeToOffer": 15, "timeToClose": 19, "status": "Joined", "cand": "Anil P", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 22, "geo": "India", "dept": "Product", "squad": "Account", "pos": "Product Manager - VA", "head": "Ashok", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-01-02", "offer": "2026-01-27", "join": "2026-04-28", "q": "Q2", "aging": 18, "timeToOffer": 18, "timeToClose": 83, "status": "Joined", "cand": "Dhawal", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 23, "geo": "India", "dept": "QA", "squad": "Account", "pos": "QA Analyst", "head": "Ashok", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-01-21", "offer": "2026-01-30", "join": "2026-03-12", "q": "Q1", "aging": 8, "timeToOffer": 8, "timeToClose": 37, "status": "Joined", "cand": "Nikhil C Karanam", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Nikhil early attrition"},
+      {"id": 24, "geo": "India", "dept": "QA", "squad": "Account", "pos": "QA Analyst", "head": "Ashok", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-01-21", "offer": "2026-02-04", "join": "2026-03-02", "q": "Q1", "aging": 11, "timeToOffer": 11, "timeToClose": 29, "status": "Joined", "cand": "Keerthika", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 25, "geo": "India", "dept": "Product", "squad": "Payments", "pos": "Payment Owner", "head": "Kasi", "type": "Replacement", "replaced": "Ravikumar Kasi", "empType": "Full-time", "loc": "Chennai", "open": "2026-01-21", "offer": "2026-01-30", "join": "2026-02-24", "q": "Q1", "aging": 8, "timeToOffer": 8, "timeToClose": 25, "status": "Joined", "cand": "Ganesh", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": "Sujata on hold"},
+      {"id": 26, "geo": "India", "dept": "Prod Support", "squad": "Support", "pos": "Production Support Engineer (FX)", "head": "Mark D", "type": "New", "replaced": "", "empType": "Full-time", "loc": "India-Remote", "open": "2026-01-21", "offer": "2026-01-30", "join": "2026-02-05", "q": "Q1", "aging": 173, "timeToOffer": 8, "timeToClose": 12, "status": "Joined", "cand": "Krishnaprasad", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 27, "geo": "India", "dept": "BA", "squad": "PS", "pos": "Business Analyst", "head": "Kanan", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-01-27", "offer": "2026-02-04", "join": "2026-04-10", "q": "Q2", "aging": 7, "timeToOffer": 7, "timeToClose": 54, "status": "Joined", "cand": "Niraj T", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 28, "geo": "India", "dept": "Legal", "squad": "Support", "pos": "India Legal Assistant supporting US", "head": "Hardik", "type": "New", "replaced": "", "empType": "Full-time", "loc": "India-Remote", "open": "2026-01-27", "offer": "2026-02-11", "join": "2026-02-17", "q": "Q1", "aging": 169, "timeToOffer": 12, "timeToClose": 16, "status": "Joined", "cand": "Uzma Sohail", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 29, "geo": "India", "dept": "Product", "squad": "Digital", "pos": "Product Manager- DGx & OpenAPI", "head": "Sajeesh", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-02-11", "offer": "", "join": "2026-03-10", "q": "Q1", "aging": 158, "timeToOffer": 0, "timeToClose": 20, "status": "Joined", "cand": "Alice Marks", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 30, "geo": "India", "dept": "Engineering", "squad": "Digital", "pos": "Full-stack Engineer", "head": "Sajeesh", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-02-11", "offer": "2026-03-04", "join": "2026-03-26", "q": "Q1", "aging": 16, "timeToOffer": 16, "timeToClose": 32, "status": "Joined", "cand": "Omkar Chavan", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 31, "geo": "India", "dept": "BA", "squad": "Trade", "pos": "BA- FX", "head": "Patrick", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-05-02", "offer": "2026-06-01", "join": "2026-06-02", "q": "Q2", "aging": 22, "timeToOffer": 21, "timeToClose": 22, "status": "Joined", "cand": "Muthu Meenakshi", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 32, "geo": "India", "dept": "BA", "squad": "Trade", "pos": "Business Analyst - IRD", "head": "Patrick", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-05-02", "offer": "2026-06-17", "join": "2026-09-18", "q": "Q3", "aging": 33, "timeToOffer": 33, "timeToClose": 100, "status": "Joined", "cand": "Kishore", "rec": "Thirukumaran", "rag": "Green", "buddy": "Karthikeyan", "backup": "Initial Interview", "comm": "Kishore accpeted our offer"},
+      {"id": 33, "geo": "India", "dept": "Engineering", "squad": "Account", "pos": "Full-stack Engineer", "head": "Ashok", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-02-11", "offer": "2026-04-29", "join": "2026-05-20", "q": "Q2", "aging": 56, "timeToOffer": 56, "timeToClose": 71, "status": "Joined", "cand": "Kalirajan", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Sivakumar Backedout"},
+      {"id": 34, "geo": "India", "dept": "Program", "squad": "Payments", "pos": "Project Manager", "head": "Ramesh", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-02-02", "offer": "2026-07-07", "join": "2026-07-29", "q": "Q3", "aging": 112, "timeToOffer": 112, "timeToClose": 128, "status": "Joined", "cand": "Naveen Kulkarni", "rec": "Andleeb", "rag": "Green", "buddy": "Amit Kulkarni", "backup": "Initial Interview", "comm": "Naveen accepted our offered"},
+      {"id": 35, "geo": "India", "dept": "DevOps", "squad": "DevOps", "pos": "DevOps Engineer", "head": "Prathap", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-05-02", "offer": "2026-06-11", "join": "2026-06-15", "q": "Q2", "aging": 29, "timeToOffer": 29, "timeToClose": 31, "status": "Joined", "cand": "Faheem", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 36, "geo": "India", "dept": "DevOps", "squad": "DevOps", "pos": "DevOps Engineer", "head": "Prathap", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-05-02", "offer": "2026-06-05", "join": "2026-06-08", "q": "Q2", "aging": 25, "timeToOffer": 25, "timeToClose": 26, "status": "Joined", "cand": "Deepakraj J", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 37, "geo": "India", "dept": "Infosec", "squad": "Infosec", "pos": "InfoSec Security Analyst", "head": "Supro", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-03-29", "offer": "2026-07-03", "join": "2026-07-08", "q": "Q3", "aging": 70, "timeToOffer": 70, "timeToClose": 73, "status": "Joined", "cand": "Rajesh", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "Sourcing", "comm": "Swapnil/Gauresh / Nitesh declined our offer. Supro referral is looking remote"},
+      {"id": 38, "geo": "India", "dept": "Infosec", "squad": "Infosec", "pos": "InfoSec Audit & Compliance Engineer", "head": "Supro", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-02-11", "offer": "2026-03-24", "join": "2026-03-25", "q": "Q1", "aging": 30, "timeToOffer": 30, "timeToClose": 31, "status": "Joined", "cand": "Sayyed Karim", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 39, "geo": "India", "dept": "Program", "squad": "Payments", "pos": "Scrum Master", "head": "Vijay", "type": "Replacement", "replaced": "Saravanan T", "empType": "Full-time", "loc": "Pune", "open": "2026-02-10", "offer": "", "join": "2026-03-05", "q": "Q1", "aging": 159, "timeToOffer": 0, "timeToClose": 18, "status": "Joined", "cand": "Amit KS", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 40, "geo": "India", "dept": "QA", "squad": "Payments", "pos": "Senior QA Analyst", "head": "Vijay", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-02-10", "offer": "2026-03-26", "join": "2026-03-27", "q": "Q1", "aging": 33, "timeToOffer": 33, "timeToClose": 34, "status": "Joined", "cand": "Abinaya D", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 41, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Senior/Lead Engineer", "head": "Vijay", "type": "New", "replaced": "", "empType": "Consultant", "loc": "Pune", "open": "2026-03-23", "offer": "2026-05-11", "join": "2026-05-14", "q": "Q2", "aging": 36, "timeToOffer": 23, "timeToClose": 25, "status": "Joined", "cand": "Prachi", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 42, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Senior/Lead Engineer", "head": "Vijay", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-03-23", "offer": "2026-04-22", "join": "2026-04-24", "q": "Q2", "aging": 23, "timeToOffer": 0, "timeToClose": 0, "status": "Joined", "cand": "Mani Prathap", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 43, "geo": "India", "dept": "HR", "squad": "HR", "pos": "Senior HR Executive", "head": "Bharath", "type": "Replacement", "replaced": "Janani", "empType": "Full-time", "loc": "Chennai", "open": "2026-03-31", "offer": "", "join": "", "q": "Q1", "aging": 124, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "Keerthivasan", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 44, "geo": "India", "dept": "Engineering", "squad": "Digital", "pos": "Open API Developer", "head": "Sajeesh", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-02-16", "offer": "2026-03-27", "join": "2026-04-02", "q": "Q2", "aging": 30, "timeToOffer": 30, "timeToClose": 34, "status": "Joined", "cand": "Ramya", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 45, "geo": "India", "dept": "Infosec", "squad": "Infosec", "pos": "System Monitoring Engineer", "head": "Supro", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Remote", "open": "", "offer": "", "join": "", "q": "", "aging": 0, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Supro has hold the req"},
+      {"id": 46, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Solution Architect", "head": "Vijay", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-03-23", "offer": "2026-05-06", "join": "2026-05-07", "q": "Q2", "aging": 33, "timeToOffer": 33, "timeToClose": 34, "status": "Joined", "cand": "Shankar Gaikwad", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 47, "geo": "India", "dept": "BA", "squad": "PS", "pos": "Sr.Business Analyst", "head": "Kanan", "type": "Replacement", "replaced": "Jaspreet", "empType": "Full-time", "loc": "Pune", "open": "2026-03-02", "offer": "2026-07-20", "join": "2026-09-30", "q": "Q3", "aging": 101, "timeToOffer": 101, "timeToClose": 153, "status": "Offered", "cand": "", "rec": "Andleeb", "rag": "Green", "buddy": "Prabu", "backup": "Sourcing", "comm": "Yasar Declined (30 -sept DOJ), Dhawal Interview happened with Nagesh. Ashok is waiting for an response for replacment confirmation from Karuna so that he can share the next action plan for Dhawal"},
+      {"id": 48, "geo": "India", "dept": "Prod Support", "squad": "Support", "pos": "Wire Support Sr", "head": "Mark D", "type": "New", "replaced": "", "empType": "Full-time", "loc": "India-Remote", "open": "2026-03-09", "offer": "2026-04-24", "join": "2026-05-11", "q": "Q2", "aging": 140, "timeToOffer": 35, "timeToClose": 46, "status": "Joined", "cand": "Yasar", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 49, "geo": "India", "dept": "Prod Support", "squad": "Support", "pos": "Instant Payment Support Sr", "head": "Mark D", "type": "New", "replaced": "", "empType": "Full-time", "loc": "India-Remote", "open": "2026-03-09", "offer": "2026-04-24", "join": "2026-04-29", "q": "Q2", "aging": 140, "timeToOffer": 35, "timeToClose": 38, "status": "Joined", "cand": "Prince", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 50, "geo": "USA", "dept": "Engineering", "squad": "Payments", "pos": "Lead Software Engineer  - ACH", "head": "Vijay", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-02-16", "offer": "2026-05-07", "join": "2026-07-21", "q": "Q3", "aging": 112, "timeToOffer": 59, "timeToClose": 112, "status": "Joined", "cand": "Alka Lakhote", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": "H-1B approved, waiting on candidate to confirm start date."},
+      {"id": 51, "geo": "USA", "dept": "Engineering", "squad": "Digital", "pos": "Full Stack Developer", "head": "Sajeesh", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-02-11", "offer": "", "join": "", "q": "Q1", "aging": 158, "timeToOffer": 0, "timeToClose": 0, "status": "L1 Process", "cand": "Anupam Babar", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 52, "geo": "USA", "dept": "Product", "squad": "PS", "pos": "Business Analyst- ACH", "head": "Kanan", "type": "New", "replaced": "", "empType": "Consultant", "loc": "Charlotte", "open": "2026-02-03", "offer": "", "join": "2026-02-13", "q": "Q1", "aging": 9, "timeToOffer": 0, "timeToClose": 9, "status": "Joined", "cand": "Ramona Brown", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 53, "geo": "USA", "dept": "Product", "squad": "PS", "pos": "Developer", "head": "Kanan", "type": "New", "replaced": "", "empType": "Consultant", "loc": "Charlotte", "open": "", "offer": "", "join": "2026-02-17", "q": "Q1", "aging": 0, "timeToOffer": 0, "timeToClose": 0, "status": "Joined", "cand": "Narendra Kumar", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 54, "geo": "USA", "dept": "Product", "squad": "PS", "pos": "Project Manager", "head": "Kanan", "type": "New", "replaced": "", "empType": "Consultant", "loc": "Charlotte", "open": "", "offer": "", "join": "2026-02-23", "q": "Q1", "aging": 0, "timeToOffer": 0, "timeToClose": 32911, "status": "Joined", "cand": "Sagarika B", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 55, "geo": "USA", "dept": "Production Support", "squad": "Support", "pos": "ACH Support", "head": "Mark D", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-03-02", "offer": "2026-05-29", "join": "2026-06-17", "q": "Q2", "aging": 78, "timeToOffer": 65, "timeToClose": 78, "status": "Joined", "cand": "Sai Narahari", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 56, "geo": "USA", "dept": "Production Support", "squad": "Support", "pos": "Capital Market Support", "head": "Mark D", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-02-11", "offer": "2026-02-20", "join": "2026-03-02", "q": "Q1", "aging": 14, "timeToOffer": 8, "timeToClose": 14, "status": "Joined", "cand": "Manoj", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 57, "geo": "India", "dept": "Engineering", "squad": "Digital", "pos": "Full-stack Engineer", "head": "Sajeesh", "type": "New", "replaced": "Full-time", "empType": "Full-time", "loc": "Pune", "open": "2026-02-12", "offer": "2026-02-26", "join": "2026-04-20", "q": "Q2", "aging": 157, "timeToOffer": 11, "timeToClose": 48, "status": "Joined", "cand": "Meghali", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Amruta & Viddesh Backedout"},
+      {"id": 58, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Performance Engineer", "head": "Vijay", "type": "Replacement", "replaced": "Pavithra M", "empType": "Full-time", "loc": "Pune", "open": "2026-06-15", "offer": "", "join": "2026-10-12", "q": "Q4", "aging": 70, "timeToOffer": 0, "timeToClose": 86, "status": "Temp Hold", "cand": "Urvashi T", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": "Urvashi internal movement (Hariprasanth -offer declined)"},
+      {"id": 59, "geo": "India", "dept": "Engineering", "squad": "Account", "pos": "Compliance - AI Developer", "head": "Ashok", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-03-16", "offer": "2026-03-18", "join": "2026-03-23", "q": "Q1", "aging": 3, "timeToOffer": 3, "timeToClose": 6, "status": "Joined", "cand": "Vaishnavi", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 60, "geo": "USA", "dept": "HR", "squad": "HR", "pos": "Director HR", "head": "Aarthie", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "", "offer": "", "join": "", "q": "", "aging": 0, "timeToOffer": 0, "timeToClose": 0, "status": "JD Pending", "cand": "", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": "JD pending with Aarthie"},
+      {"id": 61, "geo": "USA", "dept": "Product", "squad": "Others", "pos": "Program Manager", "head": "Aarthie", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "", "offer": "", "join": "", "q": "", "aging": 0, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 62, "geo": "USA", "dept": "Product", "squad": "Others", "pos": "Chief Delivery Officer", "head": "Aarthie", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "", "offer": "", "join": "", "q": "", "aging": 0, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 63, "geo": "USA", "dept": "HR", "squad": "HR", "pos": "Exec Assistant & Office Manager", "head": "Aarthie", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-02-02", "offer": "2026-03-17", "join": "2026-03-30", "q": "Q1", "aging": 165, "timeToOffer": 32, "timeToClose": 41, "status": "Joined", "cand": "Andrea Clemons", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 64, "geo": "USA", "dept": "Marketing/Customer Success", "squad": "GTM", "pos": "Marketing Trainee Associate", "head": "Marc", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-02-11", "offer": "", "join": "", "q": "Q1", "aging": 158, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 65, "geo": "USA", "dept": "DevOps", "squad": "DevOps", "pos": "DevOps Engineer", "head": "Manoj", "type": "Replacement", "replaced": "Prathamesh", "empType": "Full-time", "loc": "Charlotte", "open": "2026-04-09", "offer": "", "join": "", "q": "Q2", "aging": 117, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": "Adithya is on hold, This requirement is moved to India team"},
+      {"id": 66, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Enterprise Architect", "head": "Murthy", "type": "New", "replaced": "", "empType": "Full-time/Consultant", "loc": "Pune", "open": "2026-09-19", "offer": "", "join": "", "q": "Q3", "aging": 0, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 67, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "AI Engineer", "head": "Vijay", "type": "Replacement", "replaced": "Mallika", "empType": "Full-time", "loc": "Pune", "open": "2026-05-01", "offer": "2026-06-24", "join": "2026-09-21", "q": "Q3", "aging": 39, "timeToOffer": 39, "timeToClose": 102, "status": "Offered", "cand": "Shivam More", "rec": "Andleeb", "rag": "Green", "buddy": "Vikrant Singh", "backup": "Sourcing", "comm": ""},
+      {"id": 68, "geo": "India", "dept": "QA", "squad": "Digital", "pos": "Senior QA Analyst", "head": "Sajeesh", "type": "Replacement", "replaced": "Priyanka Kapla", "empType": "Full-time", "loc": "Chennai", "open": "2026-03-09", "offer": "2026-03-12", "join": "2026-03-13", "q": "Q1", "aging": 5, "timeToOffer": 4, "timeToClose": 5, "status": "Joined", "cand": "Mallika", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 69, "geo": "USA", "dept": "Support", "squad": "GTM", "pos": "Director, Client Onboarding", "head": "Marc", "type": "Replacement", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-02-20", "offer": "2026-03-09", "join": "2026-03-19", "q": "Q1", "aging": 151, "timeToOffer": 12, "timeToClose": 20, "status": "Joined", "cand": "Abhijit C", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 70, "geo": "India", "dept": "QA", "squad": "Account", "pos": "QA Analyst", "head": "Ashok", "type": "Replacement", "replaced": "Nikhil", "empType": "Full-time", "loc": "Chennai", "open": "2026-03-18", "offer": "2026-04-10", "join": "2026-04-20", "q": "Q2", "aging": 18, "timeToOffer": 18, "timeToClose": 24, "status": "Joined", "cand": "Arul Anand", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 71, "geo": "India", "dept": "Engineering", "squad": "PS", "pos": "Software Engineer", "head": "Nitin", "type": "Replacement", "replaced": "Meghali", "empType": "Full-time", "loc": "Pune", "open": "2026-03-23", "offer": "2026-03-24", "join": "2026-03-25", "q": "Q1", "aging": 130, "timeToOffer": 2, "timeToClose": 3, "status": "Joined", "cand": "Som Limbure", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 72, "geo": "USA", "dept": "QA", "squad": "PS", "pos": "Automation Engineer", "head": "Kanan", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-03-11", "offer": "2026-03-27", "join": "2026-04-20", "q": "Q2", "aging": 138, "timeToOffer": 13, "timeToClose": 29, "status": "Joined", "cand": "Shashank", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 73, "geo": "India", "dept": "Product", "squad": "Account", "pos": "Product Manager - Deposits & VA", "head": "Ashok", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-02-09", "offer": "2026-03-20", "join": "2026-03-23", "q": "Q1", "aging": 30, "timeToOffer": 30, "timeToClose": 31, "status": "Joined", "cand": "Arivumani N", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Narasimha Backup"},
+      {"id": 74, "geo": "India", "dept": "Finance", "squad": "Finance", "pos": "Finance Analyst", "head": "Dharani", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-06-08", "offer": "2026-06-30", "join": "2026-07-06", "q": "Q3", "aging": 17, "timeToOffer": 17, "timeToClose": 21, "status": "Joined", "cand": "Vignesh", "rec": "Andleeb/Thirukumaran", "rag": "Green", "buddy": "", "backup": "Sourcing", "comm": "Vignesh DOJ 6th July"},
+      {"id": 75, "geo": "USA", "dept": "HR", "squad": "HR", "pos": "Recruiter", "head": "Aarthie", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-03-31", "offer": "2026-04-10", "join": "2026-04-20", "q": "Q2", "aging": 124, "timeToOffer": 9, "timeToClose": 15, "status": "Joined", "cand": "Sindu", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 76, "geo": "India", "dept": "QA", "squad": "Payments", "pos": "Senior QA Analyst", "head": "Vijay", "type": "Replacement", "replaced": "Sakshi Dhumal", "empType": "Full-time", "loc": "Pune", "open": "2026-05-11", "offer": "2026-06-10", "join": "2026-06-11", "q": "Q2", "aging": 23, "timeToOffer": 23, "timeToClose": 24, "status": "Joined", "cand": "Utkarsh", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 77, "geo": "USA", "dept": "Support", "squad": "Support", "pos": "VP of Training", "head": "Dharmesh", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Remote - USA", "open": "2026-04-17", "offer": "2026-04-22", "join": "2026-05-19", "q": "Q2", "aging": 111, "timeToOffer": 4, "timeToClose": 23, "status": "Joined", "cand": "Peter Ro", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 78, "geo": "USA", "dept": "Payments", "squad": "Payments", "pos": "AI Developer", "head": "Vijay", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-04-13", "offer": "2026-05-01", "join": "2026-05-18", "q": "Q2", "aging": 115, "timeToOffer": 15, "timeToClose": 26, "status": "Joined", "cand": "Aditya Khandare", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 79, "geo": "USA", "dept": "Sales", "squad": "Sales", "pos": "Business Development Representative", "head": "Jack", "type": "Replacement", "replaced": "Will", "empType": "Full-time", "loc": "Remote - USA", "open": "2026-04-17", "offer": "2026-05-01", "join": "2026-05-19", "q": "Q2", "aging": 111, "timeToOffer": 11, "timeToClose": 23, "status": "Joined", "cand": "Eric Nowell", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 80, "geo": "USA", "dept": "PS", "squad": "PS", "pos": "Project Manager", "head": "Kanan", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-04-20", "offer": "", "join": "", "q": "Q2", "aging": 110, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Kanan", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 81, "geo": "USA", "dept": "PS", "squad": "PS", "pos": "Tech Manager", "head": "Kanan", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-04-22", "offer": "2026-06-12", "join": "2026-08-03", "q": "Q3", "aging": 108, "timeToOffer": 38, "timeToClose": 74, "status": "Joined", "cand": "Sirisha Meka", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": "Waiting on H-1B approval"},
+      {"id": 82, "geo": "India", "dept": "QA", "squad": "PS", "pos": "QA Lead", "head": "Kanan", "type": "Replacement", "replaced": "Sachin Dhome", "empType": "Full-time", "loc": "Pune", "open": "2026-06-11", "offer": "", "join": "", "q": "Q2", "aging": 72, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Andleeb/Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "2 L1 Interview on hold. Waiting for Dharmesh to share resource capacity planning"},
+      {"id": 83, "geo": "USA", "dept": "DevOps", "squad": "DevOps", "pos": "IT Admin Consultant", "head": "Murthy", "type": "Replacement", "replaced": "Suman", "empType": "Consultant", "loc": "Charlotte", "open": "2026-04-16", "offer": "2026-05-18", "join": "2026-06-08", "q": "Q2", "aging": 112, "timeToOffer": 23, "timeToClose": 38, "status": "Joined", "cand": "Tejasri Balusu", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 84, "geo": "India", "dept": "Engineering", "squad": "Digital", "pos": "Backend Developer", "head": "Sajeesh", "type": "Replacement", "replaced": "Ramya", "empType": "Full-time", "loc": "Chennai", "open": "2026-05-06", "offer": "2026-07-21", "join": "2026-08-05", "q": "Q3", "aging": 55, "timeToOffer": 55, "timeToClose": 66, "status": "Joined", "cand": "Thameenansari", "rec": "Thirukumaran", "rag": "Green", "buddy": "Abdul R", "backup": "", "comm": "Venkatesh/ Gokulnath/ Sandeep/ GokulRaja declined our offer"},
+      {"id": 85, "geo": "India", "dept": "QA", "squad": "Trade", "pos": "QA Analyst", "head": "Raju", "type": "Replacement", "replaced": "Satyasri", "empType": "Full-time", "loc": "Chennai", "open": "2026-05-06", "offer": "2026-05-15", "join": "2026-05-18", "q": "Q2", "aging": 98, "timeToOffer": 8, "timeToClose": 9, "status": "Joined", "cand": "Nirmal", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 86, "geo": "India", "dept": "Engineering", "squad": "GTM", "pos": "API Integration Engineer", "head": "Karuna", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-06-10", "offer": "2026-06-26", "join": "2026-06-29", "q": "Q2", "aging": 13, "timeToOffer": 13, "timeToClose": 14, "status": "Joined", "cand": "Shradha", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Shradha- DOJ 29th June"},
+      {"id": 87, "geo": "USA", "dept": "Infosec", "squad": "Infosec", "pos": "Associate AI Engineer _InfoSec", "head": "Supro", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-04-30", "offer": "2026-05-13", "join": "2026-05-27", "q": "Q2", "aging": 102, "timeToOffer": 10, "timeToClose": 20, "status": "Joined", "cand": "Shubham Bhojwani", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 88, "geo": "USA", "dept": "Account Galaxy", "squad": "Account", "pos": "Associate AI Engineer_Accounts", "head": "Ashok", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-05-08", "offer": "2026-06-18", "join": "2026-07-08", "q": "Q3", "aging": 96, "timeToOffer": 30, "timeToClose": 44, "status": "Joined", "cand": "Tejashwini Padmashali", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 89, "geo": "USA", "dept": "DevOps", "squad": "DevOps", "pos": "Associate AI Engineer_DecOps", "head": "Manoj", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-04-30", "offer": "2026-05-19", "join": "2026-08-03", "q": "Q3", "aging": 102, "timeToOffer": 14, "timeToClose": 68, "status": "Joined", "cand": "Bladen Martin", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": "Bladen selected"},
+      {"id": 90, "geo": "India", "dept": "Engineering", "squad": "PS", "pos": "Senior Software Engineer", "head": "Kanan", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-06-01", "offer": "2026-07-09", "join": "2026-07-14", "q": "Q3", "aging": 29, "timeToOffer": 29, "timeToClose": 32, "status": "Joined", "cand": "Ajay Shinde", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "Initial Interview", "comm": "Ajay (14th July)  Scrum Master role changed to SSE"},
+      {"id": 91, "geo": "India", "dept": "Program", "squad": "PS", "pos": "Project Manager", "head": "Kanan", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-05-11", "offer": "", "join": "", "q": "Q2", "aging": 95, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 92, "geo": "USA", "dept": "Engineering", "squad": "PS", "pos": "Associate AI Engineer", "head": "Kanan", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-05-08", "offer": "2026-05-29", "join": "2026-07-06", "q": "Q3", "aging": 96, "timeToOffer": 16, "timeToClose": 42, "status": "Joined", "cand": "Hrisheekesh Dandekar", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 93, "geo": "USA", "dept": "Engineering", "squad": "Trade", "pos": "Associate AI Engineer", "head": "Brian", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-05-08", "offer": "2026-06-18", "join": "2026-07-06", "q": "Q3", "aging": 96, "timeToOffer": 30, "timeToClose": 42, "status": "Joined", "cand": "Kiran Dhanasekaran", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 94, "geo": "USA", "dept": "Engineering", "squad": "Digital", "pos": "Associate AI Engineer_Digital Galaxy", "head": "Sajeesh", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-05-08", "offer": "2026-05-29", "join": "2026-06-15", "q": "Q2", "aging": 96, "timeToOffer": 16, "timeToClose": 27, "status": "Joined", "cand": "Shubham Salonki", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 95, "geo": "USA", "dept": "Technology", "squad": "DevOps", "pos": "Data Architect", "head": "Murthy", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-05-17", "offer": "2026-07-02", "join": "2026-07-23", "q": "Q3", "aging": 90, "timeToOffer": 34, "timeToClose": 49, "status": "Joined", "cand": "Narayanan Sundaram", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": "Narayana selected"},
+      {"id": 96, "geo": "India", "dept": "Engineering", "squad": "Trade", "pos": "Software Engineer", "head": "Raju", "type": "Replacement", "replaced": "Zaki", "empType": "Full-time", "loc": "Chennai", "open": "2026-05-29", "offer": "2026-07-21", "join": "2026-10-01", "q": "Q4", "aging": 38, "timeToOffer": 38, "timeToClose": 90, "status": "Offered", "cand": "Gowthamasaravanan", "rec": "Thirukumaran", "rag": "Green", "buddy": "Bala K", "backup": "Final Interview", "comm": "Gowtham (LWD 30 sept) / Sumithra L1 select (Immediate joiner)"},
+      {"id": 97, "geo": "India", "dept": "Program", "squad": "Payments", "pos": "Incident Management", "head": "Kanan", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-05-27", "offer": "2026-07-27", "join": "2026-10-01", "q": "Q4", "aging": 44, "timeToOffer": 44, "timeToClose": 92, "status": "Offered", "cand": "Vishvendra", "rec": "Andleeb", "rag": "Green", "buddy": "Amit Kulkarni", "backup": "Sourcing", "comm": "Vishvendra (1st Oct DOJ)"},
+      {"id": 98, "geo": "India", "dept": "Engineering", "squad": "PS", "pos": "Software Engineer", "head": "Kanan", "type": "Replacement", "replaced": "Som Limbure", "empType": "Full-time", "loc": "Pune", "open": "2026-05-26", "offer": "2026-07-03", "join": "2026-07-07", "q": "Q3", "aging": 29, "timeToOffer": 29, "timeToClose": 31, "status": "Joined", "cand": "Sukhbheer", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Sukbeer (Immidiate)"},
+      {"id": 99, "geo": "USA", "dept": "Finance", "squad": "Finance", "pos": "Commercial Contracts Manager", "head": "Aarthie", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-05-29", "offer": "2026-06-30", "join": "2026-07-13", "q": "Q3", "aging": 81, "timeToOffer": 23, "timeToClose": 32, "status": "Joined", "cand": "Cystal Goodwin", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 100, "geo": "India", "dept": "QA", "squad": "Payments", "pos": "Senior QA Analyst", "head": "Divya", "type": "Replacement", "replaced": "Sathishkumar Rajendran", "empType": "Full-time", "loc": "Chennai", "open": "2026-06-02", "offer": "2026-06-12", "join": "2026-08-03", "q": "Q3", "aging": 9, "timeToOffer": 9, "timeToClose": 45, "status": "Joined", "cand": "Sivaraj", "rec": "Thirukumaran", "rag": "Green", "buddy": "Kokilavani", "backup": "Initial Interview", "comm": "Sivaraj (3rd Aug). Pre-orientation scheduled on 16th July"},
+      {"id": 101, "geo": "USA", "dept": "Product", "squad": "Payments", "pos": "Business Analyst", "head": "Vijay", "type": "Replacement", "replaced": "Melissa", "empType": "Full-time", "loc": "Charlotte", "open": "2026-06-06", "offer": "", "join": "", "q": "Q2", "aging": 75, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": "Naveen has been selected. Offer approval is pending and will depend on Karuna's resource planning."},
+      {"id": 102, "geo": "USA", "dept": "Program", "squad": "PS", "pos": "Project Manager", "head": "Kanan", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-06-04", "offer": "2026-08-07", "join": "2026-09-09", "q": "Q3", "aging": 77, "timeToOffer": 47, "timeToClose": 70, "status": "Joined", "cand": "Jasna Singh", "rec": "Sindhu", "rag": "Green", "buddy": "Mahendra", "backup": "", "comm": "Jasna has been shortlisted."},
+      {"id": 103, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Open API Developer", "head": "Vijay", "type": "Replacement", "replaced": "BaskaranR", "empType": "Full-time", "loc": "Pune", "open": "2026-07-26", "offer": "2026-07-26", "join": "2026-07-26", "q": "Q3", "aging": 0, "timeToOffer": 0, "timeToClose": 0, "status": "Internal Movement", "cand": "Shankar Gaikwad", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": "Shankar moved to Open API Team"},
+      {"id": 104, "geo": "India", "dept": "Support", "squad": "Support", "pos": "Production Support Engineer (FX)", "head": "Anish", "type": "Replacement", "replaced": "Krishnaprasad", "empType": "Full-time", "loc": "India-Remote", "open": "2026-06-30", "offer": "2026-08-21", "join": "2026-08-25", "q": "Q3", "aging": 39, "timeToOffer": 39, "timeToClose": 41, "status": "Joined", "cand": "Manish Piplodi", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": "Manish - Offered. Alok Ranjan (60 days) offer on hold,"},
+      {"id": 105, "geo": "India", "dept": "DevOps", "squad": "DevOps", "pos": "Trainee DevOps Engineer", "head": "Prathap", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-06-12", "offer": "2026-06-12", "join": "2026-06-22", "q": "Q2", "aging": 1, "timeToOffer": 1, "timeToClose": 7, "status": "Joined", "cand": "Prasanna", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 106, "geo": "India", "dept": "QA", "squad": "PS", "pos": "Senior QA Analyst", "head": "Kanan", "type": "Replacement", "replaced": "Poonam (Contractor)", "empType": "Full-time", "loc": "Pune", "open": "2026-06-12", "offer": "", "join": "", "q": "Q2", "aging": 71, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "Ajay", "rec": "Andleeb/Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Ajay (Immediate joiner) offer on hold. Waiting for Dharmesh to share resource capacity planning"},
+      {"id": 107, "geo": "USA", "dept": "PS", "squad": "PS", "pos": "Business Analyst", "head": "Kanan", "type": "Replacement", "replaced": "Ramona", "empType": "Full-time", "loc": "Charlotte", "open": "2026-06-15", "offer": "2026-07-17", "join": "2026-09-08", "q": "Q3", "aging": 70, "timeToOffer": 25, "timeToClose": 62, "status": "Joined", "cand": "Nitin Anand", "rec": "Sindhu", "rag": "Green", "buddy": "Nagesh", "backup": "", "comm": "Nitin H1 B Approved."},
+      {"id": 108, "geo": "India", "dept": "QA", "squad": "PS", "pos": "Quality Analyst", "head": "Kanan", "type": "Replacement", "replaced": "Namra", "empType": "Full-time", "loc": "Pune", "open": "2026-06-12", "offer": "2026-06-26", "join": "2026-06-29", "q": "Q2", "aging": 11, "timeToOffer": 11, "timeToClose": 12, "status": "Joined", "cand": "Amol J", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": "Amol joined on 29th June 2026"},
+      {"id": 109, "geo": "India", "dept": "Delivery", "squad": "PS", "pos": "Director", "head": "Kanan", "type": "New", "replaced": "", "empType": "Full-time", "loc": "India-Remote", "open": "2026-06-12", "offer": "", "join": "2026-06-15", "q": "Q2", "aging": 2, "timeToOffer": 0, "timeToClose": 2, "status": "Joined", "cand": "Nagesh Mududi", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Internal movement from USA to India"},
+      {"id": 110, "geo": "India", "dept": "BA", "squad": "Payments", "pos": "Sr.Business Analyst", "head": "Vijay", "type": "Replacement", "replaced": "Karthika C", "empType": "Full-time", "loc": "Chennai", "open": "2026-06-24", "offer": "2026-07-20", "join": "2026-10-01", "q": "Q4", "aging": 19, "timeToOffer": 19, "timeToClose": 72, "status": "Offered", "cand": "Gayathri", "rec": "Andleeb", "rag": "Green", "buddy": "Ganesh Kumar", "backup": "Sourcing", "comm": "Gayathri (1st Oct DOJ)"},
+      {"id": 111, "geo": "USA", "dept": "PS", "squad": "Account", "pos": "Solution Engineer", "head": "Ashok", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-07-27", "offer": "", "join": "", "q": "Q3", "aging": 40, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": "Requirement is currently on hold until resource planning."},
+      {"id": 112, "geo": "USA", "dept": "Support", "squad": "Support", "pos": "Associate – Payment Production Support (Trainee)", "head": "Anish", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-07-01", "offer": "2026-07-24", "join": "2026-09-08", "q": "Q3", "aging": 58, "timeToOffer": 18, "timeToClose": 50, "status": "Joined", "cand": "Rebanta", "rec": "Sindhu", "rag": "Green", "buddy": "Anish", "backup": "", "comm": "Rebanta selected and offer has been sent. Waiting on EAD card to arrive. Projected start date is August 31, 2026"},
+      {"id": 113, "geo": "India", "dept": "Support", "squad": "Support", "pos": "Production Support Engineer", "head": "Mark/Anish", "type": "Replacement", "replaced": "Muzammil", "empType": "Full-time", "loc": "India-Remote", "open": "2026-07-01", "offer": "2026-07-30", "join": "2026-08-03", "q": "Q3", "aging": 22, "timeToOffer": 22, "timeToClose": 24, "status": "Joined", "cand": "Siddardha", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Siddardha Joined - 3rd Aug"},
+      {"id": 114, "geo": "USA", "dept": "Support", "squad": "Support", "pos": "Associate - Payment Production Support(Trainee)", "head": "Ranjith", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-07-01", "offer": "2026-07-22", "join": "2026-08-03", "q": "Q3", "aging": 4, "timeToOffer": 16, "timeToClose": 24, "status": "Joined", "cand": "Sharwari", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": "Sharwari selected"},
+      {"id": 115, "geo": "USA", "dept": "PS", "squad": "PS", "pos": "Associate - Implementation Analyst 1", "head": "Kanan", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-07-10", "offer": "2026-08-10", "join": "2026-09-08", "q": "Q3", "aging": 51, "timeToOffer": 22, "timeToClose": 43, "status": "Joined", "cand": "Pranav", "rec": "Sindhu", "rag": "Green", "buddy": "Pradeep", "backup": "", "comm": "Pranav's offer has been sent. Waiting on EAD card to arrive. Projected start date is August 31, 2026"},
+      {"id": 116, "geo": "USA", "dept": "PS", "squad": "PS", "pos": "Associate - Implementation Analyst 2", "head": "Kanan", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-07-10", "offer": "2026-08-18", "join": "2026-09-01", "q": "Q3", "aging": 51, "timeToOffer": 28, "timeToClose": 38, "status": "Joined", "cand": "Viranchi", "rec": "Sindhu", "rag": "Green", "buddy": "Srihari", "backup": "", "comm": "Viranchi joined on September 1, 2026"},
+      {"id": 117, "geo": "USA", "dept": "PS", "squad": "PS", "pos": "FX Business Analyst", "head": "Kanan", "type": "Replacement", "replaced": "James", "empType": "Full-time", "loc": "Charlotte", "open": "2026-07-08", "offer": "", "join": "", "q": "Q3", "aging": 53, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": "Dinesh has been selected, offer approval is pending and will depend on Dharmesh's resource planning."},
+      {"id": 118, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Senior Software Engineer", "head": "Vijay", "type": "Replacement", "replaced": "Maniprathap", "empType": "Full-time", "loc": "Pune", "open": "2026-07-27", "offer": "", "join": "", "q": "Q3", "aging": 40, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": "Vishal AI round, if selected the offer approval will on hold until resource capacity plan is finalized and shared, Gaurav AI round rejected"},
+      {"id": 119, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Application Architect", "head": "Vijay", "type": "Replacement", "replaced": "Shankar", "empType": "Full-time", "loc": "Chennai", "open": "2026-08-13", "offer": "", "join": "", "q": "Q3", "aging": 27, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Hiring request not approved by Karuna"},
+      {"id": 120, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Senior Software Engineer", "head": "Vijay", "type": "Replacement", "replaced": "Ganesh k", "empType": "Full-time", "loc": "Pune", "open": "2026-08-10", "offer": "", "join": "", "q": "Q3", "aging": 30, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Interview are slowed down until resource capacity plan is finalized and shared"},
+      {"id": 121, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Associate Software Engineer", "head": "Vijay", "type": "Replacement", "replaced": "Shubham J", "empType": "Full-time", "loc": "Pune", "open": "2026-07-27", "offer": "", "join": "", "q": "Q3", "aging": 40, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Ankit is on AI round, if selected the offer approval will on hold until resource capacity plan is finalized and shared"},
+      {"id": 122, "geo": "USA", "dept": "PS", "squad": "Account", "pos": "Business Analyst", "head": "Ashok", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-07-31", "offer": "", "join": "", "q": "Q3", "aging": 36, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": "Requirement is currently on hold until resource planning."},
+      {"id": 123, "geo": "USA", "dept": "PS", "squad": "Account", "pos": "Project Manager", "head": "Ashok", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-07-31", "offer": "2026-09-16", "join": "2026-10-05", "q": "Q3", "aging": 36, "timeToOffer": 34, "timeToClose": 47, "status": "Offer Approval", "cand": "Rabhina", "rec": "Sindhu", "rag": "Green", "buddy": "Balaji Balamurugan", "backup": "", "comm": "Offered Rabhina, Aswin on hold"},
+      {"id": 124, "geo": "India", "dept": "QA", "squad": "Payments", "pos": "Senior QA Analyst", "head": "Karuna", "type": "Replacement", "replaced": "Pankaj", "empType": "Full-time", "loc": "Pune", "open": "2026-08-17", "offer": "", "join": "", "q": "Q3", "aging": 25, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "Prathamesh Salunkhe", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Prathamesh (Immediate) offer on hold until resource capacity plan is finalized and shared"},
+      {"id": 125, "geo": "India", "dept": "Technology", "squad": "Technology", "pos": "IT Admin", "head": "Supro", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-08-14", "offer": "2026-09-07", "join": "2026-09-08", "q": "Q3", "aging": 17, "timeToOffer": 17, "timeToClose": 18, "status": "Joined", "cand": "Mayur", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Mayur - DOJ 8th September"},
+      {"id": 126, "geo": "India", "dept": "Delivery", "squad": "PS", "pos": "Delivery Manager", "head": "Kanan", "type": "Replacement", "replaced": "Satyavir", "empType": "Full-time", "loc": "Pune", "open": "2026-08-05", "offer": "2026-08-13", "join": "2026-08-17", "q": "Q3", "aging": 7, "timeToOffer": 7, "timeToClose": 9, "status": "Joined", "cand": "Kishore T", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "Sourcing", "comm": "Kishore offered - DOJ 17th August"},
+      {"id": 127, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Senior Software Engineer", "head": "Vijay", "type": "Replacement", "replaced": "Prachi", "empType": "Full-time", "loc": "Pune", "open": "2026-08-11", "offer": "", "join": "", "q": "Q3", "aging": 29, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Interview are slowed down until resource capacity plan is finalized and shared"},
+      {"id": 128, "geo": "USA", "dept": "PS", "squad": "PS", "pos": "Business Analyst Payment", "head": "Kanan", "type": "Replacement", "replaced": "Bhavana", "empType": "Full-time", "loc": "Charlotte", "open": "2026-08-13", "offer": "", "join": "", "q": "Q3", "aging": 3, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": "Sujith has been selected, offer approval is pending and will depend on Dharmesh's resource planning."},
+      {"id": 129, "geo": "India", "dept": "Support", "squad": "Support", "pos": "Production Support Engineer ( Payments)", "head": "Anish", "type": "Replacement", "replaced": "Kapil", "empType": "Full-time", "loc": "Remote", "open": "2026-08-14", "offer": "", "join": "", "q": "Q3", "aging": 26, "timeToOffer": 0, "timeToClose": 0, "status": "HR Interview", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Mahendra HR Discussion"},
+      {"id": 130, "geo": "India", "dept": "Engineering", "squad": "Digital", "pos": "Associate Software Engineer", "head": "Sajeesh", "type": "Replacement", "replaced": "Urvashi", "empType": "Full-time", "loc": "Pune", "open": "2026-08-17", "offer": "", "join": "", "q": "Q3", "aging": 25, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Urvashi is planned to moved to Payments team - Performance Engineer role"},
+      {"id": 131, "geo": "India", "dept": "Finance", "squad": "Finance", "pos": "Account Executive", "head": "Dharani", "type": "Replacement", "replaced": "Venkatesan", "empType": "Full-time", "loc": "Chennai", "open": "2026-08-17", "offer": "", "join": "", "q": "Q3", "aging": 25, "timeToOffer": 0, "timeToClose": 0, "status": "Initial Interview", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "3 L1 Interviews scheduled (Sudhakar, Shanmugam & Mahendra)"},
+      {"id": 132, "geo": "USA", "dept": "Engineering", "squad": "AI", "pos": "Associate AI Engineer", "head": "", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-08-21", "offer": "", "join": "", "q": "Q3", "aging": 21, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Sindhu", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 133, "geo": "India", "dept": "Engineering", "squad": "Digital", "pos": "Associate Software Engineer", "head": "Sajeesh", "type": "Replacement", "replaced": "Sai Shree", "empType": "Full-time", "loc": "Chennai", "open": "2026-08-17", "offer": "", "join": "", "q": "Q3", "aging": 25, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "The Requirement is currently on hold until resource capacity plan is finalized and shared"},
+      {"id": 134, "geo": "India", "dept": "Technology", "squad": "Technology", "pos": "Junior IT Admin", "head": "Supro", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-08-17", "offer": "", "join": "", "q": "Q3", "aging": 25, "timeToOffer": 0, "timeToClose": 0, "status": "Initial Interview", "cand": "", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Rakesh - kept on hold by Amit wants to interview few more candidates and finalize (Immediate joiners are scheduled)"},
+      {"id": 135, "geo": "India", "dept": "QA", "squad": "Payments", "pos": "Associate QA", "head": "Vijay", "type": "Replacement", "replaced": "Gaurav D", "empType": "Full-time", "loc": "Pune", "open": "2026-08-14", "offer": "", "join": "", "q": "Q3", "aging": 26, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "The Requirement is currently on hold until resource capacity plan is finalized and shared"},
+      {"id": 136, "geo": "India", "dept": "Support", "squad": "Support", "pos": "Production Support Engineer ( Payments)", "head": "Anish", "type": "Replacement", "replaced": "Prince", "empType": "Full-time", "loc": "Remote", "open": "2026-08-28", "offer": "", "join": "", "q": "Q3", "aging": 16, "timeToOffer": 0, "timeToClose": 0, "status": "Initial Interview", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Initial Interviews : Mahendra , Yogesh"},
+      {"id": 137, "geo": "India", "dept": "HR", "squad": "HR", "pos": "Senior HR Manager", "head": "Aarthie", "type": "Replacement", "replaced": "Bharathkumar  M", "empType": "Full-time", "loc": "Chennai", "open": "2026-08-17", "offer": "2026-09-21", "join": "2026-09-23", "q": "Q3", "aging": 25, "timeToOffer": 26, "timeToClose": 28, "status": "Offered", "cand": "Vishnukumar", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "Sourcing", "comm": ""},
+      {"id": 138, "geo": "India", "dept": "Marketing", "squad": "GTM", "pos": "Director Marketing", "head": "Suja", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Remote", "open": "2026-08-31", "offer": "2026-09-05", "join": "2026-09-16", "q": "Q3", "aging": 15, "timeToOffer": 5, "timeToClose": 13, "status": "Offered", "cand": "Indu k", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+      {"id": 139, "geo": "India", "dept": "Marketing", "squad": "GTM", "pos": "Marketing Manager", "head": "Suja", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Remote", "open": "2026-08-31", "offer": "2026-09-15", "join": "2026-09-21", "q": "Q3", "aging": 15, "timeToOffer": 12, "timeToClose": 16, "status": "Offered", "cand": "Karthick", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Karthick - Offer in progress"},
+      {"id": 140, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Associate Software Engineer", "head": "Vijay", "type": "Replacement", "replaced": "Pradyumna", "empType": "Full-time", "loc": "Pune", "open": "2026-09-07", "offer": "", "join": "", "q": "Q3", "aging": 10, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "The Requirement is currently on hold until resource capacity plan is finalized and shared"},
+      {"id": 141, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Associate Software Engineer", "head": "Vijay", "type": "Replacement", "replaced": "Yogesh Y", "empType": "Full-time", "loc": "Pune", "open": "2026-09-07", "offer": "", "join": "", "q": "Q3", "aging": 10, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "The Requirement is currently on hold until resource capacity plan is finalized and shared"},
+      {"id": 142, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Associate Software Engineer", "head": "Vijay", "type": "Replacement", "replaced": "Vikrant J", "empType": "Full-time", "loc": "Pune", "open": "2026-09-07", "offer": "", "join": "", "q": "Q3", "aging": 10, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "The Requirement is currently on hold until resource capacity plan is finalized and shared"},
+      {"id": 143, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Software Engineer", "head": "Vijay", "type": "Replacement", "replaced": "Bhavik P", "empType": "Full-time", "loc": "Pune", "open": "2026-09-09", "offer": "", "join": "", "q": "Q3", "aging": 8, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "The Requirement is currently on hold until resource capacity plan is finalized and shared"},
+      {"id": 144, "geo": "India", "dept": "DevOps", "squad": "DevOps", "pos": "Senior DevOps Engineer", "head": "Manoj", "type": "Replacement", "replaced": "Prathamesh", "empType": "Full-time", "loc": "Pune/Chennai", "open": "2026-09-03", "offer": "", "join": "", "q": "Q3", "aging": 12, "timeToOffer": 0, "timeToClose": 0, "status": "Sourcing", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Sourcing in progress"},
+      {"id": 145, "geo": "India", "dept": "Delivery", "squad": "PS", "pos": "Delivery Manager", "head": "Kanan", "type": "Replacement", "replaced": "Satyavir/Kishore T", "empType": "Full-time", "loc": "Pune", "open": "2026-09-07", "offer": "", "join": "", "q": "Q3", "aging": 10, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Sourcing in progress"},
+      {"id": 146, "geo": "India", "dept": "Engineering", "squad": "PS", "pos": "Senior Software Engineer", "head": "Kanan", "type": "Replacement", "replaced": "Nitin", "empType": "Full-time", "loc": "Pune", "open": "2026-09-14", "offer": "", "join": "", "q": "Q3", "aging": 5, "timeToOffer": 0, "timeToClose": 0, "status": "Position Freezed", "cand": "", "rec": "Unassigned", "rag": "Green", "buddy": "", "backup": "", "comm": "Sourcing in progress"}
+    ];
+
     let masterRecords = [];
-    
-    // Unified Filter State
     const filterState = {
-      geo: 'ALL',        // 'ALL', 'India', 'USA'
-      quarter: 'ALL',    // 'ALL', 'Q1', 'Q2', 'Q3', 'Q4'
-      status: 'ALL',     // 'ALL', 'Joined', 'Offered', 'ACTIVE_PIPE', 'HOLD_FREEZE'
+      geo: 'ALL',
+      quarter: 'ALL',
+      status: 'ALL',
       dept: 'ALL',
       recruiter: 'ALL',
-      hireType: 'ALL',   // 'ALL', 'New', 'Replacement'
+      hireType: 'ALL',
       search: '',
       page: 1,
       pageSize: 15
     };
 
-    // Chart instances
     let charts = {};
 
-    // Initial load with data
     window.addEventListener('DOMContentLoaded', () => {
-      // Load embedded dataset
-      loadEmbeddedMasterData();
+      masterRecords = RAW_MASTER_DATA.slice();
+      document.getElementById('dataTimestamp').textContent = masterRecords.length + ' Master Requisitions';
+      populateDropdowns();
+      applyFiltersAndRender();
       lucide.createIcons();
     });
 
-    function loadEmbeddedMasterData() {
-      // Embedded clean records from Master 2026
-      masterRecords = getInitialRecords();
-      populateDropdowns();
-      applyFiltersAndRender();
-    }
-
-    // Switch between the 5 tabs
     function switchTab(tabName) {
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('bg-brand-600/20', 'border-brand-500/40', 'text-brand-300');
@@ -930,14 +979,12 @@
       const activePane = document.getElementById('tabContent-' + tabName);
       if (activePane) activePane.classList.remove('hidden');
 
-      // Re-trigger chart resize on active tab
       setTimeout(() => {
         Object.values(charts).forEach(c => c && c.resize && c.resize());
         lucide.createIcons();
       }, 50);
     }
 
-    // Composed Filter Handlers
     function setGeoFilter(geo) {
       filterState.geo = geo;
       document.querySelectorAll('.geo-btn').forEach(b => {
@@ -1016,18 +1063,11 @@
       setQuarterFilter('ALL');
     }
 
-    // Core Filtering Engine
     function getFilteredData() {
       return masterRecords.filter(item => {
-        // 1. Geo Filter
         if (filterState.geo !== 'ALL' && item.geo !== filterState.geo) return false;
+        if (filterState.quarter !== 'ALL' && item.q !== filterState.quarter) return false;
 
-        // 2. Quarter Filter
-        if (filterState.quarter !== 'ALL') {
-          if (item.q !== filterState.quarter) return false;
-        }
-
-        // 3. Status Filter
         if (filterState.status === 'Joined' && item.status !== 'Joined') return false;
         if (filterState.status === 'Offered' && item.status !== 'Offered') return false;
         if (filterState.status === 'ACTIVE_PIPE') {
@@ -1039,16 +1079,10 @@
           if (!holdStatuses.includes(item.status)) return false;
         }
 
-        // 4. Dept Filter
         if (filterState.dept !== 'ALL' && item.dept !== filterState.dept) return false;
-
-        // 5. Recruiter Filter
         if (filterState.recruiter !== 'ALL' && item.rec !== filterState.recruiter) return false;
-
-        // 6. Hire Type Filter
         if (filterState.hireType !== 'ALL' && item.type !== filterState.hireType) return false;
 
-        // 7. Search Filter
         if (filterState.search) {
           const s = filterState.search;
           const match = 
@@ -1069,29 +1103,14 @@
 
     function applyFiltersAndRender() {
       const data = getFilteredData();
-
-      // Update Active Chips
       renderActiveChips();
-
-      // Update KPI Numbers
       updateKPIs(data);
-
-      // Render Charts
       renderAllCharts(data);
-
-      // Render Upcoming Joiners Runway
       renderOffersRunway(data);
-
-      // Render Critical SLA Table
       renderCriticalAgingTable(data);
-
-      // Render Recruiter Matrix
       renderRecruiterTable(data);
-
-      // Render Master Grid
       renderMasterGrid(data);
 
-      // Update count
       document.getElementById('countDisplay').textContent = data.length;
       lucide.createIcons();
     }
@@ -1139,7 +1158,14 @@
       const usaTotal = data.filter(d => d.geo === 'USA').length;
       document.getElementById('kpiTotalSub').textContent = `India: ${indTotal} | USA: ${usaTotal}`;
 
-      // Hiring Intent
+      const indOffered = data.filter(d => d.status === 'Offered' && d.geo === 'India').length;
+      const usaOffered = data.filter(d => d.status === 'Offered' && d.geo === 'USA').length;
+      document.getElementById('kpiOfferedSub').textContent = `India: ${indOffered} | USA: ${usaOffered}`;
+
+      const indActive = data.filter(d => ['Sourcing', 'Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval'].includes(d.status) && d.geo === 'India').length;
+      const usaActive = data.filter(d => ['Sourcing', 'Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval'].includes(d.status) && d.geo === 'USA').length;
+      document.getElementById('kpiActiveSub').textContent = `India: ${indActive} | USA: ${usaActive}`;
+
       const newCount = data.filter(d => d.type === 'New').length;
       const replCount = data.filter(d => d.type === 'Replacement').length;
       document.getElementById('intentNewCount').textContent = newCount;
@@ -1149,7 +1175,6 @@
       document.getElementById('intentNewPct').textContent = `${newPct}% Growth`;
       document.getElementById('intentReplPct').textContent = `${replPct}% Backfill`;
 
-      // Aging metrics
       const aging0to30 = data.filter(d => d.aging <= 30).length;
       const aging31to60 = data.filter(d => d.aging > 30 && d.aging <= 60).length;
       const aging61to90 = data.filter(d => d.aging > 60 && d.aging <= 90).length;
@@ -1176,19 +1201,15 @@
       if (!ctx) return;
       if (charts.monthly) charts.monthly.destroy();
 
-      const months = ['Jan (Q1)', 'Feb (Q1)', 'Mar (Q1)', 'Apr (Q2)', 'May (Q2)', 'Jun (Q2)', 'Jul (Q3)', 'Aug (Q3)', 'Sep (Q3)', 'Oct (Q4)'];
-      const indCounts = [4, 7, 12, 5, 6, 10, 4, 3, 5, 0];
-      const usaCounts = [2, 4, 5, 6, 4, 1, 7, 5, 2, 0];
-
-      // Dynamically calculate from data
+      const months = ['Jan (Q1)', 'Feb (Q1)', 'Mar (Q1)', 'Apr (Q2)', 'May (Q2)', 'Jun (Q2)', 'Jul (Q3)', 'Aug (Q3)', 'Sep (Q3)'];
       const joinedData = data.filter(d => d.status === 'Joined');
-      const indMap = Array(10).fill(0);
-      const usaMap = Array(10).fill(0);
+      const indMap = Array(9).fill(0);
+      const usaMap = Array(9).fill(0);
 
       joinedData.forEach(d => {
         if (d.join) {
           const m = parseInt(d.join.split('-')[1], 10) - 1;
-          if (m >= 0 && m < 10) {
+          if (m >= 0 && m < 9) {
             if (d.geo === 'India') indMap[m]++;
             else usaMap[m]++;
           }
@@ -1202,13 +1223,13 @@
           datasets: [
             {
               label: 'India Joiners',
-              data: indMap.some(v => v > 0) ? indMap : indCounts,
+              data: indMap,
               backgroundColor: '#10b981',
               borderRadius: 6
             },
             {
               label: 'USA Joiners',
-              data: usaMap.some(v => v > 0) ? usaMap : usaCounts,
+              data: usaMap,
               backgroundColor: '#06b6d4',
               borderRadius: 6
             }
@@ -1636,7 +1657,7 @@
 
         <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 text-xs">
           <span class="text-slate-400 font-semibold block mb-1">Recruitment Notes & Comments</span>
-          <p class="text-slate-300">${item.comm || 'No specific bottlenecks or notes logged for this requisition.'}</p>
+          <p class="text-slate-300">${item.comm || 'No specific bottlenecks logged for this requisition.'}</p>
         </div>
       `;
 
@@ -1692,7 +1713,6 @@
       document.body.removeChild(link);
     }
 
-    // Modal Controls for OneDrive Sync
     function openSyncModal() {
       const modal = document.getElementById('syncModal');
       modal.classList.remove('hidden');
@@ -1799,27 +1819,6 @@
         document.getElementById('dataTimestamp').textContent = `${newRecords.length} Requisitions Imported`;
         applyFiltersAndRender();
       }
-    }
-
-    // Baseline 146 Clean Master Records from Master 2026 sheet
-    function getInitialRecords() {
-      return [
-        {"id": 1, "geo": "India", "dept": "Product", "squad": "Account", "pos": "Product Manager", "head": "Ashok", "type": "Replacement", "replaced": "Bhargav/Mahesh", "empType": "Full-time", "loc": "Chennai", "open": "2025-10-08", "offer": "2025-11-14", "join": "2026-03-09", "q": "Q1", "aging": 28, "timeToOffer": 28, "timeToClose": 109, "status": "Suspended", "cand": "", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Narsimha Leela Krishna - Backedout"},
-        {"id": 2, "geo": "USA", "dept": "Infosec", "squad": "Infosec", "pos": "CISO (Change of Role)", "head": "Murthy", "type": "Replacement", "replaced": "Nate", "empType": "Full-time", "loc": "Charlotte", "open": "2025-11-21", "offer": "2026-01-23", "join": "2026-02-02", "q": "Q1", "aging": 52, "timeToOffer": 46, "timeToClose": 52, "status": "Joined", "cand": "Supro", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": "Eric Garcia decided to reject the offer on October 1, 2025."},
-        {"id": 3, "geo": "USA", "dept": "Product", "squad": "Payments", "pos": "Product Owner (Change of Role)", "head": "Vijay", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2025-08-26", "offer": "2025-12-12", "join": "2026-01-20", "q": "Q1", "aging": 106, "timeToOffer": 79, "timeToClose": 106, "status": "Joined", "cand": "Melissa", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": "Melissa will join in January 12, 2025"},
-        {"id": 4, "geo": "USA", "dept": "Engineering", "squad": "Payments", "pos": "Enterprise Architect", "head": "Murthy", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-01-02", "offer": "2026-03-24", "join": "2026-04-20", "q": "Q2", "aging": 77, "timeToOffer": 58, "timeToClose": 77, "status": "Joined", "cand": "Lakshminarayan", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
-        {"id": 5, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Senior Software Engineer", "head": "Vinay", "type": "Replacement", "replaced": "Balaji G", "empType": "Full-time", "loc": "Chennai", "open": "2025-10-28", "offer": "2025-12-12", "join": "2026-01-20", "q": "Q1", "aging": 34, "timeToOffer": 34, "timeToClose": 60, "status": "Joined", "cand": "Srinivasan", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
-        {"id": 6, "geo": "India", "dept": "DevOps", "squad": "DevOps", "pos": "DevOps Engineer", "head": "Prathap", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-01-02", "offer": "2026-03-04", "join": "2026-03-05", "q": "Q1", "aging": 44, "timeToOffer": 43, "timeToClose": 44, "status": "Joined", "cand": "Senthil R", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
-        {"id": 7, "geo": "India", "dept": "DevOps", "squad": "DevOps", "pos": "Senior DevOps Engineer", "head": "Prathap", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-07-11", "offer": "", "join": "", "q": "Q3", "aging": 50, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Andleeb/Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Role changed to IT Admin (email from Aarthie)"},
-        {"id": 8, "geo": "India", "dept": "QA", "squad": "Payments", "pos": "Performance Tester", "head": "Divya", "type": "Replacement", "replaced": "Sneha", "empType": "Full-time", "loc": "Chennai", "open": "2026-01-06", "offer": "2026-01-09", "join": "2026-01-19", "q": "Q1", "aging": 4, "timeToOffer": 4, "timeToClose": 10, "status": "Joined", "cand": "Pavithra Devi", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": "Pavithra Devi early attrition"},
-        {"id": 9, "geo": "India", "dept": "Engineering", "squad": "PS", "pos": "Senior Software Engineer", "head": "Kanan", "type": "Replacement", "replaced": "Nandhini", "empType": "Full-time", "loc": "Pune", "open": "2025-10-15", "offer": "2026-03-13", "join": "2026-03-23", "q": "Q1", "aging": 108, "timeToOffer": 103, "timeToClose": 108, "status": "Joined", "cand": "Uttkarsh", "rec": "Vendor / Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
-        {"id": 10, "geo": "USA", "dept": "DevOps", "squad": "DevOps", "pos": "Director of Infrastructure", "head": "Murthy", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2025-11-04", "offer": "2026-01-20", "join": "2026-02-04", "q": "Q1", "aging": 67, "timeToOffer": 56, "timeToClose": 67, "status": "Joined", "cand": "Manoj", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
-        {"id": 11, "geo": "USA", "dept": "DevOps", "squad": "DevOps", "pos": "SecOps - Enterprise Governance", "head": "Murthy", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2025-11-05", "offer": "", "join": "", "q": "Q4", "aging": 228, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": "Murthy asked to temp hold the req until the clarity on business need"},
-        {"id": 12, "geo": "USA", "dept": "Engineering", "squad": "Account", "pos": "Java Architect", "head": "Ashok", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2025-11-18", "offer": "2026-02-23", "join": "2026-04-17", "q": "Q2", "aging": 109, "timeToOffer": 68, "timeToClose": 109, "status": "Joined", "cand": "Esther M", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
-        {"id": 13, "geo": "India", "dept": "Engineering", "squad": "Trade", "pos": "Software Engineer", "head": "Raju", "type": "Replacement", "replaced": "Natarajan S", "empType": "Full-time", "loc": "Chennai", "open": "2026-01-02", "offer": "2026-02-04", "join": "2026-05-04", "q": "Q2", "aging": 24, "timeToOffer": 24, "timeToClose": 88, "status": "Joined", "cand": "Sridharan", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Sridharan - Backup / Manikandan Resigned"},
-        {"id": 14, "geo": "USA", "dept": "Finance", "squad": "Finance", "pos": "Chief Finance Officer", "head": "Booshan", "type": "Replacement", "replaced": "David", "empType": "Full-time", "loc": "Charlotte", "open": "2025-12-18", "offer": "", "join": "", "q": "Q4", "aging": 197, "timeToOffer": 0, "timeToClose": 0, "status": "Offered", "cand": "Bill Gostkowski", "rec": "TPZ", "rag": "Green", "buddy": "", "backup": "", "comm": "Executive Agency TPZ retained for CFO search"},
-        {"id": 15, "geo": "India", "dept": "Engineering", "squad": "Trade", "pos": "Software Engineer", "head": "Raju", "type": "Replacement", "replaced": "Raghul A", "empType": "Full-time", "loc": "Chennai", "open": "2025-12-24", "offer": "2026-03-26", "join": "2026-03-27", "q": "Q1", "aging": 67, "timeToOffer": 66, "timeToClose": 67, "status": "Joined", "cand": "Elumalai", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Ambikeshwari Resigned"}
-      ];
     }
   </script>
 </body>
