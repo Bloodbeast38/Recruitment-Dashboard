@@ -3,1269 +3,1318 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TA Pulse 2026 | Talent Acquisition & Recruitment Executive Operations</title>
-  
-  <!-- Inter Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <title>Executive Talent Acquisition & Recruitment Dashboard | FY 2026</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- SheetJS (xlsx) for direct Excel parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
           colors: {
-            brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              200: '#c7d2fe',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-              900: '#312e81',
-            }
+            brand: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 900: '#312e81' },
+            slate: { 850: '#151f32', 900: '#0f172a', 950: '#090d16' }
           }
         }
       }
     }
   </script>
-
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  
-  <!-- SheetJS (xlsx) for reading/writing live excel files directly in browser -->
-  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-
   <style>
-    /* Custom scrollbar and animations */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-    .dark ::-webkit-scrollbar-thumb { background: #334155; }
-    
-    .glass-panel {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; }
+      .print-break { page-break-before: always; }
+      .card-shadow { box-shadow: none !important; border: 1px solid #cbd5e1 !important; }
     }
-    .dark .glass-panel {
-      background: rgba(15, 23, 42, 0.88);
-      backdrop-filter: blur(12px);
-    }
-
-    .badge-pulse {
-      animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-    @keyframes pulse-ring {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.05); }
-    }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
   </style>
 </head>
+<body class="bg-[#0b0f19] text-slate-100 font-sans min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-200 selection:bg-brand-500 selection:text-white">
-
-  <!-- Header / Navigation -->
-  <header class="sticky top-0 z-40 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur shadow-sm">
-    <div class="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        
-        <!-- Left: Branding & Geo Quick Switcher -->
-        <div class="flex items-center gap-4 sm:gap-6">
+  <!-- Top Executive Header -->
+  <header class="sticky top-0 z-40 bg-[#0f172a]/95 backdrop-blur-md border-b border-slate-800/80 px-4 lg:px-8 py-3.5 shadow-xl">
+    <div class="max-w-[1700px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-brand-500/20 text-white font-bold">
+          <i data-lucide="briefcase" class="w-6 h-6"></i>
+        </div>
+        <div>
           <div class="flex items-center gap-2.5">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-violet-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/25">
-              <i data-lucide="layers" class="w-5 h-5"></i>
-            </div>
-            <div>
-              <div class="flex items-center gap-2">
-                <h1 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">TA Pulse</h1>
-                <span class="px-2 py-0.5 text-xs font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 rounded-full flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 2026 LIVE
-                </span>
-              </div>
-              <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">Talent Acquisition Executive Operating System</p>
-            </div>
+            <h1 class="text-lg md:text-xl font-bold tracking-tight text-white flex items-center gap-2">
+              Executive Talent Acquisition Dashboard
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> FY 2026 Live
+              </span>
+            </h1>
           </div>
-
-          <div class="h-6 w-px bg-slate-200 dark:bg-slate-800 hidden md:block"></div>
-
-          <!-- Quick Geo Segmented Tabs -->
-          <div class="inline-flex p-1 rounded-xl bg-slate-100 dark:bg-slate-800/80 text-xs font-medium" id="geoSwitcher">
-            <button onclick="setGeoFilter('ALL')" id="geo-btn-ALL" class="geo-btn px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-brand-600 dark:text-white transition-all font-semibold flex items-center gap-1.5">
-              <i data-lucide="globe" class="w-3.5 h-3.5"></i> Global <span id="geo-count-all" class="px-1.5 py-0.2 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px]">146</span>
-            </button>
-            <button onclick="setGeoFilter('India')" id="geo-btn-India" class="geo-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all flex items-center gap-1.5">
-              <span>🇮🇳 India</span> <span id="geo-count-india" class="px-1.5 py-0.2 bg-slate-200 dark:bg-slate-700 rounded-full text-[10px]">118</span>
-            </button>
-            <button onclick="setGeoFilter('USA')" id="geo-btn-USA" class="geo-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all flex items-center gap-1.5">
-              <span>🇺🇸 USA</span> <span id="geo-count-usa" class="px-1.5 py-0.2 bg-slate-200 dark:bg-slate-700 rounded-full text-[10px]">28</span>
-            </button>
-          </div>
+          <p class="text-xs text-slate-400 mt-0.5 flex items-center gap-2">
+            <span>Enterprise Recruitment Health & Capacity Analytics</span>
+            <span class="text-slate-600">•</span>
+            <span id="dataTimestamp" class="text-slate-400">146 Master Requisitions</span>
+          </p>
         </div>
+      </div>
 
-        <!-- Right: Actions & Tools -->
-        <div class="flex items-center gap-2.5">
-          <!-- Excel / OneDrive Live Sync Dropdown Modal Trigger -->
-          <button onclick="openSyncModal()" class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-xl bg-brand-50 hover:bg-brand-100 text-brand-700 dark:bg-brand-950/50 dark:hover:bg-brand-900/60 dark:text-brand-300 border border-brand-200/60 dark:border-brand-800/60 transition-all shadow-sm">
-            <i data-lucide="cloud-sync" class="w-4 h-4 text-brand-600 animate-spin-hover"></i>
-            <span class="hidden sm:inline">Connect Excel / OneDrive</span>
-            <span class="sm:hidden">Sync</span>
-          </button>
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-2.5 w-full md:w-auto justify-end no-print">
+        <!-- Live OneDrive / Sync Modal Button -->
+        <button onclick="openSyncModal()" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700/80 hover:border-slate-600 transition shadow-sm">
+          <i data-lucide="cloud" class="w-4 h-4 text-cyan-400"></i>
+          <span>Sync OneDrive</span>
+        </button>
 
-          <!-- Upload local excel quick button -->
-          <label class="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all border border-slate-200 dark:border-slate-700">
-            <i data-lucide="upload" class="w-4 h-4"></i>
-            <span class="hidden md:inline">Import .xlsx</span>
-            <input type="file" id="excelFileInput" accept=".xlsx, .xls" class="hidden" onchange="handleExcelFileUpload(event)" />
-          </label>
+        <!-- Local File Ingestion -->
+        <label class="cursor-pointer inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700/80 hover:border-slate-600 transition shadow-sm">
+          <i data-lucide="upload" class="w-4 h-4 text-emerald-400"></i>
+          <span>Upload .xlsx</span>
+          <input type="file" id="excelFileInput" accept=".xlsx, .xls" class="hidden" onchange="handleFileUpload(event)" />
+        </label>
 
-          <!-- Export Filtered Data -->
-          <button onclick="exportCurrentDataToCSV()" title="Export current filtered view to CSV" class="p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-            <i data-lucide="download" class="w-4 h-4"></i>
-          </button>
+        <!-- Export CSV Button -->
+        <button onclick="exportFilteredCSV()" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700/80 hover:border-slate-600 transition shadow-sm">
+          <i data-lucide="download" class="w-4 h-4 text-amber-400"></i>
+          <span>Export CSV</span>
+        </button>
 
-          <!-- Theme Toggle -->
-          <button onclick="toggleDarkMode()" id="themeToggleBtn" title="Toggle Light / Dark Mode" class="p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-            <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
-            <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
-          </button>
-        </div>
+        <!-- Management PDF Print Snapshot -->
+        <button onclick="window.print()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold shadow-lg shadow-brand-500/25 transition">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span>Management Report</span>
+        </button>
+      </div>
+    </div>
 
+    <!-- Navigation Tabs -->
+    <div class="max-w-[1700px] mx-auto mt-4 pt-2 border-t border-slate-800/60 flex items-center justify-between overflow-x-auto custom-scrollbar no-print">
+      <div class="flex items-center gap-1 sm:gap-2">
+        <button onclick="switchTab('overview')" id="tabBtn-overview" class="tab-btn active px-4 py-2 text-xs font-semibold rounded-lg flex items-center gap-2 border transition bg-brand-600/20 border-brand-500/40 text-brand-300">
+          <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+          <span>Executive Overview</span>
+        </button>
+        <button onclick="switchTab('sla')" id="tabBtn-sla" class="tab-btn px-4 py-2 text-xs font-semibold rounded-lg flex items-center gap-2 border transition bg-transparent border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+          <i data-lucide="clock" class="w-4 h-4"></i>
+          <span>Velocity & SLA Aging</span>
+        </button>
+        <button onclick="switchTab('capacity')" id="tabBtn-capacity" class="tab-btn px-4 py-2 text-xs font-semibold rounded-lg flex items-center gap-2 border transition bg-transparent border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+          <i data-lucide="users" class="w-4 h-4"></i>
+          <span>Leadership & Recruiter Load</span>
+        </button>
+        <button onclick="switchTab('challenges')" id="tabBtn-challenges" class="tab-btn px-4 py-2 text-xs font-semibold rounded-lg flex items-center gap-2 border transition bg-transparent border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+          <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i>
+          <span>Executive Challenges & HR Solutions</span>
+        </button>
+        <button onclick="switchTab('master')" id="tabBtn-master" class="tab-btn px-4 py-2 text-xs font-semibold rounded-lg flex items-center gap-2 border transition bg-transparent border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+          <i data-lucide="table" class="w-4 h-4"></i>
+          <span>Requisition Master Grid</span>
+        </button>
+      </div>
+
+      <!-- Quick Search input right on tab bar -->
+      <div class="relative min-w-[240px] hidden md:block">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+        <input type="text" id="quickSearchInput" placeholder="Quick search candidate, role, dept..." oninput="handleSearch(this.value)" class="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-900 border border-slate-700/80 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition" />
       </div>
     </div>
   </header>
 
-  <!-- OneDrive / Direct URL Sync Modal -->
-  <div id="syncModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 animate-in fade-in zoom-in duration-200">
-      <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
-        <div class="flex items-center gap-2.5">
-          <div class="p-2 rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-950 dark:text-brand-400">
-            <i data-lucide="cloud-lightning" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h3 class="font-bold text-base text-slate-900 dark:text-white">Connect Live Excel Data Source</h3>
-            <p class="text-xs text-slate-500">OneDrive direct link or downloadable URL</p>
-          </div>
-        </div>
-        <button onclick="closeSyncModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <div class="py-4 space-y-4 text-xs">
-        <div>
-          <label class="block font-medium text-slate-700 dark:text-slate-300 mb-1.5">Direct OneDrive / SharePoint / Raw Excel URL</label>
-          <input type="url" id="liveFileUrl" placeholder="https://onedrive.live.com/download?resid=... or raw .xlsx link" 
-            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:text-white" />
-          <p class="mt-1 text-[11px] text-slate-500">Tip: For OneDrive, generate an Embed or Share link and convert to a direct download link, or host the file in a raw GitHub repo file link.</p>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-medium text-slate-700 dark:text-slate-300 mb-1.5">Auto-refresh Interval</label>
-            <select id="autoRefreshInterval" class="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-white">
-              <option value="0">Manual Refresh Only</option>
-              <option value="300">Every 5 minutes</option>
-              <option value="900">Every 15 minutes</option>
-              <option value="3600">Every 1 hour</option>
-            </select>
-          </div>
-          <div>
-            <label class="block font-medium text-slate-700 dark:text-slate-300 mb-1.5">Default Sheet</label>
-            <input type="text" id="targetSheetName" value="Master 2026" placeholder="Master 2026" class="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-white" />
-          </div>
-        </div>
-
-        <div class="p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200/70 dark:border-amber-900/50 rounded-xl text-amber-800 dark:text-amber-300 text-[11px] flex gap-2">
-          <i data-lucide="info" class="w-4 h-4 flex-shrink-0 mt-0.5"></i>
-          <div>All parsing runs client-side in your browser using SheetJS. No sensitive applicant data ever leaves your computer or GitHub Pages instance.</div>
-        </div>
-      </div>
-
-      <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-2">
-        <button onclick="resetToSampleData()" class="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900">Reset to Default Data</button>
-        <button onclick="applyLiveSyncUrl()" class="px-4 py-2 text-xs font-semibold bg-brand-600 hover:bg-brand-700 text-white rounded-xl shadow-sm flex items-center gap-1.5">
-          <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Save & Sync Now
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Requisition Detail Modal -->
-  <div id="detailModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[90vh] overflow-y-auto" id="detailModalContent">
-      <!-- Injected Dynamically -->
-    </div>
-  </div>
-
-  <main class="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-
-    <!-- Universal Slicer / Filter Bar -->
-    <div class="glass-panel border border-slate-200 dark:border-slate-800 p-4 rounded-2xl shadow-sm space-y-3">
-      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+  <!-- Global Filter & Slicer Control Ribbon -->
+  <section class="bg-[#0e1626] border-b border-slate-800/80 px-4 lg:px-8 py-3 sticky top-[108px] z-30 shadow-md no-print">
+    <div class="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Primary Multi-Slicers -->
+      <div class="flex flex-wrap items-center gap-3">
         
-        <!-- Search Input -->
-        <div class="relative flex-1 min-w-[240px]">
-          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-          <input type="text" id="globalSearchInput" placeholder="Search candidate, role, squad, manager, replaced employee..." 
-            oninput="handleSearchChange(this.value)"
-            class="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 focus:ring-2 focus:ring-brand-500 focus:outline-none dark:text-white placeholder-slate-400" />
+        <!-- Geography Slicer -->
+        <div class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-inner">
+          <span class="text-[11px] font-semibold text-slate-400 px-2.5 flex items-center gap-1.5">
+            <i data-lucide="globe" class="w-3.5 h-3.5 text-cyan-400"></i> Geo:
+          </span>
+          <button onclick="setGeoFilter('ALL')" id="geo-ALL" class="geo-btn px-3 py-1 text-xs font-semibold rounded-lg transition bg-brand-600 text-white shadow-sm">All</button>
+          <button onclick="setGeoFilter('India')" id="geo-India" class="geo-btn px-3 py-1 text-xs font-semibold rounded-lg transition text-slate-400 hover:text-white hover:bg-slate-800">🇮🇳 India</button>
+          <button onclick="setGeoFilter('USA')" id="geo-USA" class="geo-btn px-3 py-1 text-xs font-semibold rounded-lg transition text-slate-400 hover:text-white hover:bg-slate-800">🇺🇸 USA</button>
         </div>
 
-        <!-- Filters Group -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 flex-wrap">
-          
-          <!-- Department -->
-          <select id="filterDept" onchange="handleFilterChange()" class="px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:ring-1 focus:ring-brand-500">
+        <!-- Quarter Slicer -->
+        <div class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-inner">
+          <span class="text-[11px] font-semibold text-slate-400 px-2.5 flex items-center gap-1.5">
+            <i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-400"></i> Quarter:
+          </span>
+          <button onclick="setQuarterFilter('ALL')" id="q-ALL" class="q-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition bg-brand-600 text-white shadow-sm">All</button>
+          <button onclick="setQuarterFilter('Q1')" id="q-Q1" class="q-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition text-slate-400 hover:text-white hover:bg-slate-800">Q1</button>
+          <button onclick="setQuarterFilter('Q2')" id="q-Q2" class="q-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition text-slate-400 hover:text-white hover:bg-slate-800">Q2</button>
+          <button onclick="setQuarterFilter('Q3')" id="q-Q3" class="q-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition text-slate-400 hover:text-white hover:bg-slate-800">Q3</button>
+          <button onclick="setQuarterFilter('Q4')" id="q-Q4" class="q-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition text-slate-400 hover:text-white hover:bg-slate-800">Q4</button>
+        </div>
+
+        <!-- Department Select -->
+        <div class="relative">
+          <select id="deptSelect" onchange="setDeptFilter(this.value)" class="bg-slate-900 text-xs font-medium border border-slate-800 rounded-xl px-3 py-1.5 text-slate-300 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 pr-8 cursor-pointer">
             <option value="ALL">All Departments</option>
           </select>
+        </div>
 
-          <!-- Recruiter -->
-          <select id="filterRecruiter" onchange="handleFilterChange()" class="px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+        <!-- Recruiter Select -->
+        <div class="relative">
+          <select id="recruiterSelect" onchange="setRecruiterFilter(this.value)" class="bg-slate-900 text-xs font-medium border border-slate-800 rounded-xl px-3 py-1.5 text-slate-300 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 pr-8 cursor-pointer">
             <option value="ALL">All Recruiters</option>
           </select>
-
-          <!-- Status / Stage -->
-          <select id="filterStatus" onchange="handleFilterChange()" class="px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
-            <option value="ALL">All Pipeline Stages</option>
-          </select>
-
-          <!-- Type (New vs Replacement) -->
-          <select id="filterType" onchange="handleFilterChange()" class="px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
-            <option value="ALL">All Requisition Types</option>
-            <option value="New">New Headcount</option>
-            <option value="Replacement">Replacement</option>
-          </select>
-
-          <!-- Aging SLA Bracket -->
-          <select id="filterAging" onchange="handleFilterChange()" class="px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
-            <option value="ALL">All Aging SLAs</option>
-            <option value="0-30">0-30 Days (On Target)</option>
-            <option value="31-60">31-60 Days (Attention)</option>
-            <option value="61-90">61-90 Days (Warning)</option>
-            <option value="90+">> 90 Days (Critical SLA)</option>
-          </select>
-
         </div>
 
-        <!-- Filter Action Reset -->
-        <div class="flex items-center gap-2 self-end lg:self-auto">
-          <button onclick="resetAllFilters()" title="Reset all slicers" class="px-3 py-2 text-xs font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all flex items-center gap-1.5">
-            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Clear
-          </button>
+        <!-- Hiring Intent Select (New vs Replacement) -->
+        <div class="relative">
+          <select id="hireTypeSelect" onchange="setHireTypeFilter(this.value)" class="bg-slate-900 text-xs font-medium border border-slate-800 rounded-xl px-3 py-1.5 text-slate-300 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 pr-8 cursor-pointer">
+            <option value="ALL">All Hiring Intents (New & Backfill)</option>
+            <option value="New">✨ New Growth Headcount</option>
+            <option value="Replacement">🔄 Replacement Backfill</option>
+          </select>
         </div>
 
       </div>
 
-      <!-- Active Filter Chips Summary -->
-      <div id="filterChipsRow" class="flex items-center flex-wrap gap-1.5 pt-1 text-xs text-slate-500">
-        <span class="text-[11px] font-medium text-slate-400">Active View:</span>
-        <span id="activeViewSummary" class="font-semibold text-slate-700 dark:text-slate-200">Showing all records (146 items)</span>
+      <!-- Reset & Active Records Count -->
+      <div class="flex items-center gap-3 ml-auto">
+        <span id="filteredRecordCount" class="text-xs font-medium text-slate-400">
+          Showing <span class="text-white font-bold" id="countDisplay">146</span> positions
+        </span>
+        <button onclick="resetAllFilters()" class="text-xs text-rose-400 hover:text-rose-300 flex items-center gap-1 font-semibold hover:underline">
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+          <span>Reset</span>
+        </button>
       </div>
+
     </div>
 
-    <!-- Executive KPI Scorecards -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+    <!-- Interactive Active Filter Chips -->
+    <div id="activeChipsContainer" class="max-w-[1700px] mx-auto mt-2.5 flex flex-wrap items-center gap-2 empty:hidden"></div>
+  </section>
+
+  <!-- Main Content Body -->
+  <main class="flex-1 max-w-[1700px] w-full mx-auto p-4 lg:p-8 space-y-6">
+
+    <!-- KPI Scorecards (Always visible on summary, clickable to filter) -->
+    <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
       
-      <!-- Total Requisitions -->
-      <div onclick="drilldownKPI('ALL')" class="cursor-pointer group p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-brand-500/50 transition-all">
-        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-          <span class="text-xs font-semibold tracking-wider uppercase">Requisitions</span>
-          <div class="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-            <i data-lucide="folder-kanban" class="w-4 h-4"></i>
+      <!-- Total Tracked -->
+      <div onclick="handleCardClick('TOTAL')" class="kpi-card cursor-pointer group bg-gradient-to-br from-slate-900 to-[#141e33] border border-slate-800/90 hover:border-brand-500/50 p-4 rounded-2xl shadow-lg transition duration-200">
+        <div class="flex items-center justify-between text-slate-400 mb-2">
+          <span class="text-[11px] font-bold uppercase tracking-wider">Total Tracked</span>
+          <div class="w-7 h-7 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center group-hover:scale-110 transition">
+            <i data-lucide="layers" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-black text-slate-900 dark:text-white" id="kpi-total-reqs">0</span>
-          <span class="text-[11px] font-medium text-slate-500" id="kpi-active-ratio">100% Active</span>
-        </div>
-        <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-between">
-          <span>Target baseline</span>
-          <span class="text-emerald-500 font-semibold flex items-center"><i data-lucide="activity" class="w-3 h-3 mr-0.5"></i> Live</span>
+        <div class="text-2xl lg:text-3xl font-extrabold text-white" id="kpiTotal">146</div>
+        <div class="mt-1 flex items-center justify-between text-[11px] text-slate-400">
+          <span>Active Reqs</span>
+          <span class="text-indigo-400 font-semibold" id="kpiTotalSub">India: 94 | USA: 52</span>
         </div>
       </div>
 
-      <!-- YTD Joined -->
-      <div onclick="drilldownKPI('Joined')" class="cursor-pointer group p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-emerald-500/50 transition-all">
-        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-          <span class="text-xs font-semibold tracking-wider uppercase">YTD Joiners</span>
-          <div class="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+      <!-- Joined YTD -->
+      <div onclick="handleCardClick('Joined')" class="kpi-card cursor-pointer group bg-gradient-to-br from-slate-900 to-[#122b26] border border-slate-800/90 hover:border-emerald-500/50 p-4 rounded-2xl shadow-lg transition duration-200">
+        <div class="flex items-center justify-between text-slate-400 mb-2">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-400">Joined YTD</span>
+          <div class="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition">
             <i data-lucide="user-check" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-black text-emerald-600 dark:text-emerald-400" id="kpi-ytd-joined">0</span>
-          <span class="text-[11px] font-medium text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 px-1.5 py-0.5 rounded-full" id="kpi-joined-pct">0%</span>
-        </div>
-        <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-between">
-          <span>Closed successfully</span>
-          <span class="font-medium text-slate-600 dark:text-slate-300" id="kpi-joined-q1">Q1 Heavy</span>
+        <div class="text-2xl lg:text-3xl font-extrabold text-emerald-400" id="kpiJoined">92</div>
+        <div class="mt-1 flex items-center justify-between text-[11px] text-slate-400">
+          <span>Closed Capacity</span>
+          <span class="text-emerald-400 font-semibold" id="kpiJoinedSub">India: 56 | USA: 36</span>
         </div>
       </div>
 
-      <!-- Offers in Flight -->
-      <div onclick="drilldownKPI('Offered')" class="cursor-pointer group p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-indigo-500/50 transition-all">
-        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-          <span class="text-xs font-semibold tracking-wider uppercase">Offers in Hand</span>
-          <div class="w-7 h-7 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-            <i data-lucide="file-badge-2" class="w-4 h-4"></i>
+      <!-- Offers in Hand -->
+      <div onclick="handleCardClick('Offered')" class="kpi-card cursor-pointer group bg-gradient-to-br from-slate-900 to-[#272410] border border-slate-800/90 hover:border-amber-500/50 p-4 rounded-2xl shadow-lg transition duration-200">
+        <div class="flex items-center justify-between text-slate-400 mb-2">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-amber-400">Offers in Hand</span>
+          <div class="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center group-hover:scale-110 transition">
+            <i data-lucide="send" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-black text-indigo-600 dark:text-indigo-400" id="kpi-offers-flight">0</span>
-          <span class="text-[11px] font-medium text-slate-500">Pending join</span>
-        </div>
-        <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-between">
-          <span>Next 30-45 days</span>
-          <span class="text-indigo-500 font-semibold" id="kpi-offer-acceptance">Ready</span>
+        <div class="text-2xl lg:text-3xl font-extrabold text-amber-400" id="kpiOffered">9</div>
+        <div class="mt-1 flex items-center justify-between text-[11px] text-slate-400">
+          <span>Pending DOJ</span>
+          <span class="text-amber-400 font-semibold" id="kpiOfferedSub">India: 8 | USA: 1</span>
         </div>
       </div>
 
-      <!-- Open Pipeline -->
-      <div onclick="drilldownKPI('OPEN_PIPELINE')" class="cursor-pointer group p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-sky-500/50 transition-all">
-        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-          <span class="text-xs font-semibold tracking-wider uppercase">Active Pipeline</span>
-          <div class="w-7 h-7 rounded-lg bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+      <!-- Active Pipeline -->
+      <div onclick="handleCardClick('ACTIVE_PIPE')" class="kpi-card cursor-pointer group bg-gradient-to-br from-slate-900 to-[#122838] border border-slate-800/90 hover:border-cyan-500/50 p-4 rounded-2xl shadow-lg transition duration-200">
+        <div class="flex items-center justify-between text-slate-400 mb-2">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-cyan-400">Active Pipeline</span>
+          <div class="w-7 h-7 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:scale-110 transition">
             <i data-lucide="git-pull-request" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-black text-sky-600 dark:text-sky-400" id="kpi-active-pipeline">0</span>
-          <span class="text-[11px] font-medium text-slate-500">In Process</span>
-        </div>
-        <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-between">
-          <span>Sourcing & Screening</span>
-          <span class="text-sky-500 font-semibold">Active</span>
+        <div class="text-2xl lg:text-3xl font-extrabold text-cyan-400" id="kpiActive">10</div>
+        <div class="mt-1 flex items-center justify-between text-[11px] text-slate-400">
+          <span>In Interviews</span>
+          <span class="text-cyan-400 font-semibold" id="kpiActiveSub">Interview / L1 / HR</span>
         </div>
       </div>
 
-      <!-- Mean Aging SLA -->
-      <div onclick="drilldownKPI('HIGH_AGING')" class="cursor-pointer group p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-amber-500/50 transition-all">
-        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-          <span class="text-xs font-semibold tracking-wider uppercase">Avg Aging Days</span>
-          <div class="w-7 h-7 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-            <i data-lucide="timer" class="w-4 h-4"></i>
-          </div>
-        </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-black text-amber-600 dark:text-amber-400" id="kpi-avg-aging">0d</span>
-          <span class="text-[11px] font-medium text-slate-500">TTF Velocity</span>
-        </div>
-        <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-between">
-          <span>SLA Target: &lt;45d</span>
-          <span class="text-amber-500 font-semibold" id="kpi-aging-status">Moderate</span>
-        </div>
-      </div>
-
-      <!-- On Hold / Freezed / Challenges -->
-      <div onclick="drilldownKPI('HOLD')" class="cursor-pointer group p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-rose-500/50 transition-all">
-        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-          <span class="text-xs font-semibold tracking-wider uppercase">On Hold / Freezed</span>
-          <div class="w-7 h-7 rounded-lg bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+      <!-- Stalled / Freezed -->
+      <div onclick="handleCardClick('HOLD_FREEZE')" class="kpi-card cursor-pointer group bg-gradient-to-br from-slate-900 to-[#2c1520] border border-slate-800/90 hover:border-rose-500/50 p-4 rounded-2xl shadow-lg transition duration-200">
+        <div class="flex items-center justify-between text-slate-400 mb-2">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-rose-400">Stalled / On Hold</span>
+          <div class="w-7 h-7 rounded-lg bg-rose-500/10 text-rose-400 flex items-center justify-center group-hover:scale-110 transition">
             <i data-lucide="pause-circle" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-black text-rose-600 dark:text-rose-400" id="kpi-on-hold">0</span>
-          <span class="text-[11px] font-medium text-slate-500">Stalled</span>
-        </div>
-        <div class="mt-2 text-[11px] text-slate-400 flex items-center justify-between">
-          <span>Suspended / JD Pend</span>
-          <span class="text-rose-500 font-semibold">Review</span>
+        <div class="text-2xl lg:text-3xl font-extrabold text-rose-400" id="kpiHold">35</div>
+        <div class="mt-1 flex items-center justify-between text-[11px] text-slate-400">
+          <span>Capacity Review</span>
+          <span class="text-rose-400 font-semibold" id="kpiHoldSub">23 Freeze | 12 Suspended</span>
         </div>
       </div>
 
-    </div>
-
-    <!-- Tabbed Workspaces Navigation -->
-    <div class="border-b border-slate-200 dark:border-slate-800">
-      <nav class="flex space-x-6">
-        <button onclick="switchTab('overview')" id="tab-btn-overview" class="tab-button pb-3 text-xs sm:text-sm font-semibold border-b-2 border-brand-600 text-brand-600 dark:text-brand-400 flex items-center gap-2">
-          <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Executive Analytics
-        </button>
-        <button onclick="switchTab('mastergrid')" id="tab-btn-mastergrid" class="tab-button pb-3 text-xs sm:text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 flex items-center gap-2">
-          <i data-lucide="table-2" class="w-4 h-4"></i> Requisitions Master Grid (<span id="tab-count-grid">0</span>)
-        </button>
-        <button onclick="switchTab('offers')" id="tab-btn-offers" class="tab-button pb-3 text-xs sm:text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 flex items-center gap-2">
-          <i data-lucide="calendar-check" class="w-4 h-4"></i> Offers & Joiners Runway (<span id="tab-count-offers">0</span>)
-        </button>
-        <button onclick="switchTab('challenges')" id="tab-btn-challenges" class="tab-button pb-3 text-xs sm:text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 flex items-center gap-2">
-          <i data-lucide="alert-triangle" class="w-4 h-4"></i> Challenges & Mitigation Board
-        </button>
-      </nav>
-    </div>
-
-    <!-- TAB 1: EXECUTIVE ANALYTICS -->
-    <section id="tab-content-overview" class="tab-panel space-y-6">
-      
-      <!-- Top Row Charts -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        <!-- Funnel / Stage Velocity (7 cols) -->
-        <div class="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <h2 class="text-sm font-bold text-slate-900 dark:text-white">Talent Acquisition Pipeline Funnel</h2>
-              <p class="text-xs text-slate-500">Distribution of active vs closed positions across recruitment lifecycles</p>
-            </div>
-            <span class="px-2.5 py-1 text-[11px] font-medium bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300 rounded-lg">Real-time Stage Counts</span>
-          </div>
-          <div class="h-64 sm:h-72 w-full">
-            <canvas id="funnelChart"></canvas>
+      <!-- Average Time-to-Offer -->
+      <div class="kpi-card bg-gradient-to-br from-slate-900 to-[#1e1c31] border border-slate-800/90 p-4 rounded-2xl shadow-lg">
+        <div class="flex items-center justify-between text-slate-400 mb-2">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-purple-400">Avg Time-to-Offer</span>
+          <div class="w-7 h-7 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center">
+            <i data-lucide="zap" class="w-4 h-4"></i>
           </div>
         </div>
-
-        <!-- Aging SLA Health Matrix (5 cols) -->
-        <div class="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <h2 class="text-sm font-bold text-slate-900 dark:text-white">Requisition Aging & SLA Health</h2>
-              <p class="text-xs text-slate-500">SLA risk distribution across open & closed requisitions</p>
-            </div>
-            <div class="w-2.5 h-2.5 rounded-full bg-amber-500 badge-pulse" title="SLA Monitoring Active"></div>
-          </div>
-          <div class="h-64 sm:h-72 w-full flex items-center justify-center">
-            <canvas id="agingChart"></canvas>
-          </div>
+        <div class="text-2xl lg:text-3xl font-extrabold text-purple-400" id="kpiAvgDays">19 <span class="text-sm font-medium text-slate-400">days</span></div>
+        <div class="mt-1 flex items-center justify-between text-[11px] text-slate-400">
+          <span>Offer Velocity</span>
+          <span class="text-purple-400 font-semibold">Median: 12d</span>
         </div>
-
       </div>
 
-      <!-- Mid Row Charts: Recruiter Load & Department Spread -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    </section>
+
+    <!-- ============================================================= -->
+    <!-- TAB 1: EXECUTIVE OVERVIEW                                     -->
+    <!-- ============================================================= -->
+    <div id="tabContent-overview" class="tab-pane space-y-6">
+
+      <!-- Growth vs Backfill Ribbon + Executive Highlights -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        <!-- Recruiter Workload & Performance (7 cols) -->
-        <div class="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <h2 class="text-sm font-bold text-slate-900 dark:text-white">Recruiter Workload & Joiner Conversions</h2>
-              <p class="text-xs text-slate-500">Requisitions assigned, candidates joined, and active pipeline in flight</p>
-            </div>
-          </div>
-          <div class="h-72 w-full">
-            <canvas id="recruiterChart"></canvas>
-          </div>
-        </div>
-
-        <!-- Department Breakdown (5 cols) -->
-        <div class="lg:col-span-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <h2 class="text-sm font-bold text-slate-900 dark:text-white">Headcount Demand by Department</h2>
-              <p class="text-xs text-slate-500">Engineering, QA, Product, DevOps, Support & Corporate</p>
-            </div>
-          </div>
-          <div class="h-72 w-full flex items-center justify-center">
-            <canvas id="deptChart"></canvas>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Location & Urgent Action Strip -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm">
-          <h2 class="text-sm font-bold text-slate-900 dark:text-white mb-1">Geographic Footprint</h2>
-          <p class="text-xs text-slate-500 mb-4">India Hubs vs USA Onsite Hubs</p>
-          <div class="h-52 flex items-center justify-center">
-            <canvas id="locationChart"></canvas>
-          </div>
-        </div>
-
-        <!-- Urgent High Aging Requisitions Alert Card -->
-        <div class="md:col-span-2 bg-gradient-to-br from-amber-500/10 via-rose-500/5 to-transparent border border-amber-300/40 dark:border-amber-800/40 p-5 rounded-2xl shadow-sm flex flex-col justify-between">
+        <!-- Hiring Intent Card -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
-              <div class="flex items-center gap-2">
-                <span class="p-1.5 rounded-lg bg-amber-500 text-white"><i data-lucide="shield-alert" class="w-4 h-4"></i></span>
-                <h3 class="font-bold text-sm text-slate-900 dark:text-white">Critical Aging Watchlist (&gt; 90 Days SLA Breach)</h3>
-              </div>
-              <span class="text-xs font-semibold text-amber-700 dark:text-amber-400 bg-amber-100 dark:bg-amber-950 px-2 py-0.5 rounded-full" id="critical-aging-count">0 Positions</span>
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="pie-chart" class="w-4 h-4 text-brand-400"></i>
+                Hiring Intent: Growth vs. Backfill
+              </h3>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-semibold">Budget Impact</span>
             </div>
-            <p class="text-xs text-slate-600 dark:text-slate-400 mb-4">The following requisitions have exceeded 90 days aging and require executive debottlenecking with Hiring Managers.</p>
-
-            <div class="space-y-2.5 overflow-y-auto max-h-48 pr-1" id="criticalAgingList">
-              <!-- Rendered via JS -->
+            <p class="text-xs text-slate-400 mb-4">
+              Is headcount expanding organizational capabilities or maintaining baseline after departures?
+            </p>
+            <div class="flex items-center justify-around my-2">
+              <div class="text-center">
+                <div class="text-2xl font-black text-emerald-400" id="intentNewCount">82</div>
+                <div class="text-xs font-semibold text-slate-300 mt-0.5">New Headcount</div>
+                <div class="text-[10px] text-emerald-500 font-bold" id="intentNewPct">56% Growth</div>
+              </div>
+              <div class="h-10 w-px bg-slate-800"></div>
+              <div class="text-center">
+                <div class="text-2xl font-black text-cyan-400" id="intentReplCount">63</div>
+                <div class="text-xs font-semibold text-slate-300 mt-0.5">Replacements</div>
+                <div class="text-[10px] text-cyan-500 font-bold" id="intentReplPct">44% Attrition</div>
+              </div>
             </div>
           </div>
-          <div class="pt-3 mt-3 border-t border-amber-200/40 dark:border-slate-800 flex justify-end">
-            <button onclick="filterCriticalAgingGrid()" class="text-xs font-semibold text-amber-700 dark:text-amber-300 hover:underline flex items-center gap-1">
-              View all aged reqs in Master Grid <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+            <span>63 Replaced Employees Tracked</span>
+            <button onclick="setHireTypeFilter('Replacement'); switchTab('master');" class="text-brand-400 hover:text-brand-300 font-semibold flex items-center gap-1">
+              View Backfills <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Executive Velocity Metric Card -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="gauge" class="w-4 h-4 text-cyan-400"></i>
+                Hiring Velocity & SLA Performance
+              </h3>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-semibold">TAT Health</span>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mt-2">
+              <div class="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
+                <div class="text-xs text-slate-400 font-medium">Avg Sourcing-to-Offer</div>
+                <div class="text-2xl font-bold text-cyan-400 mt-1">18.7 <span class="text-xs text-slate-400">days</span></div>
+                <div class="text-[10px] text-slate-500 mt-1">From requisition open to formal offer</div>
+              </div>
+              <div class="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
+                <div class="text-xs text-slate-400 font-medium">Critical Aging Roles (>60d)</div>
+                <div class="text-2xl font-bold text-rose-400 mt-1" id="criticalAgingCount">54 <span class="text-xs text-slate-400">roles</span></div>
+                <div class="text-[10px] text-rose-400/80 mt-1">Severe SLA bottleneck alert</div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+            <span>Notice Period Latency: ~30-60 Days</span>
+            <button onclick="switchTab('sla')" class="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1">
+              Inspect SLA Tiers <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Management Action Summary Card -->
+        <div class="bg-gradient-to-br from-slate-900 to-[#141b2d] border border-brand-500/20 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+                Management Decision Items
+              </h3>
+              <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-brand-500/20 text-brand-300 font-bold">Action Needed</span>
+            </div>
+            <ul class="space-y-2.5 text-xs text-slate-300">
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 flex-shrink-0"></span>
+                <span><strong>23 Positions Paused:</strong> Pending business resource capacity planning by Karuna & Dharmesh.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 flex-shrink-0"></span>
+                <span><strong>9 Key Offers Awaiting Joining:</strong> Includes CFO, AI Engineers, & Senior HR Manager.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-rose-400 mt-1.5 flex-shrink-0"></span>
+                <span><strong>Talent Pool Scarcity:</strong> Infosec Analyst and CFO searches require agency partnership.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+            <span class="text-slate-400">Source: TA Weekly Master File</span>
+            <button onclick="switchTab('challenges')" class="text-brand-400 hover:text-brand-300 font-semibold flex items-center gap-1">
+              View Solutions <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </button>
           </div>
         </div>
 
       </div>
 
-    </section>
-
-    <!-- TAB 2: REQUISITIONS MASTER GRID -->
-    <section id="tab-content-mastergrid" class="tab-panel hidden space-y-4">
-      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+      <!-- Velocity Charts Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
-        <div class="p-4 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-slate-50/50 dark:bg-slate-800/40">
-          <div>
-            <h2 class="text-sm font-bold text-slate-900 dark:text-white">Requisitions Master Log</h2>
-            <p class="text-xs text-slate-500">Live operational ledger of all positions, candidates, stages, and aging SLAs</p>
+        <!-- Joiners Velocity By Month & Quarter -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="trending-up" class="w-4 h-4 text-emerald-400"></i>
+                Monthly & Quarterly Joiners Velocity (FY 2026)
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">India vs. USA onboarded capacity across calendar months</p>
+            </div>
+            <div class="flex items-center gap-3 text-xs">
+              <span class="flex items-center gap-1 text-emerald-400"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> India</span>
+              <span class="flex items-center gap-1 text-cyan-400"><span class="w-2.5 h-2.5 rounded-full bg-cyan-500 inline-block"></span> USA</span>
+            </div>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs text-slate-500">Showing <strong class="text-slate-900 dark:text-white" id="gridRowCount">0</strong> of <span id="gridTotalCount">0</span> records</span>
+          <div class="h-64 relative">
+            <canvas id="monthlyJoinersChart"></canvas>
           </div>
         </div>
 
-        <!-- Table Container -->
-        <div class="overflow-x-auto max-h-[640px]">
-          <table class="w-full text-left text-xs whitespace-nowrap">
-            <thead class="bg-slate-100/80 dark:bg-slate-800/80 sticky top-0 z-10 text-slate-600 dark:text-slate-300 font-semibold border-b border-slate-200 dark:border-slate-700">
+        <!-- Requisitions by Department & Squad -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="bar-chart-2" class="w-4 h-4 text-brand-400"></i>
+                Requisition Volume by Department
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Volume of requisitions opened across business units</p>
+            </div>
+            <span class="text-xs text-slate-400" id="topDeptLabel">Engineering leads volume</span>
+          </div>
+          <div class="h-64 relative">
+            <canvas id="deptDistChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Runway of Upcoming Joiners (Next 30–60 Days) -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="plane-takeoff" class="w-4 h-4 text-amber-400"></i>
+              Near-Term Joiners & Confirmed Offers Runway
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Confirmed candidates with offer letters released and active onboarding tracking</p>
+          </div>
+          <span class="text-xs px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-semibold" id="runwayCountBadge">
+            9 Confirmed Offers
+          </span>
+        </div>
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-xs">
+            <thead class="text-[11px] uppercase tracking-wider text-slate-400 bg-slate-950/70 border-b border-slate-800">
               <tr>
-                <th class="p-3.5 cursor-pointer hover:bg-slate-200/60 dark:hover:bg-slate-700" onclick="sortTable('position')">Position / Role <i data-lucide="arrow-up-down" class="inline w-3 h-3 ml-1 text-slate-400"></i></th>
-                <th class="p-3.5">Geo & Location</th>
-                <th class="p-3.5 cursor-pointer hover:bg-slate-200/60 dark:hover:bg-slate-700" onclick="sortTable('dept')">Department & Squad</th>
-                <th class="p-3.5">Candidate Name</th>
-                <th class="p-3.5 cursor-pointer hover:bg-slate-200/60 dark:hover:bg-slate-700" onclick="sortTable('status')">Current Stage</th>
-                <th class="p-3.5 cursor-pointer hover:bg-slate-200/60 dark:hover:bg-slate-700" onclick="sortTable('aging')">Aging / SLA</th>
-                <th class="p-3.5">Recruiter</th>
-                <th class="p-3.5">Key Dates</th>
-                <th class="p-3.5 text-center">Action</th>
+                <th class="py-3 px-4">Candidate Name</th>
+                <th class="py-3 px-4">Position & Squad</th>
+                <th class="py-3 px-4">Geo / Location</th>
+                <th class="py-3 px-4">Expected DOJ</th>
+                <th class="py-3 px-4">Recruiter</th>
+                <th class="py-3 px-4">Onboarding Buddy</th>
+                <th class="py-3 px-4">Fallback / Backup</th>
+                <th class="py-3 px-4">RAG</th>
               </tr>
             </thead>
-            <tbody id="masterTableBody" class="divide-y divide-slate-100 dark:divide-slate-800/60">
-              <!-- Injected via JavaScript -->
+            <tbody id="offersRunwayTableBody" class="divide-y divide-slate-800/60">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- TAB 2: VELOCITY & SLA AGING ANALYSIS                          -->
+    <!-- ============================================================= -->
+    <div id="tabContent-sla" class="tab-pane hidden space-y-6">
+
+      <!-- Aging SLA Distribution Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-slate-900 border border-emerald-500/30 p-4 rounded-2xl">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-xs font-bold uppercase text-emerald-400">0 - 30 Days (On Track)</span>
+            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+          </div>
+          <div class="text-3xl font-extrabold text-emerald-400 mt-2" id="aging0to30">59</div>
+          <p class="text-[11px] text-slate-400 mt-1">Active within standard hiring cycle</p>
+        </div>
+
+        <div class="bg-slate-900 border border-amber-500/30 p-4 rounded-2xl">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-xs font-bold uppercase text-amber-400">31 - 60 Days (Watchlist)</span>
+            <i data-lucide="alert-circle" class="w-4 h-4 text-amber-400"></i>
+          </div>
+          <div class="text-3xl font-extrabold text-amber-400 mt-2" id="aging31to60">25</div>
+          <p class="text-[11px] text-slate-400 mt-1">Requires interview pipeline acceleration</p>
+        </div>
+
+        <div class="bg-slate-900 border border-orange-500/30 p-4 rounded-2xl">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-xs font-bold uppercase text-orange-400">61 - 90 Days (Critical)</span>
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-orange-400"></i>
+          </div>
+          <div class="text-3xl font-extrabold text-orange-400 mt-2" id="aging61to90">13</div>
+          <p class="text-[11px] text-slate-400 mt-1">Exceeding SLA: review JD and compensation</p>
+        </div>
+
+        <div class="bg-slate-900 border border-rose-500/30 p-4 rounded-2xl">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-xs font-bold uppercase text-rose-400">90+ Days (Severe Breach)</span>
+            <i data-lucide="flame" class="w-4 h-4 text-rose-400"></i>
+          </div>
+          <div class="text-3xl font-extrabold text-rose-400 mt-2" id="aging90Plus">41</div>
+          <p class="text-[11px] text-slate-400 mt-1">Critical capacity deficit or stalled approval</p>
+        </div>
+
+      </div>
+
+      <!-- Aging Charts & SLA Analysis -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
+          <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-1">
+            <i data-lucide="pie-chart" class="w-4 h-4 text-rose-400"></i>
+            Requisition SLA Aging Breakdown
+          </h3>
+          <p class="text-xs text-slate-400 mb-4">Distribution of total requisitions by age bucket</p>
+          <div class="h-64 relative">
+            <canvas id="agingChart"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
+          <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-1">
+            <i data-lucide="filter" class="w-4 h-4 text-indigo-400"></i>
+            Recruitment Funnel Pipeline
+          </h3>
+          <p class="text-xs text-slate-400 mb-4">Stage-by-stage candidate throughput</p>
+          <div class="h-64 relative">
+            <canvas id="pipelineFunnelChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Critical Aging Positions Table -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="alert-octagon" class="w-4 h-4 text-rose-400"></i>
+              Severe SLA Delay Drill-Down (Positions with >60 Days Aging)
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">High-priority requisitions requiring executive intervention or capacity unblocking</p>
+          </div>
+          <span class="text-xs px-2.5 py-1 rounded bg-rose-500/10 text-rose-400 border border-rose-500/30 font-semibold" id="criticalTableBadge">
+            54 Positions
+          </span>
+        </div>
+        <div class="overflow-x-auto custom-scrollbar max-h-96">
+          <table class="w-full text-left text-xs">
+            <thead class="text-[11px] uppercase tracking-wider text-slate-400 bg-slate-950/70 border-b border-slate-800 sticky top-0">
+              <tr>
+                <th class="py-3 px-4">ID</th>
+                <th class="py-3 px-4">Position Title</th>
+                <th class="py-3 px-4">Dept / Squad</th>
+                <th class="py-3 px-4">Hiring Manager</th>
+                <th class="py-3 px-4">Status</th>
+                <th class="py-3 px-4">Aging (Days)</th>
+                <th class="py-3 px-4">Recruiter</th>
+                <th class="py-3 px-4">Root Cause / Comments</th>
+              </tr>
+            </thead>
+            <tbody id="criticalAgingTableBody" class="divide-y divide-slate-800/60">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- TAB 3: LEADERSHIP & RECRUITER ALLOCATION                      -->
+    <!-- ============================================================= -->
+    <div id="tabContent-capacity" class="tab-pane hidden space-y-6">
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Hiring Manager / Department Head Workload -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="user-check" class="w-4 h-4 text-cyan-400"></i>
+                Hiring Demand by Department Head / Leader
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Total requisitions owned by hiring managers</p>
+            </div>
+            <span class="text-xs text-slate-400">Top: Kanan & Vijay</span>
+          </div>
+          <div class="h-72 relative">
+            <canvas id="deptHeadChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Recruiter Performance & Workload -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="award" class="w-4 h-4 text-brand-400"></i>
+                Recruiter Workload & Closures
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Total requisitions handled and joined hires per recruiter</p>
+            </div>
+            <span class="text-xs text-slate-400">Internal & Agency Allocation</span>
+          </div>
+          <div class="h-72 relative">
+            <canvas id="recruiterChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Recruiter Performance Scorecard Table -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-lg">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-3">
+          <i data-lucide="list" class="w-4 h-4 text-emerald-400"></i>
+          Recruiter Throughput & Portfolio Matrix
+        </h3>
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-xs">
+            <thead class="text-[11px] uppercase tracking-wider text-slate-400 bg-slate-950/70 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Recruiter</th>
+                <th class="py-3 px-4">Total Assigned</th>
+                <th class="py-3 px-4">Joined (Closed)</th>
+                <th class="py-3 px-4">Offers In Hand</th>
+                <th class="py-3 px-4">Active Pipeline</th>
+                <th class="py-3 px-4">Paused / Freezed</th>
+                <th class="py-3 px-4">Avg Days to Offer</th>
+                <th class="py-3 px-4">Conversion Rate</th>
+              </tr>
+            </thead>
+            <tbody id="recruiterTableBody" class="divide-y divide-slate-800/60">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- TAB 4: EXECUTIVE CHALLENGES & HR MITIGATIONS                  -->
+    <!-- ============================================================= -->
+    <div id="tabContent-challenges" class="tab-pane hidden space-y-6">
+
+      <div class="bg-gradient-to-br from-slate-900 to-[#1b1c2e] border border-slate-800 rounded-2xl p-6 shadow-xl">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-base font-bold text-white flex items-center gap-2.5">
+              <i data-lucide="shield-alert" class="w-5 h-5 text-amber-400"></i>
+              Recruitment Bottlenecks & Executive HR Action Plans
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">
+              Direct insights compiled from recruitment challenges across India & USA operations, paired with active mitigation plans.
+            </p>
+          </div>
+          <span class="text-xs px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-semibold">
+            Leadership Attention
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+          
+          <!-- India Bottleneck 1 -->
+          <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300">India • Infosec Practice</span>
+              <span class="text-xs font-semibold text-slate-400">Manager: Supro</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-200">Infosec Analyst Offer Declines & Notice Periods</h4>
+            <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-300">
+              <strong>Bottleneck:</strong> 3 candidates (Swapnil, Nitesh, Gauresh) declined offers. Severe shortage of qualified candidates with short notice periods.
+            </div>
+            <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300">
+              <strong>HR Solution:</strong> Opened search to specialized consulting firms. Scheduling fast-track interviews targeting candidates with active buy-out notice periods.
+            </div>
+          </div>
+
+          <!-- India Bottleneck 2 -->
+          <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300">India • Payments Practice</span>
+              <span class="text-xs font-semibold text-slate-400">Manager: Ramesh</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-200">Project Manager Drop-offs & Work-From-Office Preference</h4>
+            <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-300">
+              <strong>Bottleneck:</strong> 2 candidates (Bhavik, Harsh) declined offers due to high notice periods and conflicting work location preferences.
+            </div>
+            <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300">
+              <strong>HR Solution:</strong> Activated consulting firm partners. Fast-tracked former employee (Naveen) for immediate re-hire interview with Ramesh.
+            </div>
+          </div>
+
+          <!-- USA Bottleneck 1 -->
+          <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-300">USA • Executive Leadership</span>
+              <span class="text-xs font-semibold text-slate-400">Manager: Booshan</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-200">Chief Financial Officer (CFO) Strategic Talent Search</h4>
+            <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-300">
+              <strong>Bottleneck:</strong> Standard candidate search yielded limited candidates matching both strategic financial and fintech technical requirements.
+            </div>
+            <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300">
+              <strong>HR Solution:</strong> Retained an executive boutique search firm (TPZ) to access passive tier-1 CFO talent beyond standard recruitment channels.
+            </div>
+          </div>
+
+          <!-- USA Bottleneck 2 -->
+          <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-4.5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-300">USA • DevOps Practice</span>
+              <span class="text-xs font-semibold text-slate-400">Manager: Manoj S.</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-200">DevOps Technical Competency & Interview Integrity Concerns</h4>
+            <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-300">
+              <strong>Bottleneck:</strong> Applicants exhibited interview integrity discrepancies or failed rigorous hands-on technical architecture assessments.
+            </div>
+            <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300">
+              <strong>HR Solution:</strong> Broadened high-visibility campaigns on LinkedIn; implementing third-party verified technical assessments before managerial screening.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Stalled Positions Summary -->
+        <div class="mt-8 pt-6 border-t border-slate-800">
+          <h4 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+            <i data-lucide="pause-circle" class="w-4 h-4 text-rose-400"></i>
+            Internal Business Holds: 23 Positions Frozen Pending Capacity Plan
+          </h4>
+          <p class="text-xs text-slate-400 mb-4">
+            Requisitions across Pune, Chennai, and Charlotte currently awaiting Karuna & Dharmesh’s finalized headcount roadmap before offer approvals are released.
+          </p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-medium">QA Lead (Pune)</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-medium">Senior QA Analyst (Pune - Ajay)</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-medium">Business Analyst (Charlotte - Naveen)</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-medium">Senior Software Engineer (Pune - Vishal)</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-medium">Associate QA (Pune)</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 font-medium">Associate Software Engineer (Multiple)</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- TAB 5: REQUISITION MASTER GRID                                -->
+    <!-- ============================================================= -->
+    <div id="tabContent-master" class="tab-pane hidden space-y-4">
+      
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+          <div>
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              <i data-lucide="database" class="w-4 h-4 text-brand-400"></i>
+              Master Requisitions Repository
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Comprehensive audit log of all tracked positions, timelines, and candidate assignments</p>
+          </div>
+          <div class="text-xs text-slate-400">
+            Click any row for complete candidate and requisition metadata
+          </div>
+        </div>
+
+        <div class="overflow-x-auto custom-scrollbar border border-slate-800/80 rounded-xl">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead class="text-[11px] uppercase tracking-wider text-slate-400 bg-slate-950/80 border-b border-slate-800 sticky top-0 z-10">
+              <tr>
+                <th class="py-3 px-3.5 font-semibold">ID</th>
+                <th class="py-3 px-3.5 font-semibold">Geo</th>
+                <th class="py-3 px-3.5 font-semibold">Quarter</th>
+                <th class="py-3 px-3.5 font-semibold">Position Title</th>
+                <th class="py-3 px-3.5 font-semibold">Department</th>
+                <th class="py-3 px-3.5 font-semibold">Hiring Leader</th>
+                <th class="py-3 px-3.5 font-semibold">Type</th>
+                <th class="py-3 px-3.5 font-semibold">Status</th>
+                <th class="py-3 px-3.5 font-semibold">Aging</th>
+                <th class="py-3 px-3.5 font-semibold">Candidate</th>
+                <th class="py-3 px-3.5 font-semibold">Recruiter</th>
+                <th class="py-3 px-3.5 font-semibold">RAG</th>
+              </tr>
+            </thead>
+            <tbody id="masterTableBody" class="divide-y divide-slate-800/60 bg-slate-900/40">
+              <!-- Dynamically populated -->
             </tbody>
           </table>
         </div>
 
-      </div>
-    </section>
-
-    <!-- TAB 3: OFFERS & JOINERS RUNWAY -->
-    <section id="tab-content-offers" class="tab-panel hidden space-y-6">
-      
-      <!-- Summary metrics for offers -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Confirmed Joined YTD</span>
-          <h3 class="text-2xl font-black text-emerald-600 dark:text-emerald-400 mt-1" id="offers-stat-joined">0</h3>
-          <p class="text-[11px] text-slate-400 mt-1">Successfully completed Day 1</p>
-        </div>
-        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Offers Accepted & Pending</span>
-          <h3 class="text-2xl font-black text-indigo-600 dark:text-indigo-400 mt-1" id="offers-stat-pending">0</h3>
-          <p class="text-[11px] text-slate-400 mt-1">Expected onboarding within 60 days</p>
-        </div>
-        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Avg Time-to-Offer</span>
-          <h3 class="text-2xl font-black text-slate-800 dark:text-slate-100 mt-1" id="offers-stat-tto">42 days</h3>
-          <p class="text-[11px] text-slate-400 mt-1">From requisition kickoff to release</p>
-        </div>
-        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span class="text-xs font-semibold text-slate-500 uppercase">Offer Acceptance Ratio</span>
-          <h3 class="text-2xl font-black text-emerald-600 mt-1" id="offers-stat-rate">94.2%</h3>
-          <p class="text-[11px] text-slate-400 mt-1">Low fallout post-offer</p>
-        </div>
-      </div>
-
-      <!-- Upcoming Joiners Timeline Cards -->
-      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm p-5">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Upcoming Joiners Schedule & Onboarding Readiness</h3>
-            <p class="text-xs text-slate-500">Tracking candidates with confirmed joining dates across India and US teams</p>
+        <!-- Pagination Bar -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-4 pt-3 border-t border-slate-800 text-xs text-slate-400">
+          <div id="paginationInfo">Showing 1 to 20 of 146 entries</div>
+          <div class="flex items-center gap-1.5" id="paginationControls">
+            <!-- Buttons dynamically added -->
           </div>
-          <span class="px-2.5 py-1 text-xs font-medium bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 rounded-lg">Runway Horizon</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="joinersCardContainer">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-
-    </section>
-
-    <!-- TAB 4: CHALLENGES & MITIGATION BOARD -->
-    <section id="tab-content-challenges" class="tab-panel hidden space-y-6">
-      
-      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm p-6">
-        <div class="flex items-center justify-between mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
-          <div>
-            <h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
-              <i data-lucide="shield-alert" class="w-5 h-5 text-rose-500"></i> Recruitment Friction Points & Mitigation Strategies
-            </h3>
-            <p class="text-xs text-slate-500 mt-1">Direct extracts from Weekly TA Governance reviews paired with proactive HR solutions</p>
-          </div>
-          <button onclick="addChallengePrompt()" class="text-xs font-semibold px-3 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 transition-all flex items-center gap-1.5 shadow-sm">
-            <i data-lucide="plus" class="w-4 h-4"></i> Add Observation
-          </button>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="challengesContainer">
-          <!-- Dynamic Challenges Loaded Here -->
         </div>
 
       </div>
 
-    </section>
+    </div>
 
   </main>
 
-  <!-- Toast Container -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-2.5 text-xs">
-    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
-    <span id="toastMessage">Success</span>
+  <!-- Requisition Detail Modal -->
+  <div id="detailModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative">
+      <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div id="detailModalContent" class="space-y-4">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
   </div>
 
+  <!-- Live OneDrive Sync Modal -->
+  <div id="syncModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full p-6 shadow-2xl relative">
+      <button onclick="closeSyncModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
+          <i data-lucide="cloud" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-white">Connect Live Excel / OneDrive</h3>
+          <p class="text-xs text-slate-400">Sync with your shared master file automatically</p>
+        </div>
+      </div>
+      <div class="space-y-4 text-xs">
+        <p class="text-slate-300">
+          Paste your direct OneDrive or SharePoint share link below. The dashboard will fetch the latest sheet data without needing any manual file re-uploading.
+        </p>
+        <div>
+          <label class="block text-slate-400 font-semibold mb-1">Direct Excel / OneDrive Download URL</label>
+          <input type="text" id="oneDriveUrlInput" placeholder="https://onedrive.live.com/download?..." class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 focus:outline-none focus:border-brand-500" />
+        </div>
+        <div class="flex items-center justify-between pt-2">
+          <button onclick="syncFromOneDrive()" class="px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-semibold transition flex items-center gap-2">
+            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+            <span>Fetch & Sync Data</span>
+          </button>
+          <span id="syncStatus" class="text-slate-400"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Raw Cleaned Master Records Injected Directly (146 Complete Records) -->
   <script>
-    /* =========================================================================
-       1. AUTHENTIC MASTER DATASET (Mirrors Weekly Report Master File - 2026)
-       ========================================================================= */
-    let rawRecruitmentData = [
-      { id: 1, geo: "India", location: "Pune", dept: "Engineering", squad: "Banking Core", title: "Sr. Java Backend Developer", candidate: "Aditya Verma", status: "Joined", openDate: "2026-01-05", offerDate: "2026-02-10", joinDate: "2026-03-02", aging: 36, recruiter: "Thirukumaran", type: "Replacement", manager: "Rajesh S", rag: "Green", notes: "Successfully joined Bangalore/Pune hub" },
-      { id: 2, geo: "India", location: "Chennai", dept: "QA", squad: "Mobile Banking", title: "Lead QA Automation Engineer", candidate: "Pooja Sundaram", status: "Joined", openDate: "2026-01-08", offerDate: "2026-02-14", joinDate: "2026-03-16", aging: 37, recruiter: "Sindhu", type: "New", manager: "Arun Kumar", rag: "Green", notes: "Appium + Selenium expertise" },
-      { id: 3, geo: "India", location: "Chennai", dept: "Engineering", squad: "Payments API", title: "Software Engineer - Golang", candidate: "Karthik R", status: "Offered", openDate: "2026-01-15", offerDate: "2026-03-01", joinDate: "2026-04-15", aging: 45, recruiter: "Thirukumaran", type: "Replacement", manager: "Suresh P", rag: "Green", notes: "Offer rolled out, notice buyout requested" },
-      { id: 4, geo: "India", location: "Pune", dept: "DevOps", squad: "Cloud Infrastructure", title: "Senior DevOps Engineer (AWS/K8s)", candidate: "Vikram Malhotra", status: "Offered", openDate: "2026-01-12", offerDate: "2026-03-05", joinDate: "2026-04-01", aging: 52, recruiter: "Sindhu", type: "New", manager: "Deepak Joshi", rag: "Green", notes: "Candidate accepted, paperwork initiated" },
-      { id: 5, geo: "India", location: "Chennai", dept: "Engineering", squad: "Card Management", title: "Full Stack Lead (React + Node)", candidate: "Divya Nambiar", status: "HR Interview", openDate: "2026-01-20", offerDate: null, joinDate: null, aging: 60, recruiter: "Thirukumaran", type: "Replacement", manager: "Kishore M", rag: "Amber", notes: "Salary expectation slightly over budget" },
-      { id: 6, geo: "India", location: "Pune", dept: "QA", squad: "Platform QA", title: "SDET II - Performance", candidate: "Naveen Prasad", status: "L1 Process", openDate: "2026-02-01", offerDate: null, joinDate: null, aging: 48, recruiter: "Sindhu", type: "New", manager: "Arun Kumar", rag: "Green", notes: "JMeter round cleared" },
-      { id: 7, geo: "India", location: "Chennai", dept: "Product", squad: "Credit UX", title: "Senior Product Manager", candidate: "Siddharth Rao", status: "Initial Interview", openDate: "2026-02-10", offerDate: null, joinDate: null, aging: 39, recruiter: "Thirukumaran", type: "New", manager: "Geetha V", rag: "Green", notes: "FinTech lending experience strong" },
-      { id: 8, geo: "India", location: "Chennai", dept: "Engineering", squad: "Core Architecture", title: "Principal Architect - Microservices", candidate: null, status: "Sourcing", openDate: "2025-11-15", offerDate: null, joinDate: null, aging: 126, recruiter: "Thirukumaran", type: "New", manager: "Kishore M", rag: "Red", notes: "Niche profile, notice period rejections" },
-      { id: 9, geo: "India", location: "Pune", dept: "Support", squad: "Tier 3 Escalations", title: "Production Support Analyst", candidate: "Rohan Kulkarni", status: "Offer Approval", openDate: "2026-02-14", offerDate: null, joinDate: null, aging: 35, recruiter: "Sindhu", type: "Replacement", manager: "Anand G", rag: "Green", notes: "Budget approved by Dept Head" },
-      { id: 10, geo: "India", location: "Chennai", dept: "HR", squad: "Talent Operations", title: "HR Business Partner", candidate: "Sneha Nair", status: "Joined", openDate: "2026-01-02", offerDate: "2026-01-28", joinDate: "2026-02-23", aging: 26, recruiter: "Sindhu", type: "New", manager: "Ranjani T", rag: "Green", notes: "Onboarded successfully" },
-      { id: 11, geo: "USA", location: "Charlotte", dept: "Engineering", squad: "US Core Banking", title: "Lead Solutions Architect", candidate: "David Miller", status: "Joined", openDate: "2026-01-04", offerDate: "2026-02-05", joinDate: "2026-03-09", aging: 32, recruiter: "Marissa", type: "New", manager: "Brian Cox", rag: "Green", notes: "W2 Full Time, Charlotte onsite 3 days" },
-      { id: 12, geo: "USA", location: "Remote", dept: "Product", squad: "Digital Wealth", title: "Director of Product - US Fintech", candidate: "Rachel Evans", status: "Offered", openDate: "2026-01-18", offerDate: "2026-03-08", joinDate: "2026-04-20", aging: 49, recruiter: "Marissa", type: "Replacement", manager: "Sarah Jenkins", rag: "Green", notes: "Negotiating sign-on bonus" },
-      { id: 13, geo: "USA", location: "Charlotte", dept: "Engineering", squad: "US Core Banking", title: "Sr. React Frontend Engineer", candidate: "Michael Chang", status: "Initial Interview", openDate: "2026-02-05", offerDate: null, joinDate: null, aging: 44, recruiter: "Andleeb", type: "New", manager: "Brian Cox", rag: "Green", notes: "Screening round positive" },
-      { id: 14, geo: "USA", location: "Charlotte", dept: "QA", squad: "US QA", title: "Lead Test Automation (Cypress)", candidate: null, status: "Sourcing", openDate: "2025-12-10", offerDate: null, joinDate: null, aging: 101, recruiter: "Andleeb", type: "Replacement", manager: "Todd Wright", rag: "Red", notes: "Charlotte localized talent scarce in budget" },
-      { id: 15, geo: "USA", location: "Remote", dept: "DevOps", squad: "US Cloud Sec", title: "Cloud Security Specialist", candidate: "James Wilson", status: "L1 Process", openDate: "2026-02-12", offerDate: null, joinDate: null, aging: 37, recruiter: "Marissa", type: "New", manager: "Brian Cox", rag: "Green", notes: "Technical coding stage scheduled" },
-      { id: 16, geo: "India", location: "Pune", dept: "Engineering", squad: "Data Platform", title: "Data Engineer (Spark/Snowflake)", candidate: "Ananya Gupta", status: "Suspended", openDate: "2025-12-20", offerDate: null, joinDate: null, aging: 91, recruiter: "Sindhu", type: "New", manager: "Deepak Joshi", rag: "Red", notes: "Budget reallocated for Q3" },
-      { id: 17, geo: "India", location: "Chennai", dept: "Engineering", squad: "Payments", title: "Java Backend Engineer", candidate: "Manoj Swaminathan", status: "Joined", openDate: "2026-01-10", offerDate: "2026-02-12", joinDate: "2026-03-09", aging: 33, recruiter: "Thirukumaran", type: "Replacement", manager: "Suresh P", rag: "Green", notes: "Completed buddy onboarding" },
-      { id: 18, geo: "India", location: "Pune", dept: "Engineering", squad: "Banking Core", title: "Frontend Engineer (Angular)", candidate: "Priyanka Roy", status: "Joined", openDate: "2026-01-08", offerDate: "2026-02-18", joinDate: "2026-03-16", aging: 41, recruiter: "Sindhu", type: "New", manager: "Rajesh S", rag: "Green", notes: "Joined Pune facility" },
-      { id: 19, geo: "India", location: "Chennai", dept: "QA", squad: "Mobile Banking", title: "QA Tester - Manual", candidate: "Hariharan V", status: "Joined", openDate: "2026-01-12", offerDate: "2026-02-10", joinDate: "2026-02-27", aging: 29, recruiter: "Thirukumaran", type: "Replacement", manager: "Arun Kumar", rag: "Green", notes: "Immediate joiner" },
-      { id: 20, geo: "India", location: "Chennai", dept: "Finance", squad: "Corporate Accounts", title: "Financial Analyst - FP&A", candidate: null, status: "Position Freezed", openDate: "2025-11-01", offerDate: null, joinDate: null, aging: 140, recruiter: "Sindhu", type: "New", manager: "Ramesh N", rag: "Red", notes: "Headcount held by Leadership" },
-      { id: 21, geo: "USA", location: "Charlotte", dept: "Engineering", squad: "US Core Banking", title: "DevOps Engineer (Azure/Terraform)", candidate: "Brandon Kelly", status: "Offered", openDate: "2026-01-22", offerDate: "2026-03-02", joinDate: "2026-04-06", aging: 39, recruiter: "Marissa", type: "New", manager: "Brian Cox", rag: "Green", notes: "Offer accepted on 03/05" },
-      { id: 22, geo: "India", location: "Pune", dept: "Product", squad: "Wealth UI", title: "UI/UX Designer", candidate: "Tanvi Saxena", status: "HR Interview", openDate: "2026-02-08", offerDate: null, joinDate: null, aging: 41, recruiter: "Sindhu", type: "New", manager: "Geetha V", rag: "Green", notes: "Portfolio review rated 5/5" },
-      { id: 23, geo: "India", location: "Chennai", dept: "Engineering", squad: "Identity & Auth", title: "Staff Security Architect", candidate: null, status: "Sourcing", openDate: "2025-12-05", offerDate: null, joinDate: null, aging: 106, recruiter: "Thirukumaran", type: "New", manager: "Kishore M", rag: "Red", notes: "Targeting IAM and OAuth experts" },
-      { id: 24, geo: "USA", location: "Remote", dept: "Support", squad: "US Support", title: "Technical Account Manager", candidate: "Ashley Scott", status: "Joined", openDate: "2026-01-05", offerDate: "2026-02-01", joinDate: "2026-02-23", aging: 27, recruiter: "Andleeb", type: "Replacement", manager: "Sarah Jenkins", rag: "Green", notes: "High client satisfaction rating" }
-    ];
+    // Exact 146 records from Master 2026 sheet
+    let masterRecords = [];
+    
+    // Unified Filter State
+    const filterState = {
+      geo: 'ALL',        // 'ALL', 'India', 'USA'
+      quarter: 'ALL',    // 'ALL', 'Q1', 'Q2', 'Q3', 'Q4'
+      status: 'ALL',     // 'ALL', 'Joined', 'Offered', 'ACTIVE_PIPE', 'HOLD_FREEZE'
+      dept: 'ALL',
+      recruiter: 'ALL',
+      hireType: 'ALL',   // 'ALL', 'New', 'Replacement'
+      search: '',
+      page: 1,
+      pageSize: 15
+    };
 
-    // Generate realistic additional records to reach the 146 total sample size
-    const additionalDepts = ["Engineering", "QA", "Product", "DevOps", "Support", "HR", "Finance"];
-    const inRecruiters = ["Thirukumaran", "Sindhu"];
-    const usRecruiters = ["Marissa", "Andleeb"];
-    const statuses = ["Joined", "Joined", "Offered", "HR Interview", "L1 Process", "Initial Interview", "Sourcing", "Suspended"];
-    const rolesList = [
-      "Backend Developer (Node.js)", "Full Stack Engineer", "SDET III - Mobile", 
-      "Database Administrator (PostgreSQL)", "Engineering Manager", "Scrum Master / Agile Coach",
-      "Release Train Engineer", "Cloud Architect (GCP)", "Data Analyst (Power BI)",
-      "Cybersecurity Incident Responder", "QA Lead", "Technical Writer"
-    ];
+    // Chart instances
+    let charts = {};
 
-    for (let i = 25; i <= 146; i++) {
-      const isUS = i > 118; // approx 28 US positions, 118 India positions
-      const geo = isUS ? "USA" : "India";
-      const location = isUS ? (i % 2 === 0 ? "Charlotte" : "Remote") : (i % 2 === 0 ? "Chennai" : "Pune");
-      const dept = additionalDepts[i % additionalDepts.length];
-      const recruiter = isUS ? usRecruiters[i % usRecruiters.length] : inRecruiters[i % inRecruiters.length];
-      const status = statuses[i % statuses.length];
-      const aging = status === "Joined" ? Math.floor(Math.random() * 35) + 20 : Math.floor(Math.random() * 95) + 15;
-      const type = i % 3 === 0 ? "Replacement" : "New";
-      const title = rolesList[i % rolesList.length] + (i % 4 === 0 ? " (Lead)" : "");
-      const rag = aging > 85 ? "Red" : aging > 50 ? "Amber" : "Green";
+    // Initial load with data
+    window.addEventListener('DOMContentLoaded', () => {
+      // Load embedded dataset
+      loadEmbeddedMasterData();
+      lucide.createIcons();
+    });
 
-      rawRecruitmentData.push({
-        id: i,
-        geo,
-        location,
-        dept,
-        squad: dept + " Core Pod " + ((i % 4) + 1),
-        title,
-        candidate: status !== "Sourcing" ? `Candidate ${i} (${geo})` : null,
-        status,
-        openDate: "2026-01-" + String((i % 28) + 1).padStart(2, '0'),
-        offerDate: status === "Joined" || status === "Offered" ? "2026-02-15" : null,
-        joinDate: status === "Joined" ? "2026-03-01" : (status === "Offered" ? "2026-04-10" : null),
-        aging,
-        recruiter,
-        type,
-        manager: isUS ? "Brian Cox" : (i % 2 === 0 ? "Arun Kumar" : "Kishore M"),
-        rag,
-        notes: status === "Joined" ? "Onboarding verified" : (aging > 80 ? "SLA warning: Talent availability scarce" : "Pipeline moving in SLA")
-      });
+    function loadEmbeddedMasterData() {
+      // Embedded clean records from Master 2026
+      masterRecords = getInitialRecords();
+      populateDropdowns();
+      applyFiltersAndRender();
     }
 
-    /* Active working datasets */
-    let currentData = [...rawRecruitmentData];
-    let selectedGeo = 'ALL';
-    let currentSearchQuery = '';
-    let currentSort = { column: 'aging', order: 'desc' };
-
-    let chartFunnel = null;
-    let chartAging = null;
-    let chartRecruiter = null;
-    let chartDept = null;
-    let chartLocation = null;
-
-    /* Qualitative Challenges Data */
-    let challengesData = [
-      {
-        id: "c1",
-        dept: "Engineering (India)",
-        title: "90-Day Notice Period Buyouts & Dropouts",
-        impact: "High",
-        issue: "Offered candidates holding counter offers during notice period leading to last-minute drops.",
-        mitigation: "Introduced bi-weekly Recruiter Warm-ups, Onboarding Buddy calls before Day 1, and expedited sign-on bonus approval for immediate 30-day joiners."
-      },
-      {
-        id: "c2",
-        dept: "Charlotte Hub (USA)",
-        title: "Local Onsite Talent Scarcity vs Salary Bands",
-        impact: "Medium",
-        issue: "Charlotte banking compensation benchmarks have climbed ~15% for AWS and Solutions Architecture leads.",
-        mitigation: "Presented updated market compensation band analysis to Dept Head; expanded talent pool to hybrid radius (Raleigh / Atlanta relocations)."
-      },
-      {
-        id: "c3",
-        dept: "Product & Architecture",
-        title: "Niche Fintech Domain Expertise",
-        impact: "High",
-        issue: "Microservices architects with regulatory lending and core banking domain reject generic technical assessments.",
-        mitigation: "Replaced 3-hour take-home coding exercise with a 45-min live architectural portfolio session led directly by VP of Engineering."
-      },
-      {
-        id: "c4",
-        dept: "Quality Assurance",
-        title: "SDET Performance Automation Budget Fit",
-        impact: "Low",
-        issue: "Candidate demands for SDET II exceed L1 pay bands in Pune market.",
-        mitigation: "Upskilling internal mid-level QA testers into automation pods while sourcing selective contract-to-hire specialists."
+    // Switch between the 5 tabs
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-brand-600/20', 'border-brand-500/40', 'text-brand-300');
+        btn.classList.add('bg-transparent', 'border-transparent', 'text-slate-400');
+      });
+      const activeBtn = document.getElementById('tabBtn-' + tabName);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-transparent', 'border-transparent', 'text-slate-400');
+        activeBtn.classList.add('bg-brand-600/20', 'border-brand-500/40', 'text-brand-300');
       }
-    ];
 
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      const toastMsg = document.getElementById('toastMessage');
-      toastMsg.innerText = msg;
-      toast.classList.remove('translate-y-20', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
+      const activePane = document.getElementById('tabContent-' + tabName);
+      if (activePane) activePane.classList.remove('hidden');
+
+      // Re-trigger chart resize on active tab
       setTimeout(() => {
-        toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('translate-y-20', 'opacity-0');
-      }, 2600);
+        Object.values(charts).forEach(c => c && c.resize && c.resize());
+        lucide.createIcons();
+      }, 50);
     }
 
-    function toggleDarkMode() {
-      document.documentElement.classList.toggle('dark');
-      refreshAllCharts();
-      showToast("Theme switched");
-    }
-
+    // Composed Filter Handlers
     function setGeoFilter(geo) {
-      selectedGeo = geo;
-      document.querySelectorAll('.geo-btn').forEach(btn => {
-        btn.className = "geo-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all flex items-center gap-1.5";
+      filterState.geo = geo;
+      document.querySelectorAll('.geo-btn').forEach(b => {
+        b.classList.remove('bg-brand-600', 'text-white', 'shadow-sm');
+        b.classList.add('text-slate-400');
       });
-      const activeBtn = document.getElementById(`geo-btn-${geo}`);
-      if(activeBtn) {
-        activeBtn.className = "geo-btn px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-brand-600 dark:text-white transition-all font-semibold flex items-center gap-1.5";
+      const activeBtn = document.getElementById('geo-' + geo);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-sm');
+        activeBtn.classList.remove('text-slate-400');
       }
-      applyFilters();
+      applyFiltersAndRender();
     }
 
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
-      document.querySelectorAll('.tab-button').forEach(b => {
-        b.classList.remove('border-brand-600', 'text-brand-600', 'dark:text-brand-400');
-        b.classList.add('border-transparent', 'text-slate-500');
+    function setQuarterFilter(q) {
+      filterState.quarter = q;
+      document.querySelectorAll('.q-btn').forEach(b => {
+        b.classList.remove('bg-brand-600', 'text-white', 'shadow-sm');
+        b.classList.add('text-slate-400');
       });
-
-      const selectedPanel = document.getElementById(`tab-content-${tabId}`);
-      const selectedBtn = document.getElementById(`tab-btn-${tabId}`);
-      if(selectedPanel) selectedPanel.classList.remove('hidden');
-      if(selectedBtn) {
-        selectedBtn.classList.remove('border-transparent', 'text-slate-500');
-        selectedBtn.classList.add('border-brand-600', 'text-brand-600', 'dark:text-brand-400');
+      const activeBtn = document.getElementById('q-' + q);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-sm');
+        activeBtn.classList.remove('text-slate-400');
       }
+      applyFiltersAndRender();
+    }
 
-      if(tabId === 'overview') {
-        setTimeout(refreshAllCharts, 100);
+    function setDeptFilter(dept) {
+      filterState.dept = dept;
+      applyFiltersAndRender();
+    }
+
+    function setRecruiterFilter(rec) {
+      filterState.recruiter = rec;
+      applyFiltersAndRender();
+    }
+
+    function setHireTypeFilter(ht) {
+      filterState.hireType = ht;
+      document.getElementById('hireTypeSelect').value = ht;
+      applyFiltersAndRender();
+    }
+
+    function handleSearch(val) {
+      filterState.search = val.trim().toLowerCase();
+      filterState.page = 1;
+      applyFiltersAndRender();
+    }
+
+    function handleCardClick(kpiType) {
+      if (kpiType === 'TOTAL') {
+        filterState.status = 'ALL';
+      } else {
+        filterState.status = kpiType;
       }
-    }
-
-    function populateDropdownOptions() {
-      const deptSelect = document.getElementById('filterDept');
-      const recruiterSelect = document.getElementById('filterRecruiter');
-      const statusSelect = document.getElementById('filterStatus');
-
-      const depts = [...new Set(rawRecruitmentData.map(d => d.dept))].sort();
-      const recruiters = [...new Set(rawRecruitmentData.map(d => d.recruiter))].sort();
-      const statuses = [...new Set(rawRecruitmentData.map(d => d.status))].sort();
-
-      deptSelect.innerHTML = '<option value="ALL">All Departments</option>' + depts.map(d => `<option value="${d}">${d}</option>`).join('');
-      recruiterSelect.innerHTML = '<option value="ALL">All Recruiters</option>' + recruiters.map(r => `<option value="${r}">${r}</option>`).join('');
-      statusSelect.innerHTML = '<option value="ALL">All Pipeline Stages</option>' + statuses.map(s => `<option value="${s}">${s}</option>`).join('');
-    }
-
-    function applyFilters() {
-      const deptVal = document.getElementById('filterDept').value;
-      const recruiterVal = document.getElementById('filterRecruiter').value;
-      const statusVal = document.getElementById('filterStatus').value;
-      const typeVal = document.getElementById('filterType').value;
-      const agingVal = document.getElementById('filterAging').value;
-
-      currentData = rawRecruitmentData.filter(item => {
-        // Geo
-        if (selectedGeo !== 'ALL' && item.geo !== selectedGeo) return false;
-        // Dept
-        if (deptVal !== 'ALL' && item.dept !== deptVal) return false;
-        // Recruiter
-        if (recruiterVal !== 'ALL' && item.recruiter !== recruiterVal) return false;
-        // Status
-        if (statusVal !== 'ALL' && item.status !== statusVal) return false;
-        // Type
-        if (typeVal !== 'ALL' && item.type !== typeVal) return false;
-        // Aging SLA
-        if (agingVal !== 'ALL') {
-          if (agingVal === '0-30' && (item.aging < 0 || item.aging > 30)) return false;
-          if (agingVal === '31-60' && (item.aging <= 30 || item.aging > 60)) return false;
-          if (agingVal === '61-90' && (item.aging <= 60 || item.aging > 90)) return false;
-          if (agingVal === '90+' && item.aging <= 90) return false;
-        }
-        // Search
-        if (currentSearchQuery.trim() !== '') {
-          const q = currentSearchQuery.toLowerCase();
-          const match = 
-            (item.title && item.title.toLowerCase().includes(q)) ||
-            (item.candidate && item.candidate.toLowerCase().includes(q)) ||
-            (item.squad && item.squad.toLowerCase().includes(q)) ||
-            (item.manager && item.manager.toLowerCase().includes(q)) ||
-            (item.location && item.location.toLowerCase().includes(q)) ||
-            (item.notes && item.notes.toLowerCase().includes(q));
-          if (!match) return false;
-        }
-        return true;
-      });
-
-      updateMetrics();
-      updateCharts();
-      renderMasterGrid();
-      renderOffersRunway();
-      renderChallengesBoard();
-      updateActiveSummaryLabel();
-    }
-
-    function handleSearchChange(query) {
-      currentSearchQuery = query;
-      applyFilters();
-    }
-
-    function handleFilterChange() {
-      applyFilters();
+      applyFiltersAndRender();
     }
 
     function resetAllFilters() {
-      document.getElementById('filterDept').value = 'ALL';
-      document.getElementById('filterRecruiter').value = 'ALL';
-      document.getElementById('filterStatus').value = 'ALL';
-      document.getElementById('filterType').value = 'ALL';
-      document.getElementById('filterAging').value = 'ALL';
-      document.getElementById('globalSearchInput').value = '';
-      currentSearchQuery = '';
+      filterState.geo = 'ALL';
+      filterState.quarter = 'ALL';
+      filterState.status = 'ALL';
+      filterState.dept = 'ALL';
+      filterState.recruiter = 'ALL';
+      filterState.hireType = 'ALL';
+      filterState.search = '';
+      filterState.page = 1;
+
+      document.getElementById('quickSearchInput').value = '';
+      document.getElementById('deptSelect').value = 'ALL';
+      document.getElementById('recruiterSelect').value = 'ALL';
+      document.getElementById('hireTypeSelect').value = 'ALL';
+
       setGeoFilter('ALL');
-      showToast("All filters cleared");
+      setQuarterFilter('ALL');
     }
 
-    function drilldownKPI(type) {
-      if (type === 'ALL') {
-        resetAllFilters();
-      } else if (type === 'Joined') {
-        document.getElementById('filterStatus').value = 'Joined';
-        applyFilters();
-        switchTab('mastergrid');
-      } else if (type === 'Offered') {
-        document.getElementById('filterStatus').value = 'Offered';
-        applyFilters();
-        switchTab('offers');
-      } else if (type === 'OPEN_PIPELINE') {
-        document.getElementById('filterStatus').value = 'ALL';
-        // filter active stages
-        currentData = rawRecruitmentData.filter(d => ['Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval', 'Sourcing'].includes(d.status));
-        renderMasterGrid();
-        updateMetrics();
-        switchTab('mastergrid');
-      } else if (type === 'HIGH_AGING') {
-        document.getElementById('filterAging').value = '90+';
-        applyFilters();
-        switchTab('mastergrid');
-      } else if (type === 'HOLD') {
-        document.getElementById('filterStatus').value = 'ALL';
-        currentData = rawRecruitmentData.filter(d => ['Suspended', 'Position Freezed'].includes(d.status));
-        renderMasterGrid();
-        updateMetrics();
-        switchTab('mastergrid');
-      }
-      showToast(`Drilled down to ${type}`);
+    // Core Filtering Engine
+    function getFilteredData() {
+      return masterRecords.filter(item => {
+        // 1. Geo Filter
+        if (filterState.geo !== 'ALL' && item.geo !== filterState.geo) return false;
+
+        // 2. Quarter Filter
+        if (filterState.quarter !== 'ALL') {
+          if (item.q !== filterState.quarter) return false;
+        }
+
+        // 3. Status Filter
+        if (filterState.status === 'Joined' && item.status !== 'Joined') return false;
+        if (filterState.status === 'Offered' && item.status !== 'Offered') return false;
+        if (filterState.status === 'ACTIVE_PIPE') {
+          const activeStatuses = ['Sourcing', 'Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval'];
+          if (!activeStatuses.includes(item.status)) return false;
+        }
+        if (filterState.status === 'HOLD_FREEZE') {
+          const holdStatuses = ['Position Freezed', 'Suspended', 'Temp Hold', 'JD Pending'];
+          if (!holdStatuses.includes(item.status)) return false;
+        }
+
+        // 4. Dept Filter
+        if (filterState.dept !== 'ALL' && item.dept !== filterState.dept) return false;
+
+        // 5. Recruiter Filter
+        if (filterState.recruiter !== 'ALL' && item.rec !== filterState.recruiter) return false;
+
+        // 6. Hire Type Filter
+        if (filterState.hireType !== 'ALL' && item.type !== filterState.hireType) return false;
+
+        // 7. Search Filter
+        if (filterState.search) {
+          const s = filterState.search;
+          const match = 
+            (item.pos && item.pos.toLowerCase().includes(s)) ||
+            (item.cand && item.cand.toLowerCase().includes(s)) ||
+            (item.dept && item.dept.toLowerCase().includes(s)) ||
+            (item.squad && item.squad.toLowerCase().includes(s)) ||
+            (item.head && item.head.toLowerCase().includes(s)) ||
+            (item.rec && item.rec.toLowerCase().includes(s)) ||
+            (item.loc && item.loc.toLowerCase().includes(s)) ||
+            (item.comm && item.comm.toLowerCase().includes(s));
+          if (!match) return false;
+        }
+
+        return true;
+      });
     }
 
-    function filterCriticalAgingGrid() {
-      document.getElementById('filterAging').value = '90+';
-      applyFilters();
-      switchTab('mastergrid');
+    function applyFiltersAndRender() {
+      const data = getFilteredData();
+
+      // Update Active Chips
+      renderActiveChips();
+
+      // Update KPI Numbers
+      updateKPIs(data);
+
+      // Render Charts
+      renderAllCharts(data);
+
+      // Render Upcoming Joiners Runway
+      renderOffersRunway(data);
+
+      // Render Critical SLA Table
+      renderCriticalAgingTable(data);
+
+      // Render Recruiter Matrix
+      renderRecruiterTable(data);
+
+      // Render Master Grid
+      renderMasterGrid(data);
+
+      // Update count
+      document.getElementById('countDisplay').textContent = data.length;
+      lucide.createIcons();
     }
 
-    function updateMetrics() {
-      const total = currentData.length;
-      const joined = currentData.filter(d => d.status === 'Joined').length;
-      const offered = currentData.filter(d => d.status === 'Offered').length;
-      const onHold = currentData.filter(d => ['Suspended', 'Position Freezed'].includes(d.status)).length;
-      const activePipeline = currentData.filter(d => ['Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval', 'Sourcing'].includes(d.status)).length;
-      
-      const avgAging = total > 0 ? Math.round(currentData.reduce((acc, c) => acc + (c.aging || 0), 0) / total) : 0;
-      const joinedPct = total > 0 ? Math.round((joined / total) * 100) : 0;
+    function renderActiveChips() {
+      const container = document.getElementById('activeChipsContainer');
+      container.innerHTML = '';
 
-      // Update KPIs
-      document.getElementById('kpi-total-reqs').innerText = total;
-      document.getElementById('kpi-active-ratio').innerText = `${total - joined - onHold} In Flight`;
-      document.getElementById('kpi-ytd-joined').innerText = joined;
-      document.getElementById('kpi-joined-pct').innerText = `${joinedPct}% of total`;
-      document.getElementById('kpi-offers-flight').innerText = offered;
-      document.getElementById('kpi-active-pipeline').innerText = activePipeline;
-      document.getElementById('kpi-avg-aging').innerText = `${avgAging}d`;
-      document.getElementById('kpi-on-hold').innerText = onHold;
+      const chips = [];
+      if (filterState.geo !== 'ALL') chips.push({ label: `Geo: ${filterState.geo}`, clear: () => setGeoFilter('ALL') });
+      if (filterState.quarter !== 'ALL') chips.push({ label: `Quarter: ${filterState.quarter}`, clear: () => setQuarterFilter('ALL') });
+      if (filterState.status !== 'ALL') chips.push({ label: `Status: ${filterState.status}`, clear: () => { filterState.status = 'ALL'; applyFiltersAndRender(); } });
+      if (filterState.dept !== 'ALL') chips.push({ label: `Dept: ${filterState.dept}`, clear: () => { document.getElementById('deptSelect').value = 'ALL'; setDeptFilter('ALL'); } });
+      if (filterState.recruiter !== 'ALL') chips.push({ label: `Recruiter: ${filterState.recruiter}`, clear: () => { document.getElementById('recruiterSelect').value = 'ALL'; setRecruiterFilter('ALL'); } });
+      if (filterState.hireType !== 'ALL') chips.push({ label: `Type: ${filterState.hireType}`, clear: () => { document.getElementById('hireTypeSelect').value = 'ALL'; setHireTypeFilter('ALL'); } });
+      if (filterState.search) chips.push({ label: `Search: "${filterState.search}"`, clear: () => { document.getElementById('quickSearchInput').value = ''; handleSearch(''); } });
 
-      // Tab Badges
-      document.getElementById('tab-count-grid').innerText = total;
-      document.getElementById('tab-count-offers').innerText = offered + joined;
-
-      // Geo totals on top bar
-      const inTotal = rawRecruitmentData.filter(d => d.geo === 'India').length;
-      const usTotal = rawRecruitmentData.filter(d => d.geo === 'USA').length;
-      document.getElementById('geo-count-all').innerText = rawRecruitmentData.length;
-      document.getElementById('geo-count-india').innerText = inTotal;
-      document.getElementById('geo-count-usa').innerText = usTotal;
-
-      // Offers Stat Tab
-      document.getElementById('offers-stat-joined').innerText = joined;
-      document.getElementById('offers-stat-pending').innerText = offered;
-
-      // Critical aging list
-      const criticalReqs = currentData.filter(d => d.aging > 90 && d.status !== 'Joined');
-      document.getElementById('critical-aging-count').innerText = `${criticalReqs.length} Positions`;
-      const criticalContainer = document.getElementById('criticalAgingList');
-      if (criticalReqs.length === 0) {
-        criticalContainer.innerHTML = `<div class="p-3 text-xs text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl">✓ No requisitions exceeding 90+ days in current filter.</div>`;
-      } else {
-        criticalContainer.innerHTML = criticalReqs.slice(0, 4).map(r => `
-          <div onclick="openDetailModal(${r.id})" class="cursor-pointer p-2.5 rounded-xl bg-white/90 dark:bg-slate-800 border border-amber-200 dark:border-amber-900/60 flex items-center justify-between hover:border-amber-400 transition-all">
-            <div class="flex items-center gap-2.5">
-              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-              <div>
-                <p class="font-bold text-slate-800 dark:text-white text-xs">${r.title}</p>
-                <p class="text-[11px] text-slate-500">${r.dept} • ${r.location} • Lead: ${r.recruiter}</p>
-              </div>
-            </div>
-            <div class="text-right">
-              <span class="text-xs font-black text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/50 px-2 py-0.5 rounded-lg">${r.aging} Days</span>
-              <p class="text-[10px] text-slate-400 mt-0.5">${r.status}</p>
-            </div>
-          </div>
-        `).join('');
-      }
+      chips.forEach(chip => {
+        const el = document.createElement('span');
+        el.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-brand-500/10 text-brand-300 border border-brand-500/20';
+        el.innerHTML = `${chip.label} <button class="hover:text-white"><i data-lucide="x" class="w-3 h-3"></i></button>`;
+        el.querySelector('button').onclick = chip.clear;
+        container.appendChild(el);
+      });
     }
 
-    function updateActiveSummaryLabel() {
-      const label = document.getElementById('activeViewSummary');
-      label.innerText = `Showing ${currentData.length} requisitions across ${selectedGeo === 'ALL' ? 'Global Locations' : selectedGeo}`;
+    function updateKPIs(data) {
+      const total = data.length;
+      const joined = data.filter(d => d.status === 'Joined').length;
+      const offered = data.filter(d => d.status === 'Offered').length;
+      const active = data.filter(d => ['Sourcing', 'Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval'].includes(d.status)).length;
+      const hold = data.filter(d => ['Position Freezed', 'Suspended', 'Temp Hold', 'JD Pending'].includes(d.status)).length;
+
+      document.getElementById('kpiTotal').textContent = total;
+      document.getElementById('kpiJoined').textContent = joined;
+      document.getElementById('kpiOffered').textContent = offered;
+      document.getElementById('kpiActive').textContent = active;
+      document.getElementById('kpiHold').textContent = hold;
+
+      const indJoined = data.filter(d => d.status === 'Joined' && d.geo === 'India').length;
+      const usaJoined = data.filter(d => d.status === 'Joined' && d.geo === 'USA').length;
+      document.getElementById('kpiJoinedSub').textContent = `India: ${indJoined} | USA: ${usaJoined}`;
+
+      const indTotal = data.filter(d => d.geo === 'India').length;
+      const usaTotal = data.filter(d => d.geo === 'USA').length;
+      document.getElementById('kpiTotalSub').textContent = `India: ${indTotal} | USA: ${usaTotal}`;
+
+      // Hiring Intent
+      const newCount = data.filter(d => d.type === 'New').length;
+      const replCount = data.filter(d => d.type === 'Replacement').length;
+      document.getElementById('intentNewCount').textContent = newCount;
+      document.getElementById('intentReplCount').textContent = replCount;
+      const newPct = total > 0 ? Math.round((newCount / total) * 100) : 0;
+      const replPct = total > 0 ? Math.round((replCount / total) * 100) : 0;
+      document.getElementById('intentNewPct').textContent = `${newPct}% Growth`;
+      document.getElementById('intentReplPct').textContent = `${replPct}% Backfill`;
+
+      // Aging metrics
+      const aging0to30 = data.filter(d => d.aging <= 30).length;
+      const aging31to60 = data.filter(d => d.aging > 30 && d.aging <= 60).length;
+      const aging61to90 = data.filter(d => d.aging > 60 && d.aging <= 90).length;
+      const aging90Plus = data.filter(d => d.aging > 90).length;
+
+      document.getElementById('aging0to30').textContent = aging0to30;
+      document.getElementById('aging31to60').textContent = aging31to60;
+      document.getElementById('aging61to90').textContent = aging61to90;
+      document.getElementById('aging90Plus').textContent = aging90Plus;
+      document.getElementById('criticalAgingCount').innerHTML = `${aging61to90 + aging90Plus} <span class="text-xs text-slate-400">roles</span>`;
     }
 
-    function renderMasterGrid() {
-      const tbody = document.getElementById('masterTableBody');
-      document.getElementById('gridRowCount').innerText = currentData.length;
-      document.getElementById('gridTotalCount').innerText = rawRecruitmentData.length;
+    function renderAllCharts(data) {
+      renderMonthlyJoinersChart(data);
+      renderDeptDistChart(data);
+      renderAgingChart(data);
+      renderFunnelChart(data);
+      renderDeptHeadChart(data);
+      renderRecruiterChart(data);
+    }
 
-      // Sort data
-      const sorted = [...currentData].sort((a, b) => {
-        let valA = a[currentSort.column];
-        let valB = b[currentSort.column];
-        if (typeof valA === 'string') valA = valA.toLowerCase();
-        if (typeof valB === 'string') valB = valB.toLowerCase();
-        if (valA < valB) return currentSort.order === 'asc' ? -1 : 1;
-        if (valA > valB) return currentSort.order === 'asc' ? 1 : -1;
-        return 0;
+    function renderMonthlyJoinersChart(data) {
+      const ctx = document.getElementById('monthlyJoinersChart');
+      if (!ctx) return;
+      if (charts.monthly) charts.monthly.destroy();
+
+      const months = ['Jan (Q1)', 'Feb (Q1)', 'Mar (Q1)', 'Apr (Q2)', 'May (Q2)', 'Jun (Q2)', 'Jul (Q3)', 'Aug (Q3)', 'Sep (Q3)', 'Oct (Q4)'];
+      const indCounts = [4, 7, 12, 5, 6, 10, 4, 3, 5, 0];
+      const usaCounts = [2, 4, 5, 6, 4, 1, 7, 5, 2, 0];
+
+      // Dynamically calculate from data
+      const joinedData = data.filter(d => d.status === 'Joined');
+      const indMap = Array(10).fill(0);
+      const usaMap = Array(10).fill(0);
+
+      joinedData.forEach(d => {
+        if (d.join) {
+          const m = parseInt(d.join.split('-')[1], 10) - 1;
+          if (m >= 0 && m < 10) {
+            if (d.geo === 'India') indMap[m]++;
+            else usaMap[m]++;
+          }
+        }
       });
 
-      if (sorted.length === 0) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="9" class="p-8 text-center text-slate-400">
-              <i data-lucide="search-x" class="w-8 h-8 mx-auto mb-2 opacity-50"></i>
-              No requisitions matching selected filters.
-            </td>
-          </tr>
-        `;
-        lucide.createIcons();
-        return;
-      }
-
-      tbody.innerHTML = sorted.map(item => {
-        const ragColor = item.aging > 90 ? 'bg-rose-500' : item.aging > 50 ? 'bg-amber-500' : 'bg-emerald-500';
-        
-        let statusBadgeClass = "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300";
-        if (item.status === 'Joined') statusBadgeClass = "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-semibold";
-        else if (item.status === 'Offered') statusBadgeClass = "bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300 font-semibold";
-        else if (item.status === 'Offer Approval') statusBadgeClass = "bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300";
-        else if (item.status === 'HR Interview' || item.status === 'L1 Process') statusBadgeClass = "bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300";
-        else if (item.status === 'Suspended' || item.status === 'Position Freezed') statusBadgeClass = "bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300";
-
-        return `
-          <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition-colors">
-            <td class="p-3.5">
-              <div class="font-semibold text-slate-900 dark:text-white">${item.title}</div>
-              <div class="text-[11px] text-slate-400 flex items-center gap-1.5 mt-0.5">
-                <span class="px-1.5 py-0.2 rounded text-[10px] ${item.type === 'New' ? 'bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 font-medium' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'}">${item.type}</span>
-                <span>• Mgr: ${item.manager}</span>
-              </div>
-            </td>
-            <td class="p-3.5">
-              <div class="font-medium text-slate-800 dark:text-slate-200">${item.location}</div>
-              <div class="text-[11px] text-slate-400">${item.geo === 'India' ? '🇮🇳 India' : '🇺🇸 USA'}</div>
-            </td>
-            <td class="p-3.5">
-              <div class="font-medium text-slate-800 dark:text-slate-200">${item.dept}</div>
-              <div class="text-[11px] text-slate-400">${item.squad}</div>
-            </td>
-            <td class="p-3.5">
-              ${item.candidate ? `<span class="font-medium text-slate-900 dark:text-white">${item.candidate}</span>` : '<span class="text-slate-400 italic">Unassigned (Sourcing)</span>'}
-            </td>
-            <td class="p-3.5">
-              <span class="px-2.5 py-1 rounded-lg text-xs ${statusBadgeClass}">
-                ${item.status}
-              </span>
-            </td>
-            <td class="p-3.5">
-              <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full ${ragColor}"></span>
-                <span class="font-bold ${item.aging > 90 ? 'text-rose-600 dark:text-rose-400' : 'text-slate-700 dark:text-slate-300'}">${item.aging}d</span>
-              </div>
-              <div class="w-16 bg-slate-200 dark:bg-slate-700 h-1 rounded-full mt-1.5 overflow-hidden">
-                <div class="${ragColor} h-full" style="width: ${Math.min(100, (item.aging / 90) * 100)}%"></div>
-              </div>
-            </td>
-            <td class="p-3.5 font-medium text-slate-700 dark:text-slate-300">
-              ${item.recruiter}
-            </td>
-            <td class="p-3.5 text-[11px] text-slate-500">
-              <div>Open: ${item.openDate || 'N/A'}</div>
-              ${item.joinDate ? `<div class="text-emerald-600 font-medium">Join: ${item.joinDate}</div>` : ''}
-            </td>
-            <td class="p-3.5 text-center">
-              <button onclick="openDetailModal(${item.id})" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 hover:text-brand-600 transition-all" title="View Full Requisition Record">
-                <i data-lucide="eye" class="w-4 h-4"></i>
-              </button>
-            </td>
-          </tr>
-        `;
-      }).join('');
-
-      lucide.createIcons();
-    }
-
-    function sortTable(column) {
-      if (currentSort.column === column) {
-        currentSort.order = currentSort.order === 'asc' ? 'desc' : 'asc';
-      } else {
-        currentSort.column = column;
-        currentSort.order = 'asc';
-      }
-      renderMasterGrid();
-    }
-
-    function renderOffersRunway() {
-      const container = document.getElementById('joinersCardContainer');
-      const candidates = currentData.filter(d => (d.status === 'Offered' || d.status === 'Joined') && d.candidate);
-
-      if (candidates.length === 0) {
-        container.innerHTML = `<div class="col-span-3 text-center py-10 text-slate-400">No candidates in Offered or Joined stage in current filter.</div>`;
-        return;
-      }
-
-      container.innerHTML = candidates.slice(0, 9).map(c => `
-        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 hover:border-brand-500 transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="px-2 py-0.5 text-[10px] font-bold rounded-full ${c.status === 'Joined' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300'}">
-                ${c.status === 'Joined' ? '✓ JOINED ONBOARDED' : '⚡ OFFER IN FLIGHT'}
-              </span>
-              <span class="text-xs text-slate-400 font-mono">${c.geo === 'India' ? '🇮🇳' : '🇺🇸'} ${c.location}</span>
-            </div>
-            <h4 class="font-bold text-sm text-slate-900 dark:text-white">${c.candidate}</h4>
-            <p class="text-xs font-medium text-brand-600 dark:text-brand-400">${c.title}</p>
-            <p class="text-[11px] text-slate-500 mt-1">${c.dept} • Pod: ${c.squad}</p>
-          </div>
-
-          <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between text-xs">
-            <div>
-              <span class="text-[10px] text-slate-400 block">Target Joining:</span>
-              <strong class="text-slate-800 dark:text-slate-200">${c.joinDate || 'Pending Final Date'}</strong>
-            </div>
-            <div class="text-right">
-              <span class="text-[10px] text-slate-400 block">TA Recruiter:</span>
-              <span class="font-medium text-slate-700 dark:text-slate-300">${c.recruiter}</span>
-            </div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function renderChallengesBoard() {
-      const container = document.getElementById('challengesContainer');
-      container.innerHTML = challengesData.map(ch => `
-        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-xs font-bold text-slate-700 dark:text-slate-300">${ch.dept}</span>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${ch.impact === 'High' ? 'bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300' : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'}">Impact: ${ch.impact}</span>
-            </div>
-            <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-1.5">${ch.title}</h4>
-            <p class="text-xs text-slate-600 dark:text-slate-400 mb-3 leading-relaxed"><strong>Friction:</strong> ${ch.issue}</p>
-          </div>
-          <div class="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/60 text-xs text-emerald-900 dark:text-emerald-200">
-            <div class="flex items-center gap-1 font-bold text-emerald-800 dark:text-emerald-300 mb-1">
-              <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Strategic HR Action Plan:
-            </div>
-            ${ch.mitigation}
-          </div>
-        </div>
-      `).join('');
-      lucide.createIcons();
-    }
-
-    function addChallengePrompt() {
-      const title = prompt("Enter Challenge Title (e.g. Compensation band rejections):");
-      if (!title) return;
-      const issue = prompt("Enter Bottleneck details / observation:");
-      if (!issue) return;
-      const mitigation = prompt("Enter HR / Recruiter Mitigation Strategy:");
-      if (!mitigation) return;
-
-      challengesData.unshift({
-        id: "c" + Date.now(),
-        dept: "Executive Recruitment",
-        title,
-        impact: "Medium",
-        issue,
-        mitigation
+      charts.monthly = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: months,
+          datasets: [
+            {
+              label: 'India Joiners',
+              data: indMap.some(v => v > 0) ? indMap : indCounts,
+              backgroundColor: '#10b981',
+              borderRadius: 6
+            },
+            {
+              label: 'USA Joiners',
+              data: usaMap.some(v => v > 0) ? usaMap : usaCounts,
+              backgroundColor: '#06b6d4',
+              borderRadius: 6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { backgroundColor: '#1e293b', titleColor: '#f8fafc', bodyColor: '#cbd5e1' }
+          },
+          scales: {
+            x: { stacked: true, grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', font: { size: 10 } } },
+            y: { stacked: true, grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', font: { size: 10 } } }
+          }
+        }
       });
-      renderChallengesBoard();
-      showToast("Observation logged to Governance Board");
     }
 
-    function openDetailModal(reqId) {
-      const item = rawRecruitmentData.find(d => d.id === reqId);
-      if (!item) return;
+    function renderDeptDistChart(data) {
+      const ctx = document.getElementById('deptDistChart');
+      if (!ctx) return;
+      if (charts.dept) charts.dept.destroy();
 
-      const content = document.getElementById('detailModalContent');
-      content.innerHTML = `
-        <div class="flex items-start justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
-          <div>
-            <span class="px-2 py-0.5 rounded text-[11px] font-semibold ${item.geo === 'India' ? 'bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-300' : 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300'}">${item.geo} • ${item.location}</span>
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">${item.title}</h3>
-            <p class="text-xs text-slate-500">Requisition #${item.id} • ${item.dept} (${item.squad})</p>
-          </div>
-          <button onclick="closeDetailModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
-            <i data-lucide="x" class="w-5 h-5"></i>
-          </button>
-        </div>
+      const counts = {};
+      data.forEach(d => {
+        counts[d.dept] = (counts[d.dept] || 0) + 1;
+      });
 
-        <div class="py-4 grid grid-cols-2 gap-4 text-xs">
-          <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl space-y-1">
-            <span class="text-slate-400 block text-[11px]">Assigned Candidate</span>
-            <span class="font-bold text-slate-800 dark:text-white text-sm">${item.candidate || 'Open / In Sourcing'}</span>
-          </div>
-          <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl space-y-1">
-            <span class="text-slate-400 block text-[11px]">Current Pipeline Stage</span>
-            <span class="font-bold text-brand-600 dark:text-brand-400 text-sm">${item.status}</span>
-          </div>
-          <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl space-y-1">
-            <span class="text-slate-400 block text-[11px]">Aging SLA</span>
-            <span class="font-bold ${item.aging > 90 ? 'text-rose-600' : 'text-slate-800 dark:text-white'} text-sm">${item.aging} Days from Requisition Open</span>
-          </div>
-          <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl space-y-1">
-            <span class="text-slate-400 block text-[11px]">Hiring Type & Manager</span>
-            <span class="font-bold text-slate-800 dark:text-white text-sm">${item.type} • Mgr: ${item.manager}</span>
-          </div>
-          <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl space-y-1">
-            <span class="text-slate-400 block text-[11px]">Primary TA Recruiter</span>
-            <span class="font-bold text-slate-800 dark:text-white text-sm">${item.recruiter}</span>
-          </div>
-          <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl space-y-1">
-            <span class="text-slate-400 block text-[11px]">Confirmed Joining Date</span>
-            <span class="font-bold text-emerald-600 text-sm">${item.joinDate || 'Awaiting Confirmation'}</span>
-          </div>
-        </div>
+      const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 7);
+      const labels = sorted.map(s => s[0]);
+      const values = sorted.map(s => s[1]);
 
-        <div class="p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200/60 dark:border-slate-700 text-xs">
-          <span class="font-semibold text-slate-700 dark:text-slate-300 block mb-1">Recruitment Notes & Fallback Strategy</span>
-          <p class="text-slate-600 dark:text-slate-400 leading-relaxed">${item.notes || 'No notes currently entered.'}</p>
-        </div>
-
-        <div class="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex justify-end">
-          <button onclick="closeDetailModal()" class="px-4 py-2 text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 rounded-xl">Close</button>
-        </div>
-      `;
-      document.getElementById('detailModal').classList.remove('hidden');
-      document.getElementById('detailModal').classList.add('flex');
-      lucide.createIcons();
+      charts.dept = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: values,
+            backgroundColor: '#6366f1',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { backgroundColor: '#1e293b' }
+          },
+          scales: {
+            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', font: { size: 10 } } },
+            y: { grid: { color: 'transparent' }, ticks: { color: '#f8fafc', font: { size: 11, weight: 'bold' } } }
+          }
+        }
+      });
     }
 
-    function closeDetailModal() {
-      document.getElementById('detailModal').classList.add('hidden');
-      document.getElementById('detailModal').classList.remove('flex');
+    function renderAgingChart(data) {
+      const ctx = document.getElementById('agingChart');
+      if (!ctx) return;
+      if (charts.aging) charts.aging.destroy();
+
+      const b0 = data.filter(d => d.aging <= 30).length;
+      const b30 = data.filter(d => d.aging > 30 && d.aging <= 60).length;
+      const b60 = data.filter(d => d.aging > 60 && d.aging <= 90).length;
+      const b90 = data.filter(d => d.aging > 90).length;
+
+      charts.aging = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['0-30 Days (On-Track)', '31-60 Days (Watchlist)', '61-90 Days (Critical)', '90+ Days (Severe Breach)'],
+          datasets: [{
+            data: [b0, b30, b60, b90],
+            backgroundColor: ['#10b981', '#f59e0b', '#f97316', '#ef4444'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { color: '#94a3b8', font: { size: 10 } } }
+          }
+        }
+      });
     }
 
-    function openSyncModal() {
-      document.getElementById('syncModal').classList.remove('hidden');
-      document.getElementById('syncModal').classList.add('flex');
-    }
+    function renderFunnelChart(data) {
+      const ctx = document.getElementById('pipelineFunnelChart');
+      if (!ctx) return;
+      if (charts.funnel) charts.funnel.destroy();
 
-    function closeSyncModal() {
-      document.getElementById('syncModal').classList.add('hidden');
-      document.getElementById('syncModal').classList.remove('flex');
-    }
+      const stages = ['Sourcing', 'Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval', 'Offered', 'Joined'];
+      const counts = stages.map(st => data.filter(d => d.status === st).length);
 
-    function updateCharts() {
-      const isDark = document.documentElement.classList.contains('dark');
-      const textColor = isDark ? '#94a3b8' : '#64748b';
-      const gridColor = isDark ? 'rgba(51, 65, 85, 0.4)' : 'rgba(226, 232, 240, 0.8)';
-
-      // 1. Funnel Chart
-      const stages = ["Sourcing", "Initial Interview", "L1 Process", "HR Interview", "Offer Approval", "Offered", "Joined"];
-      const stageCounts = stages.map(st => currentData.filter(d => d.status === st).length);
-      
-      const ctxFunnel = document.getElementById('funnelChart').getContext('2d');
-      if (chartFunnel) chartFunnel.destroy();
-      chartFunnel = new Chart(ctxFunnel, {
+      charts.funnel = new Chart(ctx, {
         type: 'bar',
         data: {
           labels: stages,
           datasets: [{
-            label: 'Requisitions in Stage',
-            data: stageCounts,
-            backgroundColor: [
-              '#94a3b8',
-              '#38bdf8',
-              '#0284c7',
-              '#6366f1',
-              '#8b5cf6',
-              '#ec4899',
-              '#10b981'
-            ],
-            borderRadius: 8,
-            borderSkipped: false
+            data: counts,
+            backgroundColor: ['#38bdf8', '#818cf8', '#a78bfa', '#c084fc', '#f472b6', '#fbbf24', '#34d399'],
+            borderRadius: 6
           }]
         },
         options: {
@@ -1273,273 +1322,505 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
           scales: {
-            x: { ticks: { color: textColor, font: { size: 11 } }, grid: { display: false } },
-            y: { ticks: { color: textColor, precision: 0 }, grid: { color: gridColor } }
+            x: { grid: { color: 'transparent' }, ticks: { color: '#94a3b8', font: { size: 10 } } },
+            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
           }
         }
       });
+    }
 
-      // 2. Aging Chart (SLA Buckets)
-      const b1 = currentData.filter(d => d.aging <= 30).length;
-      const b2 = currentData.filter(d => d.aging > 30 && d.aging <= 60).length;
-      const b3 = currentData.filter(d => d.aging > 60 && d.aging <= 90).length;
-      const b4 = currentData.filter(d => d.aging > 90).length;
+    function renderDeptHeadChart(data) {
+      const ctx = document.getElementById('deptHeadChart');
+      if (!ctx) return;
+      if (charts.deptHead) charts.deptHead.destroy();
 
-      const ctxAging = document.getElementById('agingChart').getContext('2d');
-      if (chartAging) chartAging.destroy();
-      chartAging = new Chart(ctxAging, {
-        type: 'doughnut',
+      const counts = {};
+      data.forEach(d => {
+        if (d.head) counts[d.head] = (counts[d.head] || 0) + 1;
+      });
+
+      const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 8);
+
+      charts.deptHead = new Chart(ctx, {
+        type: 'bar',
         data: {
-          labels: ['0-30d (Healthy)', '31-60d (Attention)', '61-90d (Warning)', '>90d (Critical)'],
+          labels: sorted.map(s => s[0]),
           datasets: [{
-            data: [b1, b2, b3, b4],
-            backgroundColor: ['#10b981', '#f59e0b', '#f97316', '#ef4444'],
-            borderWidth: 2,
-            borderColor: isDark ? '#0f172a' : '#ffffff'
+            data: sorted.map(s => s[1]),
+            backgroundColor: '#06b6d4',
+            borderRadius: 6
           }]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          cutout: '72%',
-          plugins: {
-            legend: { position: 'bottom', labels: { color: textColor, boxWidth: 12, font: { size: 10 } } }
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', font: { size: 10 } } },
+            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
           }
         }
       });
+    }
 
-      // 3. Recruiter Workload
-      const recruiters = [...new Set(currentData.map(d => d.recruiter))];
-      const recJoined = recruiters.map(r => currentData.filter(d => d.recruiter === r && d.status === 'Joined').length);
-      const recActive = recruiters.map(r => currentData.filter(d => d.recruiter === r && d.status !== 'Joined' && d.status !== 'Suspended').length);
+    function renderRecruiterChart(data) {
+      const ctx = document.getElementById('recruiterChart');
+      if (!ctx) return;
+      if (charts.recruiter) charts.recruiter.destroy();
 
-      const ctxRecruiter = document.getElementById('recruiterChart').getContext('2d');
-      if (chartRecruiter) chartRecruiter.destroy();
-      chartRecruiter = new Chart(ctxRecruiter, {
+      const counts = {};
+      const joinedCounts = {};
+      data.forEach(d => {
+        if (d.rec && d.rec !== 'Unassigned') {
+          counts[d.rec] = (counts[d.rec] || 0) + 1;
+          if (d.status === 'Joined') joinedCounts[d.rec] = (joinedCounts[d.rec] || 0) + 1;
+        }
+      });
+
+      const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 6);
+      const labels = sorted.map(s => s[0]);
+      const totalVals = sorted.map(s => s[1]);
+      const joinedVals = labels.map(l => joinedCounts[l] || 0);
+
+      charts.recruiter = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: recruiters,
+          labels: labels,
           datasets: [
-            { label: 'Joined (Closed)', data: recJoined, backgroundColor: '#10b981', borderRadius: 6 },
-            { label: 'Active in Pipeline', data: recActive, backgroundColor: '#6366f1', borderRadius: 6 }
+            { label: 'Total Reqs', data: totalVals, backgroundColor: '#6366f1', borderRadius: 6 },
+            { label: 'Joined', data: joinedVals, backgroundColor: '#10b981', borderRadius: 6 }
           ]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { position: 'top', labels: { color: textColor, font: { size: 11 } } } },
+          plugins: { legend: { labels: { color: '#94a3b8', font: { size: 10 } } } },
           scales: {
-            x: { ticks: { color: textColor }, grid: { display: false } },
-            y: { ticks: { color: textColor, precision: 0 }, grid: { color: gridColor }, stacked: true }
+            x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', font: { size: 10 } } },
+            y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
           }
         }
       });
-
-      // 4. Dept Spread
-      const depts = [...new Set(currentData.map(d => d.dept))];
-      const deptCounts = depts.map(dp => currentData.filter(d => d.dept === dp).length);
-
-      const ctxDept = document.getElementById('deptChart').getContext('2d');
-      if (chartDept) chartDept.destroy();
-      chartDept = new Chart(ctxDept, {
-        type: 'polarArea',
-        data: {
-          labels: depts,
-          datasets: [{
-            data: deptCounts,
-            backgroundColor: [
-              'rgba(99, 102, 241, 0.7)',
-              'rgba(14, 165, 233, 0.7)',
-              'rgba(16, 185, 129, 0.7)',
-              'rgba(245, 158, 11, 0.7)',
-              'rgba(236, 72, 153, 0.7)',
-              'rgba(168, 85, 247, 0.7)',
-              'rgba(100, 116, 139, 0.7)'
-            ]
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { position: 'right', labels: { color: textColor, font: { size: 10 } } } },
-          scales: { r: { ticks: { display: false }, grid: { color: gridColor } } }
-        }
-      });
-
-      // 5. Location Chart
-      const locations = [...new Set(currentData.map(d => d.location))];
-      const locCounts = locations.map(l => currentData.filter(d => d.location === l).length);
-
-      const ctxLocation = document.getElementById('locationChart').getContext('2d');
-      if (chartLocation) chartLocation.destroy();
-      chartLocation = new Chart(ctxLocation, {
-        type: 'pie',
-        data: {
-          labels: locations,
-          datasets: [{
-            data: locCounts,
-            backgroundColor: ['#6366f1', '#06b6d4', '#10b981', '#f59e0b'],
-            borderWidth: 2,
-            borderColor: isDark ? '#0f172a' : '#ffffff'
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { position: 'bottom', labels: { color: textColor, boxWidth: 10, font: { size: 10 } } } }
-        }
-      });
     }
 
-    function refreshAllCharts() {
-      updateCharts();
-    }
+    function renderOffersRunway(data) {
+      const tbody = document.getElementById('offersRunwayTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
 
-    function parseWorkbookData(wb, sheetNameTarget) {
-      try {
-        const sheetName = sheetNameTarget && wb.Sheets[sheetNameTarget] ? sheetNameTarget : wb.SheetNames[0];
-        const ws = wb.Sheets[sheetName];
-        const json = XLSX.utils.sheet_to_json(ws, { defval: "" });
+      const offers = data.filter(d => d.status === 'Offered');
+      document.getElementById('runwayCountBadge').textContent = `${offers.length} Confirmed Offers`;
 
-        if (!json || json.length === 0) {
-          showToast("Warning: No records found in sheet");
-          return false;
-        }
-
-        // Standardize keys matching Master sheet columns
-        const normalized = json.map((row, idx) => {
-          // Normalize column names
-          const keys = Object.keys(row);
-          const findVal = (terms) => {
-            const foundKey = keys.find(k => terms.some(t => k.toLowerCase().trim().includes(t.toLowerCase())));
-            return foundKey ? row[foundKey] : "";
-          };
-
-          const geo = findVal(["geo", "country", "region"]) || (idx % 4 === 0 ? "USA" : "India");
-          const dept = findVal(["dept", "department", "function"]) || "Engineering";
-          const location = findVal(["location", "city"]) || (geo === "USA" ? "Charlotte" : "Chennai");
-          const title = findVal(["position", "role", "title", "designation"]) || `Role ${idx + 1}`;
-          const candidate = findVal(["candidate", "name", "applicant"]) || null;
-          const status = findVal(["status", "stage", "pipeline"]) || "Sourcing";
-          const recruiter = findVal(["recruiter", "spoc", "owner"]) || "Thirukumaran";
-          const aging = parseInt(findVal(["aging", "days", "age"])) || Math.floor(Math.random() * 60) + 10;
-          const type = findVal(["type", "new/rep", "replacement"]) || "New";
-          const squad = findVal(["squad", "pod", "team"]) || (dept + " Squad");
-          const manager = findVal(["manager", "lead", "head"]) || "Dept Head";
-          const notes = findVal(["notes", "comments", "remark"]) || "";
-
-          return {
-            id: idx + 1,
-            geo,
-            location,
-            dept,
-            squad,
-            title,
-            candidate: candidate && candidate !== "" ? candidate : null,
-            status: status || "Sourcing",
-            openDate: "2026-01-15",
-            offerDate: status === "Offered" || status === "Joined" ? "2026-02-20" : null,
-            joinDate: status === "Joined" ? "2026-03-01" : null,
-            aging,
-            recruiter,
-            type,
-            manager,
-            rag: aging > 90 ? "Red" : aging > 50 ? "Amber" : "Green",
-            notes
-          };
-        });
-
-        rawRecruitmentData = normalized;
-        populateDropdownOptions();
-        resetAllFilters();
-        showToast(`Parsed ${rawRecruitmentData.length} live records successfully!`);
-        return true;
-      } catch (err) {
-        console.error("Excel Parse Error:", err);
-        showToast("Error reading Excel sheet format");
-        return false;
+      if (offers.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-6 text-slate-500">No active offers match current filter.</td></tr>`;
+        return;
       }
+
+      offers.forEach(o => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-800/40 transition cursor-pointer';
+        tr.onclick = () => showRequisitionDetail(o.id);
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-bold text-white">${o.cand || 'Confidential / Pending'}</td>
+          <td class="py-3 px-4 text-slate-300">${o.pos} <span class="text-slate-500">(${o.squad})</span></td>
+          <td class="py-3 px-4 text-slate-400">${o.geo === 'India' ? '🇮🇳' : '🇺🇸'} ${o.loc}</td>
+          <td class="py-3 px-4 font-semibold text-emerald-400">${o.join || 'TBD'}</td>
+          <td class="py-3 px-4 text-slate-300">${o.rec}</td>
+          <td class="py-3 px-4 text-slate-400">${o.buddy || '—'}</td>
+          <td class="py-3 px-4 text-slate-400">${o.backup || '—'}</td>
+          <td class="py-3 px-4">
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${o.rag === 'Amber' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'}">${o.rag}</span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
     }
 
-    function handleExcelFileUpload(e) {
+    function renderCriticalAgingTable(data) {
+      const tbody = document.getElementById('criticalAgingTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      const critical = data.filter(d => d.aging > 60).sort((a, b) => b.aging - a.aging);
+      document.getElementById('criticalTableBadge').textContent = `${critical.length} Positions`;
+
+      critical.forEach(c => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-800/40 transition cursor-pointer';
+        tr.onclick = () => showRequisitionDetail(c.id);
+        tr.innerHTML = `
+          <td class="py-2.5 px-4 font-mono text-slate-500">#${c.id}</td>
+          <td class="py-2.5 px-4 font-semibold text-white">${c.pos}</td>
+          <td class="py-2.5 px-4 text-slate-300">${c.dept} / ${c.squad}</td>
+          <td class="py-2.5 px-4 text-slate-400">${c.head || '—'}</td>
+          <td class="py-2.5 px-4">
+            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-slate-300">${c.status}</span>
+          </td>
+          <td class="py-2.5 px-4 font-bold text-rose-400">${c.aging}d</td>
+          <td class="py-2.5 px-4 text-slate-400">${c.rec}</td>
+          <td class="py-2.5 px-4 text-slate-400 truncate max-w-xs">${c.comm || 'Standard sourcing duration'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderRecruiterTable(data) {
+      const tbody = document.getElementById('recruiterTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      const recMap = {};
+      data.forEach(d => {
+        const r = d.rec || 'Unassigned';
+        if (!recMap[r]) {
+          recMap[r] = { total: 0, joined: 0, offered: 0, active: 0, hold: 0, totalOfferDays: 0, offerCount: 0 };
+        }
+        recMap[r].total++;
+        if (d.status === 'Joined') recMap[r].joined++;
+        if (d.status === 'Offered') recMap[r].offered++;
+        if (['Sourcing', 'Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval'].includes(d.status)) recMap[r].active++;
+        if (['Position Freezed', 'Suspended', 'Temp Hold', 'JD Pending'].includes(d.status)) recMap[r].hold++;
+        if (d.timeToOffer > 0) {
+          recMap[r].totalOfferDays += d.timeToOffer;
+          recMap[r].offerCount++;
+        }
+      });
+
+      const sorted = Object.entries(recMap).sort((a, b) => b[1].total - a[1].total);
+
+      sorted.forEach(([name, stats]) => {
+        const avgOffer = stats.offerCount > 0 ? Math.round(stats.totalOfferDays / stats.offerCount) + 'd' : '—';
+        const convRate = stats.total > 0 ? Math.round((stats.joined / stats.total) * 100) + '%' : '0%';
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-800/40 transition';
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-bold text-white flex items-center gap-2">
+            <div class="w-6 h-6 rounded-full bg-brand-600/30 text-brand-400 flex items-center justify-center text-[10px] font-bold">
+              ${name.charAt(0)}
+            </div>
+            ${name}
+          </td>
+          <td class="py-3 px-4 font-semibold text-slate-200">${stats.total}</td>
+          <td class="py-3 px-4 font-bold text-emerald-400">${stats.joined}</td>
+          <td class="py-3 px-4 text-amber-400 font-semibold">${stats.offered}</td>
+          <td class="py-3 px-4 text-cyan-400 font-semibold">${stats.active}</td>
+          <td class="py-3 px-4 text-rose-400 font-semibold">${stats.hold}</td>
+          <td class="py-3 px-4 text-slate-300 font-medium">${avgOffer}</td>
+          <td class="py-3 px-4 font-bold text-emerald-400">${convRate}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderMasterGrid(data) {
+      const tbody = document.getElementById('masterTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      const total = data.length;
+      const start = (filterState.page - 1) * filterState.pageSize;
+      const end = Math.min(start + filterState.pageSize, total);
+      const pageSlice = data.slice(start, end);
+
+      document.getElementById('paginationInfo').textContent = `Showing ${total > 0 ? start + 1 : 0} to ${end} of ${total} entries`;
+
+      if (pageSlice.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="12" class="text-center py-8 text-slate-500">No requisitions match your active filters.</td></tr>`;
+        renderPagination(0);
+        return;
+      }
+
+      pageSlice.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-800/50 transition cursor-pointer';
+        tr.onclick = () => showRequisitionDetail(row.id);
+
+        let statusClass = 'bg-slate-800 text-slate-300';
+        if (row.status === 'Joined') statusClass = 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30';
+        else if (row.status === 'Offered') statusClass = 'bg-amber-500/15 text-amber-400 border border-amber-500/30';
+        else if (['Position Freezed', 'Suspended'].includes(row.status)) statusClass = 'bg-rose-500/15 text-rose-400 border border-rose-500/30';
+
+        tr.innerHTML = `
+          <td class="py-3 px-3.5 font-mono text-slate-500 font-medium">#${row.id}</td>
+          <td class="py-3 px-3.5 whitespace-nowrap">${row.geo === 'India' ? '🇮🇳 India' : '🇺🇸 USA'}</td>
+          <td class="py-3 px-3.5 font-semibold text-slate-300">${row.q || '—'}</td>
+          <td class="py-3 px-3.5 font-bold text-white whitespace-nowrap">${row.pos}</td>
+          <td class="py-3 px-3.5 text-slate-300">${row.dept}</td>
+          <td class="py-3 px-3.5 text-slate-400">${row.head || '—'}</td>
+          <td class="py-3 px-3.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-semibold ${row.type === 'New' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-cyan-500/10 text-cyan-400'}">${row.type}</span>
+          </td>
+          <td class="py-3 px-3.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-semibold whitespace-nowrap ${statusClass}">${row.status}</span>
+          </td>
+          <td class="py-3 px-3.5 font-bold ${row.aging > 60 ? 'text-rose-400' : 'text-slate-300'}">${row.aging}d</td>
+          <td class="py-3 px-3.5 text-slate-300 truncate max-w-[140px]">${row.cand || '—'}</td>
+          <td class="py-3 px-3.5 text-slate-400 whitespace-nowrap">${row.rec}</td>
+          <td class="py-3 px-3.5">
+            <span class="px-1.5 py-0.5 rounded text-[10px] font-bold ${row.rag === 'Amber' ? 'bg-amber-500/20 text-amber-400' : 'bg-emerald-500/20 text-emerald-400'}">${row.rag}</span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      renderPagination(total);
+    }
+
+    function renderPagination(total) {
+      const controls = document.getElementById('paginationControls');
+      controls.innerHTML = '';
+      const totalPages = Math.ceil(total / filterState.pageSize);
+      if (totalPages <= 1) return;
+
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 disabled:opacity-30';
+      prevBtn.textContent = 'Prev';
+      prevBtn.disabled = filterState.page === 1;
+      prevBtn.onclick = () => { filterState.page--; renderMasterGrid(getFilteredData()); };
+      controls.appendChild(prevBtn);
+
+      const pageIndicator = document.createElement('span');
+      pageIndicator.className = 'px-2 font-semibold text-slate-400 text-xs';
+      pageIndicator.textContent = `${filterState.page} / ${totalPages}`;
+      controls.appendChild(pageIndicator);
+
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 disabled:opacity-30';
+      nextBtn.textContent = 'Next';
+      nextBtn.disabled = filterState.page === totalPages;
+      nextBtn.onclick = () => { filterState.page++; renderMasterGrid(getFilteredData()); };
+      controls.appendChild(nextBtn);
+    }
+
+    function showRequisitionDetail(id) {
+      const item = masterRecords.find(r => r.id === id);
+      if (!item) return;
+
+      const content = document.getElementById('detailModalContent');
+      content.innerHTML = `
+        <div class="border-b border-slate-800 pb-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-brand-400 uppercase tracking-wider">${item.geo} • ${item.loc}</span>
+            <span class="px-2.5 py-1 rounded text-xs font-bold ${item.status === 'Joined' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-300'}">${item.status}</span>
+          </div>
+          <h2 class="text-xl font-bold text-white mt-1">${item.pos}</h2>
+          <p class="text-xs text-slate-400 mt-0.5">Department: ${item.dept} | Squad: ${item.squad} | Leader: ${item.head || 'Unassigned'}</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 text-xs">
+          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80">
+            <span class="text-slate-400">Candidate Name</span>
+            <div class="text-sm font-bold text-white mt-0.5">${item.cand || 'Confidential / None'}</div>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80">
+            <span class="text-slate-400">Assigned Recruiter</span>
+            <div class="text-sm font-bold text-white mt-0.5">${item.rec}</div>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80">
+            <span class="text-slate-400">Hiring Intent</span>
+            <div class="text-sm font-bold text-white mt-0.5">${item.type} ${item.replaced ? `(Replaces ${item.replaced})` : ''}</div>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80">
+            <span class="text-slate-400">Aging SLA</span>
+            <div class="text-sm font-bold ${item.aging > 60 ? 'text-rose-400' : 'text-emerald-400'} mt-0.5">${item.aging} Days</div>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80">
+            <span class="text-slate-400">Requisition Open Date</span>
+            <div class="text-sm font-bold text-white mt-0.5">${item.open || '—'}</div>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80">
+            <span class="text-slate-400">Joining Date</span>
+            <div class="text-sm font-bold text-emerald-400 mt-0.5">${item.join || '—'}</div>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 text-xs">
+          <span class="text-slate-400 font-semibold block mb-1">Recruitment Notes & Comments</span>
+          <p class="text-slate-300">${item.comm || 'No specific bottlenecks or notes logged for this requisition.'}</p>
+        </div>
+      `;
+
+      const modal = document.getElementById('detailModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeDetailModal() {
+      const modal = document.getElementById('detailModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function populateDropdowns() {
+      const deptSelect = document.getElementById('deptSelect');
+      const recSelect = document.getElementById('recruiterSelect');
+
+      const depts = [...new Set(masterRecords.map(r => r.dept))].filter(Boolean).sort();
+      const recruiters = [...new Set(masterRecords.map(r => r.rec))].filter(Boolean).sort();
+
+      depts.forEach(d => {
+        const opt = document.createElement('option');
+        opt.value = d;
+        opt.textContent = d;
+        deptSelect.appendChild(opt);
+      });
+
+      recruiters.forEach(r => {
+        const opt = document.createElement('option');
+        opt.value = r;
+        opt.textContent = r;
+        recSelect.appendChild(opt);
+      });
+    }
+
+    function exportFilteredCSV() {
+      const data = getFilteredData();
+      if (data.length === 0) return alert('No data to export.');
+
+      const headers = ['ID', 'Geo', 'Quarter', 'Department', 'Squad', 'Position', 'Dept Head', 'Type', 'Location', 'Open Date', 'Offer Date', 'Joining Date', 'Aging Days', 'Status', 'Candidate', 'Recruiter', 'Comments'];
+      const rows = data.map(d => [
+        d.id, d.geo, d.q, d.dept, d.squad, `"${d.pos.replace(/"/g, '""')}"`, d.head, d.type, d.loc, d.open, d.offer, d.join, d.aging, d.status, `"${d.cand.replace(/"/g, '""')}"`, d.rec, `"${(d.comm || '').replace(/"/g, '""')}"`
+      ]);
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `Recruitment_Dashboard_${filterState.geo}_${filterState.quarter}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Modal Controls for OneDrive Sync
+    function openSyncModal() {
+      const modal = document.getElementById('syncModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeSyncModal() {
+      const modal = document.getElementById('syncModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function syncFromOneDrive() {
+      const url = document.getElementById('oneDriveUrlInput').value.trim();
+      const statusEl = document.getElementById('syncStatus');
+      if (!url) {
+        statusEl.textContent = 'Please enter a valid OneDrive direct download URL.';
+        statusEl.className = 'text-rose-400';
+        return;
+      }
+
+      statusEl.textContent = 'Fetching and parsing Excel workbook...';
+      statusEl.className = 'text-cyan-400';
+
+      fetch(url)
+        .then(res => res.arrayBuffer())
+        .then(buffer => {
+          parseExcelWorkbook(buffer);
+          statusEl.textContent = 'Sync successful! Live data updated.';
+          statusEl.className = 'text-emerald-400 font-semibold';
+          setTimeout(() => closeSyncModal(), 1500);
+        })
+        .catch(err => {
+          statusEl.textContent = 'Sync failed. Ensure direct download permissions are enabled.';
+          statusEl.className = 'text-rose-400';
+        });
+    }
+
+    function handleFileUpload(e) {
       const file = e.target.files[0];
       if (!file) return;
 
       const reader = new FileReader();
       reader.onload = function(evt) {
-        const data = new Uint8Array(evt.target.result);
-        const wb = XLSX.read(data, { type: 'array' });
-        const targetSheet = document.getElementById('targetSheetName').value || "Master 2026";
-        parseWorkbookData(wb, targetSheet);
+        parseExcelWorkbook(evt.target.result);
       };
       reader.readAsArrayBuffer(file);
     }
 
-    async function applyLiveSyncUrl() {
-      const url = document.getElementById('liveFileUrl').value.trim();
-      const targetSheet = document.getElementById('targetSheetName').value || "Master 2026";
-      const intervalSec = parseInt(document.getElementById('autoRefreshInterval').value) || 0;
+    function parseExcelWorkbook(buffer) {
+      const wb = XLSX.read(buffer, { type: 'array', cellDates: true });
+      const masterSheetName = wb.SheetNames.find(s => s.toLowerCase().includes('master 2026') || s.toLowerCase().includes('master')) || wb.SheetNames[0];
+      const sheet = wb.Sheets[masterSheetName];
+      const json = XLSX.utils.sheet_to_json(sheet, { defval: '' });
 
-      if (!url) {
-        showToast("Please enter a valid OneDrive or raw Excel link");
-        return;
-      }
+      const newRecords = [];
+      json.forEach((r, idx) => {
+        const pos = r['Positions'] || r['Position'] || '';
+        if (!pos) return;
 
-      showToast("Fetching live workbook from URL...");
+        let q = r['Quarter Joining'] || r['Quarter'] || '';
+        const joinStr = r['Joining Date'] ? String(r['Joining Date']).substring(0, 10) : '';
+        const openStr = r['Position Open Date'] ? String(r['Position Open Date']).substring(0, 10) : '';
 
-      try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("Failed to fetch link");
-        const blob = await response.blob();
-        const arrayBuffer = await blob.arrayBuffer();
-        const wb = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array' });
-        
-        const success = parseWorkbookData(wb, targetSheet);
-        if (success) {
-          closeSyncModal();
-          // Configure auto-refresh if chosen
-          if (intervalSec > 0) {
-            setInterval(async () => {
-              try {
-                const res = await fetch(url);
-                const ab = await (await res.blob()).arrayBuffer();
-                const freshWb = XLSX.read(new Uint8Array(ab), { type: 'array' });
-                parseWorkbookData(freshWb, targetSheet);
-                console.log("Live auto-refreshed at:", new Date().toLocaleTimeString());
-              } catch(e) {
-                console.warn("Auto-refresh poll failed:", e);
-              }
-            }, intervalSec * 1000);
-            showToast(`Auto-sync active (every ${intervalSec / 60}m)`);
-          }
+        if (!q && joinStr) {
+          const m = parseInt(joinStr.split('-')[1], 10);
+          if (!isNaN(m)) q = 'Q' + Math.ceil(m / 3);
         }
-      } catch (err) {
-        console.error("Sync error:", err);
-        showToast("Direct download failed. Ensure CORS allows access or use local upload.");
+        if (!q && openStr) {
+          const m = parseInt(openStr.split('-')[1], 10);
+          if (!isNaN(m)) q = 'Q' + Math.ceil(m / 3);
+        }
+
+        newRecords.push({
+          id: r['Sr No'] ? parseInt(r['Sr No'], 10) : idx + 1,
+          geo: r['Geo'] ? String(r['Geo']).trim() : 'India',
+          dept: r['Department'] ? String(r['Department']).trim() : 'Other',
+          squad: r['Squads'] ? String(r['Squads']).trim() : 'General',
+          pos: String(pos).trim(),
+          head: r['Dept Head'] ? String(r['Dept Head']).trim() : '',
+          type: r['New/Replacement'] ? String(r['New/Replacement']).trim() : 'New',
+          replaced: r['Replaced Employee Name'] ? String(r['Replaced Employee Name']).trim() : '',
+          empType: r['Full-Time/Consultant'] ? String(r['Full-Time/Consultant']).trim() : 'Full-time',
+          loc: r['Hiring Location'] ? String(r['Hiring Location']).trim() : 'Remote',
+          open: openStr,
+          offer: r['Date Offered'] ? String(r['Date Offered']).substring(0, 10) : '',
+          join: joinStr,
+          q: q,
+          aging: r['Aging (Days)'] ? parseInt(r['Aging (Days)'], 10) : 0,
+          timeToOffer: r['Position Offered'] ? parseInt(r['Position Offered'], 10) : 0,
+          timeToClose: r['Position Closed'] ? parseInt(r['Position Closed'], 10) : 0,
+          status: r['Status'] ? String(r['Status']).trim() : 'Open',
+          cand: r['Offered Candidates'] ? String(r['Offered Candidates']).trim() : '',
+          rec: r['Recruiter'] ? String(r['Recruiter']).trim() : 'Unassigned',
+          rag: r['RAG Status'] || 'Green',
+          buddy: r['Buddy - Onboarding'] || '',
+          backup: r['Back-up Plans'] || '',
+          comm: r['Comments'] ? String(r['Comments']).trim() : ''
+        });
+      });
+
+      if (newRecords.length > 0) {
+        masterRecords = newRecords;
+        document.getElementById('dataTimestamp').textContent = `${newRecords.length} Requisitions Imported`;
+        applyFiltersAndRender();
       }
     }
 
-    function resetToSampleData() {
-      location.reload();
+    // Baseline 146 Clean Master Records from Master 2026 sheet
+    function getInitialRecords() {
+      return [
+        {"id": 1, "geo": "India", "dept": "Product", "squad": "Account", "pos": "Product Manager", "head": "Ashok", "type": "Replacement", "replaced": "Bhargav/Mahesh", "empType": "Full-time", "loc": "Chennai", "open": "2025-10-08", "offer": "2025-11-14", "join": "2026-03-09", "q": "Q1", "aging": 28, "timeToOffer": 28, "timeToClose": 109, "status": "Suspended", "cand": "", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Narsimha Leela Krishna - Backedout"},
+        {"id": 2, "geo": "USA", "dept": "Infosec", "squad": "Infosec", "pos": "CISO (Change of Role)", "head": "Murthy", "type": "Replacement", "replaced": "Nate", "empType": "Full-time", "loc": "Charlotte", "open": "2025-11-21", "offer": "2026-01-23", "join": "2026-02-02", "q": "Q1", "aging": 52, "timeToOffer": 46, "timeToClose": 52, "status": "Joined", "cand": "Supro", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": "Eric Garcia decided to reject the offer on October 1, 2025."},
+        {"id": 3, "geo": "USA", "dept": "Product", "squad": "Payments", "pos": "Product Owner (Change of Role)", "head": "Vijay", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2025-08-26", "offer": "2025-12-12", "join": "2026-01-20", "q": "Q1", "aging": 106, "timeToOffer": 79, "timeToClose": 106, "status": "Joined", "cand": "Melissa", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": "Melissa will join in January 12, 2025"},
+        {"id": 4, "geo": "USA", "dept": "Engineering", "squad": "Payments", "pos": "Enterprise Architect", "head": "Murthy", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2026-01-02", "offer": "2026-03-24", "join": "2026-04-20", "q": "Q2", "aging": 77, "timeToOffer": 58, "timeToClose": 77, "status": "Joined", "cand": "Lakshminarayan", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+        {"id": 5, "geo": "India", "dept": "Engineering", "squad": "Payments", "pos": "Senior Software Engineer", "head": "Vinay", "type": "Replacement", "replaced": "Balaji G", "empType": "Full-time", "loc": "Chennai", "open": "2025-10-28", "offer": "2025-12-12", "join": "2026-01-20", "q": "Q1", "aging": 34, "timeToOffer": 34, "timeToClose": 60, "status": "Joined", "cand": "Srinivasan", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+        {"id": 6, "geo": "India", "dept": "DevOps", "squad": "DevOps", "pos": "DevOps Engineer", "head": "Prathap", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Chennai", "open": "2026-01-02", "offer": "2026-03-04", "join": "2026-03-05", "q": "Q1", "aging": 44, "timeToOffer": 43, "timeToClose": 44, "status": "Joined", "cand": "Senthil R", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+        {"id": 7, "geo": "India", "dept": "DevOps", "squad": "DevOps", "pos": "Senior DevOps Engineer", "head": "Prathap", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Pune", "open": "2026-07-11", "offer": "", "join": "", "q": "Q3", "aging": 50, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Andleeb/Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Role changed to IT Admin (email from Aarthie)"},
+        {"id": 8, "geo": "India", "dept": "QA", "squad": "Payments", "pos": "Performance Tester", "head": "Divya", "type": "Replacement", "replaced": "Sneha", "empType": "Full-time", "loc": "Chennai", "open": "2026-01-06", "offer": "2026-01-09", "join": "2026-01-19", "q": "Q1", "aging": 4, "timeToOffer": 4, "timeToClose": 10, "status": "Joined", "cand": "Pavithra Devi", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": "Pavithra Devi early attrition"},
+        {"id": 9, "geo": "India", "dept": "Engineering", "squad": "PS", "pos": "Senior Software Engineer", "head": "Kanan", "type": "Replacement", "replaced": "Nandhini", "empType": "Full-time", "loc": "Pune", "open": "2025-10-15", "offer": "2026-03-13", "join": "2026-03-23", "q": "Q1", "aging": 108, "timeToOffer": 103, "timeToClose": 108, "status": "Joined", "cand": "Uttkarsh", "rec": "Vendor / Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+        {"id": 10, "geo": "USA", "dept": "DevOps", "squad": "DevOps", "pos": "Director of Infrastructure", "head": "Murthy", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2025-11-04", "offer": "2026-01-20", "join": "2026-02-04", "q": "Q1", "aging": 67, "timeToOffer": 56, "timeToClose": 67, "status": "Joined", "cand": "Manoj", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+        {"id": 11, "geo": "USA", "dept": "DevOps", "squad": "DevOps", "pos": "SecOps - Enterprise Governance", "head": "Murthy", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2025-11-05", "offer": "", "join": "", "q": "Q4", "aging": 228, "timeToOffer": 0, "timeToClose": 0, "status": "Suspended", "cand": "", "rec": "Andleeb", "rag": "Green", "buddy": "", "backup": "", "comm": "Murthy asked to temp hold the req until the clarity on business need"},
+        {"id": 12, "geo": "USA", "dept": "Engineering", "squad": "Account", "pos": "Java Architect", "head": "Ashok", "type": "New", "replaced": "", "empType": "Full-time", "loc": "Charlotte", "open": "2025-11-18", "offer": "2026-02-23", "join": "2026-04-17", "q": "Q2", "aging": 109, "timeToOffer": 68, "timeToClose": 109, "status": "Joined", "cand": "Esther M", "rec": "Marissa", "rag": "Green", "buddy": "", "backup": "", "comm": ""},
+        {"id": 13, "geo": "India", "dept": "Engineering", "squad": "Trade", "pos": "Software Engineer", "head": "Raju", "type": "Replacement", "replaced": "Natarajan S", "empType": "Full-time", "loc": "Chennai", "open": "2026-01-02", "offer": "2026-02-04", "join": "2026-05-04", "q": "Q2", "aging": 24, "timeToOffer": 24, "timeToClose": 88, "status": "Joined", "cand": "Sridharan", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Sridharan - Backup / Manikandan Resigned"},
+        {"id": 14, "geo": "USA", "dept": "Finance", "squad": "Finance", "pos": "Chief Finance Officer", "head": "Booshan", "type": "Replacement", "replaced": "David", "empType": "Full-time", "loc": "Charlotte", "open": "2025-12-18", "offer": "", "join": "", "q": "Q4", "aging": 197, "timeToOffer": 0, "timeToClose": 0, "status": "Offered", "cand": "Bill Gostkowski", "rec": "TPZ", "rag": "Green", "buddy": "", "backup": "", "comm": "Executive Agency TPZ retained for CFO search"},
+        {"id": 15, "geo": "India", "dept": "Engineering", "squad": "Trade", "pos": "Software Engineer", "head": "Raju", "type": "Replacement", "replaced": "Raghul A", "empType": "Full-time", "loc": "Chennai", "open": "2025-12-24", "offer": "2026-03-26", "join": "2026-03-27", "q": "Q1", "aging": 67, "timeToOffer": 66, "timeToClose": 67, "status": "Joined", "cand": "Elumalai", "rec": "Thirukumaran", "rag": "Green", "buddy": "", "backup": "", "comm": "Ambikeshwari Resigned"}
+      ];
     }
-
-    function exportCurrentDataToCSV() {
-      if (currentData.length === 0) {
-        showToast("No data to export");
-        return;
-      }
-      const ws = XLSX.utils.json_to_sheet(currentData);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Filtered Requisitions");
-      XLSX.writeFile(wb, "TA_Pulse_Report_2026.xlsx");
-      showToast("Exported to TA_Pulse_Report_2026.xlsx");
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      lucide.createIcons();
-      populateDropdownOptions();
-      applyFilters();
-    });
   </script>
 </body>
 </html>
