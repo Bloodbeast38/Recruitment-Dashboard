@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Executive Talent Acquisition Dashboard | FY 2026</title>
+  <title>Executive Talent Acquisition & Recruitment Dashboard | FY 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -157,14 +157,14 @@
 
         <!-- Dept Select -->
         <div class="relative">
-          <select id="deptSelect" onchange="setDeptFilter(this.value)" class="bg-white dark:bg-slate-900 text-xs font-medium border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-brand-500 pr-8 cursor-pointer">
+          <select id="deptSelect" onchange="setDeptFilter(this.value)" class="bg-white dark:bg-slate-900 text-xs font-medium border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-brand-500 cursor-pointer">
             <option value="ALL">All Departments</option>
           </select>
         </div>
 
         <!-- Recruiter Select -->
         <div class="relative">
-          <select id="recruiterSelect" onchange="setRecruiterFilter(this.value)" class="bg-white dark:bg-slate-900 text-xs font-medium border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-brand-500 pr-8 cursor-pointer">
+          <select id="recruiterSelect" onchange="setRecruiterFilter(this.value)" class="bg-white dark:bg-slate-900 text-xs font-medium border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-brand-500 cursor-pointer">
             <option value="ALL">All Recruiters</option>
           </select>
         </div>
@@ -174,7 +174,7 @@
         <span id="filteredRecordCount" class="text-xs font-medium text-slate-500 dark:text-slate-400">
           Showing <span class="text-slate-900 dark:text-white font-bold" id="countDisplay">146</span> positions
         </span>
-        <button onclick="resetAllFilters()" class="text-xs text-rose-500 hover:underline flex items-center gap-1 font-semibold">
+        <button onclick="resetAllFilters()" class="text-xs text-rose-500 hover:text-rose-600 dark:text-rose-400 dark:hover:text-rose-300 flex items-center gap-1 font-semibold hover:underline">
           <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
           <span>Reset</span>
         </button>
@@ -628,62 +628,8 @@
           </span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
-          <div class="bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-xl p-4.5 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-700 dark:text-indigo-300">India • Infosec Practice</span>
-              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Manager: Supro</span>
-            </div>
-            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200">Infosec Analyst Offer Declines & Notice Periods</h4>
-            <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-700 dark:text-rose-300">
-              <strong>Bottleneck:</strong> 3 candidates (Swapnil, Nitesh, Gauresh) declined offers.
-            </div>
-            <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-700 dark:text-emerald-300">
-              <strong>HR Solution:</strong> Opened search to specialized consulting firms.
-            </div>
-          </div>
-
-          <div class="bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-xl p-4.5 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-700 dark:text-indigo-300">India • Payments Practice</span>
-              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Manager: Ramesh</span>
-            </div>
-            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200">Project Manager Drop-offs & Work-From-Office Preference</h4>
-            <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-700 dark:text-rose-300">
-              <strong>Bottleneck:</strong> 2 candidates (Bhavik, Harsh) declined offers due to high notice periods.
-            </div>
-            <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-700 dark:text-emerald-300">
-              <strong>HR Solution:</strong> Fast-tracked former employee (Naveen) for immediate re-hire interview.
-            </div>
-          </div>
-
-          <div class="bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-xl p-4.5 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-700 dark:text-cyan-300">USA • Executive Leadership</span>
-              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Manager: Booshan</span>
-            </div>
-            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200">Chief Financial Officer (CFO) Strategic Talent Search</h4>
-            <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-700 dark:text-rose-300">
-              <strong>Bottleneck:</strong> Limited candidates matching both strategic and fintech technical requirements.
-            </div>
-            <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-700 dark:text-emerald-300">
-              <strong>HR Solution:</strong> Retained an executive boutique search firm (TPZ) to access passive tier-1 CFO talent.
-            </div>
-          </div>
-
-          <div class="bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-xl p-4.5 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-700 dark:text-cyan-300">USA • DevOps Practice</span>
-              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Manager: Manoj S.</span>
-            </div>
-            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200">DevOps Technical Competency & Interview Integrity Concerns</h4>
-            <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-700 dark:text-rose-300">
-              <strong>Bottleneck:</strong> Applicants exhibited interview integrity discrepancies or failed technical assessments.
-            </div>
-            <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-700 dark:text-emerald-300">
-              <strong>HR Solution:</strong> Broadened high-visibility campaigns on LinkedIn; third-party verified assessments.
-            </div>
-          </div>
+        <div id="challengesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+          <!-- Populated dynamically to filter by Geo -->
         </div>
 
         <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
@@ -747,33 +693,41 @@
   </main>
 
   <!-- POPUP MODAL 1: CANDIDATES DRILL-DOWN -->
-  <div id="drillDownModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-5xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+  <div id="drillDownModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6 transition-all duration-200">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-5xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      
+      <!-- Modal Header -->
       <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/80 dark:bg-slate-950/60">
         <div>
           <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2" id="drillDownModalTitle">
             <i data-lucide="users" class="w-5 h-5 text-brand-600 dark:text-brand-400"></i>
             Candidates Drill-Down
           </h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5" id="drillDownModalSubtitle">Matching candidates</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5" id="drillDownModalSubtitle">
+            Showing matching candidates and requisitions
+          </p>
         </div>
         <div class="flex items-center gap-2">
-          <button onclick="exportDrillDownCSV()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 text-xs font-semibold border border-slate-300 dark:border-slate-700 transition">
+          <button onclick="exportDrillDownCSV()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-300 dark:border-slate-700 transition">
             <i data-lucide="download" class="w-3.5 h-3.5 text-amber-500"></i>
             <span>Export List</span>
           </button>
-          <button onclick="closeDrillDownModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          <button onclick="closeDrillDownModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition">
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
       </div>
+
+      <!-- Quick Search inside Modal -->
       <div class="px-6 py-2.5 bg-slate-100/60 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 text-xs">
         <div class="relative flex-1 max-w-sm">
           <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
-          <input type="text" id="modalSearchInput" placeholder="Filter candidates by name, role..." oninput="filterModalTable(this.value)" class="w-full pl-9 pr-3 py-1.5 text-xs bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:border-brand-500" />
+          <input type="text" id="modalSearchInput" placeholder="Filter candidates by name, role, manager..." oninput="filterModalTable(this.value)" class="w-full pl-9 pr-3 py-1.5 text-xs bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:border-brand-500" />
         </div>
         <span id="modalRowCount" class="font-semibold text-brand-600 dark:text-brand-400">0 Candidates Found</span>
       </div>
+
+      <!-- Modal Table Body -->
       <div class="overflow-y-auto overflow-x-auto flex-1 custom-scrollbar p-0">
         <table class="w-full text-left text-xs border-collapse">
           <thead class="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
@@ -789,46 +743,69 @@
               <th class="py-3 px-4">Status</th>
             </tr>
           </thead>
-          <tbody id="drillDownTableBody" class="divide-y divide-slate-200 dark:divide-slate-800/60 bg-white dark:bg-slate-900/40"></tbody>
+          <tbody id="drillDownTableBody" class="divide-y divide-slate-200 dark:divide-slate-800/60 bg-white dark:bg-slate-900/40">
+            <!-- Populated dynamically -->
+          </tbody>
         </table>
       </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+        <span>Tip: Click any row in this popup to see full candidate comments & history.</span>
+        <button onclick="closeDrillDownModal()" class="px-4 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold hover:bg-slate-300 dark:hover:bg-slate-700 transition">
+          Close
+        </button>
+      </div>
+
     </div>
   </div>
 
-  <!-- Detail Modal -->
+  <!-- POPUP MODAL 2: REQUISITION DETAIL MODAL -->
   <div id="detailModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative">
-      <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
+      <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 dark:hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
       <div id="detailModalContent" class="space-y-4"></div>
     </div>
   </div>
 
-  <!-- OneDrive Sync Modal -->
+  <!-- POPUP MODAL 3: LIVE ONEDRIVE SYNC MODAL -->
   <div id="syncModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-xl w-full p-6 shadow-2xl relative">
-      <button onclick="closeSyncModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-xl w-full p-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
+      <button onclick="closeSyncModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 dark:hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
       <div class="flex items-center gap-3 mb-4">
         <div class="w-10 h-10 rounded-xl bg-cyan-50 dark:bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center">
           <i data-lucide="cloud" class="w-5 h-5"></i>
         </div>
         <div>
           <h3 class="text-base font-bold text-slate-900 dark:text-white">Connect Live Excel / OneDrive</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Sync automatically</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Sync with your shared master file automatically</p>
         </div>
       </div>
       <div class="space-y-4 text-xs">
-        <p class="text-slate-600 dark:text-slate-300">Paste your direct OneDrive link below:</p>
-        <input type="text" id="oneDriveUrlInput" placeholder="https://onedrive.live.com/download?..." class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200" />
+        <p class="text-slate-600 dark:text-slate-300">
+          Paste your direct OneDrive or SharePoint share link below. The dashboard will fetch the latest sheet data without needing any manual file re-uploading.
+        </p>
+        <div>
+          <label class="block text-slate-500 dark:text-slate-400 font-semibold mb-1">Direct Excel / OneDrive Download URL</label>
+          <input type="text" id="oneDriveUrlInput" placeholder="https://onedrive.live.com/download?..." class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200 focus:outline-none focus:border-brand-500" />
+        </div>
         <div class="flex items-center justify-between pt-2">
-          <button onclick="syncFromOneDrive()" class="px-4 py-2 rounded-lg bg-brand-600 text-white font-semibold">Fetch & Sync</button>
+          <button onclick="syncFromOneDrive()" class="px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-semibold transition flex items-center gap-2">
+            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+            <span>Fetch & Sync Data</span>
+          </button>
           <span id="syncStatus" class="text-slate-500 dark:text-slate-400"></span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Script Engine -->
   <script>
+    // COMPACT 146 MASTER RECORDS (Packed loss-less to ensure 100% complete loading)
     const COMPACT_KEYS = ['id','geo','dept','squad','pos','head','type','replaced','empType','loc','open','offer','join','q','aging','timeToOffer','timeToClose','status','cand','rec','sourceChannel','sourceDetail','rag','buddy','backup','comm'];
     const COMPACT_DATA = [
       [1, "India", "Product", "Account", "Product Manager", "Ashok", "Replacement", "Bhargav/Mahesh", "Full-time", "Chennai", "2025-10-08", "2025-11-14", "2026-03-09", "Q1", 28, 28, 109, "Suspended", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Narsimha Leela Krishna - Backedout"],
@@ -956,7 +933,7 @@
       [123, "USA", "PS", "Account", "Project Manager", "Ashok", "New", "", "Full-time", "Charlotte", "2026-07-31", "2026-09-16", "2026-10-05", "Q3", 36, 34, 47, "Offer Approval", "Rabhina", "Sindhu", "External / Sourced", "Linkedln Soucing", "Green", "Balaji Balamurugan", "", "Offered Rabhina, Aswin on hold"],
       [124, "India", "QA", "Payments", "Senior QA Analyst", "Karuna", "Replacement", "Pankaj", "Full-time", "Pune", "2026-08-17", "", "", "Q3", 25, 0, 0, "Position Freezed", "Prathamesh Salunkhe", "Unassigned", "Not Specified", "", "Green", "", "", "Prathamesh (Immediate) offer on hold until resource capacity plan is finalized and shared\u200b"],
       [125, "India", "Technology", "Technology", "IT Admin", "Supro", "New", "", "Full-time", "Pune", "2026-08-14", "2026-09-07", "2026-09-08", "Q3", 17, 17, 18, "Joined", "Mayur", "Unassigned", "Not Specified", "", "Green", "", "", "Mayur - DOJ 8th September"],
-      [126, "India", "Delivery", "PS", "Delivery Manager", "Kanan", "Replacement", "Satyavir", "Full-time", "Pune", "2026-08-05", "2026-08-13", "2026-08-17", "Q3", 7, 7, 9, "Joined", "Kishore T", "Andleeb", "Employee Referral", "Emp Ref", "Green", "", "Sourcing", "Kishore offered - DOJ 17th August"],
+      [126, "India", "Delivery", "PS", "Delivery Manager", "Kanan", "Replacement", "Satyavir/Kishore T", "Full-time", "Pune", "2026-08-05", "2026-08-13", "2026-08-17", "Q3", 7, 7, 9, "Joined", "Kishore T", "Andleeb", "Employee Referral", "Emp Ref", "Green", "", "Sourcing", "Kishore offered - DOJ 17th August"],
       [127, "India", "Engineering", "Payments", "Senior Software Engineer", "Vijay", "Replacement", "Prachi", "Full-time", "Pune", "2026-08-11", "", "", "Q3", 29, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Interview are slowed down until resource capacity plan is finalized and shared \u200b"],
       [128, "USA", "PS", "PS", "Business Analyst Payment", "Kanan", "Replacement", "Bhavana", "Full-time", "Charlotte", "2026-08-13", "", "", "Q3", 3, 0, 0, "Position Freezed", "", "Sindhu", "External / Sourced", "Linkedln Soucing", "Green", "", "", "Sujith has been selected, offer approval is pending and will depend on Dharmesh's resource planning."],
       [129, "India", "Support", "Support", "Production Support Engineer ( Payments)", "Anish", "Replacement", "Kapil", "Full-time", "Remote", "2026-08-14", "", "", "Q3", 26, 0, 0, "HR Interview", "", "Unassigned", "Not Specified", "", "Green", "", "", "Mahendra HR Discussion"],
@@ -986,6 +963,13 @@
     };
     let charts = {};
     let currentDrillDownData = [];
+
+    const CHALLENGES_DATA = [
+      { geo: "India", dept: "Infosec", head: "Supro", title: "Infosec Analyst Offer Declines & Notice Periods", bottleneck: "3 candidates (Swapnil, Nitesh, Gauresh) declined offers. Limited pool of candidates with short notice.", solution: "Opened search to specialized consulting firms. Schedule the interview with shorter notice period.", tagGeo: "bg-indigo-500/20 text-indigo-700 dark:text-indigo-300" },
+      { geo: "India", dept: "Payments", head: "Ramesh", title: "Project Manager Drop-offs & WFO Preference", bottleneck: "2 candidates (Bhavik/Harsh) declined our offer. High Notice period candidates. Candidates preferred only working in office.", solution: "Shared the role with the consulting firms. Ex-employee (Naveen) scheduled with Ramesh this week Friday.", tagGeo: "bg-indigo-500/20 text-indigo-700 dark:text-indigo-300" },
+      { geo: "USA", dept: "Finance", head: "Booshan", title: "Chief Financial Officer (CFO) Strategic Search", bottleneck: "The CFO search yielded limited qualified candidates, with the talent pool failing to meet the strategic and technical requirements of the role.", solution: "Partner with a specialized executive search firm to broaden the CFO candidate pipeline and access passive, high-caliber talent.", tagGeo: "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300" },
+      { geo: "USA", dept: "DevOps", head: "Manoj S.", title: "DevOps Technical Competency & Integrity Concerns", bottleneck: "Current applicants are either demonstrating indications of interview integrity concerns or are failing to meet required technical competencies for the role.", solution: "We plan to expand visibility on LinkedIn as an immediate next step and will evaluate engaging a third-party recruiting firm.", tagGeo: "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300" }
+    ];
 
     function initTheme() {
       const saved = localStorage.getItem('dashboard_theme') || 'dark';
@@ -1090,6 +1074,7 @@
       document.getElementById('quickSearchInput').value = '';
       document.getElementById('deptSelect').value = 'ALL';
       document.getElementById('recruiterSelect').value = 'ALL';
+      document.getElementById('hireTypeSelect').value = 'ALL';
       setGeoFilter('ALL'); setQuarterFilter('ALL'); setChannelFilter('ALL');
     }
 
@@ -1135,6 +1120,8 @@
       renderCriticalAgingTable(data);
       renderRecruiterTable(data);
       renderMasterGrid(data);
+      renderChallenges();
+      
       const countEl = document.getElementById('countDisplay');
       if (countEl) countEl.textContent = data.length;
       lucide.createIcons();
@@ -1150,10 +1137,12 @@
       if (filterState.status !== 'ALL') chips.push({ label: `Status: ${filterState.status}`, clear: () => { filterState.status = 'ALL'; applyFiltersAndRender(); } });
       if (filterState.dept !== 'ALL') chips.push({ label: `Dept: ${filterState.dept}`, clear: () => { document.getElementById('deptSelect').value = 'ALL'; setDeptFilter('ALL'); } });
       if (filterState.recruiter !== 'ALL') chips.push({ label: `Recruiter: ${filterState.recruiter}`, clear: () => { document.getElementById('recruiterSelect').value = 'ALL'; setRecruiterFilter('ALL'); } });
+      if (filterState.hireType !== 'ALL') chips.push({ label: `Type: ${filterState.hireType}`, clear: () => { document.getElementById('hireTypeSelect').value = 'ALL'; setHireTypeFilter('ALL'); } });
+      if (filterState.search) chips.push({ label: `Search: "${filterState.search}"`, clear: () => { document.getElementById('quickSearchInput').value = ''; handleSearch(''); } });
 
       chips.forEach(chip => {
         const el = document.createElement('span');
-        el.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-500/20';
+        el.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-500/20 shadow-sm';
         el.innerHTML = `${chip.label} <button class="hover:opacity-75"><i data-lucide="x" class="w-3 h-3"></i></button>`;
         el.querySelector('button').onclick = chip.clear;
         container.appendChild(el);
@@ -1178,11 +1167,36 @@
       document.getElementById('channelInternalCount').textContent = data.filter(d => d.sourceChannel === 'Internal').length;
       document.getElementById('channelReferralCount').textContent = data.filter(d => d.sourceChannel === 'Employee Referral').length;
       document.getElementById('channelExternalCount').textContent = data.filter(d => d.sourceChannel === 'External / Sourced').length;
+      
+      const newCount = data.filter(d => d.type === 'New').length;
+      const replCount = data.filter(d => d.type === 'Replacement').length;
+      document.getElementById('intentNewCount').textContent = newCount;
+      document.getElementById('intentReplCount').textContent = replCount;
+      const newPct = data.length > 0 ? Math.round((newCount / data.length) * 100) : 0;
+      const replPct = data.length > 0 ? Math.round((replCount / data.length) * 100) : 0;
+      document.getElementById('intentNewPct').textContent = `${newPct}% Growth`;
+      document.getElementById('intentReplPct').textContent = `${replPct}% Backfill`;
+
+      const aging0to30 = data.filter(d => d.aging <= 30).length;
+      const aging31to60 = data.filter(d => d.aging > 30 && d.aging <= 60).length;
+      const aging61to90 = data.filter(d => d.aging > 60 && d.aging <= 90).length;
+      const aging90Plus = data.filter(d => d.aging > 90).length;
+
+      const e0 = document.getElementById('aging0to30'); if(e0) e0.textContent = aging0to30;
+      const e30 = document.getElementById('aging31to60'); if(e30) e30.textContent = aging31to60;
+      const e60 = document.getElementById('aging61to90'); if(e60) e60.textContent = aging61to90;
+      const e90 = document.getElementById('aging90Plus'); if(e90) e90.textContent = aging90Plus;
+      const cAge = document.getElementById('criticalAgingCount'); 
+      if(cAge) cAge.innerHTML = `${aging61to90 + aging90Plus} <span class="text-xs text-slate-500 dark:text-slate-400 font-normal">roles</span>`;
     }
 
+    function getGridColor() { return document.documentElement.classList.contains('dark') ? '#1e293b' : '#e2e8f0'; }
+    function getTickColor() { return document.documentElement.classList.contains('dark') ? '#94a3b8' : '#64748b'; }
+
     function renderAllCharts(data) {
-      const ctx = document.getElementById('monthlyJoinersChart');
-      if (ctx) {
+      // 1. Monthly Joiners
+      const ctxM = document.getElementById('monthlyJoinersChart');
+      if (ctxM) {
         if (charts.monthly) charts.monthly.destroy();
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
         const indM = Array(9).fill(0), usaM = Array(9).fill(0);
@@ -1192,7 +1206,7 @@
             if (m >= 0 && m < 9) { if (d.geo === 'India') indM[m]++; else usaM[m]++; }
           }
         });
-        charts.monthly = new Chart(ctx, {
+        charts.monthly = new Chart(ctxM, {
           type: 'bar',
           data: {
             labels: months,
@@ -1201,9 +1215,11 @@
               { label: 'USA', data: usaM, backgroundColor: '#06b6d4', borderRadius: 4 }
             ]
           },
-          options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
+          options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true, grid: { color: getGridColor() }, ticks: { color: getTickColor() } }, y: { stacked: true, grid: { color: getGridColor() }, ticks: { color: getTickColor() } } } }
         });
       }
+
+      // 2. Dept Dist
       const ctxD = document.getElementById('deptDistChart');
       if (ctxD) {
         if (charts.dept) charts.dept.destroy();
@@ -1213,9 +1229,196 @@
         charts.dept = new Chart(ctxD, {
           type: 'bar',
           data: { labels: sorted.map(s => s[0]), datasets: [{ data: sorted.map(s => s[1]), backgroundColor: '#6366f1', borderRadius: 4 }] },
-          options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+          options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: getGridColor() }, ticks: { color: getTickColor() } }, y: { grid: { color: 'transparent' }, ticks: { color: getTickColor(), font: { weight: 'bold' } } } } }
         });
       }
+
+      // 3. Aging Doughnut
+      const ctxA = document.getElementById('agingChart');
+      if (ctxA) {
+        if (charts.aging) charts.aging.destroy();
+        const b0 = data.filter(d => d.aging <= 30).length;
+        const b30 = data.filter(d => d.aging > 30 && d.aging <= 60).length;
+        const b60 = data.filter(d => d.aging > 60 && d.aging <= 90).length;
+        const b90 = data.filter(d => d.aging > 90).length;
+        charts.aging = new Chart(ctxA, {
+          type: 'doughnut',
+          data: {
+            labels: ['0-30 Days', '31-60 Days', '61-90 Days', '90+ Days'],
+            datasets: [{ data: [b0, b30, b60, b90], backgroundColor: ['#10b981', '#f59e0b', '#f97316', '#ef4444'], borderWidth: 0 }]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: getTickColor() } } } }
+        });
+      }
+
+      // 4. Pipeline Funnel
+      const ctxF = document.getElementById('pipelineFunnelChart');
+      if (ctxF) {
+        if (charts.funnel) charts.funnel.destroy();
+        const stages = ['Sourcing', 'Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval', 'Offered', 'Joined'];
+        const counts = stages.map(st => data.filter(d => d.status === st).length);
+        charts.funnel = new Chart(ctxF, {
+          type: 'bar',
+          data: {
+            labels: stages,
+            datasets: [{ data: counts, backgroundColor: ['#38bdf8', '#818cf8', '#a78bfa', '#c084fc', '#f472b6', '#fbbf24', '#34d399'], borderRadius: 4 }]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: 'transparent' }, ticks: { color: getTickColor() } }, y: { grid: { color: getGridColor() }, ticks: { color: getTickColor() } } } }
+        });
+      }
+
+      // 5. Dept Head Demand
+      const ctxH = document.getElementById('deptHeadChart');
+      if (ctxH) {
+        if (charts.deptHead) charts.deptHead.destroy();
+        const counts = {};
+        data.forEach(d => { if (d.head) counts[d.head] = (counts[d.head] || 0) + 1; });
+        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 8);
+        charts.deptHead = new Chart(ctxH, {
+          type: 'bar',
+          data: { labels: sorted.map(s => s[0]), datasets: [{ data: sorted.map(s => s[1]), backgroundColor: '#06b6d4', borderRadius: 4 }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: getGridColor() }, ticks: { color: getTickColor() } }, y: { grid: { color: getGridColor() }, ticks: { color: getTickColor() } } } }
+        });
+      }
+
+      // 6. Recruiter Output
+      const ctxR = document.getElementById('recruiterChart');
+      if (ctxR) {
+        if (charts.recruiter) charts.recruiter.destroy();
+        const counts = {}; const joinedCounts = {};
+        data.forEach(d => {
+          if (d.rec && d.rec !== 'Unassigned') {
+            counts[d.rec] = (counts[d.rec] || 0) + 1;
+            if (d.status === 'Joined') joinedCounts[d.rec] = (joinedCounts[d.rec] || 0) + 1;
+          }
+        });
+        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 6);
+        const labels = sorted.map(s => s[0]);
+        charts.recruiter = new Chart(ctxR, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              { label: 'Assigned', data: labels.map(l => counts[l] || 0), backgroundColor: '#6366f1', borderRadius: 4 },
+              { label: 'Joined', data: labels.map(l => joinedCounts[l] || 0), backgroundColor: '#10b981', borderRadius: 4 }
+            ]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: getTickColor() } } }, scales: { x: { grid: { color: getGridColor() }, ticks: { color: getTickColor() } }, y: { grid: { color: getGridColor() }, ticks: { color: getTickColor() } } } }
+        });
+      }
+    }
+
+    function renderChallenges() {
+      const container = document.getElementById('challengesContainer');
+      if (!container) return;
+      container.innerHTML = '';
+      const filtered = CHALLENGES_DATA.filter(c => filterState.geo === 'ALL' || c.geo === filterState.geo);
+      
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="col-span-2 text-center py-10 text-slate-400">No specific executive challenges logged for this region filter.</div>`;
+        return;
+      }
+      
+      filtered.forEach(c => {
+        container.innerHTML += `
+          <div class="bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-xl p-4.5 space-y-3 p-5">
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${c.tagGeo}">${c.geo} • ${c.dept}</span>
+              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Manager: ${c.head}</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200">${c.title}</h4>
+            <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-700 dark:text-rose-300 mt-2">
+              <strong>Bottleneck:</strong> ${c.bottleneck}
+            </div>
+            <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-700 dark:text-emerald-300 mt-2">
+              <strong>HR Solution:</strong> ${c.solution}
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function getChannelBadgeClass(channel) {
+      if (channel === 'Internal') return 'bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30';
+      if (channel === 'Employee Referral') return 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30';
+      if (channel === 'External / Sourced') return 'bg-cyan-100 dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30';
+      return 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400';
+    }
+
+    function renderCriticalAgingTable(data) {
+      const tbody = document.getElementById('criticalAgingTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      const critical = data.filter(d => d.aging > 60).sort((a, b) => b.aging - a.aging);
+      const badge = document.getElementById('criticalTableBadge');
+      if (badge) badge.textContent = `${critical.length} Positions`;
+
+      if (critical.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" class="text-center py-6 text-slate-400">No critical aging positions match current filter.</td></tr>`;
+        return;
+      }
+
+      critical.forEach(c => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/40 transition cursor-pointer';
+        tr.onclick = () => showRequisitionDetail(c.id);
+        tr.innerHTML = `
+          <td class="py-2.5 px-4 font-mono text-slate-500 dark:text-slate-400">#${c.id}</td>
+          <td class="py-2.5 px-4 font-semibold text-slate-900 dark:text-white">${c.pos}</td>
+          <td class="py-2.5 px-4 text-slate-600 dark:text-slate-300">${c.dept} / ${c.squad}</td>
+          <td class="py-2.5 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${getChannelBadgeClass(c.sourceChannel)}">${c.sourceChannel}</span></td>
+          <td class="py-2.5 px-4 text-slate-500 dark:text-slate-400">${c.head || '—'}</td>
+          <td class="py-2.5 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">${c.status}</span></td>
+          <td class="py-2.5 px-4 font-bold text-rose-600 dark:text-rose-400">${c.aging}d</td>
+          <td class="py-2.5 px-4 text-slate-600 dark:text-slate-400">${c.rec}</td>
+          <td class="py-2.5 px-4 text-slate-500 dark:text-slate-400 truncate max-w-xs">${c.comm || 'Standard duration'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderRecruiterTable(data) {
+      const tbody = document.getElementById('recruiterTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      const recMap = {};
+      data.forEach(d => {
+        const r = d.rec || 'Unassigned';
+        if (!recMap[r]) recMap[r] = { total: 0, joined: 0, offered: 0, active: 0, hold: 0, totalOfferDays: 0, offerCount: 0 };
+        recMap[r].total++;
+        if (d.status === 'Joined') recMap[r].joined++;
+        if (d.status === 'Offered') recMap[r].offered++;
+        if (['Sourcing', 'Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval'].includes(d.status)) recMap[r].active++;
+        if (['Position Freezed', 'Suspended', 'Temp Hold', 'JD Pending'].includes(d.status)) recMap[r].hold++;
+        if (d.timeToOffer > 0) { recMap[r].totalOfferDays += d.timeToOffer; recMap[r].offerCount++; }
+      });
+
+      const sorted = Object.entries(recMap).sort((a, b) => b[1].total - a[1].total);
+      if (sorted.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-6 text-slate-400">No recruiter data matches current filter.</td></tr>`;
+        return;
+      }
+
+      sorted.forEach(([name, stats]) => {
+        const avgOffer = stats.offerCount > 0 ? Math.round(stats.totalOfferDays / stats.offerCount) + 'd' : '—';
+        const convRate = stats.total > 0 ? Math.round((stats.joined / stats.total) * 100) + '%' : '0%';
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/40 transition';
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <div class="w-6 h-6 rounded-full bg-brand-100 dark:bg-brand-600/30 text-brand-700 dark:text-brand-400 flex items-center justify-center text-[10px] font-bold">${name.charAt(0)}</div>
+            ${name}
+          </td>
+          <td class="py-3 px-4 font-semibold text-slate-700 dark:text-slate-200">${stats.total}</td>
+          <td class="py-3 px-4 font-bold text-emerald-600 dark:text-emerald-400">${stats.joined}</td>
+          <td class="py-3 px-4 text-amber-600 dark:text-amber-400 font-semibold">${stats.offered}</td>
+          <td class="py-3 px-4 text-cyan-600 dark:text-cyan-400 font-semibold">${stats.active}</td>
+          <td class="py-3 px-4 text-rose-600 dark:text-rose-400 font-semibold">${stats.hold}</td>
+          <td class="py-3 px-4 text-slate-600 dark:text-slate-300 font-medium">${avgOffer}</td>
+          <td class="py-3 px-4 font-bold text-emerald-600 dark:text-emerald-400">${convRate}</td>
+        `;
+        tbody.appendChild(tr);
+      });
     }
 
     function renderOffersRunway(data) {
@@ -1235,7 +1438,7 @@
         tr.innerHTML = `
           <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">${o.cand || 'Pending'}</td>
           <td class="py-3 px-4 text-slate-700 dark:text-slate-300">${o.pos} (${o.squad})</td>
-          <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-300">${o.sourceDetail || o.sourceChannel}</span></td>
+          <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${getChannelBadgeClass(o.sourceChannel)}">${o.sourceDetail || o.sourceChannel}</span></td>
           <td class="py-3 px-4 text-slate-600 dark:text-slate-400">${o.geo} (${o.loc})</td>
           <td class="py-3 px-4 font-semibold text-emerald-500">${o.join || 'TBD'}</td>
           <td class="py-3 px-4 text-slate-600 dark:text-slate-300">${o.rec}</td>
@@ -1246,9 +1449,6 @@
       });
     }
 
-    function renderCriticalAgingTable(data) {}
-    function renderRecruiterTable(data) {}
-
     function renderMasterGrid(data) {
       const tbody = document.getElementById('masterTableBody');
       if (!tbody) return;
@@ -1257,20 +1457,32 @@
       const pageSlice = data.slice(start, start + filterState.pageSize);
       document.getElementById('paginationInfo').textContent = `Showing ${data.length > 0 ? start + 1 : 0} to ${Math.min(start + filterState.pageSize, data.length)} of ${data.length} entries`;
       
+      if (pageSlice.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="13" class="text-center py-8 text-slate-400">No requisitions match your active filters.</td></tr>`;
+        renderPagination(0);
+        return;
+      }
+
       pageSlice.forEach(row => {
         const tr = document.createElement('tr');
         tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/50 transition cursor-pointer';
         tr.onclick = () => showRequisitionDetail(row.id);
+
+        let statusClass = 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300';
+        if (row.status === 'Joined') statusClass = 'bg-emerald-50 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/30';
+        else if (row.status === 'Offered') statusClass = 'bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-500/30';
+        else if (['Position Freezed', 'Suspended'].includes(row.status)) statusClass = 'bg-rose-50 dark:bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-300 dark:border-rose-500/30';
+
         tr.innerHTML = `
           <td class="py-3 px-3.5 font-mono text-slate-400">#${row.id}</td>
           <td class="py-3 px-3.5">${row.geo}</td>
           <td class="py-3 px-3.5 font-semibold">${row.q || '—'}</td>
           <td class="py-3 px-3.5 font-bold text-slate-900 dark:text-white">${row.pos}</td>
           <td class="py-3 px-3.5">${row.dept}</td>
-          <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-purple-500/20 text-purple-300">${row.sourceDetail || row.sourceChannel}</span></td>
+          <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${getChannelBadgeClass(row.sourceChannel)}">${row.sourceDetail || row.sourceChannel}</span></td>
           <td class="py-3 px-3.5">${row.head || '—'}</td>
           <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded text-[10px]">${row.type}</span></td>
-          <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-slate-200">${row.status}</span></td>
+          <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${statusClass}">${row.status}</span></td>
           <td class="py-3 px-3.5 font-bold">${row.aging}d</td>
           <td class="py-3 px-3.5 font-semibold">${row.cand || '—'}</td>
           <td class="py-3 px-3.5">${row.rec}</td>
@@ -1287,28 +1499,27 @@
       const totalPages = Math.ceil(total / filterState.pageSize);
       if (totalPages <= 1) return;
       const prev = document.createElement('button');
-      prev.className = 'px-2.5 py-1 rounded bg-slate-800 text-xs text-white disabled:opacity-30';
+      prev.className = 'px-2.5 py-1 rounded bg-slate-200 dark:bg-slate-800 text-xs text-slate-800 dark:text-white disabled:opacity-30';
       prev.textContent = 'Prev'; prev.disabled = filterState.page === 1;
       prev.onclick = () => { filterState.page--; renderMasterGrid(getFilteredData()); };
       controls.appendChild(prev);
 
       const span = document.createElement('span');
-      span.className = 'px-2 text-xs text-slate-400'; span.textContent = `${filterState.page} / ${totalPages}`;
+      span.className = 'px-2 text-xs text-slate-500 dark:text-slate-400'; span.textContent = `${filterState.page} / ${totalPages}`;
       controls.appendChild(span);
 
       const next = document.createElement('button');
-      next.className = 'px-2.5 py-1 rounded bg-slate-800 text-xs text-white disabled:opacity-30';
+      next.className = 'px-2.5 py-1 rounded bg-slate-200 dark:bg-slate-800 text-xs text-slate-800 dark:text-white disabled:opacity-30';
       next.textContent = 'Next'; next.disabled = filterState.page === totalPages;
       next.onclick = () => { filterState.page++; renderMasterGrid(getFilteredData()); };
       controls.appendChild(next);
     }
 
-    // ROBUST DRILL-DOWN MODAL FIX: Unlocks status correctly when card is clicked
     function openDrillDownPopup(title) {
-      // When opening from a KPI card click, ensure status filter is applied correctly
       const data = getFilteredData();
       currentDrillDownData = data.slice();
       document.getElementById('drillDownModalTitle').innerHTML = `<i data-lucide="users" class="w-5 h-5 text-brand-400"></i> ${title}`;
+      document.getElementById('modalSearchInput').value = '';
       renderModalTable(data);
       document.getElementById('drillDownModal').classList.remove('hidden');
       document.getElementById('drillDownModal').classList.add('flex');
@@ -1325,7 +1536,9 @@
         (d.cand && d.cand.toLowerCase().includes(query)) ||
         (d.pos && d.pos.toLowerCase().includes(query)) ||
         (d.dept && d.dept.toLowerCase().includes(query)) ||
-        (d.sourceDetail && d.sourceDetail.toLowerCase().includes(query))
+        (d.sourceDetail && d.sourceDetail.toLowerCase().includes(query)) ||
+        (d.rec && d.rec.toLowerCase().includes(query)) ||
+        (d.head && d.head.toLowerCase().includes(query))
       ));
     }
     function renderModalTable(data) {
@@ -1338,18 +1551,18 @@
       }
       data.forEach(item => {
         const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-800/50 transition cursor-pointer';
+        tr.className = 'hover:bg-slate-100 dark:hover:bg-slate-800/50 transition cursor-pointer';
         tr.onclick = () => { closeDrillDownModal(); showRequisitionDetail(item.id); };
         tr.innerHTML = `
-          <td class="py-3 px-4 font-bold text-white">${item.cand || '—'}</td>
+          <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">${item.cand || '—'}</td>
           <td class="py-3 px-4">${item.pos}</td>
           <td class="py-3 px-4">${item.dept}</td>
-          <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] bg-purple-500/20 text-purple-300">${item.sourceDetail || item.sourceChannel}</span></td>
+          <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] ${getChannelBadgeClass(item.sourceChannel)}">${item.sourceDetail || item.sourceChannel}</span></td>
           <td class="py-3 px-4">${item.geo}</td>
-          <td class="py-3 px-4 text-emerald-400 font-semibold">${item.join || '—'}</td>
+          <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-semibold">${item.join || '—'}</td>
           <td class="py-3 px-4">${item.head || '—'}</td>
           <td class="py-3 px-4">${item.rec}</td>
-          <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-200">${item.status}</span></td>
+          <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200">${item.status}</span></td>
         `;
         tbody.appendChild(tr);
       });
@@ -1357,7 +1570,7 @@
     }
     function exportDrillDownCSV() {
       if (!currentDrillDownData.length) return alert('No data.');
-      const rows = currentDrillDownData.map(d => [d.id, d.cand, d.pos, d.dept, d.sourceChannel, d.geo, d.join, d.status]);
+      const rows = currentDrillDownData.map(d => [d.id, `"${d.cand}"`, `"${d.pos}"`, d.dept, d.sourceChannel, d.geo, d.join, d.status]);
       const csv = 'data:text/csv;charset=utf-8,' + [['ID','Candidate','Position','Dept','Channel','Geo','DOJ','Status'].join(','), ...rows.map(e => e.join(','))].join('\n');
       const link = document.createElement('a'); link.href = encodeURI(csv); link.download = 'drilldown.csv'; link.click();
     }
@@ -1366,10 +1579,46 @@
       const item = masterRecords.find(r => r.id === id);
       if (!item) return;
       document.getElementById('detailModalContent').innerHTML = `
-        <h2 class="text-xl font-bold text-white">${item.pos}</h2>
-        <p class="text-xs text-slate-400">Candidate: ${item.cand || 'None'} | Status: ${item.status}</p>
-        <p class="text-xs text-slate-400">Channel: ${item.sourceDetail || item.sourceChannel} | Recruiter: ${item.rec}</p>
-        <p class="text-xs text-slate-300 mt-2"><b>Comments:</b> ${item.comm || 'None'}</p>
+        <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider">${item.geo} • ${item.loc}</span>
+            <span class="px-2.5 py-1 rounded text-xs font-bold ${item.status === 'Joined' ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'}">${item.status}</span>
+          </div>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white mt-1">${item.pos}</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Department: ${item.dept} | Squad: ${item.squad} | Leader: ${item.head || 'Unassigned'}</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3.5 text-xs mt-4">
+          <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
+            <span class="text-slate-500 dark:text-slate-400">Candidate Name</span>
+            <div class="text-sm font-bold text-slate-900 dark:text-white mt-0.5">${item.cand || 'Confidential / None'}</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
+            <span class="text-slate-500 dark:text-slate-400">Sourcing Channel / Referral</span>
+            <div class="text-sm font-bold text-purple-600 dark:text-purple-400 mt-0.5">${item.sourceDetail || item.sourceChannel}</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
+            <span class="text-slate-500 dark:text-slate-400">Assigned Recruiter</span>
+            <div class="text-sm font-bold text-slate-900 dark:text-white mt-0.5">${item.rec}</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
+            <span class="text-slate-500 dark:text-slate-400">Hiring Intent</span>
+            <div class="text-sm font-bold text-slate-900 dark:text-white mt-0.5">${item.type} ${item.replaced ? `(Replaces ${item.replaced})` : ''}</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
+            <span class="text-slate-500 dark:text-slate-400">Aging SLA</span>
+            <div class="text-sm font-bold ${item.aging > 60 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'} mt-0.5">${item.aging} Days</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
+            <span class="text-slate-500 dark:text-slate-400">Joining Date</span>
+            <div class="text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">${item.join || '—'}</div>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800/80 text-xs mt-4">
+          <span class="text-slate-500 dark:text-slate-400 font-semibold block mb-1">Recruitment Notes & Comments</span>
+          <p class="text-slate-700 dark:text-slate-300">${item.comm || 'No specific bottlenecks logged for this requisition.'}</p>
+        </div>
       `;
       document.getElementById('detailModal').classList.remove('hidden');
       document.getElementById('detailModal').classList.add('flex');
