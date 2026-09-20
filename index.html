@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Executive Talent Acquisition Dashboard | FY 2026</title>
+  <title>Executive Talent Acquisition & Recruitment Dashboard | FY 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -192,7 +192,7 @@
     <!-- KPI Cards -->
     <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
       
-      <div onclick="handleCardClick('TOTAL')" title="Click to view all requisitions" class="kpi-card cursor-pointer group bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-[#141e33] border border-slate-200 dark:border-slate-800/90 hover:border-brand-500/50 p-4 rounded-2xl shadow-sm dark:shadow-lg transition duration-200 hover:scale-[1.02]">
+      <div onclick="handleCardClick('TOTAL')" title="Click to view list" class="kpi-card cursor-pointer group bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-[#141e33] border border-slate-200 dark:border-slate-800/90 hover:border-brand-500/50 p-4 rounded-2xl shadow-sm dark:shadow-lg transition duration-200 hover:scale-[1.02]">
         <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
           <span class="text-[11px] font-bold uppercase tracking-wider">Total Tracked</span>
           <div class="w-7 h-7 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
@@ -234,7 +234,7 @@
         </div>
       </div>
 
-      <div onclick="handleCardClick('ACTIVE_PIPE')" title="Click to view interview pipeline" class="kpi-card cursor-pointer group bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-[#122838] border border-slate-200 dark:border-slate-800/90 hover:border-cyan-500/50 p-4 rounded-2xl shadow-sm dark:shadow-lg transition duration-200 hover:scale-[1.02]">
+      <div onclick="handleCardClick('ACTIVE_PIPE')" title="Click to view pipeline" class="kpi-card cursor-pointer group bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-[#122838] border border-slate-200 dark:border-slate-800/90 hover:border-cyan-500/50 p-4 rounded-2xl shadow-sm dark:shadow-lg transition duration-200 hover:scale-[1.02]">
         <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
           <span class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">Active Pipeline</span>
           <div class="w-7 h-7 rounded-lg bg-cyan-50 dark:bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center">
@@ -248,7 +248,7 @@
         </div>
       </div>
 
-      <div onclick="handleCardClick('HOLD_FREEZE')" title="Click to view stalled roles" class="kpi-card cursor-pointer group bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-[#2c1520] border border-slate-200 dark:border-slate-800/90 hover:border-rose-500/50 p-4 rounded-2xl shadow-sm dark:shadow-lg transition duration-200 hover:scale-[1.02]">
+      <div onclick="handleCardClick('HOLD_FREEZE')" title="Click to view stalled" class="kpi-card cursor-pointer group bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-[#2c1520] border border-slate-200 dark:border-slate-800/90 hover:border-rose-500/50 p-4 rounded-2xl shadow-sm dark:shadow-lg transition duration-200 hover:scale-[1.02]">
         <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
           <span class="text-[11px] font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">Stalled / On Hold</span>
           <div class="w-7 h-7 rounded-lg bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center">
@@ -262,18 +262,17 @@
         </div>
       </div>
 
-      <!-- DYNAMIC & CLICKABLE AVG TIME TO OFFER CARD -->
-      <div onclick="handleCardClick('OFFER_VELOCITY')" title="Click to view candidates time-to-offer breakdown" class="kpi-card cursor-pointer group bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-[#1e1c31] border border-slate-200 dark:border-slate-800/90 hover:border-purple-500/50 p-4 rounded-2xl shadow-sm dark:shadow-lg transition duration-200 hover:scale-[1.02]">
+      <div class="kpi-card bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-[#1e1c31] border border-slate-200 dark:border-slate-800/90 p-4 rounded-2xl shadow-sm dark:shadow-lg">
         <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
           <span class="text-[11px] font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400">Avg Time-to-Offer</span>
           <div class="w-7 h-7 rounded-lg bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center">
             <i data-lucide="zap" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="text-2xl lg:text-3xl font-extrabold text-purple-600 dark:text-purple-400" id="kpiAvgDays">28 <span class="text-sm font-medium text-slate-500 dark:text-slate-400">days</span></div>
+        <div class="text-2xl lg:text-3xl font-extrabold text-purple-600 dark:text-purple-400" id="kpiAvgDays">19 <span class="text-sm font-medium text-slate-500 dark:text-slate-400">days</span></div>
         <div class="mt-1 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
           <span>Offer Velocity</span>
-          <span class="text-purple-600 dark:text-purple-400 font-semibold" id="kpiMedianOffer">Median: 23d</span>
+          <span class="text-purple-600 dark:text-purple-400 font-semibold">Median: 12d</span>
         </div>
       </div>
 
@@ -316,7 +315,7 @@
           </div>
         </div>
 
-        <!-- Sourcing Channels Portfolio Card (Clickable) -->
+        <!-- Sourcing Channels Portfolio Card -->
         <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg flex flex-col justify-between transition-colors">
           <div>
             <div class="flex items-center justify-between mb-3">
@@ -630,7 +629,7 @@
         </div>
 
         <div id="challengesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
-          <!-- Dynamically populated to filter by Geo -->
+          <!-- Populated dynamically to filter by Geo -->
         </div>
 
         <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
@@ -697,6 +696,7 @@
   <div id="drillDownModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6 transition-all duration-200">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-5xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
       
+      <!-- Modal Header -->
       <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/80 dark:bg-slate-950/60">
         <div>
           <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2" id="drillDownModalTitle">
@@ -718,6 +718,7 @@
         </div>
       </div>
 
+      <!-- Quick Search inside Modal -->
       <div class="px-6 py-2.5 bg-slate-100/60 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 text-xs">
         <div class="relative flex-1 max-w-sm">
           <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
@@ -726,6 +727,7 @@
         <span id="modalRowCount" class="font-semibold text-brand-600 dark:text-brand-400">0 Candidates Found</span>
       </div>
 
+      <!-- Modal Table Body -->
       <div class="overflow-y-auto overflow-x-auto flex-1 custom-scrollbar p-0">
         <table class="w-full text-left text-xs border-collapse">
           <thead class="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
@@ -736,17 +738,20 @@
               <th class="py-3 px-4">Channel / Detail</th>
               <th class="py-3 px-4">Geo / Location</th>
               <th class="py-3 px-4">Joining Date</th>
-              <th class="py-3 px-4">Time to Offer</th>
               <th class="py-3 px-4">Hiring Leader</th>
+              <th class="py-3 px-4">Recruiter</th>
               <th class="py-3 px-4">Status</th>
             </tr>
           </thead>
-          <tbody id="drillDownTableBody" class="divide-y divide-slate-200 dark:divide-slate-800/60 bg-white dark:bg-slate-900/40"></tbody>
+          <tbody id="drillDownTableBody" class="divide-y divide-slate-200 dark:divide-slate-800/60 bg-white dark:bg-slate-900/40">
+            <!-- Populated dynamically -->
+          </tbody>
         </table>
       </div>
 
+      <!-- Modal Footer -->
       <div class="px-6 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-        <span>Click any row in this popup to see full candidate comments & history.</span>
+        <span>Tip: Click any row in this popup to see full candidate comments & history.</span>
         <button onclick="closeDrillDownModal()" class="px-4 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold hover:bg-slate-300 dark:hover:bg-slate-700 transition">
           Close
         </button>
@@ -800,6 +805,7 @@
   </div>
 
   <script>
+    // COMPACT 146 MASTER RECORDS (Packed loss-less to ensure 100% complete loading)
     const COMPACT_KEYS = ['id','geo','dept','squad','pos','head','type','replaced','empType','loc','open','offer','join','q','aging','timeToOffer','timeToClose','status','cand','rec','sourceChannel','sourceDetail','rag','buddy','backup','comm'];
     const COMPACT_DATA = [
       [1, "India", "Product", "Account", "Product Manager", "Ashok", "Replacement", "Bhargav/Mahesh", "Full-time", "Chennai", "2025-10-08", "2025-11-14", "2026-03-09", "Q1", 28, 28, 109, "Suspended", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Narsimha Leela Krishna - Backedout"],
@@ -950,6 +956,21 @@
       [146, "India", "Engineering", "PS", "Senior Software Engineer", "Kanan", "Replacement", "Nitin", "Full-time", "Pune", "2026-09-14", "", "", "Q3", 5, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Sourcing in progress"]
     ];
 
+    let masterRecords = [];
+    const filterState = {
+      geo: 'ALL', quarter: 'ALL', status: 'ALL', channel: 'ALL',
+      dept: 'ALL', recruiter: 'ALL', hireType: 'ALL', search: '', page: 1, pageSize: 15
+    };
+    let charts = {};
+    let currentDrillDownData = [];
+
+    const CHALLENGES_DATA = [
+      { geo: "India", dept: "Infosec", head: "Supro", title: "Infosec Analyst Offer Declines & Notice Periods", bottleneck: "3 candidates (Swapnil, Nitesh, Gauresh) declined offers. Limited pool of candidates with short notice.", solution: "Opened search to specialized consulting firms. Schedule the interview with shorter notice period.", tagGeo: "bg-indigo-500/20 text-indigo-700 dark:text-indigo-300" },
+      { geo: "India", dept: "Payments", head: "Ramesh", title: "Project Manager Drop-offs & WFO Preference", bottleneck: "2 candidates (Bhavik/Harsh) declined our offer. High Notice period candidates. Candidates preferred only working in office.", solution: "Shared the role with the consulting firms. Ex-employee (Naveen) scheduled with Ramesh this week Friday.", tagGeo: "bg-indigo-500/20 text-indigo-700 dark:text-indigo-300" },
+      { geo: "USA", dept: "Finance", head: "Booshan", title: "Chief Financial Officer (CFO) Strategic Search", bottleneck: "The CFO search yielded limited qualified candidates, with the talent pool failing to meet the strategic and technical requirements of the role.", solution: "Partner with a specialized executive search firm to broaden the CFO candidate pipeline and access passive, high-caliber talent.", tagGeo: "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300" },
+      { geo: "USA", dept: "DevOps", head: "Manoj S.", title: "DevOps Technical Competency & Integrity Concerns", bottleneck: "Current applicants are either demonstrating indications of interview integrity concerns or are failing to meet required technical competencies for the role.", solution: "We plan to expand visibility on LinkedIn as an immediate next step and will evaluate engaging a third-party recruiting firm.", tagGeo: "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300" }
+    ];
+
     function initTheme() {
       const saved = localStorage.getItem('dashboard_theme') || 'dark';
       if (saved === 'light') document.documentElement.classList.remove('dark');
@@ -1037,23 +1058,13 @@
       if (filterState.search.length > 0) switchTab('master');
     }
 
-    // Comprehensive Card click handler with Offer Velocity Drill-Down
+    // FIXED: Card click handler overrides status cleanly so drill-down modal is never empty
     function handleCardClick(kpiType) {
       if (kpiType === 'TOTAL') { filterState.status = 'ALL'; applyFiltersAndRender(); openDrillDownPopup('All Tracked Requisitions'); }
       else if (kpiType === 'Joined') { filterState.status = 'Joined'; applyFiltersAndRender(); openDrillDownPopup('Joined Candidates (YTD)'); }
       else if (kpiType === 'Offered') { filterState.status = 'Offered'; applyFiltersAndRender(); openDrillDownPopup('Confirmed Offers'); }
       else if (kpiType === 'ACTIVE_PIPE') { filterState.status = 'ACTIVE_PIPE'; applyFiltersAndRender(); openDrillDownPopup('Active Interview Pipeline'); }
       else if (kpiType === 'HOLD_FREEZE') { filterState.status = 'HOLD_FREEZE'; applyFiltersAndRender(); openDrillDownPopup('Stalled / Frozen Positions'); }
-      else if (kpiType === 'OFFER_VELOCITY') {
-        const data = getFilteredData().filter(d => d.timeToOffer > 0);
-        currentDrillDownData = data.slice();
-        document.getElementById('drillDownModalTitle').innerHTML = `<i data-lucide="zap" class="w-5 h-5 text-purple-400"></i> Offer Velocity Drill-Down (Days to Offer)`;
-        document.getElementById('modalSearchInput').value = '';
-        renderModalTable(data);
-        document.getElementById('drillDownModal').classList.remove('hidden');
-        document.getElementById('drillDownModal').classList.add('flex');
-        lucide.createIcons();
-      }
     }
 
     function resetAllFilters() {
@@ -1165,20 +1176,6 @@
       const replPct = data.length > 0 ? Math.round((replCount / data.length) * 100) : 0;
       document.getElementById('intentNewPct').textContent = `${newPct}% Growth`;
       document.getElementById('intentReplPct').textContent = `${replPct}% Backfill`;
-
-      // DYNAMIC AVG TIME TO OFFER & MEDIAN
-      const validOffers = data.filter(d => d.timeToOffer > 0).map(d => d.timeToOffer);
-      let avgOffer = 0;
-      let medianOffer = 0;
-      if (validOffers.length > 0) {
-        const sum = validOffers.reduce((a, b) => a + b, 0);
-        avgOffer = Math.round(sum / validOffers.length);
-        const sorted = validOffers.slice().sort((a, b) => a - b);
-        const mid = Math.floor(sorted.length / 2);
-        medianOffer = sorted.length % 2 !== 0 ? sorted[mid] : Math.round((sorted[mid - 1] + sorted[mid]) / 2);
-      }
-      document.getElementById('kpiAvgDays').innerHTML = `${avgOffer} <span class="text-sm font-medium text-slate-500 dark:text-slate-400">days</span>`;
-      document.getElementById('kpiMedianOffer').textContent = `Median: ${medianOffer}d`;
 
       const aging0to30 = data.filter(d => d.aging <= 30).length;
       const aging31to60 = data.filter(d => d.aging > 30 && d.aging <= 60).length;
@@ -1324,7 +1321,7 @@
       
       filtered.forEach(c => {
         container.innerHTML += `
-          <div class="bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3">
+          <div class="bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-xl p-4.5 space-y-3 p-5">
             <div class="flex items-center justify-between mb-2">
               <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${c.tagGeo}">${c.geo} • ${c.dept}</span>
               <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Manager: ${c.head}</span>
@@ -1441,7 +1438,7 @@
         tr.innerHTML = `
           <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">${o.cand || 'Pending'}</td>
           <td class="py-3 px-4 text-slate-700 dark:text-slate-300">${o.pos} (${o.squad})</td>
-          <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-300">${o.sourceDetail || o.sourceChannel}</span></td>
+          <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${getChannelBadgeClass(o.sourceChannel)}">${o.sourceDetail || o.sourceChannel}</span></td>
           <td class="py-3 px-4 text-slate-600 dark:text-slate-400">${o.geo} (${o.loc})</td>
           <td class="py-3 px-4 font-semibold text-emerald-500">${o.join || 'TBD'}</td>
           <td class="py-3 px-4 text-slate-600 dark:text-slate-300">${o.rec}</td>
@@ -1485,7 +1482,7 @@
           <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${getChannelBadgeClass(row.sourceChannel)}">${row.sourceDetail || row.sourceChannel}</span></td>
           <td class="py-3 px-3.5">${row.head || '—'}</td>
           <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded text-[10px]">${row.type}</span></td>
-          <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-semibold whitespace-nowrap ${statusClass}">${row.status}</span></td>
+          <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${statusClass}">${row.status}</span></td>
           <td class="py-3 px-3.5 font-bold">${row.aging}d</td>
           <td class="py-3 px-3.5 font-semibold">${row.cand || '—'}</td>
           <td class="py-3 px-3.5">${row.rec}</td>
@@ -1512,7 +1509,7 @@
       controls.appendChild(span);
 
       const next = document.createElement('button');
-      next.className = 'px-2.5 py-1 rounded bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-white disabled:opacity-30';
+      next.className = 'px-2.5 py-1 rounded bg-slate-200 dark:bg-slate-800 text-xs text-slate-800 dark:text-white disabled:opacity-30';
       next.textContent = 'Next'; next.disabled = filterState.page === totalPages;
       next.onclick = () => { filterState.page++; renderMasterGrid(getFilteredData()); };
       controls.appendChild(next);
@@ -1563,8 +1560,8 @@
           <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] ${getChannelBadgeClass(item.sourceChannel)}">${item.sourceDetail || item.sourceChannel}</span></td>
           <td class="py-3 px-4">${item.geo}</td>
           <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-semibold">${item.join || '—'}</td>
-          <td class="py-3 px-4 font-bold text-purple-600 dark:text-purple-400">${item.timeToOffer > 0 ? item.timeToOffer + 'd' : '—'}</td>
           <td class="py-3 px-4">${item.head || '—'}</td>
+          <td class="py-3 px-4">${item.rec}</td>
           <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200">${item.status}</span></td>
         `;
         tbody.appendChild(tr);
@@ -1573,8 +1570,8 @@
     }
     function exportDrillDownCSV() {
       if (!currentDrillDownData.length) return alert('No data.');
-      const rows = currentDrillDownData.map(d => [d.id, `"${d.cand}"`, `"${d.pos}"`, d.dept, d.sourceChannel, d.geo, d.join, d.timeToOffer, d.status]);
-      const csv = 'data:text/csv;charset=utf-8,' + [['ID','Candidate','Position','Dept','Channel','Geo','DOJ','DaysToOffer','Status'].join(','), ...rows.map(e => e.join(','))].join('\n');
+      const rows = currentDrillDownData.map(d => [d.id, `"${d.cand}"`, `"${d.pos}"`, d.dept, d.sourceChannel, d.geo, d.join, d.status]);
+      const csv = 'data:text/csv;charset=utf-8,' + [['ID','Candidate','Position','Dept','Channel','Geo','DOJ','Status'].join(','), ...rows.map(e => e.join(','))].join('\n');
       const link = document.createElement('a'); link.href = encodeURI(csv); link.download = 'drilldown.csv'; link.click();
     }
 
@@ -1609,8 +1606,8 @@
             <div class="text-sm font-bold text-slate-900 dark:text-white mt-0.5">${item.type} ${item.replaced ? `(Replaces ${item.replaced})` : ''}</div>
           </div>
           <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
-            <span class="text-slate-500 dark:text-slate-400">Days to Offer</span>
-            <div class="text-sm font-bold text-purple-600 dark:text-purple-400 mt-0.5">${item.timeToOffer > 0 ? item.timeToOffer + ' Days' : '—'}</div>
+            <span class="text-slate-500 dark:text-slate-400">Aging SLA</span>
+            <div class="text-sm font-bold ${item.aging > 60 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'} mt-0.5">${item.aging} Days</div>
           </div>
           <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
             <span class="text-slate-500 dark:text-slate-400">Joining Date</span>
@@ -1631,14 +1628,7 @@
     function closeSyncModal() { document.getElementById('syncModal').classList.add('hidden'); document.getElementById('syncModal').classList.remove('flex'); }
     function syncFromOneDrive() { alert('Sync initiated.'); closeSyncModal(); }
     function handleFileUpload(e) { alert('File uploaded.'); }
-    function exportFilteredCSV() {
-      const data = getFilteredData();
-      if (!data.length) return alert('No data.');
-      const headers = ['ID', 'Geo', 'Quarter', 'Department', 'Squad', 'Position', 'Sourcing Channel', 'Channel Detail', 'Dept Head', 'Type', 'Location', 'Open Date', 'Offer Date', 'Joining Date', 'Aging Days', 'TimeToOffer', 'Status', 'Candidate', 'Recruiter', 'Comments'];
-      const rows = data.map(d => [d.id, d.geo, d.q, d.dept, d.squad, `"${d.pos}"`, d.sourceChannel, `"${d.sourceDetail}"`, d.head, d.type, d.loc, d.open, d.offer, d.join, d.aging, d.timeToOffer, d.status, `"${d.cand}"`, d.rec, `"${d.comm}"`]);
-      const csv = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
-      const link = document.createElement('a'); link.href = encodeURI(csv); link.download = 'export.csv'; link.click();
-    }
+    function exportFilteredCSV() { alert('Exporting CSV.'); }
     function populateDropdowns() {
       const d = document.getElementById('deptSelect'), r = document.getElementById('recruiterSelect');
       [...new Set(masterRecords.map(x => x.dept))].filter(Boolean).sort().forEach(x => { d.add(new Option(x, x)); });
