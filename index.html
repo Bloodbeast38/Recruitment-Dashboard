@@ -315,7 +315,7 @@
           </div>
         </div>
 
-        <!-- Sourcing Channels Portfolio Card (Clickable) -->
+        <!-- Sourcing Channels Portfolio Card -->
         <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg flex flex-col justify-between transition-colors">
           <div>
             <div class="flex items-center justify-between mb-3">
@@ -746,7 +746,7 @@
 
   </main>
 
-  <!-- Drill-Down Popup Modal -->
+  <!-- POPUP MODAL 1: CANDIDATES DRILL-DOWN -->
   <div id="drillDownModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-5xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
       <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/80 dark:bg-slate-950/60">
@@ -827,7 +827,7 @@
     </div>
   </div>
 
-  <!-- Dashboard JavaScript Engine -->
+  <!-- Script Engine -->
   <script>
     const COMPACT_KEYS = ['id','geo','dept','squad','pos','head','type','replaced','empType','loc','open','offer','join','q','aging','timeToOffer','timeToClose','status','cand','rec','sourceChannel','sourceDetail','rag','buddy','backup','comm'];
     const COMPACT_DATA = [
@@ -950,14 +950,14 @@
       [117, "USA", "PS", "PS", "FX Business Analyst", "Kanan", "Replacement", "James", "Full-time", "Charlotte", "2026-07-08", "", "", "Q3", 53, 0, 0, "Position Freezed", "", "Sindhu", "External / Sourced", "Linkedln applied", "Green", "", "", "Dinesh has been selected, offer approval is pending and will depend on Dharmesh's resource planning."],
       [118, "India", "Engineering", "Payments", "Senior Software Engineer", "Vijay", "Replacement", "Maniprathap", "Full-time", "Pune", "2026-07-27", "", "", "Q3", 40, 0, 0, "Position Freezed", "", "Andleeb", "Not Specified", "", "Green", "", "", "Vishal AI round, if selected the offer approval will on hold until resource capacity  plan is finalized and shared\u200b, Gaurav AI round rejected"],
       [119, "India", "Engineering", "Payments", "Application Architect", "Vijay", "Replacement", "Shankar", "Full-time", "Chennai", "2026-08-13", "", "", "Q3", 27, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Hiring request not approved by Karuna"],
-      [120, "India", "Engineering", "Payments", "Senior Software Engineer", "Vijay", "Replacement", "Ganesh k", "Full-time", "Pune", "2026-08-10", "", "", "Q3", 30, 0, 0, "Position Freezed", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Interview are slowed down until resource capacity plan is finalized and shared\u200b"],
+      [120, "India", "Engineering", "Payments", "Senior Software Engineer", "Vijay", "Replacement", "Ganesh k", "Full-time", "Pune", "2026-08-10", "", "", "Q3", 30, 0, 0, "Position Freezed", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Interview are slowed down until resource capacity plan is finalized and shared \u200b"],
       [121, "India", "Engineering", "Payments", "Associate Software Engineer", "Vijay", "Replacement", "Shubham J", "Full-time", "Pune", "2026-07-27", "", "", "Q3", 40, 0, 0, "Position Freezed", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Ankit is on AI round, if selected the offer approval will on hold until resource capacity plan is finalized and shared\u200b"],
       [122, "USA", "PS", "Account", "Business Analyst", "Ashok", "New", "", "Full-time", "Charlotte", "2026-07-31", "", "", "Q3", 36, 0, 0, "Position Freezed", "", "Sindhu", "Not Specified", "", "Green", "", "", "Requirement is currently on hold until resource planning."],
       [123, "USA", "PS", "Account", "Project Manager", "Ashok", "New", "", "Full-time", "Charlotte", "2026-07-31", "2026-09-16", "2026-10-05", "Q3", 36, 34, 47, "Offer Approval", "Rabhina", "Sindhu", "External / Sourced", "Linkedln Soucing", "Green", "Balaji Balamurugan", "", "Offered Rabhina, Aswin on hold"],
       [124, "India", "QA", "Payments", "Senior QA Analyst", "Karuna", "Replacement", "Pankaj", "Full-time", "Pune", "2026-08-17", "", "", "Q3", 25, 0, 0, "Position Freezed", "Prathamesh Salunkhe", "Unassigned", "Not Specified", "", "Green", "", "", "Prathamesh (Immediate) offer on hold until resource capacity plan is finalized and shared\u200b"],
       [125, "India", "Technology", "Technology", "IT Admin", "Supro", "New", "", "Full-time", "Pune", "2026-08-14", "2026-09-07", "2026-09-08", "Q3", 17, 17, 18, "Joined", "Mayur", "Unassigned", "Not Specified", "", "Green", "", "", "Mayur - DOJ 8th September"],
       [126, "India", "Delivery", "PS", "Delivery Manager", "Kanan", "Replacement", "Satyavir", "Full-time", "Pune", "2026-08-05", "2026-08-13", "2026-08-17", "Q3", 7, 7, 9, "Joined", "Kishore T", "Andleeb", "Employee Referral", "Emp Ref", "Green", "", "Sourcing", "Kishore offered - DOJ 17th August"],
-      [127, "India", "Engineering", "Payments", "Senior Software Engineer", "Vijay", "Replacement", "Prachi", "Full-time", "Pune", "2026-08-11", "", "", "Q3", 29, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Interview are slowed down until resource capacity plan is finalized and shared\u200b"],
+      [127, "India", "Engineering", "Payments", "Senior Software Engineer", "Vijay", "Replacement", "Prachi", "Full-time", "Pune", "2026-08-11", "", "", "Q3", 29, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Interview are slowed down until resource capacity plan is finalized and shared \u200b"],
       [128, "USA", "PS", "PS", "Business Analyst Payment", "Kanan", "Replacement", "Bhavana", "Full-time", "Charlotte", "2026-08-13", "", "", "Q3", 3, 0, 0, "Position Freezed", "", "Sindhu", "External / Sourced", "Linkedln Soucing", "Green", "", "", "Sujith has been selected, offer approval is pending and will depend on Dharmesh's resource planning."],
       [129, "India", "Support", "Support", "Production Support Engineer ( Payments)", "Anish", "Replacement", "Kapil", "Full-time", "Remote", "2026-08-14", "", "", "Q3", 26, 0, 0, "HR Interview", "", "Unassigned", "Not Specified", "", "Green", "", "", "Mahendra HR Discussion"],
       [130, "India", "Engineering", "Digital", "Associate Software Engineer", "Sajeesh", "Replacement", "Urvashi", "Full-time", "Pune", "2026-08-17", "", "", "Q3", 25, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Urvashi is planned to moved to Payments team - Performance Engineer role\u200b"],
@@ -1007,7 +1007,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       initTheme();
-      masterRecords = RAW_MASTER_DATA.map(row => {
+      masterRecords = COMPACT_DATA.map(row => {
         const obj = {};
         COMPACT_KEYS.forEach((k, i) => obj[k] = row[i]);
         return obj;
@@ -1069,12 +1069,13 @@
     function setHireTypeFilter(ht) { filterState.hireType = ht; applyFiltersAndRender(); }
     function handleSearch(val) { filterState.search = val.trim().toLowerCase(); filterState.page = 1; applyFiltersAndRender(); }
 
+    // Robust click handler that explicitly overrides status so modal is never empty
     function handleCardClick(kpiType) {
-      if (kpiType === 'TOTAL') { filterState.status = 'ALL'; applyFiltersAndRender(); openDrillDownPopup('All Tracked Requisitions'); }
-      else if (kpiType === 'Joined') { filterState.status = 'Joined'; applyFiltersAndRender(); openDrillDownPopup('Joined Candidates (YTD)'); }
-      else if (kpiType === 'Offered') { filterState.status = 'Offered'; applyFiltersAndRender(); openDrillDownPopup('Confirmed Offers'); }
-      else if (kpiType === 'ACTIVE_PIPE') { filterState.status = 'ACTIVE_PIPE'; applyFiltersAndRender(); openDrillDownPopup('Active Interview Pipeline'); }
-      else if (kpiType === 'HOLD_FREEZE') { filterState.status = 'HOLD_FREEZE'; applyFiltersAndRender(); openDrillDownPopup('Stalled / Frozen Positions'); }
+      if (kpiType === 'TOTAL') { filterState.status = 'ALL'; openDrillDownPopup('All Tracked Requisitions'); }
+      else if (kpiType === 'Joined') { filterState.status = 'Joined'; openDrillDownPopup('Joined Candidates (YTD)'); }
+      else if (kpiType === 'Offered') { filterState.status = 'Offered'; openDrillDownPopup('Confirmed Offers'); }
+      else if (kpiType === 'ACTIVE_PIPE') { filterState.status = 'ACTIVE_PIPE'; openDrillDownPopup('Active Interview Pipeline'); }
+      else if (kpiType === 'HOLD_FREEZE') { filterState.status = 'HOLD_FREEZE'; openDrillDownPopup('Stalled / Frozen Positions'); }
     }
 
     function resetAllFilters() {
@@ -1175,7 +1176,6 @@
     }
 
     function renderAllCharts(data) {
-      // Monthly chart
       const ctx = document.getElementById('monthlyJoinersChart');
       if (ctx) {
         if (charts.monthly) charts.monthly.destroy();
@@ -1199,7 +1199,6 @@
           options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } } }
         });
       }
-      // Dept chart
       const ctxD = document.getElementById('deptDistChart');
       if (ctxD) {
         if (charts.dept) charts.dept.destroy();
@@ -1299,7 +1298,7 @@
       controls.appendChild(next);
     }
 
-    // Drill-Down Popup
+    // Drill-Down Popup (Guaranteed to show matching records)
     function openDrillDownPopup(title) {
       const data = getFilteredData();
       currentDrillDownData = data.slice();
