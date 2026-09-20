@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Executive Talent Acquisition & Recruitment Dashboard | FY 2026</title>
+  <title>Executive Talent Acquisition Dashboard | FY 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -1067,15 +1067,20 @@
     function setDeptFilter(dept) { filterState.dept = dept; applyFiltersAndRender(); }
     function setRecruiterFilter(rec) { filterState.recruiter = rec; applyFiltersAndRender(); }
     function setHireTypeFilter(ht) { filterState.hireType = ht; applyFiltersAndRender(); }
-    function handleSearch(val) { filterState.search = val.trim().toLowerCase(); filterState.page = 1; applyFiltersAndRender(); }
+    function handleSearch(val) {
+      filterState.search = val.trim().toLowerCase();
+      filterState.page = 1;
+      applyFiltersAndRender();
+      if (filterState.search.length > 0) switchTab('master');
+    }
 
-    // Robust click handler that explicitly overrides status so modal is never empty
+    // FIXED: Card click handler overrides status cleanly so drill-down modal is never empty
     function handleCardClick(kpiType) {
-      if (kpiType === 'TOTAL') { filterState.status = 'ALL'; openDrillDownPopup('All Tracked Requisitions'); }
-      else if (kpiType === 'Joined') { filterState.status = 'Joined'; openDrillDownPopup('Joined Candidates (YTD)'); }
-      else if (kpiType === 'Offered') { filterState.status = 'Offered'; openDrillDownPopup('Confirmed Offers'); }
-      else if (kpiType === 'ACTIVE_PIPE') { filterState.status = 'ACTIVE_PIPE'; openDrillDownPopup('Active Interview Pipeline'); }
-      else if (kpiType === 'HOLD_FREEZE') { filterState.status = 'HOLD_FREEZE'; openDrillDownPopup('Stalled / Frozen Positions'); }
+      if (kpiType === 'TOTAL') { filterState.status = 'ALL'; applyFiltersAndRender(); openDrillDownPopup('All Tracked Requisitions'); }
+      else if (kpiType === 'Joined') { filterState.status = 'Joined'; applyFiltersAndRender(); openDrillDownPopup('Joined Candidates (YTD)'); }
+      else if (kpiType === 'Offered') { filterState.status = 'Offered'; applyFiltersAndRender(); openDrillDownPopup('Confirmed Offers'); }
+      else if (kpiType === 'ACTIVE_PIPE') { filterState.status = 'ACTIVE_PIPE'; applyFiltersAndRender(); openDrillDownPopup('Active Interview Pipeline'); }
+      else if (kpiType === 'HOLD_FREEZE') { filterState.status = 'HOLD_FREEZE'; applyFiltersAndRender(); openDrillDownPopup('Stalled / Frozen Positions'); }
     }
 
     function resetAllFilters() {
@@ -1298,8 +1303,9 @@
       controls.appendChild(next);
     }
 
-    // Drill-Down Popup (Guaranteed to show matching records)
+    // ROBUST DRILL-DOWN MODAL FIX: Unlocks status correctly when card is clicked
     function openDrillDownPopup(title) {
+      // When opening from a KPI card click, ensure status filter is applied correctly
       const data = getFilteredData();
       currentDrillDownData = data.slice();
       document.getElementById('drillDownModalTitle').innerHTML = `<i data-lucide="users" class="w-5 h-5 text-brand-400"></i> ${title}`;
