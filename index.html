@@ -133,7 +133,7 @@
           <button onclick="setQuarterFilter('Q4')" id="q-Q4" class="q-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800">Q4</button>
         </div>
 
-                <!-- Channel Slicer -->
+        <!-- Channel Slicer -->
         <div class="flex items-center bg-white dark:bg-slate-900/90 p-1 rounded-xl border border-slate-200 dark:border-slate-800 shadow-inner">
           <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 px-2.5 flex items-center gap-1.5">
             <i data-lucide="share-2" class="w-3.5 h-3.5 text-purple-500"></i> Channel:
@@ -147,7 +147,7 @@
         <!-- Dept Select -->
         <div class="relative">
           <select id="deptSelect" onchange="setDeptFilter(this.value)" class="bg-white dark:bg-slate-900 text-xs font-medium border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-brand-500 cursor-pointer">
-            <option value="ALL">All Departments</option>
+            <option value="ALL">All Departments / Squads</option>
           </select>
         </div>
 
@@ -849,7 +849,7 @@
       if (btn) { btn.classList.add('bg-brand-600', 'text-white', 'shadow-sm'); btn.classList.remove('text-slate-600', 'dark:text-slate-400'); }
       applyFiltersAndRender();
     }
-            function setChannelFilter(ch) {
+    function setChannelFilter(ch) {
       filterState.channel = ch;
       document.querySelectorAll('.ch-btn').forEach(b => {
         b.classList.remove('bg-brand-600', 'text-white', 'shadow-sm');
@@ -865,8 +865,6 @@
         btn.classList.add('bg-brand-600', 'text-white', 'shadow-sm'); 
         btn.classList.remove('text-slate-600', 'dark:text-slate-400'); 
       }
-      applyFiltersAndRender();
-    }
       applyFiltersAndRender();
     }
     function setDeptFilter(dept) { filterState.dept = dept; applyFiltersAndRender(); }
@@ -898,7 +896,7 @@
       setGeoFilter('ALL'); setQuarterFilter('ALL'); setChannelFilter('ALL');
     }
 
-        function getFilteredData() {
+    function getFilteredData() {
       return masterRecords.filter(item => {
         if (filterState.geo !== 'ALL' && item.geo !== filterState.geo) return false;
         if (filterState.quarter !== 'ALL' && item.q !== filterState.quarter) return false;
@@ -1451,7 +1449,7 @@
       link.click();
     }
 
-        function populateDropdowns() {
+    function populateDropdowns() {
       const d = document.getElementById('deptSelect'), r = document.getElementById('recruiterSelect');
       d.innerHTML = '<option value="ALL">All Departments / Squads</option>';
       r.innerHTML = '<option value="ALL">All Recruiters</option>';
@@ -1465,7 +1463,6 @@
       [...deptSet].filter(Boolean).sort().forEach(x => { d.add(new Option(x, x)); });
       [...new Set(masterRecords.map(x => x.rec))].filter(Boolean).sort().forEach(x => { r.add(new Option(x, x)); });
     }
-
   </script>
 </body>
 </html>
