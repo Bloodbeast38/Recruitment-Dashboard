@@ -45,6 +45,9 @@ const masterRecords = parsedData
         const joinDate = parseDate(findVal(row, ['Joining Date', 'Joined Date']));
         const explicitQ = String(findVal(row, ['Quarter Joining', 'Quarter'], '')).trim();
         const finalQ = (explicitQ && explicitQ !== '' && explicitQ !== 'undefined') ? explicitQ : getQuarter(joinDate);
+        
+        let statusVal = String(findVal(row, ['Status', 'Hiring Status'], 'Open')).trim();
+        if (!statusVal || statusVal === '') statusVal = 'Open';
 
         return {
             id: Number(findVal(row, ['Sr No', 'id', 'No'], index + 1)),
@@ -64,7 +67,7 @@ const masterRecords = parsedData
             aging: Number(findVal(row, ['Aging (Days)', 'Aging'], 0)),
             timeToOffer: Number(findVal(row, ['Position Offered', 'Time to Offer'], 0)),
             timeToClose: Number(findVal(row, ['Position Closed', 'Time to Close'], 0)),
-            status: String(findVal(row, ['Status', 'Hiring Status'], 'Open')).trim(),
+            status: statusVal,
             cand: String(findVal(row, ['Offered Candidates', 'Candidate Name', 'Candidate'], '')).trim(),
             rec: String(findVal(row, ['Recruiter', 'Recruiter Name'], 'Unassigned')).trim(),
             sourceChannel: String(findVal(row, ['Applied/ Sourced/ Reffered (Internal/External)', 'Channel', 'Source'], 'External / Sourced')).trim(),
@@ -77,7 +80,7 @@ const masterRecords = parsedData
     });
 
 fs.writeFileSync('data.json', JSON.stringify(masterRecords, null, 2));
-console.log(`Successfully compiled ${masterRecords.length} records with auto-calculated quarters.`);
+console.log(`Successfully compiled ${masterRecords.length} records into data.json.`);
 
 function parseDate(value) {
     if (!value) return '';
