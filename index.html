@@ -888,7 +888,7 @@
       setGeoFilter('ALL'); setQuarterFilter('ALL'); setChannelFilter('ALL');
     }
 
-    function getFilteredData() {
+        function getFilteredData() {
       return masterRecords.filter(item => {
         if (filterState.geo !== 'ALL' && item.geo !== filterState.geo) return false;
         if (filterState.quarter !== 'ALL' && item.q !== filterState.quarter) return false;
@@ -903,7 +903,7 @@
           const holds = ['Position Freezed', 'Suspended', 'Temp Hold', 'JD Pending'];
           if (!holds.includes(item.status)) return false;
         }
-        if (filterState.dept !== 'ALL' && item.dept !== filterState.dept) return false;
+        if (filterState.dept !== 'ALL' && item.dept !== filterState.dept && item.squad !== filterState.dept) return false;
         if (filterState.recruiter !== 'ALL' && item.rec !== filterState.recruiter) return false;
         if (filterState.hireType !== 'ALL' && item.type !== filterState.hireType) return false;
         if (filterState.search) {
@@ -1441,13 +1441,21 @@
       link.click();
     }
 
-    function populateDropdowns() {
+        function populateDropdowns() {
       const d = document.getElementById('deptSelect'), r = document.getElementById('recruiterSelect');
-      d.innerHTML = '<option value="ALL">All Departments</option>';
+      d.innerHTML = '<option value="ALL">All Departments / Squads</option>';
       r.innerHTML = '<option value="ALL">All Recruiters</option>';
-      [...new Set(masterRecords.map(x => x.dept))].filter(Boolean).sort().forEach(x => { d.add(new Option(x, x)); });
+      
+      const deptSet = new Set();
+      masterRecords.forEach(x => {
+        if (x.dept) deptSet.add(x.dept);
+        if (x.squad && x.squad !== '-') deptSet.add(x.squad);
+      });
+
+      [...deptSet].filter(Boolean).sort().forEach(x => { d.add(new Option(x, x)); });
       [...new Set(masterRecords.map(x => x.rec))].filter(Boolean).sort().forEach(x => { r.add(new Option(x, x)); });
     }
+
   </script>
 </body>
 </html>
