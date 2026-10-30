@@ -51,9 +51,8 @@ const masterRecords = parsedData
         const finalQ = (explicitQ && explicitQ !== '' && explicitQ !== 'undefined') ? explicitQ : dateInfo.q;
         
         let statusVal = String(findVal(row, ['Status', 'Hiring Status'], 'Open')).trim();
-        if (!statusVal) statusVal = 'Open';
+        if (!statusVal || statusVal === 'nan') statusVal = 'Open';
 
-        // Explicit channel normalization for referrals, internal, and external
         let rawSource = String(findVal(row, ['Applied/ Sourced/ Reffered (Internal/External)', 'Applied/ Sourced/ Referred (Internal/External)', 'Channel', 'Source'], '')).trim();
         let normalizedSource = 'External / Sourced';
         const lowerSource = rawSource.toLowerCase();
@@ -64,15 +63,18 @@ const masterRecords = parsedData
             normalizedSource = 'Internal';
         } else if (lowerSource.includes('external') || lowerSource.includes('linkedin') || lowerSource.includes('linkedln') || lowerSource.includes('applied') || lowerSource.includes('sourcing') || lowerSource.includes('whitley')) {
             normalizedSource = 'External / Sourced';
-        } else if (rawSource !== '') {
+        } else if (rawSource !== '' && rawSource !== 'nan') {
             normalizedSource = rawSource;
         }
+
+        const deptVal = String(findVal(row, ['Department', 'Practice', 'Function'], '')).trim();
+        const squadVal = String(findVal(row, ['Squads', 'Project', 'Team'], '')).trim();
 
         return {
             id: Number(findVal(row, ['Sr No', 'id', 'No'], index + 1)),
             geo: String(findVal(row, ['Geo', 'Geography', 'Region'], 'India')).trim(),
-            dept: String(findVal(row, ['Department', 'Practice', 'Function'], 'General')).trim(),
-            squad: String(findVal(row, ['Squads', 'Project', 'Team'], '-')).trim(),
+            dept: deptVal && deptVal !== 'nan' ? deptVal : (squadVal ? squadVal : 'General'),
+            squad: squadVal && squadVal !== 'nan' ? squadVal : '-',
             pos: String(findVal(row, ['Positions', 'Position', 'Role Title'], 'Unnamed Position')).trim(),
             head: String(findVal(row, ['Dept Head', 'Head', 'Manager'], '-')).trim(),
             type: String(findVal(row, ['New/Replacement', 'Type'], 'New')).trim(),
