@@ -53,17 +53,18 @@ const masterRecords = parsedData
         let statusVal = String(findVal(row, ['Status', 'Hiring Status'], 'Open')).trim();
         if (!statusVal) statusVal = 'Open';
 
-        let rawSource = String(findVal(row, ['Applied/ Sourced/ Reffered (Internal/External)', 'Applied/ Sourced/ Referred (Internal/External)', 'Channel', 'Source'], 'External')).trim();
+        // Explicit channel normalization for referrals, internal, and external
+        let rawSource = String(findVal(row, ['Applied/ Sourced/ Reffered (Internal/External)', 'Applied/ Sourced/ Referred (Internal/External)', 'Channel', 'Source'], '')).trim();
         let normalizedSource = 'External / Sourced';
         const lowerSource = rawSource.toLowerCase();
         
-        if (lowerSource.includes('ref') || lowerSource.includes('referral')) {
+        if (lowerSource.includes('ref') || lowerSource.includes('referral') || lowerSource.includes('emp ref')) {
             normalizedSource = 'Employee Referral';
         } else if (lowerSource.includes('internal') || lowerSource.includes('ijp')) {
             normalizedSource = 'Internal';
         } else if (lowerSource.includes('external') || lowerSource.includes('linkedin') || lowerSource.includes('linkedln') || lowerSource.includes('applied') || lowerSource.includes('sourcing') || lowerSource.includes('whitley')) {
             normalizedSource = 'External / Sourced';
-        } else if (rawSource && rawSource !== '') {
+        } else if (rawSource !== '') {
             normalizedSource = rawSource;
         }
 
