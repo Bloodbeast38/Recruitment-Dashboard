@@ -968,6 +968,8 @@
     }
 
     function updateKPIs(data) {
+  const totalRefs = data.filter(d => (d.sourceChannel || '').toLowerCase().includes('ref') || (d.sourceDetail || '').toLowerCase().includes('ref')).length;
+  document.getElementById('channelReferralCount').textContent = totalRefs;
       document.getElementById('kpiTotal').textContent = data.length;
       document.getElementById('kpiJoined').textContent = data.filter(d => d.status === 'Joined').length;
       document.getElementById('kpiOffered').textContent = data.filter(d => d.status === 'Offered').length;
@@ -983,7 +985,8 @@
       document.getElementById('kpiTotalSub').textContent = `India: ${indT} | USA: ${usaT}`;
 
       document.getElementById('channelInternalCount').textContent = data.filter(d => d.sourceChannel === 'Internal').length;
-      document.getElementById('channelReferralCount').textContent = data.filter(d => d.sourceChannel === 'Employee Referral').length;
+     const totalRefs = data.filter(d => (d.sourceChannel || '').toLowerCase().includes('ref') || (d.sourceDetail || '').toLowerCase().includes('ref')).length;
+document.getElementById('channelReferralCount').textContent = totalRefs;
       document.getElementById('channelExternalCount').textContent = data.filter(d => d.sourceChannel === 'External / Sourced').length;
       
       const newCount = data.filter(d => d.type === 'New').length;
