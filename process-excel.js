@@ -53,17 +53,20 @@ const masterRecords = parsedData
         let statusVal = String(findVal(row, ['Status', 'Hiring Status'], 'Open')).trim();
         if (!statusVal || statusVal === 'nan') statusVal = 'Open';
 
+                // Correct channel classifier: only classify actual text, keep blank/suspended/frozen as Not Specified
         let rawSource = String(findVal(row, ['Applied/ Sourced/ Reffered (Internal/External)', 'Applied/ Sourced/ Referred (Internal/External)', 'Channel', 'Source'], '')).trim();
-        let normalizedSource = 'External / Sourced';
-        const lowerSource = rawSource.toLowerCase();
+        let normalizedSource = 'Not Specified';
+        let lowerSource = rawSource.toLowerCase();
         
-        if (lowerSource.includes('ref') || lowerSource.includes('referral') || lowerSource.includes('emp ref')) {
+        if (!rawSource || rawSource === 'nan' || rawSource === 'undefined') {
+            normalizedSource = 'Not Specified';
+        } else if (lowerSource.includes('ref') || lowerSource.includes('referral') || lowerSource.includes('emp ref')) {
             normalizedSource = 'Employee Referral';
         } else if (lowerSource.includes('internal') || lowerSource.includes('ijp')) {
             normalizedSource = 'Internal';
         } else if (lowerSource.includes('external') || lowerSource.includes('linkedin') || lowerSource.includes('linkedln') || lowerSource.includes('applied') || lowerSource.includes('sourcing') || lowerSource.includes('whitley')) {
             normalizedSource = 'External / Sourced';
-        } else if (rawSource !== '' && rawSource !== 'nan') {
+        } else {
             normalizedSource = rawSource;
         }
 
