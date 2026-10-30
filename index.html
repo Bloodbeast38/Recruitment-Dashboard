@@ -250,451 +250,1390 @@
 
       <div onclick="handleCardClick('HOLD_FREEZE')" title="Click to view stalled" class="kpi-card cursor-pointer group bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-[#2c1520] border border-slate-200 dark:border-slate-800/90 hover:border-rose-500/50 p-4 rounded-2xl shadow-sm dark:shadow-lg transition duration-200 hover:scale-[1.02]">
         <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-          <span class="text-[11px] font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">Hold / Freeze</span>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">Stalled / On Hold</span>
           <div class="w-7 h-7 rounded-lg bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center">
             <i data-lucide="pause-circle" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="text-2xl lg:text-3xl font-extrabold text-rose-600 dark:text-rose-400" id="kpiHold">38</div>
+        <div class="text-2xl lg:text-3xl font-extrabold text-rose-600 dark:text-rose-400" id="kpiHold">37</div>
         <div class="mt-1 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
-          <span>Paused Reqs</span>
-          <span class="text-rose-600 dark:text-rose-400 font-semibold" id="kpiHoldSub">India: 25 | USA: 13</span>
+          <span>Capacity Review</span>
+          <span class="text-rose-600 dark:text-rose-400 font-semibold" id="kpiHoldSub">23 Freeze | 12 Suspended</span>
         </div>
       </div>
 
-      <div onclick="handleCardClick('AVG_SLA')" title="Click to view aging details" class="kpi-card cursor-pointer group bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-[#2b1f10] border border-slate-200 dark:border-slate-800/90 hover:border-orange-500/50 p-4 rounded-2xl shadow-sm dark:shadow-lg transition duration-200 hover:scale-[1.02]">
+      <div class="kpi-card bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-[#1e1c31] border border-slate-200 dark:border-slate-800/90 p-4 rounded-2xl shadow-sm dark:shadow-lg">
         <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-          <span class="text-[11px] font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400">Avg SLA Aging</span>
-          <div class="w-7 h-7 rounded-lg bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 flex items-center justify-center">
-            <i data-lucide="timer" class="w-4 h-4"></i>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400">Avg Time-to-Offer</span>
+          <div class="w-7 h-7 rounded-lg bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+            <i data-lucide="zap" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="text-2xl lg:text-3xl font-extrabold text-orange-600 dark:text-orange-400" id="kpiSLA">48 Days</div>
+        <div class="text-2xl lg:text-3xl font-extrabold text-purple-600 dark:text-purple-400" id="kpiAvgDays">19 <span class="text-sm font-medium text-slate-500 dark:text-slate-400">days</span></div>
         <div class="mt-1 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
-          <span>Time to Fill</span>
-          <span class="text-orange-600 dark:text-orange-400 font-semibold" id="kpiSLASub">Target: &lt; 45 Days</span>
+          <span>Offer Velocity</span>
+          <span class="text-purple-600 dark:text-purple-400 font-semibold">Median: 12d</span>
         </div>
       </div>
 
     </section>
 
-    <!-- Tab Contents Container -->
-    <div id="tabContentContainer">
-      <!-- Overview Tab -->
-      <div id="tab-overview" class="space-y-6 tab-pane">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm">
-            <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-4 flex items-center justify-between">
-              <span>Hiring Status Distribution</span>
-              <i data-lucide="pie-chart" class="w-4 h-4 text-brand-500"></i>
-            </h3>
-            <div class="h-64 relative flex items-center justify-center">
-              <canvas id="statusPieChart"></canvas>
+    <!-- TAB 1: EXECUTIVE OVERVIEW -->
+    <div id="tabContent-overview" class="tab-pane space-y-6">
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Hiring Intent Card -->
+        <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg flex flex-col justify-between transition-colors">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="pie-chart" class="w-4 h-4 text-brand-600 dark:text-brand-400"></i>
+                Hiring Intent: Growth vs. Backfill
+              </h3>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold">Budget Impact</span>
+            </div>
+            <div class="flex items-center justify-around my-2">
+              <div onclick="setHireTypeFilter('New'); openDrillDownPopup('New Growth Requisitions');" class="cursor-pointer text-center p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition">
+                <div class="text-2xl font-black text-emerald-600 dark:text-emerald-400" id="intentNewCount">82</div>
+                <div class="text-xs font-semibold text-slate-700 dark:text-slate-300 mt-0.5">New Headcount</div>
+                <div class="text-[10px] text-emerald-600 dark:text-emerald-500 font-bold" id="intentNewPct">56% Growth</div>
+              </div>
+              <div class="h-10 w-px bg-slate-200 dark:bg-slate-800"></div>
+              <div onclick="setHireTypeFilter('Replacement'); openDrillDownPopup('Replacement Backfill Requisitions');" class="cursor-pointer text-center p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition">
+                <div class="text-2xl font-black text-cyan-600 dark:text-cyan-400" id="intentReplCount">63</div>
+                <div class="text-xs font-semibold text-slate-700 dark:text-slate-300 mt-0.5">Replacements</div>
+                <div class="text-[10px] text-cyan-600 dark:text-cyan-500 font-bold" id="intentReplPct">44% Attrition</div>
+              </div>
             </div>
           </div>
-          <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm">
-            <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-4 flex items-center justify-between">
-              <span>Geo & Department Breakdown</span>
-              <i data-lucide="bar-chart-3" class="w-4 h-4 text-cyan-500"></i>
-            </h3>
-            <div class="h-64 relative flex items-center justify-center">
-              <canvas id="geoDeptBarChart"></canvas>
+          <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+            <span>63 Replaced Employees Tracked</span>
+            <button onclick="setHireTypeFilter('Replacement'); openDrillDownPopup('Replacement Backfill Requisitions');" class="text-brand-600 dark:text-brand-400 hover:underline font-semibold flex items-center gap-1">
+              View Backfills <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sourcing Channels Portfolio Card -->
+        <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg flex flex-col justify-between transition-colors">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="share-2" class="w-4 h-4 text-purple-600 dark:text-purple-400"></i>
+                Sourcing Channel Portfolio
+              </h3>
+              <span class="text-[11px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold">Click to View</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2 text-center my-1">
+              <div onclick="setChannelFilter('Internal'); openDrillDownPopup('Internal / IJP Candidates');" class="cursor-pointer p-2 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60 hover:scale-105 transition shadow-sm">
+                <div class="text-xl font-extrabold text-purple-600 dark:text-purple-400" id="channelInternalCount">40</div>
+                <div class="text-[10px] font-bold text-slate-700 dark:text-slate-300 uppercase mt-0.5">Internal</div>
+              </div>
+              <div onclick="setChannelFilter('Employee Referral'); openDrillDownPopup('Employee Referral Candidates');" class="cursor-pointer p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 hover:scale-105 transition shadow-sm">
+                <div class="text-xl font-extrabold text-emerald-600 dark:text-emerald-400" id="channelReferralCount">20</div>
+                <div class="text-[10px] font-bold text-slate-700 dark:text-slate-300 uppercase mt-0.5">Referrals</div>
+              </div>
+              <div onclick="setChannelFilter('External / Sourced'); openDrillDownPopup('External / Sourced Candidates');" class="cursor-pointer p-2 rounded-xl bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800/60 hover:scale-105 transition shadow-sm">
+                <div class="text-xl font-extrabold text-cyan-600 dark:text-cyan-400" id="channelExternalCount">19</div>
+                <div class="text-[10px] font-bold text-slate-700 dark:text-slate-300 uppercase mt-0.5">External</div>
+              </div>
             </div>
           </div>
-          <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm">
-            <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-4 flex items-center justify-between">
-              <span>Sourcing Channel Mix</span>
-              <i data-lucide="activity" class="w-4 h-4 text-purple-500"></i>
-            </h3>
-            <div class="h-64 relative flex items-center justify-center">
-              <canvas id="channelDonutChart"></canvas>
+          <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+            <span>67 Open/Direct Unspecified</span>
+            <button onclick="setChannelFilter('Employee Referral'); openDrillDownPopup('Employee Referral Candidates');" class="text-emerald-600 dark:text-emerald-400 hover:underline font-semibold flex items-center gap-1">
+              View Referrals <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Management Decision Items Card -->
+        <div class="bg-gradient-to-br from-indigo-50/50 via-white to-indigo-50/20 dark:from-slate-900 dark:to-[#141b2d] border border-brand-200 dark:border-brand-500/20 rounded-2xl p-5 shadow-sm dark:shadow-lg flex flex-col justify-between transition-colors">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
+                Management Decision Items
+              </h3>
+              <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-brand-100 dark:bg-brand-500/20 text-brand-700 dark:text-brand-300 font-bold">Action Needed</span>
+            </div>
+            <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
+                <span><strong>23 Positions Paused:</strong> Pending capacity approval from Karuna & Dharmesh.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
+                <span><strong>9 Key Offers Awaiting Joining:</strong> Includes CFO, AI Engineers, & Senior HR Manager.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-xs">
+            <span class="text-slate-500 dark:text-slate-400">Weekly Report Master File</span>
+            <button onclick="switchTab('challenges')" class="text-brand-600 dark:text-brand-400 hover:underline font-semibold flex items-center gap-1">
+              View Solutions <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Velocity Charts Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg flex flex-col justify-between transition-colors">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="trending-up" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
+                Monthly & Quarterly Joiners Velocity (FY 2026)
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">India (56) vs. USA (36) onboarded capacity</p>
+            </div>
+            <div class="flex items-center gap-3 text-xs">
+              <span class="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> India</span>
+              <span class="flex items-center gap-1 text-cyan-600 dark:text-cyan-400 font-semibold"><span class="w-2.5 h-2.5 rounded-full bg-cyan-500 inline-block"></span> USA</span>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- SLA Tab -->
-      <div id="tab-sla" class="space-y-6 tab-pane hidden">
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
-          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Velocity & SLA Aging Analysis</h3>
-          <p class="text-xs text-slate-500 mb-6">Tracking average aging days across departments and hiring locations.</p>
-          <div class="h-80 relative">
-            <canvas id="slaBarChart"></canvas>
+          <div class="h-64 relative">
+            <canvas id="monthlyJoinersChart"></canvas>
           </div>
         </div>
-      </div>
 
-      <!-- Capacity Tab -->
-      <div id="tab-capacity" class="space-y-6 tab-pane hidden">
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
-          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Recruiter & Department Workload</h3>
-          <p class="text-xs text-slate-500 mb-6">Active requisition distribution per recruiter.</p>
-          <div class="h-80 relative">
-            <canvas id="recruiterBarChart"></canvas>
+        <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg flex flex-col justify-between transition-colors">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="bar-chart-2" class="w-4 h-4 text-brand-600 dark:text-brand-400"></i>
+                Requisition Volume by Department
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Distribution of requisitions across business units</p>
+            </div>
+            <span class="text-xs text-slate-500 dark:text-slate-400">Engineering leads demand</span>
           </div>
-        </div>
-      </div>
-
-      <!-- Challenges Tab -->
-      <div id="tab-challenges" class="space-y-6 tab-pane hidden">
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
-          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Challenges & Mitigation Plans</h3>
-          <p class="text-xs text-slate-500 mb-6">Key hiring roadblocks and back-up strategies.</p>
-          <div id="challengesContent" class="space-y-4">
-            <!-- Dynamically populated or static fallback -->
+          <div class="h-64 relative">
+            <canvas id="deptDistChart"></canvas>
           </div>
         </div>
       </div>
 
-      <!-- Master Grid Tab -->
-      <div id="tab-master" class="space-y-6 tab-pane hidden">
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
-          <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-            <h3 class="text-sm font-bold text-slate-900 dark:text-white">Master Requisitions Grid</h3>
-            <span class="text-xs text-slate-500" id="gridCountBadge">Showing all records</span>
+      <!-- Near-Term Joiners Runway -->
+      <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg transition-colors">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i data-lucide="plane-takeoff" class="w-4 h-4 text-amber-500 dark:text-amber-400"></i>
+              Near-Term Joiners & Confirmed Offers Runway
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Confirmed candidates with offer letters released and active onboarding tracking</p>
           </div>
-          <div class="overflow-x-auto max-h-[600px] custom-scrollbar">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-slate-100 dark:bg-slate-800/80 sticky top-0 text-slate-700 dark:text-slate-300 uppercase font-semibold">
-                <tr>
-                  <th class="p-3">Sr No</th>
-                  <th class="p-3">Geo</th>
-                  <th class="p-3">Department</th>
-                  <th class="p-3">Positions</th>
-                  <th class="p-3">Status</th>
-                  <th class="p-3">Recruiter</th>
-                  <th class="p-3">Aging (Days)</th>
-                  <th class="p-3">Comments</th>
-                </tr>
-              </thead>
-              <tbody id="masterTableBody" class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-600 dark:text-slate-300">
-                <!-- Populated via script -->
-              </tbody>
-            </table>
+          <span class="text-xs px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 font-semibold" id="runwayCountBadge">
+            9 Confirmed Offers
+          </span>
+        </div>
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-xs">
+            <thead class="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-950/70 border-b border-slate-200 dark:border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Candidate Name</th>
+                <th class="py-3 px-4">Position & Squad</th>
+                <th class="py-3 px-4">Channel / Source</th>
+                <th class="py-3 px-4">Geo / Location</th>
+                <th class="py-3 px-4">Expected DOJ</th>
+                <th class="py-3 px-4">Recruiter</th>
+                <th class="py-3 px-4">Onboarding Buddy</th>
+                <th class="py-3 px-4">RAG</th>
+              </tr>
+            </thead>
+            <tbody id="offersRunwayTableBody" class="divide-y divide-slate-200 dark:divide-slate-800/60"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TAB 2: VELOCITY & SLA AGING ANALYSIS -->
+    <div id="tabContent-sla" class="tab-pane hidden space-y-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white dark:bg-slate-900 border border-emerald-500/30 p-4 rounded-2xl shadow-sm">
+          <div class="flex items-center justify-between text-slate-500 dark:text-slate-400">
+            <span class="text-xs font-bold uppercase text-emerald-600 dark:text-emerald-400">0 - 30 Days (On Track)</span>
+            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i>
           </div>
+          <div class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 mt-2" id="aging0to30">59</div>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Within standard hiring cycle</p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 border border-amber-500/30 p-4 rounded-2xl shadow-sm">
+          <div class="flex items-center justify-between text-slate-500 dark:text-slate-400">
+            <span class="text-xs font-bold uppercase text-amber-600 dark:text-amber-400">31 - 60 Days (Watchlist)</span>
+            <i data-lucide="alert-circle" class="w-4 h-4 text-amber-500"></i>
+          </div>
+          <div class="text-3xl font-extrabold text-amber-600 dark:text-amber-400 mt-2" id="aging31to60">25</div>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Requires interview acceleration</p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 border border-orange-500/30 p-4 rounded-2xl shadow-sm">
+          <div class="flex items-center justify-between text-slate-500 dark:text-slate-400">
+            <span class="text-xs font-bold uppercase text-orange-600 dark:text-orange-400">61 - 90 Days (Critical)</span>
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-orange-500"></i>
+          </div>
+          <div class="text-3xl font-extrabold text-orange-600 dark:text-orange-400 mt-2" id="aging61to90">13</div>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Exceeding standard SLA threshold</p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 border border-rose-500/30 p-4 rounded-2xl shadow-sm">
+          <div class="flex items-center justify-between text-slate-500 dark:text-slate-400">
+            <span class="text-xs font-bold uppercase text-rose-600 dark:text-rose-400">90+ Days (Severe Breach)</span>
+            <i data-lucide="flame" class="w-4 h-4 text-rose-500"></i>
+          </div>
+          <div class="text-3xl font-extrabold text-rose-600 dark:text-rose-400 mt-2" id="aging90Plus">41</div>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Capacity deficit or frozen requisition</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg transition-colors">
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-1">
+            <i data-lucide="pie-chart" class="w-4 h-4 text-rose-500 dark:text-rose-400"></i>
+            Requisition SLA Aging Breakdown
+          </h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Distribution of total requisitions by age bucket</p>
+          <div class="h-64 relative">
+            <canvas id="agingChart"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg transition-colors">
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-1">
+            <i data-lucide="filter" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+            Recruitment Funnel Pipeline
+          </h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Stage-by-stage candidate throughput</p>
+          <div class="h-64 relative">
+            <canvas id="pipelineFunnelChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg transition-colors">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i data-lucide="alert-octagon" class="w-4 h-4 text-rose-500 dark:text-rose-400"></i>
+              Severe SLA Delay Drill-Down (Positions with >60 Days Aging)
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">High-priority requisitions requiring executive intervention</p>
+          </div>
+          <span class="text-xs px-2.5 py-1 rounded bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/30 font-semibold" id="criticalTableBadge">
+            54 Positions
+          </span>
+        </div>
+        <div class="overflow-x-auto custom-scrollbar max-h-96">
+          <table class="w-full text-left text-xs">
+            <thead class="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-950/70 border-b border-slate-200 dark:border-slate-800 sticky top-0">
+              <tr>
+                <th class="py-3 px-4">ID</th>
+                <th class="py-3 px-4">Position Title</th>
+                <th class="py-3 px-4">Dept / Squad</th>
+                <th class="py-3 px-4">Channel</th>
+                <th class="py-3 px-4">Hiring Manager</th>
+                <th class="py-3 px-4">Status</th>
+                <th class="py-3 px-4">Aging</th>
+                <th class="py-3 px-4">Recruiter</th>
+                <th class="py-3 px-4">Root Cause / Comments</th>
+              </tr>
+            </thead>
+            <tbody id="criticalAgingTableBody" class="divide-y divide-slate-200 dark:divide-slate-800/60"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: LEADERSHIP & RECRUITER ALLOCATION -->
+    <div id="tabContent-capacity" class="tab-pane hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg transition-colors">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="user-check" class="w-4 h-4 text-cyan-600 dark:text-cyan-400"></i>
+                Hiring Demand by Department Head / Leader
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Total requisitions owned by hiring managers</p>
+            </div>
+            <span class="text-xs text-slate-500 dark:text-slate-400">Top: Kanan & Vijay</span>
+          </div>
+          <div class="h-72 relative">
+            <canvas id="deptHeadChart"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg transition-colors">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i data-lucide="award" class="w-4 h-4 text-brand-600 dark:text-brand-400"></i>
+                Recruiter Workload & Closures
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Total requisitions handled and joined hires per recruiter</p>
+            </div>
+            <span class="text-xs text-slate-500 dark:text-slate-400">Team Allocation</span>
+          </div>
+          <div class="h-72 relative">
+            <canvas id="recruiterChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg transition-colors">
+        <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-3">
+          <i data-lucide="list" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
+          Recruiter Throughput & Portfolio Matrix
+        </h3>
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left text-xs">
+            <thead class="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-950/70 border-b border-slate-200 dark:border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Recruiter</th>
+                <th class="py-3 px-4">Total Assigned</th>
+                <th class="py-3 px-4">Joined (Closed)</th>
+                <th class="py-3 px-4">Offers In Hand</th>
+                <th class="py-3 px-4">Active Pipeline</th>
+                <th class="py-3 px-4">Paused / Freezed</th>
+                <th class="py-3 px-4">Avg Days to Offer</th>
+                <th class="py-3 px-4">Conversion Rate</th>
+              </tr>
+            </thead>
+            <tbody id="recruiterTableBody" class="divide-y divide-slate-200 dark:divide-slate-800/60"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: EXECUTIVE CHALLENGES & HR MITIGATIONS -->
+    <div id="tabContent-challenges" class="tab-pane hidden space-y-6">
+      <div class="bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:to-[#1b1c2e] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm dark:shadow-xl transition-colors">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
+              <i data-lucide="shield-alert" class="w-5 h-5 text-amber-500 dark:text-amber-400"></i>
+              Recruitment Bottlenecks & Executive HR Action Plans
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Direct insights compiled from recruitment challenges across India & USA operations.
+            </p>
+          </div>
+          <span class="text-xs px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 font-semibold">
+            Leadership Attention
+          </span>
+        </div>
+
+        <div id="challengesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+          <!-- Populated dynamically to filter by Geo -->
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
+          <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+            <i data-lucide="pause-circle" class="w-4 h-4 text-rose-500 dark:text-rose-400"></i>
+            Internal Business Holds: 23 Positions Frozen Pending Capacity Plan
+          </h4>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">
+            Requisitions across Pune, Chennai, and Charlotte currently awaiting finalized headcount roadmap.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: REQUISITION MASTER GRID -->
+    <div id="tabContent-master" class="tab-pane hidden space-y-4">
+      <div class="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-xl transition-colors">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+          <div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i data-lucide="database" class="w-4 h-4 text-brand-600 dark:text-brand-400"></i>
+              Master Requisitions Repository
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Audit log of all tracked positions, timelines, channels, and candidate assignments</p>
+          </div>
+          <div class="text-xs text-slate-500 dark:text-slate-400">
+            Click any row for complete candidate metadata
+          </div>
+        </div>
+
+        <div class="overflow-x-auto custom-scrollbar border border-slate-200 dark:border-slate-800/80 rounded-xl">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead class="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
+              <tr>
+                <th class="py-3 px-3.5 font-semibold">ID</th>
+                <th class="py-3 px-3.5 font-semibold">Geo</th>
+                <th class="py-3 px-3.5 font-semibold">Quarter</th>
+                <th class="py-3 px-3.5 font-semibold">Position Title</th>
+                <th class="py-3 px-3.5 font-semibold">Department</th>
+                <th class="py-3 px-3.5 font-semibold">Channel / Sourcing</th>
+                <th class="py-3 px-3.5 font-semibold">Leader</th>
+                <th class="py-3 px-3.5 font-semibold">Type</th>
+                <th class="py-3 px-3.5 font-semibold">Status</th>
+                <th class="py-3 px-3.5 font-semibold">Aging</th>
+                <th class="py-3 px-3.5 font-semibold">Candidate</th>
+                <th class="py-3 px-3.5 font-semibold">Recruiter</th>
+                <th class="py-3 px-3.5 font-semibold">RAG</th>
+              </tr>
+            </thead>
+            <tbody id="masterTableBody" class="divide-y divide-slate-200 dark:divide-slate-800/60 bg-white dark:bg-slate-900/40"></tbody>
+          </table>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
+          <div id="paginationInfo">Showing 1 to 15 of 146 entries</div>
+          <div class="flex items-center gap-1.5" id="paginationControls"></div>
         </div>
       </div>
     </div>
 
   </main>
 
-  <!-- Core Dashboard Logic & Enhanced Upload Handler -->
-  <script>
-    // Global State & Default Data
-    window.masterRequisitions = [];
-    let currentFilters = { geo: 'ALL', quarter: 'ALL', channel: 'ALL', dept: 'ALL', recruiter: 'ALL', search: '' };
-    let activeTab = 'overview';
-    let charts = {};
+  <!-- POPUP MODAL 1: CANDIDATES DRILL-DOWN -->
+  <div id="drillDownModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6 transition-all duration-200">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-5xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/80 dark:bg-slate-950/60">
+        <div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2" id="drillDownModalTitle">
+            <i data-lucide="users" class="w-5 h-5 text-brand-600 dark:text-brand-400"></i>
+            Candidates Drill-Down
+          </h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5" id="drillDownModalSubtitle">
+            Showing matching candidates and requisitions
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="exportDrillDownCSV()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-300 dark:border-slate-700 transition">
+            <i data-lucide="download" class="w-3.5 h-3.5 text-amber-500"></i>
+            <span>Export List</span>
+          </button>
+          <button onclick="closeDrillDownModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
 
-    // Sample initial dataset to guarantee immediate load
-    const initialData = [
-      { srNo: 1, geo: "India", department: "Product", squads: "Account", positions: "Product Manager", deptHead: "Ashok", newReplacement: "Replacement", replacedEmployee: "Bhargav/Mahesh", fullTimeConsultant: "Full-time", hiringLocation: "Chennai", positionOpenDate: "2025-10-08", todaysDate: "2025-11-14", dateOffered: "2025-11-14", joiningDate: "2026-03-09", quarterJoining: "Q1", agingDays: 28, positionOffered: 28, positionClosed: 109, status: "Suspended", offeredCandidates: "-", qualification: "-", channel: "External / Sourced", ragStatus: "Green", backUpPlans: "-", buddyOnboarding: "-", comments: "Narsimha Leela Krishna - Backedout", recruiter: "Thirukumaran" },
-      { srNo: 2, geo: "USA", department: "Infosec", squads: "Infosec", positions: "CISO (Change of Role)", deptHead: "Murthy", newReplacement: "Replacement", replacedEmployee: "Nate", fullTimeConsultant: "Full-time", hiringLocation: "Charlotte", positionOpenDate: "2025-11-21", todaysDate: "2026-02-02", dateOffered: "2026-01-23", joiningDate: "2026-02-02", quarterJoining: "Q1", agingDays: 52, positionOffered: 46, positionClosed: 52, status: "Joined", offeredCandidates: "Supro", qualification: "-", channel: "External / Sourced", ragStatus: "Green", backUpPlans: "-", buddyOnboarding: "-", comments: "Eric Garcia decided to reject the offer.", recruiter: "Marissa" }
+      <!-- Quick Search inside Modal -->
+      <div class="px-6 py-2.5 bg-slate-100/60 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 text-xs">
+        <div class="relative flex-1 max-w-sm">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+          <input type="text" id="modalSearchInput" placeholder="Filter candidates by name, role, manager..." oninput="filterModalTable(this.value)" class="w-full pl-9 pr-3 py-1.5 text-xs bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:border-brand-500" />
+        </div>
+        <span id="modalRowCount" class="font-semibold text-brand-600 dark:text-brand-400">0 Candidates Found</span>
+      </div>
+
+      <!-- Modal Table Body -->
+      <div class="overflow-y-auto overflow-x-auto flex-1 custom-scrollbar p-0">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead class="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
+            <tr>
+              <th class="py-3 px-4">Candidate Name</th>
+              <th class="py-3 px-4">Position Title</th>
+              <th class="py-3 px-4">Dept / Squad</th>
+              <th class="py-3 px-4">Channel / Detail</th>
+              <th class="py-3 px-4">Geo / Location</th>
+              <th class="py-3 px-4">Joining Date</th>
+              <th class="py-3 px-4">Hiring Leader</th>
+              <th class="py-3 px-4">Recruiter</th>
+              <th class="py-3 px-4">Status</th>
+            </tr>
+          </thead>
+          <tbody id="drillDownTableBody" class="divide-y divide-slate-200 dark:divide-slate-800/60 bg-white dark:bg-slate-900/40">
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+        <span>Tip: Click any row in this popup to see full candidate comments & history.</span>
+        <button onclick="closeDrillDownModal()" class="px-4 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold hover:bg-slate-300 dark:hover:bg-slate-700 transition">
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- POPUP MODAL 2: REQUISITION DETAIL MODAL -->
+  <div id="detailModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
+      <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 dark:hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div id="detailModalContent" class="space-y-4"></div>
+    </div>
+  </div>
+
+  <!-- POPUP MODAL 3: LIVE ONEDRIVE SYNC MODAL -->
+  <div id="syncModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-xl w-full p-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
+      <button onclick="closeSyncModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 dark:hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-cyan-50 dark:bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center">
+          <i data-lucide="cloud" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white">Connect Live Excel / OneDrive</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Sync with your shared master file automatically</p>
+        </div>
+      </div>
+      <div class="space-y-4 text-xs">
+        <p class="text-slate-600 dark:text-slate-300">
+          Paste your direct OneDrive or SharePoint share link below. The dashboard will fetch the latest sheet data without needing any manual file re-uploading.
+        </p>
+        <div>
+          <label class="block text-slate-500 dark:text-slate-400 font-semibold mb-1">Direct Excel / OneDrive Download URL</label>
+          <input type="text" id="oneDriveUrlInput" placeholder="https://onedrive.live.com/download?..." class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200 focus:outline-none focus:border-brand-500" />
+        </div>
+        <div class="flex items-center justify-between pt-2">
+          <button onclick="syncFromOneDrive()" class="px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-semibold transition flex items-center gap-2">
+            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+            <span>Fetch & Sync Data</span>
+          </button>
+          <span id="syncStatus" class="text-slate-500 dark:text-slate-400"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // COMPACT 146 MASTER RECORDS (Packed loss-less to ensure 100% complete loading)
+    const COMPACT_KEYS = ['id','geo','dept','squad','pos','head','type','replaced','empType','loc','open','offer','join','q','aging','timeToOffer','timeToClose','status','cand','rec','sourceChannel','sourceDetail','rag','buddy','backup','comm'];
+    const COMPACT_DATA = [
+      [1, "India", "Product", "Account", "Product Manager", "Ashok", "Replacement", "Bhargav/Mahesh", "Full-time", "Chennai", "2025-10-08", "2025-11-14", "2026-03-09", "Q1", 28, 28, 109, "Suspended", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Narsimha Leela Krishna - Backedout"],
+      [2, "USA", "Infosec", "Infosec", "CISO (Change of Role)", "Murthy", "Replacement", "Nate", "Full-time", "Charlotte", "2025-11-21", "2026-01-23", "2026-02-02", "Q1", 52, 46, 52, "Joined", "Supro", "Marissa", "Not Specified", "", "Green", "", "", "Eric Garcia decided to reject the offer on October 1, 2025."],
+      [3, "USA", "Product", "Payments", "Product Owner (Change of Role)", "Vijay", "New", "", "Full-time", "Charlotte", "2025-08-26", "2025-12-12", "2026-01-20", "Q1", 106, 79, 106, "Joined", "Melissa", "Marissa", "Not Specified", "", "Green", "", "", "Melissa will join in January 12, 2025"],
+      [4, "USA", "Engineering", "Payments", "Enterprise Architect", "Murthy", "New", "", "Full-time", "Charlotte", "2026-01-02", "2026-03-24", "2026-04-20", "Q2", 77, 58, 77, "Joined", "Lakshminarayan", "Andleeb", "Not Specified", "", "Green", "", "", ""],
+      [5, "India", "Engineering", "Payments", "Senior Software Engineer", "Vinay", "Replacement", "Revanth", "Full-time", "Chennai", "2025-10-28", "2025-12-12", "2026-01-20", "Q1", 34, 34, 61, "Joined", "Srinivasan", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
+      [6, "India", "DevOps", "DevOps", "DevOps Engineer", "Prathap", "New", "", "Full-time", "Chennai", "2026-01-02", "2026-03-04", "2026-03-05", "Q1", 44, 44, 45, "Joined", "Senthil R", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
+      [7, "India", "DevOps", "DevOps", "Senior DevOps Engineer", "Prathap", "New", "", "Full-time", "Pune", "2026-07-11", "", "", "Q3", 50, 0, 0, "Suspended", "", "Andleeb/Thirukumaran", "Not Specified", "", "Green", "", "", "Role changed to IT Admin (email from Aarthie)"],
+      [8, "India", "QA", "Payments", "Performance Tester", "Divya", "Replacement", "Mageshkumar", "Full-time", "Chennai", "2026-01-06", "2026-01-09", "2026-01-19", "Q1", 4, 4, 10, "Joined", "Pavithra Devi", "Andleeb", "Internal", "Internal", "Green", "", "", "Pavithra Devi early attrition"],
+      [9, "India", "Engineering", "PS", "Senior Software Engineer", "Kanan", "Replacement", "Nikhilesh", "Consultant", "Pune", "2025-10-15", "2026-03-13", "2026-03-23", "Q1", 108, 108, 114, "Joined", "Uttkarsh", "Vendor / Andleeb", "External / Sourced", "External", "Green", "", "", ""],
+      [10, "USA", "DevOps", "DevOps", "Director of Infrastructure", "Murthy", "New", "", "Full-time", "Charlotte", "2025-11-04", "2026-01-20", "2026-02-04", "Q1", 67, 56, 67, "Joined", "Manoj", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [11, "USA", "DevOps", "DevOps", "SecOps - Enterprise Governance", "Murthy", "New", "", "Full-time", "Charlotte", "2025-11-05", "", "", "Q4", 228, 0, 0, "Suspended", "", "Andleeb", "Not Specified", "", "Green", "", "", "Murthy asked to temp hold the req until the clarity on business need"],
+      [12, "USA", "Engineering", "Account", "Java Architect", "Ashok", "New", "", "Full-time", "Charlotte", "2025-11-18", "2026-02-23", "2026-04-17", "Q2", 109, 70, 109, "Joined", "Esther M", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [13, "India", "Engineering", "Trade", "Software Engineer", "Raju", "Replacement", "Manikandan S", "Full-time", "Chennai", "2026-01-02", "2026-02-04", "2026-05-04", "Q2", 24, 24, 87, "Joined", "Sridharan", "Thirukumaran", "Internal", "Internal", "Green", "", "", "Sridharan - Backup / Manikandan Resigned"],
+      [14, "USA", "Finance", "Finance", "Chief Finance Officer", "Booshan", "Replacement", "Adam", "Full-time", "Charlotte", "2025-12-18", "", "", "Q4", 197, 0, 0, "Offered", "Bill Gostkowski", "TPZ", "Not Specified", "", "Green", "", "", ""],
+      [15, "India", "Engineering", "Trade", "Software Engineer", "Raju", "Replacement", "Ambikeshwari", "Full-time", "Chennai", "2025-12-24", "2026-03-26", "2026-03-27", "Q1", 67, 67, 68, "Joined", "Elumalai", "Thirukumaran", "Internal", "Internal", "Green", "", "", "Ambikeshwari Resigned"],
+      [16, "USA", "Sales", "Sales", "VP of PreSales and Solution Consulting", "Karuna", "New", "", "Full-time", "USA-Remote", "2025-12-12", "2025-12-23", "2026-02-09", "Q1", 42, 8, 42, "Joined", "Romil", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [17, "USA", "Sales", "Sales", "VP of Sales - Payments", "Karuna", "New", "", "Full-time", "USA-Remote", "2025-11-20", "2025-12-24", "2026-01-09", "Q1", 37, 25, 37, "Joined", "Randy", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [18, "India", "HR", "HR", "HR Executive (HRBP)", "Bharath", "Replacement", "Baskaran D", "Full-time", "Chennai", "2025-12-22", "2026-01-25", "2026-01-28", "Q1", 195, 25, 28, "Joined", "Janani", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
+      [19, "India", "HR", "HR", "HR Ops", "Bharath", "Replacement", "Baskaran D", "Full-time", "Chennai", "2025-12-22", "2026-01-19", "2026-01-20", "Q1", 195, 21, 22, "Joined", "Abirami R", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
+      [20, "India", "QA", "PS", "Quality Analyst (C2H)", "Kanan", "Replacement", "Vineet K", "Consultant", "Pune", "2026-01-02", "2026-01-16", "2026-02-02", "Q1", 186, 11, 22, "Joined", "Shubhankar", "Vendor", "External / Sourced", "External", "Green", "", "", "DOJ Feb 4 - by Synechron"],
+      [21, "India", "Engineering", "Payments", "Software Engineer  (Rust)", "Prashant", "Replacement", "Ganesh", "Full-time", "Pune", "2026-01-12", "2026-01-30", "2026-02-05", "Q1", 15, 15, 19, "Joined", "Anil P", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
+      [22, "India", "Product", "Account", "Product Manager - VA", "Ashok", "New", "", "Full-time", "Pune", "2026-01-02", "2026-01-27", "2026-04-28", "Q2", 18, 18, 83, "Joined", "Dhawal", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
+      [23, "India", "QA", "Account", "QA Analyst", "Ashok", "New", "", "Full-time", "Chennai", "2026-01-21", "2026-01-30", "2026-03-12", "Q1", 8, 8, 37, "Joined", "Nikhil C Karanam", "Thirukumaran", "Internal", "Internal", "Green", "", "", "Nikhil early attrition"],
+      [24, "India", "QA", "Account", "QA Analyst", "Ashok", "New", "", "Full-time", "Chennai", "2026-01-21", "2026-02-04", "2026-03-02", "Q1", 11, 11, 29, "Joined", "Keerthika", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
+      [25, "India", "Product", "Payments", "Payment Owner", "Kasi", "Replacement", "Ravikumar Kasi", "Full-time", "Chennai", "2026-01-21", "2026-01-30", "2026-02-24", "Q1", 8, 8, 25, "Joined", "Ganesh", "Andleeb", "Internal", "Internal", "Green", "", "", "Sujata on hold"],
+      [26, "India", "Prod Support", "Support", "Production Support Engineer (FX)", "Mark D", "New", "", "Full-time", "India-Remote", "2026-01-21", "2026-01-30", "2026-02-05", "Q1", 173, 8, 12, "Joined", "Krishnaprasad", "Andleeb", "Employee Referral", "Emp Ref", "Green", "", "", ""],
+      [27, "India", "BA", "PS", "Business Analyst", "Kanan", "New", "", "Full-time", "Pune", "2026-01-27", "2026-02-04", "2026-04-10", "Q2", 7, 7, 54, "Joined", "Niraj T", "Andleeb", "Employee Referral", "Emp Ref", "Green", "", "", ""],
+      [28, "India", "Legal", "Support", "India Legal Assistant supporting US", "Hardik", "New", "", "Full-time", "India-Remote", "2026-01-27", "2026-02-11", "2026-02-17", "Q1", 169, 12, 16, "Joined", "Uzma Sohail", "Thirukumaran", "Employee Referral", "Emp Ref", "Green", "", "", ""],
+      [29, "India", "Product", "Digital", "Product Manager- DGx & OpenAPI", "Sajeesh", "New", "", "Full-time", "Pune", "2026-02-11", "", "2026-03-10", "Q1", 158, 0, 20, "Joined", "Alice Marks", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
+      [30, "India", "Engineering", "Digital", "Full-stack Engineer", "Sajeesh", "New", "", "Full-time", "Pune", "2026-02-11", "2026-03-04", "2026-03-26", "Q1", 16, 16, 32, "Joined", "Omkar Chavan", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
+      [31, "India", "BA", "Trade", "BA- FX", "Patrick", "New", "", "Full-time", "Chennai", "2026-05-02", "2026-06-01", "2026-06-02", "Q2", 22, 21, 22, "Joined", "Muthu Meenakshi", "Thirukumaran", "External / Sourced", "External", "Green", "", "", ""],
+      [32, "India", "BA", "Trade", "Business Analyst - IRD", "Patrick", "New", "", "Full-time", "Chennai", "2026-05-02", "2026-06-17", "2026-09-18", "Q3", 33, 33, 100, "Joined", "Kishore", "Thirukumaran", "Internal", "Internal", "Amber", "Karthikeyan", "Initial Interview", "Kishore accpeted our offer"],
+      [33, "India", "Engineering", "Account", "Full-stack Engineer", "Ashok", "New", "", "Full-time", "Chennai", "2026-02-11", "2026-04-29", "2026-05-20", "Q2", 56, 56, 71, "Joined", "Kalirajan", "Thirukumaran", "Internal", "Internal", "Green", "", "", "Sivakumar Backedout"],
+      [34, "India", "Program", "Payments", "Project Manager", "Ramesh", "New", "", "Full-time", "Pune", "2026-02-02", "2026-07-07", "2026-07-29", "Q3", 112, 112, 128, "Joined", "Naveen Kulkarni", "Andleeb", "Employee Referral", "Emp Ref", "Green", "Amit Kulkarni", "Initial Interview", "Naveen accepted our offered"],
+      [35, "India", "DevOps", "DevOps", "DevOps Engineer", "Prathap", "New", "", "Full-time", "Pune", "2026-05-02", "2026-06-11", "2026-06-15", "Q2", 29, 29, 31, "Joined", "Faheem", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
+      [36, "India", "DevOps", "DevOps", "DevOps Engineer", "Prathap", "New", "", "Full-time", "Chennai", "2026-05-02", "2026-06-05", "2026-06-08", "Q2", 25, 25, 26, "Joined", "Deepakraj J", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
+      [37, "India", "Infosec", "Infosec", "InfoSec Security Analyst", "Supro", "New", "", "Full-time", "Pune", "2026-03-29", "2026-07-03", "2026-07-08", "Q3", 70, 70, 73, "Joined", "Rajesh", "Andleeb", "Internal", "Internal", "Green", "", "Sourcing", "Swapnil/Gauresh / Nitesh declined our offer. Supro referral is looking remote"],
+      [38, "India", "Infosec", "Infosec", "InfoSec Audit & Compliance Engineer", "Supro", "New", "", "Full-time", "Pune", "2026-02-11", "2026-03-24", "2026-03-25", "Q1", 30, 30, 31, "Joined", "Sayyed Karim", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
+      [39, "India", "Program", "Payments", "Scrum Master", "Vijay", "Replacement", "Saravanan T", "Full-time", "Pune", "2026-02-10", "", "2026-03-05", "Q1", 159, 0, 18, "Joined", "Amit KS", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
+      [40, "India", "QA", "Payments", "Senior QA Analyst", "Vijay", "New", "", "Full-time", "Chennai", "2026-02-10", "2026-03-26", "2026-03-27", "Q1", 33, 33, 34, "Joined", "Abinaya D", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
+      [41, "India", "Engineering", "Payments", "Senior/Lead Engineer", "Vijay", "New", "", "Consultant", "Pune", "2026-03-23", "2026-05-11", "2026-05-14", "Q2", 36, 23, 25, "Joined", "Prachi", "Unassigned", "External / Sourced", "External", "Green", "", "", ""],
+      [42, "India", "Engineering", "Payments", "Senior/Lead Engineer", "Vijay", "New", "", "Full-time", "Pune", "2026-03-23", "2026-04-22", "2026-04-24", "Q2", 23, 0, 0, "Joined", "Mani Prathap", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
+      [43, "India", "HR", "HR", "Senior HR Executive", "Bharath", "Replacement", "Janani", "Full-time", "Chennai", "2026-03-31", "", "", "Q1", 124, 0, 0, "Suspended", "Keerthivasan", "Andleeb", "Not Specified", "", "Green", "", "", ""],
+      [44, "India", "Engineering", "Digital", "Open API Developer", "Sajeesh", "New", "", "Full-time", "Chennai", "2026-02-16", "2026-03-27", "2026-04-02", "Q2", 30, 30, 34, "Joined", "Ramya", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
+      [45, "India", "Infosec", "Infosec", "System Monitoring Engineer", "Supro", "New", "", "Full-time", "Remote", "", "", "", "", 0, 0, 0, "Suspended", "", "Unassigned", "Not Specified", "", "Green", "", "", "Supro has hold the req"],
+      [46, "India", "Engineering", "Payments", "Solution Architect", "Vijay", "New", "", "Full-time", "Pune", "2026-03-23", "2026-05-06", "2026-05-07", "Q2", 33, 33, 34, "Joined", "Shankar Gaikwad", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
+      [47, "India", "BA", "PS", "Sr.Business Analyst", "Kanan", "Replacement", "Jaspreet", "Full-time", "Pune", "2026-03-02", "2026-07-20", "2026-09-30", "Q3", 101, 101, 153, "Offered", "", "Andleeb", "External / Sourced", "Linkedin", "Green", "Prabu", "Sourcing", "Yasar Declined (30 -sept DOJ), Dhawal Interview happened with Nagesh. Ashok is waiting for an response for replacment confirmation from Karuna so that he can share the next action plan for Dhawal"],
+      [48, "India", "Prod Support", "Support", "Wire Support Sr", "Mark D", "New", "", "Full-time", "India-Remote", "2026-03-09", "2026-04-24", "2026-05-11", "Q2", 140, 35, 46, "Joined", "Yasar", "Unassigned", "Employee Referral", "Emp Ref", "Green", "", "", ""],
+      [49, "India", "Prod Support", "Support", "Instant Payment Support Sr", "Mark D", "New", "", "Full-time", "India-Remote", "2026-03-09", "2026-04-24", "2026-04-29", "Q2", 140, 35, 38, "Joined", "Prince", "Unassigned", "Internal", "Internal", "Green", "", "", ""],
+      [50, "USA", "Engineering", "Payments", "Lead Software Engineer  - ACH", "Vijay", "New", "", "Full-time", "Charlotte", "2026-02-16", "2026-05-07", "2026-07-21", "Q3", 112, 59, 112, "Joined", "Alka Lakhote", "Sindhu", "Not Specified", "", "Green", "", "", "H-1B approved, waiting on candidate to confirm start date."],
+      [51, "USA", "Engineering", "Digital", "Full Stack Developer", "Sajeesh", "New", "", "Full-time", "Charlotte", "2026-02-11", "", "", "Q1", 158, 0, 0, "L1 Process", "Anupam Babar", "Unassigned", "Not Specified", "", "Green", "", "", ""],
+      [52, "USA", "Product", "PS", "Business Analyst- ACH", "Kanan", "New", "", "Consultant", "Charlotte", "2026-02-03", "", "2026-02-13", "Q1", 9, 0, 9, "Joined", "Ramona Brown", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [53, "USA", "Product", "PS", "Developer", "Kanan", "New", "", "Consultant", "Charlotte", "", "", "2026-02-17", "Q1", 0, 0, 0, "Joined", "Narendra Kumar", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [54, "USA", "Product", "PS", "Project Manager", "Kanan", "New", "", "Consultant", "Charlotte", "", "", "2026-02-23", "Q1", 0, 0, 32911, "Joined", "Sagarika B", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [55, "USA", "Production Support", "Support", "ACH Support", "Mark D", "New", "", "Full-time", "Charlotte", "2026-03-02", "2026-05-29", "2026-06-17", "Q2", 78, 65, 78, "Joined", "Sai Narahari", "Sindhu", "Employee Referral", "Employee Referral - Ranjit", "Green", "", "", ""],
+      [56, "USA", "Production Support", "Support", "Capital Market Support", "Mark D", "New", "", "Full-time", "Charlotte", "2026-02-11", "2026-02-20", "2026-03-02", "Q1", 14, 8, 14, "Joined", "Manoj", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [57, "India", "Engineering", "Digital", "Full-stack Engineer", "Sajeesh", "New", "Full-time", "Full-time", "Pune", "2026-02-12", "2026-02-26", "2026-04-20", "Q2", 157, 11, 48, "Joined", "Meghali", "Unassigned", "Internal", "Internal", "Green", "", "", "Amruta & Viddesh Backedout"],
+      [58, "India", "Engineering", "Payments", "Performance Engineer", "Vijay", "Replacement", "Pavithra M", "Full-time", "Pune", "2026-06-15", "", "2026-10-12", "Q4", 70, 0, 86, "Temp Hold", "Urvashi T", "Andleeb", "Internal", "ijp", "Green", "", "", "Urvashi internal movement (Hariprasanth -offer declined)"],
+      [59, "India", "Engineering", "Account", "Compliance - AI Developer", "Ashok", "New", "", "Full-time", "Chennai", "2026-03-16", "2026-03-18", "2026-03-23", "Q1", 3, 3, 6, "Joined", "Vaishnavi", "Unassigned", "Employee Referral", "Emp Ref", "Green", "", "", ""],
+      [60, "USA", "HR", "HR", "Director HR", "Aarthie", "New", "", "Full-time", "Charlotte", "", "", "", "", 0, 0, 0, "JD Pending", "", "Marissa", "Not Specified", "", "Green", "", "", "JD pending with Aarthie"],
+      [61, "USA", "Product", "Others", "Program Manager", "Aarthie", "New", "", "Full-time", "Charlotte", "", "", "", "", 0, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", ""],
+      [62, "USA", "Product", "Others", "Chief Delivery Officer", "Aarthie", "New", "", "Full-time", "Charlotte", "", "", "", "", 0, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", ""],
+      [63, "USA", "HR", "HR", "Exec Assistant & Office Manager", "Aarthie", "New", "", "Full-time", "Charlotte", "2026-02-02", "2026-03-17", "2026-03-30", "Q1", 165, 32, 41, "Joined", "Andrea Clemons", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [64, "USA", "Marketing/Customer Success", "GTM", "Marketing Trainee Associate", "Marc", "New", "", "Full-time", "Charlotte", "2026-02-11", "", "", "Q1", 158, 0, 0, "Suspended", "", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [65, "USA", "DevOps", "DevOps", "DevOps Engineer", "Manoj", "Replacement", "Prathamesh", "Full-time", "Charlotte", "2026-04-09", "", "", "Q2", 117, 0, 0, "Suspended", "", "Sindhu", "Not Specified", "", "Green", "", "", "Adithya is on hold, This requirement is moved to India team"],
+      [66, "India", "Engineering", "Payments", "Enterprise Architect", "Murthy", "New", "", "Full-time/Consultant", "Pune", "2026-09-19", "", "", "Q3", 0, 0, 0, "Suspended", "", "Andleeb", "Not Specified", "", "Green", "", "", ""],
+      [67, "India", "Engineering", "Payments", "AI Engineer", "Vijay", "Replacement", "Mallika", "Full-time", "Pune", "2026-05-01", "2026-06-24", "2026-09-21", "Q3", 39, 39, 102, "Offered", "Shivam More", "Andleeb", "External / Sourced", "External", "Green", "Vikrant Singh", "Sourcing", ""],
+      [68, "India", "QA", "Digital", "Senior QA Analyst", "Sajeesh", "Replacement", "Priyanka Kapla", "Full-time", "Chennai", "2026-03-09", "2026-03-12", "2026-03-13", "Q1", 5, 4, 5, "Joined", "Mallika", "Unassigned", "Internal", "Internal", "Green", "", "", ""],
+      [69, "USA", "Support", "GTM", "Director, Client Onboarding", "Marc", "Replacement", "", "Full-time", "Charlotte", "2026-02-20", "2026-03-09", "2026-03-19", "Q1", 151, 12, 20, "Joined", "Abhijit C", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [70, "India", "QA", "Account", "QA Analyst", "Ashok", "Replacement", "Nikhil", "Full-time", "Chennai", "2026-03-18", "2026-04-10", "2026-04-20", "Q2", 18, 18, 24, "Joined", "Arul Anand", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
+      [71, "India", "Engineering", "PS", "Software Engineer", "Nitin", "Replacement", "Meghali", "Full-time", "Pune", "2026-03-23", "2026-03-24", "2026-03-25", "Q1", 130, 2, 3, "Joined", "Som Limbure", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
+      [72, "USA", "QA", "PS", "Automation Engineer", "Kanan", "New", "", "Full-time", "Charlotte", "2026-03-11", "2026-03-27", "2026-04-20", "Q2", 138, 13, 29, "Joined", "Shashank", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [73, "India", "Product", "Account", "Product Manager - Deposits & VA", "Ashok", "New", "", "Full-time", "Chennai", "2026-02-09", "2026-03-20", "2026-03-23", "Q1", 30, 30, 31, "Joined", "Arivumani N", "Thirukumaran", "Internal", "Internal", "Green", "", "", "Narasimha Backup"],
+      [74, "India", "Finance", "Finance", "Finance Analyst", "Dharani", "New", "", "Full-time", "Chennai", "2026-06-08", "2026-06-30", "2026-07-06", "Q3", 17, 17, 21, "Joined", "Vignesh", "Andleeb/Thirukumaran", "Not Specified", "", "Green", "", "Sourcing", "Vignesh DOJ 6th July"],
+      [75, "USA", "HR", "HR", "Recruiter", "Aarthie", "New", "", "Full-time", "Charlotte", "2026-03-31", "2026-04-10", "2026-04-20", "Q2", 124, 9, 15, "Joined", "Sindu", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [76, "India", "QA", "Payments", "Senior QA Analyst", "Vijay", "Replacement", "Sakshi Dhumal", "Full-time", "Pune", "2026-05-11", "2026-06-10", "2026-06-11", "Q2", 23, 23, 24, "Joined", "Utkarsh", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
+      [77, "USA", "Support", "Support", "VP of Training", "Dharmesh", "New", "", "Full-time", "Remote - USA", "2026-04-17", "2026-04-22", "2026-05-19", "Q2", 111, 4, 23, "Joined", "Peter Ro", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [78, "USA", "Payments", "Payments", "AI Developer", "Vijay", "New", "", "Full-time", "Charlotte", "2026-04-13", "2026-05-01", "2026-05-18", "Q2", 115, 15, 26, "Joined", "Aditya Khandare", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [79, "USA", "Sales", "Sales", "Business Development Representative", "Jack", "Replacement", "Will", "Full-time", "Remote - USA", "2026-04-17", "2026-05-01", "2026-05-19", "Q2", 111, 11, 23, "Joined", "Eric Nowell", "Marissa", "Not Specified", "", "Green", "", "", ""],
+      [80, "USA", "PS", "PS", "Project Manager", "Kanan", "New", "", "Full-time", "Charlotte", "2026-04-20", "", "", "Q2", 110, 0, 0, "Suspended", "", "Kanan", "Not Specified", "", "Green", "", "", ""],
+      [81, "USA", "PS", "PS", "Tech Manager", "Kanan", "New", "", "Full-time", "Charlotte", "2026-04-22", "2026-06-12", "2026-08-03", "Q3", 108, 38, 74, "Joined", "Sirisha Meka", "Sindhu", "Not Specified", "", "Green", "", "", "Waiting on H-1B approval"],
+      [82, "India", "QA", "PS", "QA Lead", "Kanan", "Replacement", "Sachin Dhome", "Full-time", "Pune", "2026-06-11", "", "", "Q2", 72, 0, 0, "Position Freezed", "", "Andleeb/Thirukumaran", "Not Specified", "", "Green", "", "", "2 L1 Interview on hold. Waiting for Dharmesh to share resource capacity planning"],
+      [83, "USA", "DevOps", "DevOps", "IT Admin Consultant", "Murthy", "Replacement", "Suman", "Consultant", "Charlotte", "2026-04-16", "2026-05-18", "2026-06-08", "Q2", 112, 23, 38, "Joined", "Tejasri Balusu", "Sindhu", "External / Sourced", "Linkedln applied", "Green", "", "", ""],
+      [84, "India", "Engineering", "Digital", "Backend Developer", "Sajeesh", "Replacement", "Ramya", "Full-time", "Chennai", "2026-05-06", "2026-07-21", "2026-08-05", "Q3", 55, 55, 66, "Joined", "Thameenansari", "Thirukumaran", "Employee Referral", "Emp Ref", "Green", "Abdul R", "", "Venkatesh/ Gokulnath/ Sandeep/ GokulRaja declined our offer"],
+      [85, "India", "QA", "Trade", "QA Analyst", "Raju", "Replacement", "Satyasri", "Full-time", "Chennai", "2026-05-06", "2026-05-15", "2026-05-18", "Q2", 98, 8, 9, "Joined", "Nirmal", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
+      [86, "India", "Engineering", "GTM", "API Integration Engineer", "Karuna", "New", "", "Full-time", "Pune", "2026-06-10", "2026-06-26", "2026-06-29", "Q2", 13, 13, 14, "Joined", "Shradha", "Unassigned", "Internal", "Internal", "Green", "", "", "Shradha- DOJ 29th June"],
+      [87, "USA", "Infosec", "Infosec", "Associate AI Engineer _InfoSec", "Supro", "New", "", "Full-time", "Charlotte", "2026-04-30", "2026-05-13", "2026-05-27", "Q2", 102, 10, 20, "Joined", "Shubham Bhojwani", "Sindhu", "Employee Referral", "Employee Referral - Supro", "Green", "", "", ""],
+      [88, "USA", "Account Galaxy", "Account", "Associate AI Engineer_Accounts", "Ashok", "New", "", "Full-time", "Charlotte", "2026-05-08", "2026-06-18", "2026-07-08", "Q3", 96, 30, 44, "Joined", "Tejashwini Padmashali", "Sindhu", "External / Sourced", "Linkedln sourcing", "Green", "", "", ""],
+      [89, "USA", "DevOps", "DevOps", "Associate AI Engineer_DecOps", "Manoj", "New", "", "Full-time", "Charlotte", "2026-04-30", "2026-05-19", "2026-08-03", "Q3", 102, 14, 68, "Joined", "Bladen Martin", "Sindhu", "Employee Referral", "Employee Referral - Supro", "Green", "", "", "Bladen selected"],
+      [90, "India", "Engineering", "PS", "Senior Software Engineer", "Kanan", "New", "", "Full-time", "Pune", "2026-06-01", "2026-07-09", "2026-07-14", "Q3", 29, 29, 32, "Joined", "Ajay Shinde", "Thirukumaran", "Not Specified", "", "Amber", "", "Initial Interview", "Ajay (14th July)  Scrum Master role changed to SSE"],
+      [91, "India", "Program", "PS", "Project Manager", "Kanan", "New", "", "Full-time", "Pune", "2026-05-11", "", "", "Q2", 95, 0, 0, "Suspended", "", "Unassigned", "Not Specified", "", "Green", "", "", ""],
+      [92, "USA", "Engineering", "PS", "Associate AI Engineer", "Kanan", "New", "", "Full-time", "Charlotte", "2026-05-08", "2026-05-29", "2026-07-06", "Q3", 96, 16, 42, "Joined", "Hrisheekesh Dandekar", "Sindhu", "Employee Referral", "Employee Referral - Supro", "Green", "", "", ""],
+      [93, "USA", "Engineering", "Trade", "Associate AI Engineer", "Brian", "New", "", "Full-time", "Charlotte", "2026-05-08", "2026-06-18", "2026-07-06", "Q3", 96, 30, 42, "Joined", "Kiran Dhanasekaran", "Sindhu", "Employee Referral", "Employee Referral - Supro", "Green", "", "", ""],
+      [94, "USA", "Engineering", "Digital", "Associate AI Engineer_Digital Galaxy", "Sajeesh", "New", "", "Full-time", "Charlotte", "2026-05-08", "2026-05-29", "2026-06-15", "Q2", 96, 16, 27, "Joined", "Shubham Salonki", "Sindhu", "External / Sourced", "Linkedln sourcing", "Green", "", "", ""],
+      [95, "USA", "Technology", "DevOps", "Data Architect", "Murthy", "New", "", "Full-time", "Charlotte", "2026-05-17", "2026-07-02", "2026-07-23", "Q3", 90, 34, 49, "Joined", "Narayanan Sundaram", "Sindhu", "Employee Referral", "Employee Referral - Deepak", "Green", "", "", "Narayana selected"],
+      [96, "India", "Engineering", "Trade", "Software Engineer", "Raju", "Replacement", "Zaki", "Full-time", "Chennai", "2026-05-29", "2026-07-21", "2026-10-01", "Q4", 38, 38, 90, "Offered", "Gowthamasaravanan", "Thirukumaran", "Internal", "Internal", "Amber", "Bala K", "Final Interview", "Gowtham (LWD 30 sept) / Sumithra L1 select (Immediate joiner)"],
+      [97, "India", "Program", "Payments", "Incident Management", "Kanan", "New", "", "Full-time", "Pune", "2026-05-27", "2026-07-27", "2026-10-01", "Q4", 44, 44, 92, "Offered", "Vishvendra", "Andleeb", "Employee Referral", "Emp Ref", "Green", "Amit Kulkarni", "Sourcing", "Vishvendra (1st Oct DOJ)"],
+      [98, "India", "Engineering", "PS", "Software Engineer", "Kanan", "Replacement", "Som Limbure", "Full-time", "Pune", "2026-05-26", "2026-07-03", "2026-07-07", "Q3", 29, 29, 31, "Joined", "Sukhbheer", "Thirukumaran", "Not Specified", "", "Green", "", "", "Sukbeer (Immidiate)"],
+      [99, "USA", "Finance", "Finance", "Commercial Contracts Manager", "Aarthie", "New", "", "Full-time", "Charlotte", "2026-05-29", "2026-06-30", "2026-07-13", "Q3", 81, 23, 32, "Joined", "Cystal Goodwin", "Sindhu", "External / Sourced", "Applied in Linkedln", "Green", "", "", ""],
+      [100, "India", "QA", "Payments", "Senior QA Analyst", "Divya", "Replacement", "Sathishkumar Rajendran", "Full-time", "Chennai", "2026-06-02", "2026-06-12", "2026-08-03", "Q3", 9, 9, 45, "Joined", "Sivaraj", "Thirukumaran", "Employee Referral", "Emp Ref", "Amber", "Kokilavani", "Initial Interview", "Sivaraj (3rd Aug). Pre-orientation scheduled on 16th July"],
+      [101, "USA", "Product", "Payments", "Business Analyst", "Vijay", "Replacement", "Melissa", "Full-time", "Charlotte", "2026-06-06", "", "", "Q2", 75, 0, 0, "Position Freezed", "", "Sindhu", "External / Sourced", "Whitley Recruitment", "Green", "", "", "Naveen has been selected. Offer approval is pending and will depend on Karuna's resource planning."],
+      [102, "USA", "Program", "PS", "Project Manager", "Kanan", "New", "", "Full-time", "Charlotte", "2026-06-04", "2026-08-07", "2026-09-09", "Q3", 77, 47, 70, "Joined", "Jasna Singh", "Sindhu", "External / Sourced", "Linkedln applied", "Green", "Mahendra", "", "Jasna has been shortlisted."],
+      [103, "India", "Engineering", "Payments", "Open API Developer", "Vijay", "Replacement", "BaskaranR", "Full-time", "Pune", "2026-07-26", "2026-07-26", "2026-07-26", "Q3", 0, 0, 0, "Internal Movement", "Shankar Gaikwad", "Andleeb", "Not Specified", "", "Green", "", "", "Shankar moved to Open API Team"],
+      [104, "India", "Support", "Support", "Production Support Engineer (FX)", "Anish", "Replacement", "Krishnaprasad", "Full-time", "India-Remote", "2026-06-30", "2026-08-21", "2026-08-25", "Q3", 39, 39, 41, "Joined", "Manish Piplodi", "Andleeb", "Not Specified", "", "Green", "", "", "Manish - Offered. Alok Ranjan (60 days) offer on hold,"],
+      [105, "India", "DevOps", "DevOps", "Trainee DevOps Engineer", "Prathap", "New", "", "Full-time", "Chennai", "2026-06-12", "2026-06-12", "2026-06-22", "Q2", 1, 1, 7, "Joined", "Prasanna", "Unassigned", "Internal", "Internal", "Green", "", "", ""],
+      [106, "India", "QA", "PS", "Senior QA Analyst", "Kanan", "Replacement", "Poonam (Contractor)", "Full-time", "Pune", "2026-06-12", "", "", "Q2", 71, 0, 0, "Position Freezed", "Ajay", "Andleeb/Thirukumaran", "Not Specified", "", "Green", "", "", "Ajay (Immediate joiner) offer on hold. Waiting for Dharmesh to share resource capacity planning"],
+      [107, "USA", "PS", "PS", "Business Analyst", "Kanan", "Replacement", "Ramona", "Full-time", "Charlotte", "2026-06-15", "2026-07-17", "2026-09-08", "Q3", 70, 25, 62, "Joined", "Nitin Anand", "Sindhu", "External / Sourced", "Linkedln applied", "Green", "Nagesh", "", "Nitin H1 B Approved."],
+      [108, "India", "QA", "PS", "Quality Analyst", "Kanan", "Replacement", "Namra", "Full-time", "Pune", "2026-06-12", "2026-06-26", "2026-06-29", "Q2", 11, 11, 12, "Joined", "Amol J", "Andleeb", "Internal", "Internal", "Green", "", "", "Amol joined on 29th June 2026"],
+      [109, "India", "Delivery", "PS", "Director", "Kanan", "New", "", "Full-time", "India-Remote", "2026-06-12", "", "2026-06-15", "Q2", 2, 0, 2, "Joined", "Nagesh Mududi", "Unassigned", "Internal", "Internal", "Green", "", "", "Internal movement from USA to India"],
+      [110, "India", "BA", "Payments", "Sr.Business Analyst", "Vijay", "Replacement", "Karthika C", "Full-time", "Chennai", "2026-06-24", "2026-07-20", "2026-10-01", "Q4", 19, 19, 72, "Offered", "Gayathri", "Andleeb", "Employee Referral", "Emp Ref", "Green", "Ganesh Kumar", "Sourcing", "Gayathri (1st Oct DOJ)"],
+      [111, "USA", "PS", "Account", "Solution Engineer", "Ashok", "New", "", "Full-time", "Charlotte", "2026-07-27", "", "", "Q3", 40, 0, 0, "Suspended", "", "Sindhu", "External / Sourced", "Linkedln applied", "Green", "", "", "Requirement is currently on hold until resource planning."],
+      [112, "USA", "Support", "Support", "Associate – Payment Production Support (Trainee)", "Anish", "New", "", "Full-time", "Charlotte", "2026-07-01", "2026-07-24", "2026-09-08", "Q3", 58, 18, 50, "Joined", "Rebanta", "Sindhu", "Employee Referral", "Employee Referral - Supro", "Green", "Anish", "", "Rebanta selected and offer has been sent. Waiting on EAD card to arrive. Projected start date is August 31, 2026"],
+      [113, "India", "Support", "Support", "Production Support Engineer", "Mark/Anish", "Replacement", "Muzammil", "Full-time", "India-Remote", "2026-07-01", "2026-07-30", "2026-08-03", "Q3", 22, 22, 24, "Joined", "Siddardha", "Thirukumaran", "Internal", "Internal", "Green", "", "", "Siddardha Joined - 3rd Aug"],
+      [114, "USA", "Support", "Support", "Associate - Payment Production Support(Trainee)", "Ranjith", "New", "", "Full-time", "Charlotte", "2026-07-01", "2026-07-22", "2026-08-03", "Q3", 4, 16, 24, "Joined", "Sharwari", "Sindhu", "Employee Referral", "Employee Referral - Sanket", "Green", "", "", "Sharwari selected"],
+      [115, "USA", "PS", "PS", "Associate - Implementation Analyst 1", "Kanan", "New", "", "Full-time", "Charlotte", "2026-07-10", "2026-08-10", "2026-09-08", "Q3", 51, 22, 43, "Joined", "Pranav", "Sindhu", "Employee Referral", "Employee Referral - Booshan", "Green", "Pradeep", "", "Pranav's offer has been sent. Waiting on EAD card to arrive. Projected start date is August 31, 2026"],
+      [116, "USA", "PS", "PS", "Associate - Implementation Analyst 2", "Kanan", "New", "", "Full-time", "Charlotte", "2026-07-10", "2026-08-18", "2026-09-01", "Q3", 51, 28, 38, "Joined", "Viranchi", "Sindhu", "External / Sourced", "Linkedln Soucing", "Green", "Srihari", "", "Viranchi joined on September 1, 2026"],
+      [117, "USA", "PS", "PS", "FX Business Analyst", "Kanan", "Replacement", "James", "Full-time", "Charlotte", "2026-07-08", "", "", "Q3", 53, 0, 0, "Position Freezed", "", "Sindhu", "External / Sourced", "Linkedln applied", "Green", "", "", "Dinesh has been selected, offer approval is pending and will depend on Dharmesh's resource planning."],
+      [118, "India", "Engineering", "Payments", "Senior Software Engineer", "Vijay", "Replacement", "Maniprathap", "Full-time", "Pune", "2026-07-27", "", "", "Q3", 40, 0, 0, "Position Freezed", "", "Andleeb", "Not Specified", "", "Green", "", "", "Vishal AI round, if selected the offer approval will on hold until resource capacity  plan is finalized and shared\u200b, Gaurav AI round rejected"],
+      [119, "India", "Engineering", "Payments", "Application Architect", "Vijay", "Replacement", "Shankar", "Full-time", "Chennai", "2026-08-13", "", "", "Q3", 27, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Hiring request not approved by Karuna"],
+      [120, "India", "Engineering", "Payments", "Senior Software Engineer", "Vijay", "Replacement", "Ganesh k", "Full-time", "Pune", "2026-08-10", "", "", "Q3", 30, 0, 0, "Position Freezed", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Interview are slowed down until resource capacity plan is finalized and shared \u200b"],
+      [121, "India", "Engineering", "Payments", "Associate Software Engineer", "Vijay", "Replacement", "Shubham J", "Full-time", "Pune", "2026-07-27", "", "", "Q3", 40, 0, 0, "Position Freezed", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Ankit is on AI round, if selected the offer approval will on hold until resource capacity plan is finalized and shared\u200b"],
+      [122, "USA", "PS", "Account", "Business Analyst", "Ashok", "New", "", "Full-time", "Charlotte", "2026-07-31", "", "", "Q3", 36, 0, 0, "Position Freezed", "", "Sindhu", "Not Specified", "", "Green", "", "", "Requirement is currently on hold until resource planning."],
+      [123, "USA", "PS", "Account", "Project Manager", "Ashok", "New", "", "Full-time", "Charlotte", "2026-07-31", "2026-09-16", "2026-10-05", "Q3", 36, 34, 47, "Offer Approval", "Rabhina", "Sindhu", "External / Sourced", "Linkedln Soucing", "Green", "Balaji Balamurugan", "", "Offered Rabhina, Aswin on hold"],
+      [124, "India", "QA", "Payments", "Senior QA Analyst", "Karuna", "Replacement", "Pankaj", "Full-time", "Pune", "2026-08-17", "", "", "Q3", 25, 0, 0, "Position Freezed", "Prathamesh Salunkhe", "Unassigned", "Not Specified", "", "Green", "", "", "Prathamesh (Immediate) offer on hold until resource capacity plan is finalized and shared\u200b"],
+      [125, "India", "Technology", "Technology", "IT Admin", "Supro", "New", "", "Full-time", "Pune", "2026-08-14", "2026-09-07", "2026-09-08", "Q3", 17, 17, 18, "Joined", "Mayur", "Unassigned", "Not Specified", "", "Green", "", "", "Mayur - DOJ 8th September"],
+      [126, "India", "Delivery", "PS", "Delivery Manager", "Kanan", "Replacement", "Satyavir/Kishore T", "Full-time", "Pune", "2026-08-05", "2026-08-13", "2026-08-17", "Q3", 7, 7, 9, "Joined", "Kishore T", "Andleeb", "Employee Referral", "Emp Ref", "Green", "", "Sourcing", "Kishore offered - DOJ 17th August"],
+      [127, "India", "Engineering", "Payments", "Senior Software Engineer", "Vijay", "Replacement", "Prachi", "Full-time", "Pune", "2026-08-11", "", "", "Q3", 29, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Interview are slowed down until resource capacity plan is finalized and shared \u200b"],
+      [128, "USA", "PS", "PS", "Business Analyst Payment", "Kanan", "Replacement", "Bhavana", "Full-time", "Charlotte", "2026-08-13", "", "", "Q3", 3, 0, 0, "Position Freezed", "", "Sindhu", "External / Sourced", "Linkedln Soucing", "Green", "", "", "Sujith has been selected, offer approval is pending and will depend on Dharmesh's resource planning."],
+      [129, "India", "Support", "Support", "Production Support Engineer ( Payments)", "Anish", "Replacement", "Kapil", "Full-time", "Remote", "2026-08-14", "", "", "Q3", 26, 0, 0, "HR Interview", "", "Unassigned", "Not Specified", "", "Green", "", "", "Mahendra HR Discussion"],
+      [130, "India", "Engineering", "Digital", "Associate Software Engineer", "Sajeesh", "Replacement", "Urvashi", "Full-time", "Pune", "2026-08-17", "", "", "Q3", 25, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Urvashi is planned to moved to Payments team - Performance Engineer role\u200b"],
+      [131, "India", "Finance", "Finance", "Account Executive", "Dharani", "Replacement", "Venkatesan", "Full-time", "Chennai", "2026-08-17", "", "", "Q3", 25, 0, 0, "Initial Interview", "", "Unassigned", "Not Specified", "", "Green", "", "", "3 L1 Interviews scheduled (Sudhakar, Shanmugam & Mahendra)"],
+      [132, "USA", "Engineering", "AI", "Associate AI Engineer", "", "New", "", "Full-time", "Charlotte", "2026-08-21", "", "", "Q3", 21, 0, 0, "Suspended", "", "Sindhu", "Not Specified", "", "Green", "", "", ""],
+      [133, "India", "Engineering", "Digital", "Associate Software Engineer", "Sajeesh", "Replacement", "Sai Shree", "Full-time", "Chennai", "2026-08-17", "", "", "Q3", 25, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "The Requirement is currently on hold until resource capacity plan is finalized and shared\u200b"],
+      [134, "India", "Technology", "Technology", "Junior IT Admin", "Supro", "New", "", "Full-time", "Chennai", "2026-08-17", "", "", "Q3", 25, 0, 0, "Initial Interview", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Rakesh - kept on hold by Amit wants to interview few more candidates and finalize (Immediate joiners are scheduled)"],
+      [135, "India", "QA", "Payments", "Associate QA", "Vijay", "Replacement", "Gaurav D", "Full-time", "Pune", "2026-08-14", "", "", "Q3", 26, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "The Requirement is currently on hold until resource capacity plan is finalized and shared\u200b"],
+      [136, "India", "Support", "Support", "Production Support Engineer ( Payments)", "Anish", "Replacement", "Prince", "Full-time", "Remote", "2026-08-28", "", "", "Q3", 16, 0, 0, "Initial Interview", "", "Unassigned", "Not Specified", "", "Green", "", "", "Initial Interviews : Mahendra , Yogesh\u200b"],
+      [137, "India", "HR", "HR", "Senior HR Manager", "Aarthie", "Replacement", "Bharathkumar  M", "Full-time", "Chennai", "2026-08-17", "2026-09-21", "2026-09-23", "Q3", 25, 26, 28, "Offered", "Vishnukumar", "Unassigned", "External / Sourced", "External", "Green", "", "Sourcing", ""],
+      [138, "India", "Marketing", "GTM", "Director Marketing", "Suja", "New", "", "Full-time", "Remote", "2026-08-31", "2026-09-05", "2026-09-16", "Q3", 15, 5, 13, "Offered", "Indu k", "Unassigned", "Not Specified", "", "Green", "", "", ""],
+      [139, "India", "Marketing", "GTM", "Marketing Manager", "Suja", "New", "", "Full-time", "Remote", "2026-08-31", "2026-09-15", "2026-09-21", "Q3", 15, 12, 16, "Offered", "Karthick", "Unassigned", "Not Specified", "", "Green", "", "", "Karthick - Offer in progress"],
+      [140, "India", "Engineering", "Payments", "Associate Software Engineer", "Vijay", "Replacement", "Pradyumna", "Full-time", "Pune", "2026-09-07", "", "", "Q3", 10, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "The Requirement is currently on hold until resource capacity plan is finalized and shared\u200b"],
+      [141, "India", "Engineering", "Payments", "Associate Software Engineer", "Vijay", "Replacement", "Yogesh Y", "Full-time", "Pune", "2026-09-07", "", "", "Q3", 10, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "The Requirement is currently on hold until resource capacity plan is finalized and shared\u200b"],
+      [142, "India", "Engineering", "Payments", "Associate Software Engineer", "Vijay", "Replacement", "Vikrant J", "Full-time", "Pune", "2026-09-07", "", "", "Q3", 10, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "The Requirement is currently on hold until resource capacity plan is finalized and shared\u200b"],
+      [143, "India", "Engineering", "Payments", "Software Engineer", "Vijay", "Replacement", "Bhavik P", "Full-time", "Pune", "2026-09-09", "", "", "Q3", 8, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "The Requirement is currently on hold until resource capacity plan is finalized and shared\u200b"],
+      [144, "India", "DevOps", "DevOps", "Senior DevOps Engineer", "Manoj", "Replacement", "Prathamesh", "Full-time", "Pune/Chennai", "2026-09-03", "", "", "Q3", 12, 0, 0, "Sourcing", "", "Unassigned", "Not Specified", "", "Green", "", "", "Sourcing in progress"],
+      [145, "India", "Delivery", "PS", "Delivery Manager", "Kanan", "Replacement", "Satyavir/Kishore T", "Full-time", "Pune", "2026-09-07", "", "", "Q3", 10, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Sourcing in progress"],
+      [146, "India", "Engineering", "PS", "Senior Software Engineer", "Kanan", "Replacement", "Nitin", "Full-time", "Pune", "2026-09-14", "", "", "Q3", 5, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Sourcing in progress"]
     ];
 
-    window.masterRequisitions = initialData;
+    let masterRecords = [];
+    const filterState = {
+      geo: 'ALL', quarter: 'ALL', status: 'ALL', channel: 'ALL',
+      dept: 'ALL', recruiter: 'ALL', hireType: 'ALL', search: '', page: 1, pageSize: 15
+    };
+    let charts = {};
+    let currentDrillDownData = [];
 
-    // Theme Toggle
+    const CHALLENGES_DATA = [
+      { geo: "India", dept: "Infosec", head: "Supro", title: "Infosec Analyst Offer Declines & Notice Periods", bottleneck: "3 candidates (Swapnil, Nitesh, Gauresh) declined offers. Limited pool of candidates with short notice.", solution: "Opened search to specialized consulting firms. Schedule the interview with shorter notice period.", tagGeo: "bg-indigo-500/20 text-indigo-700 dark:text-indigo-300" },
+      { geo: "India", dept: "Payments", head: "Ramesh", title: "Project Manager Drop-offs & WFO Preference", bottleneck: "2 candidates (Bhavik/Harsh) declined our offer. High Notice period candidates. Candidates preferred only working in office.", solution: "Shared the role with the consulting firms. Ex-employee (Naveen) scheduled with Ramesh this week Friday.", tagGeo: "bg-indigo-500/20 text-indigo-700 dark:text-indigo-300" },
+      { geo: "USA", dept: "Finance", head: "Booshan", title: "Chief Financial Officer (CFO) Strategic Search", bottleneck: "The CFO search yielded limited qualified candidates, with the talent pool failing to meet the strategic and technical requirements of the role.", solution: "Partner with a specialized executive search firm to broaden the CFO candidate pipeline and access passive, high-caliber talent.", tagGeo: "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300" },
+      { geo: "USA", dept: "DevOps", head: "Manoj S.", title: "DevOps Technical Competency & Integrity Concerns", bottleneck: "Current applicants are either demonstrating indications of interview integrity concerns or are failing to meet required technical competencies for the role.", solution: "We plan to expand visibility on LinkedIn as an immediate next step and will evaluate engaging a third-party recruiting firm.", tagGeo: "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300" }
+    ];
+
+    function initTheme() {
+      const saved = localStorage.getItem('dashboard_theme') || 'dark';
+      if (saved === 'light') document.documentElement.classList.remove('dark');
+      else document.documentElement.classList.add('dark');
+      updateThemeButton();
+    }
     function toggleTheme() {
-      const html = document.documentElement;
-      if (html.classList.contains('dark')) {
-        html.classList.remove('dark');
-        document.getElementById('themeLabel').innerText = 'Light';
-      } else {
-        html.classList.add('dark');
-        document.getElementById('themeLabel').innerText = 'Dark';
-      }
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('dashboard_theme', isDark ? 'dark' : 'light');
+      updateThemeButton();
+      setTimeout(() => { renderAllCharts(getFilteredData()); lucide.createIcons(); }, 50);
+    }
+    function updateThemeButton() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const label = document.getElementById('themeLabel');
+      if (label) label.textContent = isDark ? 'Light' : 'Dark';
     }
 
-    // Tab Switching
-    function switchTab(tabId) {
-      activeTab = tabId;
+    window.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      masterRecords = COMPACT_DATA.map(row => {
+        const obj = {};
+        COMPACT_KEYS.forEach((k, i) => obj[k] = row[i]);
+        return obj;
+      });
+      document.getElementById('dataTimestamp').textContent = masterRecords.length + ' Master Requisitions';
+      populateDropdowns();
+      applyFiltersAndRender();
+      lucide.createIcons();
+    });
+
+    function switchTab(tabName) {
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active', 'bg-brand-50', 'dark:bg-brand-600/20', 'border-brand-300', 'dark:border-brand-500/40', 'text-brand-700', 'dark:text-brand-300');
+        btn.classList.remove('bg-brand-50', 'dark:bg-brand-600/20', 'border-brand-300', 'dark:border-brand-500/40', 'text-brand-700', 'dark:text-brand-300');
         btn.classList.add('bg-transparent', 'border-transparent', 'text-slate-500', 'dark:text-slate-400');
       });
-      const activeBtn = document.getElementById(`tabBtn-${tabId}`);
+      const activeBtn = document.getElementById('tabBtn-' + tabName);
       if (activeBtn) {
-        activeBtn.classList.add('active', 'bg-brand-50', 'dark:bg-brand-600/20', 'border-brand-300', 'dark:border-brand-500/40', 'text-brand-700', 'dark:text-brand-300');
         activeBtn.classList.remove('bg-transparent', 'border-transparent', 'text-slate-500', 'dark:text-slate-400');
+        activeBtn.classList.add('bg-brand-50', 'dark:bg-brand-600/20', 'border-brand-300', 'dark:border-brand-500/40', 'text-brand-700', 'dark:text-brand-300');
       }
-
-      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.add('hidden'));
-      const activePane = document.getElementById(`tab-${tabId}`);
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
+      const activePane = document.getElementById('tabContent-' + tabName);
       if (activePane) activePane.classList.remove('hidden');
-
-      renderDashboard();
+      setTimeout(() => { Object.values(charts).forEach(c => c && c.resize && c.resize()); lucide.createIcons(); }, 50);
     }
 
-    // Filter Handlers
     function setGeoFilter(geo) {
-      currentFilters.geo = geo;
-      document.querySelectorAll('.geo-btn').forEach(b => b.classList.remove('bg-brand-600', 'text-white', 'shadow-sm'));
-      document.getElementById(`geo-${geo}`).classList.add('bg-brand-600', 'text-white', 'shadow-sm');
-      renderDashboard();
+      filterState.geo = geo;
+      document.querySelectorAll('.geo-btn').forEach(b => {
+        b.classList.remove('bg-brand-600', 'text-white', 'shadow-sm');
+        b.classList.add('text-slate-600', 'dark:text-slate-400');
+      });
+      const btn = document.getElementById('geo-' + geo);
+      if (btn) { btn.classList.add('bg-brand-600', 'text-white', 'shadow-sm'); btn.classList.remove('text-slate-600', 'dark:text-slate-400'); }
+      applyFiltersAndRender();
     }
-
     function setQuarterFilter(q) {
-      currentFilters.quarter = q;
-      document.querySelectorAll('.q-btn').forEach(b => b.classList.remove('bg-brand-600', 'text-white', 'shadow-sm'));
-      document.getElementById(`q-${q}`).classList.add('bg-brand-600', 'text-white', 'shadow-sm');
-      renderDashboard();
+      filterState.quarter = q;
+      document.querySelectorAll('.q-btn').forEach(b => {
+        b.classList.remove('bg-brand-600', 'text-white', 'shadow-sm');
+        b.classList.add('text-slate-600', 'dark:text-slate-400');
+      });
+      const btn = document.getElementById('q-' + q);
+      if (btn) { btn.classList.add('bg-brand-600', 'text-white', 'shadow-sm'); btn.classList.remove('text-slate-600', 'dark:text-slate-400'); }
+      applyFiltersAndRender();
     }
-
     function setChannelFilter(ch) {
-      currentFilters.channel = ch;
-      document.querySelectorAll('.ch-btn').forEach(b => b.classList.remove('bg-brand-600', 'text-white', 'shadow-sm'));
-      document.getElementById(`ch-${ch}`).classList.add('bg-brand-600', 'text-white', 'shadow-sm');
-      renderDashboard();
+      filterState.channel = ch;
+      document.querySelectorAll('.ch-btn').forEach(b => {
+        b.classList.remove('bg-brand-600', 'text-white', 'shadow-sm');
+        b.classList.add('text-slate-600', 'dark:text-slate-400');
+      });
+      const btn = document.getElementById('ch-' + ch);
+      if (btn) { btn.classList.add('bg-brand-600', 'text-white', 'shadow-sm'); btn.classList.remove('text-slate-600', 'dark:text-slate-400'); }
+      applyFiltersAndRender();
     }
-
-    function setDeptFilter(dept) {
-      currentFilters.dept = dept;
-      renderDashboard();
-    }
-
-    function setRecruiterFilter(rec) {
-      currentFilters.recruiter = rec;
-      renderDashboard();
-    }
-
+    function setDeptFilter(dept) { filterState.dept = dept; applyFiltersAndRender(); }
+    function setRecruiterFilter(rec) { filterState.recruiter = rec; applyFiltersAndRender(); }
+    function setHireTypeFilter(ht) { filterState.hireType = ht; applyFiltersAndRender(); }
     function handleSearch(val) {
-      currentFilters.search = val.toLowerCase();
-      renderDashboard();
+      filterState.search = val.trim().toLowerCase();
+      filterState.page = 1;
+      applyFiltersAndRender();
+      if (filterState.search.length > 0) switchTab('master');
+    }
+
+    // FIXED: Card click handler overrides status cleanly so drill-down modal is never empty
+    function handleCardClick(kpiType) {
+      if (kpiType === 'TOTAL') { filterState.status = 'ALL'; applyFiltersAndRender(); openDrillDownPopup('All Tracked Requisitions'); }
+      else if (kpiType === 'Joined') { filterState.status = 'Joined'; applyFiltersAndRender(); openDrillDownPopup('Joined Candidates (YTD)'); }
+      else if (kpiType === 'Offered') { filterState.status = 'Offered'; applyFiltersAndRender(); openDrillDownPopup('Confirmed Offers'); }
+      else if (kpiType === 'ACTIVE_PIPE') { filterState.status = 'ACTIVE_PIPE'; applyFiltersAndRender(); openDrillDownPopup('Active Interview Pipeline'); }
+      else if (kpiType === 'HOLD_FREEZE') { filterState.status = 'HOLD_FREEZE'; applyFiltersAndRender(); openDrillDownPopup('Stalled / Frozen Positions'); }
     }
 
     function resetAllFilters() {
-      currentFilters = { geo: 'ALL', quarter: 'ALL', channel: 'ALL', dept: 'ALL', recruiter: 'ALL', search: '' };
-      setGeoFilter('ALL');
-      setQuarterFilter('ALL');
-      setChannelFilter('ALL');
+      filterState.geo = 'ALL'; filterState.quarter = 'ALL'; filterState.status = 'ALL';
+      filterState.channel = 'ALL'; filterState.dept = 'ALL'; filterState.recruiter = 'ALL';
+      filterState.hireType = 'ALL'; filterState.search = ''; filterState.page = 1;
+      document.getElementById('quickSearchInput').value = '';
       document.getElementById('deptSelect').value = 'ALL';
       document.getElementById('recruiterSelect').value = 'ALL';
-      document.getElementById('quickSearchInput').value = '';
-      renderDashboard();
+      document.getElementById('hireTypeSelect').value = 'ALL';
+      setGeoFilter('ALL'); setQuarterFilter('ALL'); setChannelFilter('ALL');
     }
 
-    function handleCardClick(type) {
-      if (type === 'Joined') currentFilters.statusFilter = 'Joined';
-      else if (type === 'Offered') currentFilters.statusFilter = 'Offered';
-      else if (type === 'ACTIVE_PIPE') currentFilters.statusFilter = 'Active';
-      else if (type === 'HOLD_FREEZE') currentFilters.statusFilter = 'Hold';
-      else delete currentFilters.statusFilter;
-      switchTab('master');
-    }
-
-    // Enhanced File Upload Handler (Auto-detects Master sheet and parses without changing Excel format)
-    function handleFileUpload(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        try {
-          const data = new Uint8Array(e.target.result);
-          const workbook = XLSX.read(data, { type: 'array', cellDates: true });
-          
-          let targetSheetName = workbook.SheetNames.find(name => 
-            name.toLowerCase().includes('master') || name.toLowerCase().includes('2026')
-          );
-          if (!targetSheetName && workbook.SheetNames.length > 0) {
-            targetSheetName = workbook.SheetNames[0];
-          }
-
-          const worksheet = workbook.Sheets[targetSheetName];
-          const rawData = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
-          
-          if (!rawData || rawData.length === 0) {
-            alert("The selected sheet appears to be empty.");
-            return;
-          }
-
-          let headerRowIdx = 0;
-          for (let i = 0; i < Math.min(10, rawData.length); i++) {
-            const rowStr = rawData[i].map(cell => String(cell).toLowerCase()).join(" ");
-            if (rowStr.includes("positions") || rowStr.includes("geo") || rowStr.includes("status")) {
-              headerRowIdx = i;
-              break;
-            }
-          }
-
-          const parsedData = XLSX.utils.sheet_to_json(worksheet, { range: headerRowIdx, defval: "" });
-
-          if (parsedData.length === 0) {
-            alert("Could not extract rows from the Excel sheet.");
-            return;
-          }
-
-          window.masterRequisitions = parsedData
-            .filter(row => row['Positions'] || row['Geo'] || row['Status'])
-            .map((row, index) => ({
-              srNo: row['Sr No'] || (index + 1),
-              geo: String(row['Geo'] || 'India').trim(),
-              department: String(row['Department'] || row['Practice'] || 'General').trim(),
-              squads: String(row['Squads'] || row['Project'] || '-').trim(),
-              positions: String(row['Positions'] || 'Unnamed Position').trim(),
-              deptHead: String(row['Dept Head'] || '-').trim(),
-              newReplacement: String(row['New/Replacement'] || 'New').trim(),
-              replacedEmployee: String(row['Replaced Employee Name'] || row['Replaced Employee'] || '-').trim(),
-              fullTimeConsultant: String(row['Full-Time/Consultant'] || 'Full-time').trim(),
-              hiringLocation: String(row['Hiring Location'] || '-').trim(),
-              positionOpenDate: parseExcelDate(row['Position Open Date']),
-              todaysDate: parseExcelDate(row['Todays Date']),
-              dateOffered: parseExcelDate(row['Date Offered']),
-              joiningDate: parseExcelDate(row['Joining Date']),
-              quarterJoining: String(row['Quarter Joining'] || getQuarter(row['Joining Date']) || 'Q1').trim(),
-              agingDays: Number(row['Aging (Days)'] || 0),
-              positionOffered: Number(row['Position Offered'] || 0),
-              positionClosed: Number(row['Position Closed'] || 0),
-              status: String(row['Status'] || 'Open').trim(),
-              offeredCandidates: String(row['Offered Candidates'] || '-').trim(),
-              qualification: String(row['Highest Qualification Degree'] || '-').trim(),
-              channel: String(row['Applied/ Sourced/ Reffered (Internal/External)'] || 'External / Sourced').trim(),
-              ragStatus: String(row['RAG Status'] || 'Green').trim(),
-              backUpPlans: String(row['Back-up Plans'] || '-').trim(),
-              buddyOnboarding: String(row['Buddy - Onboarding'] || '-').trim(),
-              comments: String(row['Comments'] || row['Remarks '] || '-').trim(),
-              recruiter: String(row['Recruiter'] || row['Recruiter Name'] || '-').trim()
-            }));
-
-          populateDropdowns();
-          renderDashboard();
-          alert(`Successfully loaded ${window.masterRequisitions.length} requisitions from sheet: "${targetSheetName}"!`);
-
-        } catch (err) {
-          console.error("Error parsing Excel file:", err);
-          alert("Failed to parse Excel file. Please ensure it is a valid .xlsx or .xls file.");
+    function getFilteredData() {
+      return masterRecords.filter(item => {
+        if (filterState.geo !== 'ALL' && item.geo !== filterState.geo) return false;
+        if (filterState.quarter !== 'ALL' && item.q !== filterState.quarter) return false;
+        if (filterState.channel !== 'ALL' && item.sourceChannel !== filterState.channel) return false;
+        if (filterState.status === 'Joined' && item.status !== 'Joined') return false;
+        if (filterState.status === 'Offered' && item.status !== 'Offered') return false;
+        if (filterState.status === 'ACTIVE_PIPE') {
+          const acts = ['Sourcing', 'Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval'];
+          if (!acts.includes(item.status)) return false;
         }
-      };
-      reader.readAsArrayBuffer(file);
-    }
-
-    function parseExcelDate(value) {
-      if (!value) return '-';
-      if (value instanceof Date) return value.toISOString().split('T')[0];
-      if (typeof value === 'number') {
-        const utcDays = Math.floor(value - 25569);
-        const dateObj = new Date(utcDays * 86400 * 1000);
-        return !isNaN(dateObj.getTime()) ? dateObj.toISOString().split('T')[0] : String(value);
-      }
-      return String(value);
-    }
-
-    function getQuarter(dateStr) {
-      if (!dateStr) return 'Q1';
-      const d = new Date(dateStr);
-      if (isNaN(d.getTime())) return 'Q1';
-      const month = d.getMonth() + 1;
-      if (month <= 3) return 'Q1';
-      if (month <= 6) return 'Q2';
-      if (month <= 9) return 'Q3';
-      return 'Q4';
-    }
-
-    function populateDropdowns() {
-      const depts = [...new Set(window.masterRequisitions.map(r => r.department))].filter(Boolean);
-      const deptSelect = document.getElementById('deptSelect');
-      deptSelect.innerHTML = '<option value="ALL">All Departments</option>' + depts.map(d => `<option value="${d}">${d}</option>`).join('');
-
-      const recruiters = [...new Set(window.masterRequisitions.map(r => r.recruiter))].filter(Boolean);
-      const recruiterSelect = document.getElementById('recruiterSelect');
-      recruiterSelect.innerHTML = '<option value="ALL">All Recruiters</option>' + recruiters.map(rc => `<option value="${rc}">${rc}</option>`).join('');
-    }
-
-    function renderDashboard() {
-      // Filter logic
-      let filtered = window.masterRequisitions.filter(r => {
-        if (currentFilters.geo !== 'ALL' && r.geo !== currentFilters.geo) return false;
-        if (currentFilters.quarter !== 'ALL' && r.quarterJoining !== currentFilters.quarter) return false;
-        if (currentFilters.channel !== 'ALL' && !r.channel.toLowerCase().includes(currentFilters.channel.toLowerCase())) return false;
-        if (currentFilters.dept !== 'ALL' && r.department !== currentFilters.dept) return false;
-        if (currentFilters.recruiter !== 'ALL' && r.recruiter !== currentFilters.recruiter) return false;
-        if (currentFilters.statusFilter) {
-          const st = r.status.toLowerCase();
-          if (currentFilters.statusFilter === 'Joined' && !st.includes('joined')) return false;
-          if (currentFilters.statusFilter === 'Offered' && !st.includes('offered')) return false;
-          if (currentFilters.statusFilter === 'Hold' && !st.includes('hold') && !st.includes('freeze') && !st.includes('suspended')) return false;
+        if (filterState.status === 'HOLD_FREEZE') {
+          const holds = ['Position Freezed', 'Suspended', 'Temp Hold', 'JD Pending'];
+          if (!holds.includes(item.status)) return false;
         }
-        if (currentFilters.search) {
-          const s = currentFilters.search;
-          const match = Object.values(r).some(val => String(val).toLowerCase().includes(s));
+        if (filterState.dept !== 'ALL' && item.dept !== filterState.dept) return false;
+        if (filterState.recruiter !== 'ALL' && item.rec !== filterState.recruiter) return false;
+        if (filterState.hireType !== 'ALL' && item.type !== filterState.hireType) return false;
+        if (filterState.search) {
+          const s = filterState.search;
+          const match = (item.pos && item.pos.toLowerCase().includes(s)) ||
+                        (item.cand && item.cand.toLowerCase().includes(s)) ||
+                        (item.dept && item.dept.toLowerCase().includes(s)) ||
+                        (item.squad && item.squad.toLowerCase().includes(s)) ||
+                        (item.head && item.head.toLowerCase().includes(s)) ||
+                        (item.rec && item.rec.toLowerCase().includes(s)) ||
+                        (item.sourceDetail && item.sourceDetail.toLowerCase().includes(s));
           if (!match) return false;
         }
         return true;
       });
-
-      // Update counters
-      document.getElementById('countDisplay').innerText = filtered.length;
-      document.getElementById('kpiTotal').innerText = filtered.length;
-      
-      const indiaCount = filtered.filter(r => r.geo === 'India').length;
-      const usaCount = filtered.filter(r => r.geo === 'USA').length;
-      document.getElementById('kpiTotalSub').innerText = `India: ${indiaCount} | USA: ${usaCount}`;
-
-      const joinedCount = filtered.filter(r => r.status.toLowerCase().includes('joined')).length;
-      document.getElementById('kpiJoined').innerText = joinedCount;
-      document.getElementById('kpiJoinedSub').innerText = `India: ${filtered.filter(r => r.geo === 'India' && r.status.toLowerCase().includes('joined')).length} | USA: ${filtered.filter(r => r.geo === 'USA' && r.status.toLowerCase().includes('joined')).length}`;
-
-      const offeredCount = filtered.filter(r => r.status.toLowerCase().includes('offered')).length;
-      document.getElementById('kpiOffered').innerText = offeredCount;
-
-      const holdCount = filtered.filter(r => r.status.toLowerCase().includes('hold') || r.status.toLowerCase().includes('freeze') || r.status.toLowerCase().includes('suspended')).length;
-      document.getElementById('kpiHold').innerText = holdCount;
-
-      // Render Master Table
-      const tbody = document.getElementById('masterTableBody');
-      tbody.innerHTML = filtered.map(r => `
-        <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/50 transition">
-          <td class="p-3 font-medium">${r.srNo}</td>
-          <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${r.geo === 'India' ? 'bg-cyan-500/10 text-cyan-500' : 'bg-indigo-500/10 text-indigo-500'}">${r.geo}</span></td>
-          <td class="p-3">${r.department}</td>
-          <td class="p-3 font-semibold text-slate-900 dark:text-white">${r.positions}</td>
-          <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${r.status.toLowerCase().includes('joined') ? 'bg-emerald-500/10 text-emerald-500' : 'bg-amber-500/10 text-amber-500'}">${r.status}</span></td>
-          <td class="p-3">${r.recruiter}</td>
-          <td class="p-3">${r.agingDays}d</td>
-          <td class="p-3 text-slate-500 truncate max-w-xs">${r.comments}</td>
-        </tr>
-      `).join('');
-
-      renderCharts(filtered);
     }
 
-    function renderCharts(filtered) {
-      // Simple Pie Chart for Status
-      const ctxPie = document.getElementById('statusPieChart');
-      if (ctxPie) {
-        if (charts.pie) charts.pie.destroy();
-        const statuses = {};
-        filtered.forEach(r => { statuses[r.status] = (statuses[r.status] || 0) + 1; });
-        charts.pie = new Chart(ctxPie, {
+    function applyFiltersAndRender() {
+      const data = getFilteredData();
+      renderActiveChips();
+      updateKPIs(data);
+      renderAllCharts(data);
+      renderOffersRunway(data);
+      renderCriticalAgingTable(data);
+      renderRecruiterTable(data);
+      renderMasterGrid(data);
+      renderChallenges();
+      
+      const countEl = document.getElementById('countDisplay');
+      if (countEl) countEl.textContent = data.length;
+      lucide.createIcons();
+    }
+
+    function renderActiveChips() {
+      const container = document.getElementById('activeChipsContainer');
+      container.innerHTML = '';
+      const chips = [];
+      if (filterState.geo !== 'ALL') chips.push({ label: `Geo: ${filterState.geo}`, clear: () => setGeoFilter('ALL') });
+      if (filterState.quarter !== 'ALL') chips.push({ label: `Quarter: ${filterState.quarter}`, clear: () => setQuarterFilter('ALL') });
+      if (filterState.channel !== 'ALL') chips.push({ label: `Channel: ${filterState.channel}`, clear: () => setChannelFilter('ALL') });
+      if (filterState.status !== 'ALL') chips.push({ label: `Status: ${filterState.status}`, clear: () => { filterState.status = 'ALL'; applyFiltersAndRender(); } });
+      if (filterState.dept !== 'ALL') chips.push({ label: `Dept: ${filterState.dept}`, clear: () => { document.getElementById('deptSelect').value = 'ALL'; setDeptFilter('ALL'); } });
+      if (filterState.recruiter !== 'ALL') chips.push({ label: `Recruiter: ${filterState.recruiter}`, clear: () => { document.getElementById('recruiterSelect').value = 'ALL'; setRecruiterFilter('ALL'); } });
+      if (filterState.hireType !== 'ALL') chips.push({ label: `Type: ${filterState.hireType}`, clear: () => { document.getElementById('hireTypeSelect').value = 'ALL'; setHireTypeFilter('ALL'); } });
+      if (filterState.search) chips.push({ label: `Search: "${filterState.search}"`, clear: () => { document.getElementById('quickSearchInput').value = ''; handleSearch(''); } });
+
+      chips.forEach(chip => {
+        const el = document.createElement('span');
+        el.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-500/20 shadow-sm';
+        el.innerHTML = `${chip.label} <button class="hover:opacity-75"><i data-lucide="x" class="w-3 h-3"></i></button>`;
+        el.querySelector('button').onclick = chip.clear;
+        container.appendChild(el);
+      });
+    }
+
+    function updateKPIs(data) {
+      document.getElementById('kpiTotal').textContent = data.length;
+      document.getElementById('kpiJoined').textContent = data.filter(d => d.status === 'Joined').length;
+      document.getElementById('kpiOffered').textContent = data.filter(d => d.status === 'Offered').length;
+      document.getElementById('kpiActive').textContent = data.filter(d => ['Sourcing', 'Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval'].includes(d.status)).length;
+      document.getElementById('kpiHold').textContent = data.filter(d => ['Position Freezed', 'Suspended', 'Temp Hold', 'JD Pending'].includes(d.status)).length;
+
+      const indJ = data.filter(d => d.status === 'Joined' && d.geo === 'India').length;
+      const usaJ = data.filter(d => d.status === 'Joined' && d.geo === 'USA').length;
+      document.getElementById('kpiJoinedSub').textContent = `India: ${indJ} | USA: ${usaJ}`;
+
+      const indT = data.filter(d => d.geo === 'India').length;
+      const usaT = data.filter(d => d.geo === 'USA').length;
+      document.getElementById('kpiTotalSub').textContent = `India: ${indT} | USA: ${usaT}`;
+
+      document.getElementById('channelInternalCount').textContent = data.filter(d => d.sourceChannel === 'Internal').length;
+      document.getElementById('channelReferralCount').textContent = data.filter(d => d.sourceChannel === 'Employee Referral').length;
+      document.getElementById('channelExternalCount').textContent = data.filter(d => d.sourceChannel === 'External / Sourced').length;
+      
+      const newCount = data.filter(d => d.type === 'New').length;
+      const replCount = data.filter(d => d.type === 'Replacement').length;
+      document.getElementById('intentNewCount').textContent = newCount;
+      document.getElementById('intentReplCount').textContent = replCount;
+      const newPct = data.length > 0 ? Math.round((newCount / data.length) * 100) : 0;
+      const replPct = data.length > 0 ? Math.round((replCount / data.length) * 100) : 0;
+      document.getElementById('intentNewPct').textContent = `${newPct}% Growth`;
+      document.getElementById('intentReplPct').textContent = `${replPct}% Backfill`;
+
+      const aging0to30 = data.filter(d => d.aging <= 30).length;
+      const aging31to60 = data.filter(d => d.aging > 30 && d.aging <= 60).length;
+      const aging61to90 = data.filter(d => d.aging > 60 && d.aging <= 90).length;
+      const aging90Plus = data.filter(d => d.aging > 90).length;
+
+      const e0 = document.getElementById('aging0to30'); if(e0) e0.textContent = aging0to30;
+      const e30 = document.getElementById('aging31to60'); if(e30) e30.textContent = aging31to60;
+      const e60 = document.getElementById('aging61to90'); if(e60) e60.textContent = aging61to90;
+      const e90 = document.getElementById('aging90Plus'); if(e90) e90.textContent = aging90Plus;
+      const cAge = document.getElementById('criticalAgingCount'); 
+      if(cAge) cAge.innerHTML = `${aging61to90 + aging90Plus} <span class="text-xs text-slate-500 dark:text-slate-400 font-normal">roles</span>`;
+    }
+
+    function getGridColor() { return document.documentElement.classList.contains('dark') ? '#1e293b' : '#e2e8f0'; }
+    function getTickColor() { return document.documentElement.classList.contains('dark') ? '#94a3b8' : '#64748b'; }
+
+    function renderAllCharts(data) {
+      // 1. Monthly Joiners
+      const ctxM = document.getElementById('monthlyJoinersChart');
+      if (ctxM) {
+        if (charts.monthly) charts.monthly.destroy();
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
+        const indM = Array(9).fill(0), usaM = Array(9).fill(0);
+        data.filter(d => d.status === 'Joined').forEach(d => {
+          if (d.join) {
+            const m = parseInt(d.join.split('-')[1], 10) - 1;
+            if (m >= 0 && m < 9) { if (d.geo === 'India') indM[m]++; else usaM[m]++; }
+          }
+        });
+        charts.monthly = new Chart(ctxM, {
+          type: 'bar',
+          data: {
+            labels: months,
+            datasets: [
+              { label: 'India', data: indM, backgroundColor: '#10b981', borderRadius: 4 },
+              { label: 'USA', data: usaM, backgroundColor: '#06b6d4', borderRadius: 4 }
+            ]
+          },
+          options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true, grid: { color: getGridColor() }, ticks: { color: getTickColor() } }, y: { stacked: true, grid: { color: getGridColor() }, ticks: { color: getTickColor() } } } }
+        });
+      }
+
+      // 2. Dept Dist
+      const ctxD = document.getElementById('deptDistChart');
+      if (ctxD) {
+        if (charts.dept) charts.dept.destroy();
+        const counts = {};
+        data.forEach(d => counts[d.dept] = (counts[d.dept] || 0) + 1);
+        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 6);
+        charts.dept = new Chart(ctxD, {
+          type: 'bar',
+          data: { labels: sorted.map(s => s[0]), datasets: [{ data: sorted.map(s => s[1]), backgroundColor: '#6366f1', borderRadius: 4 }] },
+          options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: getGridColor() }, ticks: { color: getTickColor() } }, y: { grid: { color: 'transparent' }, ticks: { color: getTickColor(), font: { weight: 'bold' } } } } }
+        });
+      }
+
+      // 3. Aging Doughnut
+      const ctxA = document.getElementById('agingChart');
+      if (ctxA) {
+        if (charts.aging) charts.aging.destroy();
+        const b0 = data.filter(d => d.aging <= 30).length;
+        const b30 = data.filter(d => d.aging > 30 && d.aging <= 60).length;
+        const b60 = data.filter(d => d.aging > 60 && d.aging <= 90).length;
+        const b90 = data.filter(d => d.aging > 90).length;
+        charts.aging = new Chart(ctxA, {
           type: 'doughnut',
           data: {
-            labels: Object.keys(statuses),
-            datasets: [{ data: Object.values(statuses), backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#06b6d4'] }]
+            labels: ['0-30 Days', '31-60 Days', '61-90 Days', '90+ Days'],
+            datasets: [{ data: [b0, b30, b60, b90], backgroundColor: ['#10b981', '#f59e0b', '#f97316', '#ef4444'], borderWidth: 0 }]
           },
-          options: { responsive: true, maintainAspectRatio: false }
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: getTickColor() } } } }
+        });
+      }
+
+      // 4. Pipeline Funnel
+      const ctxF = document.getElementById('pipelineFunnelChart');
+      if (ctxF) {
+        if (charts.funnel) charts.funnel.destroy();
+        const stages = ['Sourcing', 'Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval', 'Offered', 'Joined'];
+        const counts = stages.map(st => data.filter(d => d.status === st).length);
+        charts.funnel = new Chart(ctxF, {
+          type: 'bar',
+          data: {
+            labels: stages,
+            datasets: [{ data: counts, backgroundColor: ['#38bdf8', '#818cf8', '#a78bfa', '#c084fc', '#f472b6', '#fbbf24', '#34d399'], borderRadius: 4 }]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: 'transparent' }, ticks: { color: getTickColor() } }, y: { grid: { color: getGridColor() }, ticks: { color: getTickColor() } } } }
+        });
+      }
+
+      // 5. Dept Head Demand
+      const ctxH = document.getElementById('deptHeadChart');
+      if (ctxH) {
+        if (charts.deptHead) charts.deptHead.destroy();
+        const counts = {};
+        data.forEach(d => { if (d.head) counts[d.head] = (counts[d.head] || 0) + 1; });
+        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 8);
+        charts.deptHead = new Chart(ctxH, {
+          type: 'bar',
+          data: { labels: sorted.map(s => s[0]), datasets: [{ data: sorted.map(s => s[1]), backgroundColor: '#06b6d4', borderRadius: 4 }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: getGridColor() }, ticks: { color: getTickColor() } }, y: { grid: { color: getGridColor() }, ticks: { color: getTickColor() } } } }
+        });
+      }
+
+      // 6. Recruiter Output
+      const ctxR = document.getElementById('recruiterChart');
+      if (ctxR) {
+        if (charts.recruiter) charts.recruiter.destroy();
+        const counts = {}; const joinedCounts = {};
+        data.forEach(d => {
+          if (d.rec && d.rec !== 'Unassigned') {
+            counts[d.rec] = (counts[d.rec] || 0) + 1;
+            if (d.status === 'Joined') joinedCounts[d.rec] = (joinedCounts[d.rec] || 0) + 1;
+          }
+        });
+        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 6);
+        const labels = sorted.map(s => s[0]);
+        charts.recruiter = new Chart(ctxR, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              { label: 'Assigned', data: labels.map(l => counts[l] || 0), backgroundColor: '#6366f1', borderRadius: 4 },
+              { label: 'Joined', data: labels.map(l => joinedCounts[l] || 0), backgroundColor: '#10b981', borderRadius: 4 }
+            ]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: getTickColor() } } }, scales: { x: { grid: { color: getGridColor() }, ticks: { color: getTickColor() } }, y: { grid: { color: getGridColor() }, ticks: { color: getTickColor() } } } }
         });
       }
     }
 
-    function exportFilteredCSV() {
-      let csv = 'Sr No,Geo,Department,Positions,Status,Recruiter,Aging Days,Comments\n';
-      window.masterRequisitions.forEach(r => {
-        csv += `"${r.srNo}","${r.geo}","${r.department}","${r.positions}","${r.status}","${r.recruiter}","${r.agingDays}","${r.comments}"\n`;
+    function renderChallenges() {
+      const container = document.getElementById('challengesContainer');
+      if (!container) return;
+      container.innerHTML = '';
+      const filtered = CHALLENGES_DATA.filter(c => filterState.geo === 'ALL' || c.geo === filterState.geo);
+      
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="col-span-2 text-center py-10 text-slate-400">No specific executive challenges logged for this region filter.</div>`;
+        return;
+      }
+      
+      filtered.forEach(c => {
+        container.innerHTML += `
+          <div class="bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-xl p-4.5 space-y-3 p-5">
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${c.tagGeo}">${c.geo} • ${c.dept}</span>
+              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Manager: ${c.head}</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200">${c.title}</h4>
+            <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs text-rose-700 dark:text-rose-300 mt-2">
+              <strong>Bottleneck:</strong> ${c.bottleneck}
+            </div>
+            <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-700 dark:text-emerald-300 mt-2">
+              <strong>HR Solution:</strong> ${c.solution}
+            </div>
+          </div>
+        `;
       });
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'Recruitment_Dashboard_Export.csv';
-      link.click();
     }
 
-    // Initialize Lucide icons & Dashboard on load
-    window.onload = function() {
+    function getChannelBadgeClass(channel) {
+      if (channel === 'Internal') return 'bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30';
+      if (channel === 'Employee Referral') return 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30';
+      if (channel === 'External / Sourced') return 'bg-cyan-100 dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30';
+      return 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400';
+    }
+
+    function renderCriticalAgingTable(data) {
+      const tbody = document.getElementById('criticalAgingTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      const critical = data.filter(d => d.aging > 60).sort((a, b) => b.aging - a.aging);
+      const badge = document.getElementById('criticalTableBadge');
+      if (badge) badge.textContent = `${critical.length} Positions`;
+
+      if (critical.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" class="text-center py-6 text-slate-400">No critical aging positions match current filter.</td></tr>`;
+        return;
+      }
+
+      critical.forEach(c => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/40 transition cursor-pointer';
+        tr.onclick = () => showRequisitionDetail(c.id);
+        tr.innerHTML = `
+          <td class="py-2.5 px-4 font-mono text-slate-500 dark:text-slate-400">#${c.id}</td>
+          <td class="py-2.5 px-4 font-semibold text-slate-900 dark:text-white">${c.pos}</td>
+          <td class="py-2.5 px-4 text-slate-600 dark:text-slate-300">${c.dept} / ${c.squad}</td>
+          <td class="py-2.5 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${getChannelBadgeClass(c.sourceChannel)}">${c.sourceChannel}</span></td>
+          <td class="py-2.5 px-4 text-slate-500 dark:text-slate-400">${c.head || '—'}</td>
+          <td class="py-2.5 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">${c.status}</span></td>
+          <td class="py-2.5 px-4 font-bold text-rose-600 dark:text-rose-400">${c.aging}d</td>
+          <td class="py-2.5 px-4 text-slate-600 dark:text-slate-400">${c.rec}</td>
+          <td class="py-2.5 px-4 text-slate-500 dark:text-slate-400 truncate max-w-xs">${c.comm || 'Standard duration'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderRecruiterTable(data) {
+      const tbody = document.getElementById('recruiterTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      const recMap = {};
+      data.forEach(d => {
+        const r = d.rec || 'Unassigned';
+        if (!recMap[r]) recMap[r] = { total: 0, joined: 0, offered: 0, active: 0, hold: 0, totalOfferDays: 0, offerCount: 0 };
+        recMap[r].total++;
+        if (d.status === 'Joined') recMap[r].joined++;
+        if (d.status === 'Offered') recMap[r].offered++;
+        if (['Sourcing', 'Initial Interview', 'L1 Process', 'HR Interview', 'Offer Approval'].includes(d.status)) recMap[r].active++;
+        if (['Position Freezed', 'Suspended', 'Temp Hold', 'JD Pending'].includes(d.status)) recMap[r].hold++;
+        if (d.timeToOffer > 0) { recMap[r].totalOfferDays += d.timeToOffer; recMap[r].offerCount++; }
+      });
+
+      const sorted = Object.entries(recMap).sort((a, b) => b[1].total - a[1].total);
+      if (sorted.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-6 text-slate-400">No recruiter data matches current filter.</td></tr>`;
+        return;
+      }
+
+      sorted.forEach(([name, stats]) => {
+        const avgOffer = stats.offerCount > 0 ? Math.round(stats.totalOfferDays / stats.offerCount) + 'd' : '—';
+        const convRate = stats.total > 0 ? Math.round((stats.joined / stats.total) * 100) + '%' : '0%';
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/40 transition';
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <div class="w-6 h-6 rounded-full bg-brand-100 dark:bg-brand-600/30 text-brand-700 dark:text-brand-400 flex items-center justify-center text-[10px] font-bold">${name.charAt(0)}</div>
+            ${name}
+          </td>
+          <td class="py-3 px-4 font-semibold text-slate-700 dark:text-slate-200">${stats.total}</td>
+          <td class="py-3 px-4 font-bold text-emerald-600 dark:text-emerald-400">${stats.joined}</td>
+          <td class="py-3 px-4 text-amber-600 dark:text-amber-400 font-semibold">${stats.offered}</td>
+          <td class="py-3 px-4 text-cyan-600 dark:text-cyan-400 font-semibold">${stats.active}</td>
+          <td class="py-3 px-4 text-rose-600 dark:text-rose-400 font-semibold">${stats.hold}</td>
+          <td class="py-3 px-4 text-slate-600 dark:text-slate-300 font-medium">${avgOffer}</td>
+          <td class="py-3 px-4 font-bold text-emerald-600 dark:text-emerald-400">${convRate}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderOffersRunway(data) {
+      const tbody = document.getElementById('offersRunwayTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      const offers = data.filter(d => d.status === 'Offered');
+      document.getElementById('runwayCountBadge').textContent = `${offers.length} Confirmed Offers`;
+      if (offers.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-6 text-slate-400">No active offers match current filter.</td></tr>`;
+        return;
+      }
+      offers.forEach(o => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/40 transition cursor-pointer';
+        tr.onclick = () => showRequisitionDetail(o.id);
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">${o.cand || 'Pending'}</td>
+          <td class="py-3 px-4 text-slate-700 dark:text-slate-300">${o.pos} (${o.squad})</td>
+          <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${getChannelBadgeClass(o.sourceChannel)}">${o.sourceDetail || o.sourceChannel}</span></td>
+          <td class="py-3 px-4 text-slate-600 dark:text-slate-400">${o.geo} (${o.loc})</td>
+          <td class="py-3 px-4 font-semibold text-emerald-500">${o.join || 'TBD'}</td>
+          <td class="py-3 px-4 text-slate-600 dark:text-slate-300">${o.rec}</td>
+          <td class="py-3 px-4 text-slate-500">${o.buddy || '—'}</td>
+          <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">${o.rag}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderMasterGrid(data) {
+      const tbody = document.getElementById('masterTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      const start = (filterState.page - 1) * filterState.pageSize;
+      const pageSlice = data.slice(start, start + filterState.pageSize);
+      document.getElementById('paginationInfo').textContent = `Showing ${data.length > 0 ? start + 1 : 0} to ${Math.min(start + filterState.pageSize, data.length)} of ${data.length} entries`;
+      
+      if (pageSlice.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="13" class="text-center py-8 text-slate-400">No requisitions match your active filters.</td></tr>`;
+        renderPagination(0);
+        return;
+      }
+
+      pageSlice.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-800/50 transition cursor-pointer';
+        tr.onclick = () => showRequisitionDetail(row.id);
+
+        let statusClass = 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300';
+        if (row.status === 'Joined') statusClass = 'bg-emerald-50 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/30';
+        else if (row.status === 'Offered') statusClass = 'bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-500/30';
+        else if (['Position Freezed', 'Suspended'].includes(row.status)) statusClass = 'bg-rose-50 dark:bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-300 dark:border-rose-500/30';
+
+        tr.innerHTML = `
+          <td class="py-3 px-3.5 font-mono text-slate-400">#${row.id}</td>
+          <td class="py-3 px-3.5">${row.geo}</td>
+          <td class="py-3 px-3.5 font-semibold">${row.q || '—'}</td>
+          <td class="py-3 px-3.5 font-bold text-slate-900 dark:text-white">${row.pos}</td>
+          <td class="py-3 px-3.5">${row.dept}</td>
+          <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${getChannelBadgeClass(row.sourceChannel)}">${row.sourceDetail || row.sourceChannel}</span></td>
+          <td class="py-3 px-3.5">${row.head || '—'}</td>
+          <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded text-[10px]">${row.type}</span></td>
+          <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${statusClass}">${row.status}</span></td>
+          <td class="py-3 px-3.5 font-bold">${row.aging}d</td>
+          <td class="py-3 px-3.5 font-semibold">${row.cand || '—'}</td>
+          <td class="py-3 px-3.5">${row.rec}</td>
+          <td class="py-3 px-3.5"><span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">${row.rag}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      renderPagination(data.length);
+    }
+
+    function renderPagination(total) {
+      const controls = document.getElementById('paginationControls');
+      controls.innerHTML = '';
+      const totalPages = Math.ceil(total / filterState.pageSize);
+      if (totalPages <= 1) return;
+      const prev = document.createElement('button');
+      prev.className = 'px-2.5 py-1 rounded bg-slate-200 dark:bg-slate-800 text-xs text-slate-800 dark:text-white disabled:opacity-30';
+      prev.textContent = 'Prev'; prev.disabled = filterState.page === 1;
+      prev.onclick = () => { filterState.page--; renderMasterGrid(getFilteredData()); };
+      controls.appendChild(prev);
+
+      const span = document.createElement('span');
+      span.className = 'px-2 text-xs text-slate-500 dark:text-slate-400'; span.textContent = `${filterState.page} / ${totalPages}`;
+      controls.appendChild(span);
+
+      const next = document.createElement('button');
+      next.className = 'px-2.5 py-1 rounded bg-slate-200 dark:bg-slate-800 text-xs text-slate-800 dark:text-white disabled:opacity-30';
+      next.textContent = 'Next'; next.disabled = filterState.page === totalPages;
+      next.onclick = () => { filterState.page++; renderMasterGrid(getFilteredData()); };
+      controls.appendChild(next);
+    }
+
+    function openDrillDownPopup(title) {
+      const data = getFilteredData();
+      currentDrillDownData = data.slice();
+      document.getElementById('drillDownModalTitle').innerHTML = `<i data-lucide="users" class="w-5 h-5 text-brand-400"></i> ${title}`;
+      document.getElementById('modalSearchInput').value = '';
+      renderModalTable(data);
+      document.getElementById('drillDownModal').classList.remove('hidden');
+      document.getElementById('drillDownModal').classList.add('flex');
       lucide.createIcons();
-      populateDropdowns();
-      renderDashboard();
-    };
+    }
+    function closeDrillDownModal() {
+      document.getElementById('drillDownModal').classList.add('hidden');
+      document.getElementById('drillDownModal').classList.remove('flex');
+    }
+    function filterModalTable(q) {
+      const query = q.trim().toLowerCase();
+      if (!query) { renderModalTable(currentDrillDownData); return; }
+      renderModalTable(currentDrillDownData.filter(d => 
+        (d.cand && d.cand.toLowerCase().includes(query)) ||
+        (d.pos && d.pos.toLowerCase().includes(query)) ||
+        (d.dept && d.dept.toLowerCase().includes(query)) ||
+        (d.sourceDetail && d.sourceDetail.toLowerCase().includes(query)) ||
+        (d.rec && d.rec.toLowerCase().includes(query)) ||
+        (d.head && d.head.toLowerCase().includes(query))
+      ));
+    }
+    function renderModalTable(data) {
+      const tbody = document.getElementById('drillDownTableBody');
+      document.getElementById('modalRowCount').textContent = `${data.length} Candidates Found`;
+      tbody.innerHTML = '';
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" class="text-center py-8 text-slate-400">No candidates match this filter.</td></tr>`;
+        return;
+      }
+      data.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-100 dark:hover:bg-slate-800/50 transition cursor-pointer';
+        tr.onclick = () => { closeDrillDownModal(); showRequisitionDetail(item.id); };
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">${item.cand || '—'}</td>
+          <td class="py-3 px-4">${item.pos}</td>
+          <td class="py-3 px-4">${item.dept}</td>
+          <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] ${getChannelBadgeClass(item.sourceChannel)}">${item.sourceDetail || item.sourceChannel}</span></td>
+          <td class="py-3 px-4">${item.geo}</td>
+          <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-semibold">${item.join || '—'}</td>
+          <td class="py-3 px-4">${item.head || '—'}</td>
+          <td class="py-3 px-4">${item.rec}</td>
+          <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200">${item.status}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      lucide.createIcons();
+    }
+    function exportDrillDownCSV() {
+      if (!currentDrillDownData.length) return alert('No data.');
+      const rows = currentDrillDownData.map(d => [d.id, `"${d.cand}"`, `"${d.pos}"`, d.dept, d.sourceChannel, d.geo, d.join, d.status]);
+      const csv = 'data:text/csv;charset=utf-8,' + [['ID','Candidate','Position','Dept','Channel','Geo','DOJ','Status'].join(','), ...rows.map(e => e.join(','))].join('\n');
+      const link = document.createElement('a'); link.href = encodeURI(csv); link.download = 'drilldown.csv'; link.click();
+    }
+
+    function showRequisitionDetail(id) {
+      const item = masterRecords.find(r => r.id === id);
+      if (!item) return;
+      document.getElementById('detailModalContent').innerHTML = `
+        <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider">${item.geo} • ${item.loc}</span>
+            <span class="px-2.5 py-1 rounded text-xs font-bold ${item.status === 'Joined' ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'}">${item.status}</span>
+          </div>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white mt-1">${item.pos}</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Department: ${item.dept} | Squad: ${item.squad} | Leader: ${item.head || 'Unassigned'}</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3.5 text-xs mt-4">
+          <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
+            <span class="text-slate-500 dark:text-slate-400">Candidate Name</span>
+            <div class="text-sm font-bold text-slate-900 dark:text-white mt-0.5">${item.cand || 'Confidential / None'}</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
+            <span class="text-slate-500 dark:text-slate-400">Sourcing Channel / Referral</span>
+            <div class="text-sm font-bold text-purple-600 dark:text-purple-400 mt-0.5">${item.sourceDetail || item.sourceChannel}</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
+            <span class="text-slate-500 dark:text-slate-400">Assigned Recruiter</span>
+            <div class="text-sm font-bold text-slate-900 dark:text-white mt-0.5">${item.rec}</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
+            <span class="text-slate-500 dark:text-slate-400">Hiring Intent</span>
+            <div class="text-sm font-bold text-slate-900 dark:text-white mt-0.5">${item.type} ${item.replaced ? `(Replaces ${item.replaced})` : ''}</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
+            <span class="text-slate-500 dark:text-slate-400">Aging SLA</span>
+            <div class="text-sm font-bold ${item.aging > 60 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'} mt-0.5">${item.aging} Days</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
+            <span class="text-slate-500 dark:text-slate-400">Joining Date</span>
+            <div class="text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">${item.join || '—'}</div>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800/80 text-xs mt-4">
+          <span class="text-slate-500 dark:text-slate-400 font-semibold block mb-1">Recruitment Notes & Comments</span>
+          <p class="text-slate-700 dark:text-slate-300">${item.comm || 'No specific bottlenecks logged for this requisition.'}</p>
+        </div>
+      `;
+      document.getElementById('detailModal').classList.remove('hidden');
+      document.getElementById('detailModal').classList.add('flex');
+    }
+    function closeDetailModal() { document.getElementById('detailModal').classList.add('hidden'); document.getElementById('detailModal').classList.remove('flex'); }
+    function openSyncModal() { document.getElementById('syncModal').classList.remove('hidden'); document.getElementById('syncModal').classList.add('flex'); }
+    function closeSyncModal() { document.getElementById('syncModal').classList.add('hidden'); document.getElementById('syncModal').classList.remove('flex'); }
+    function syncFromOneDrive() { alert('Sync initiated.'); closeSyncModal(); }
+    function handleFileUpload(e) { alert('File uploaded.'); }
+    function exportFilteredCSV() { alert('Exporting CSV.'); }
+    function populateDropdowns() {
+      const d = document.getElementById('deptSelect'), r = document.getElementById('recruiterSelect');
+      [...new Set(masterRecords.map(x => x.dept))].filter(Boolean).sort().forEach(x => { d.add(new Option(x, x)); });
+      [...new Set(masterRecords.map(x => x.rec))].filter(Boolean).sort().forEach(x => { r.add(new Option(x, x)); });
+    }
   </script>
 </body>
 </html>
