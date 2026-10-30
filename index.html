@@ -168,6 +168,15 @@
             <option value="ALL">All Recruiters</option>
           </select>
         </div>
+
+        <!-- Hiring Type Select -->
+        <div class="relative">
+          <select id="hireTypeSelect" onchange="setHireTypeFilter(this.value)" class="bg-white dark:bg-slate-900 text-xs font-medium border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-1.5 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-brand-500 cursor-pointer">
+            <option value="ALL">All Types (New/Repl)</option>
+            <option value="New">New Headcount</option>
+            <option value="Replacement">Replacement</option>
+          </select>
+        </div>
       </div>
 
       <div class="flex items-center gap-3 ml-auto">
@@ -770,42 +779,45 @@
     </div>
   </div>
 
-  <!-- POPUP MODAL 3: LIVE ONEDRIVE SYNC MODAL -->
+  <!-- POPUP MODAL 3: LIVE ONEDRIVE / EXCEL UPLOAD MODAL -->
   <div id="syncModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-xl w-full p-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
       <button onclick="closeSyncModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 dark:hover:text-white">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
       <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-xl bg-cyan-50 dark:bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center">
-          <i data-lucide="cloud" class="w-5 h-5"></i>
+        <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+          <i data-lucide="upload-cloud" class="w-5 h-5"></i>
         </div>
         <div>
-          <h3 class="text-base font-bold text-slate-900 dark:text-white">Connect Live Excel / OneDrive</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Sync with your shared master file automatically</p>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white">Upload Master Excel (.xlsx)</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Instantly refresh dashboard with your latest master file</p>
         </div>
       </div>
       <div class="space-y-4 text-xs">
         <p class="text-slate-600 dark:text-slate-300">
-          Paste your direct OneDrive or SharePoint share link below. The dashboard will fetch the latest sheet data without needing any manual file re-uploading.
+          Select your updated master Excel workbook (e.g. <code>Weekly Report Master File- 2026.xlsx</code>). The application will automatically ingest the tracking sheet and update all metrics instantly.
         </p>
         <div>
-          <label class="block text-slate-500 dark:text-slate-400 font-semibold mb-1">Direct Excel / OneDrive Download URL</label>
-          <input type="text" id="oneDriveUrlInput" placeholder="https://onedrive.live.com/download?..." class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200 focus:outline-none focus:border-brand-500" />
+          <label class="cursor-pointer flex flex-col items-center justify-center p-6 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl hover:border-brand-500 transition bg-slate-50 dark:bg-slate-950/50">
+            <i data-lucide="file-spreadsheet" class="w-8 h-8 text-emerald-500 mb-2"></i>
+            <span class="font-semibold text-slate-700 dark:text-slate-300">Click to choose Excel file</span>
+            <span class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Supports .xlsx and .xls formats</span>
+            <input type="file" id="modalExcelInput" accept=".xlsx, .xls" class="hidden" onchange="handleFileUpload(event)" />
+          </label>
         </div>
         <div class="flex items-center justify-between pt-2">
-          <button onclick="syncFromOneDrive()" class="px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-semibold transition flex items-center gap-2">
-            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-            <span>Fetch & Sync Data</span>
+          <span id="syncStatus" class="text-slate-500 dark:text-slate-400 font-medium">Ready for upload</span>
+          <button onclick="closeSyncModal()" class="px-4 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold transition">
+            Close
           </button>
-          <span id="syncStatus" class="text-slate-500 dark:text-slate-400"></span>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // COMPACT 146 MASTER RECORDS (Packed loss-less to ensure 100% complete loading)
+    // COMPACT 146 MASTER RECORDS
     const COMPACT_KEYS = ['id','geo','dept','squad','pos','head','type','replaced','empType','loc','open','offer','join','q','aging','timeToOffer','timeToClose','status','cand','rec','sourceChannel','sourceDetail','rag','buddy','backup','comm'];
     const COMPACT_DATA = [
       [1, "India", "Product", "Account", "Product Manager", "Ashok", "Replacement", "Bhargav/Mahesh", "Full-time", "Chennai", "2025-10-08", "2025-11-14", "2026-03-09", "Q1", 28, 28, 109, "Suspended", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Narsimha Leela Krishna - Backedout"],
@@ -1058,7 +1070,6 @@
       if (filterState.search.length > 0) switchTab('master');
     }
 
-    // FIXED: Card click handler overrides status cleanly so drill-down modal is never empty
     function handleCardClick(kpiType) {
       if (kpiType === 'TOTAL') { filterState.status = 'ALL'; applyFiltersAndRender(); openDrillDownPopup('All Tracked Requisitions'); }
       else if (kpiType === 'Joined') { filterState.status = 'Joined'; applyFiltersAndRender(); openDrillDownPopup('Joined Candidates (YTD)'); }
@@ -1186,15 +1197,12 @@
       const e30 = document.getElementById('aging31to60'); if(e30) e30.textContent = aging31to60;
       const e60 = document.getElementById('aging61to90'); if(e60) e60.textContent = aging61to90;
       const e90 = document.getElementById('aging90Plus'); if(e90) e90.textContent = aging90Plus;
-      const cAge = document.getElementById('criticalAgingCount'); 
-      if(cAge) cAge.innerHTML = `${aging61to90 + aging90Plus} <span class="text-xs text-slate-500 dark:text-slate-400 font-normal">roles</span>`;
     }
 
     function getGridColor() { return document.documentElement.classList.contains('dark') ? '#1e293b' : '#e2e8f0'; }
     function getTickColor() { return document.documentElement.classList.contains('dark') ? '#94a3b8' : '#64748b'; }
 
     function renderAllCharts(data) {
-      // 1. Monthly Joiners
       const ctxM = document.getElementById('monthlyJoinersChart');
       if (ctxM) {
         if (charts.monthly) charts.monthly.destroy();
@@ -1219,7 +1227,6 @@
         });
       }
 
-      // 2. Dept Dist
       const ctxD = document.getElementById('deptDistChart');
       if (ctxD) {
         if (charts.dept) charts.dept.destroy();
@@ -1233,7 +1240,6 @@
         });
       }
 
-      // 3. Aging Doughnut
       const ctxA = document.getElementById('agingChart');
       if (ctxA) {
         if (charts.aging) charts.aging.destroy();
@@ -1251,7 +1257,6 @@
         });
       }
 
-      // 4. Pipeline Funnel
       const ctxF = document.getElementById('pipelineFunnelChart');
       if (ctxF) {
         if (charts.funnel) charts.funnel.destroy();
@@ -1267,7 +1272,6 @@
         });
       }
 
-      // 5. Dept Head Demand
       const ctxH = document.getElementById('deptHeadChart');
       if (ctxH) {
         if (charts.deptHead) charts.deptHead.destroy();
@@ -1281,7 +1285,6 @@
         });
       }
 
-      // 6. Recruiter Output
       const ctxR = document.getElementById('recruiterChart');
       if (ctxR) {
         if (charts.recruiter) charts.recruiter.destroy();
@@ -1313,12 +1316,10 @@
       if (!container) return;
       container.innerHTML = '';
       const filtered = CHALLENGES_DATA.filter(c => filterState.geo === 'ALL' || c.geo === filterState.geo);
-      
       if (filtered.length === 0) {
         container.innerHTML = `<div class="col-span-2 text-center py-10 text-slate-400">No specific executive challenges logged for this region filter.</div>`;
         return;
       }
-      
       filtered.forEach(c => {
         container.innerHTML += `
           <div class="bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-xl p-4.5 space-y-3 p-5">
@@ -1626,9 +1627,120 @@
     function closeDetailModal() { document.getElementById('detailModal').classList.add('hidden'); document.getElementById('detailModal').classList.remove('flex'); }
     function openSyncModal() { document.getElementById('syncModal').classList.remove('hidden'); document.getElementById('syncModal').classList.add('flex'); }
     function closeSyncModal() { document.getElementById('syncModal').classList.add('hidden'); document.getElementById('syncModal').classList.remove('flex'); }
-    function syncFromOneDrive() { alert('Sync initiated.'); closeSyncModal(); }
-    function handleFileUpload(e) { alert('File uploaded.'); }
-    function exportFilteredCSV() { alert('Exporting CSV.'); }
+    
+    // Robust Excel File Upload Handler
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const statusEl = document.getElementById('syncStatus');
+      if (statusEl) statusEl.textContent = 'Reading Excel file...';
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array', cellDates: true });
+          
+          let targetSheetName = workbook.SheetNames.find(name => 
+            name.toLowerCase().includes('master') || name.toLowerCase().includes('2026')
+          );
+          if (!targetSheetName && workbook.SheetNames.length > 0) {
+            targetSheetName = workbook.SheetNames[0];
+          }
+
+          const worksheet = workbook.Sheets[targetSheetName];
+          const rawData = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
+          
+          if (!rawData || rawData.length === 0) {
+            alert("The selected sheet appears to be empty.");
+            return;
+          }
+
+          let headerRowIdx = 0;
+          for (let i = 0; i < Math.min(10, rawData.length); i++) {
+            const rowStr = rawData[i].map(cell => String(cell).toLowerCase()).join(" ");
+            if (rowStr.includes("positions") || rowStr.includes("geo") || rowStr.includes("status") || rowStr.includes("sr no")) {
+              headerRowIdx = i;
+              break;
+            }
+          }
+
+          const parsedData = XLSX.utils.sheet_to_json(worksheet, { range: headerRowIdx, defval: "" });
+          if (parsedData.length === 0) {
+            alert("Could not extract rows from the Excel sheet.");
+            return;
+          }
+
+          masterRecords = parsedData
+            .filter(row => row['Positions'] || row['Geo'] || row['Status'] || row['Sr No'])
+            .map((row, index) => ({
+              id: Number(row['Sr No'] || row['id'] || (index + 1)),
+              geo: String(row['Geo'] || 'India').trim(),
+              dept: String(row['Department'] || row['Practice'] || 'General').trim(),
+              squad: String(row['Squads'] || row['Project'] || '-').trim(),
+              pos: String(row['Positions'] || 'Unnamed Position').trim(),
+              head: String(row['Dept Head'] || '-').trim(),
+              type: String(row['New/Replacement'] || 'New').trim(),
+              replaced: String(row['Replaced Employee Name'] || row['Replaced Employee'] || '').trim(),
+              empType: String(row['Full-Time/Consultant'] || 'Full-time').trim(),
+              loc: String(row['Hiring Location'] || '-').trim(),
+              open: parseExcelDate(row['Position Open Date']),
+              offer: parseExcelDate(row['Date Offered']),
+              join: parseExcelDate(row['Joining Date']),
+              q: String(row['Quarter Joining'] || 'Q1').trim(),
+              aging: Number(row['Aging (Days)'] || 0),
+              timeToOffer: Number(row['Position Offered'] || 0),
+              timeToClose: Number(row['Position Closed'] || 0),
+              status: String(row['Status'] || 'Open').trim(),
+              cand: String(row['Offered Candidates'] || '').trim(),
+              rec: String(row['Recruiter'] || row['Recruiter Name'] || 'Unassigned').trim(),
+              sourceChannel: String(row['Applied/ Sourced/ Reffered (Internal/External)'] || 'External / Sourced').trim(),
+              sourceDetail: '',
+              rag: String(row['RAG Status'] || 'Green').trim(),
+              buddy: String(row['Buddy - Onboarding'] || '').trim(),
+              backup: String(row['Back-up Plans'] || '').trim(),
+              comm: String(row['Comments'] || row['Remarks '] || '').trim()
+            }));
+
+          applyFiltersAndRender();
+          if (statusEl) statusEl.textContent = `Successfully loaded ${masterRecords.length} records!`;
+          setTimeout(() => closeSyncModal(), 1500);
+          alert(`Successfully loaded ${masterRecords.length} requisitions from sheet: "${targetSheetName}"!`);
+
+        } catch (err) {
+          console.error("Error parsing Excel file:", err);
+          alert("Failed to parse Excel file. Please ensure it is a valid .xlsx or .xls file.");
+          if (statusEl) statusEl.textContent = 'Parse error.';
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function parseExcelDate(value) {
+      if (!value) return '';
+      if (value instanceof Date) return value.toISOString().split('T')[0];
+      if (typeof value === 'number') {
+        const utcDays = Math.floor(value - 25569);
+        const dateObj = new Date(utcDays * 86400 * 1000);
+        return !isNaN(dateObj.getTime()) ? dateObj.toISOString().split('T')[0] : String(value);
+      }
+      return String(value);
+    }
+
+    function exportFilteredCSV() {
+      const data = getFilteredData();
+      if (!data.length) return alert('No data to export.');
+      let csv = 'ID,Geo,Department,Position,Status,Recruiter,Aging Days,Comments\n';
+      data.forEach(r => {
+        csv += `"${r.id}","${r.geo}","${r.dept}","${r.pos}","${r.status}","${r.rec}","${r.aging}","${(r.comm || '').replace(/"/g, '""')}"\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'Recruitment_Dashboard_Export.csv';
+      link.click();
+    }
+
     function populateDropdowns() {
       const d = document.getElementById('deptSelect'), r = document.getElementById('recruiterSelect');
       [...new Set(masterRecords.map(x => x.dept))].filter(Boolean).sort().forEach(x => { d.add(new Option(x, x)); });
