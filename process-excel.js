@@ -54,7 +54,7 @@ const masterRecords = parsedData
         if (!statusVal) statusVal = 'Open';
 
         // Future-proof autonomous channel & referral classifier
-        let rawSource = String(findVal(row, ['Applied/ Sourced/ Reffered (Internal/External)', 'Channel', 'Source'], 'External')).trim();
+                let rawSource = String(findVal(row, ['Applied/ Sourced/ Reffered (Internal/External)', 'Applied/ Sourced/ Referred (Internal/External)', 'Channel', 'Source'], 'External')).trim();
         let normalizedSource = 'External / Sourced';
         const lowerSource = rawSource.toLowerCase();
         
@@ -62,8 +62,8 @@ const masterRecords = parsedData
             normalizedSource = 'Employee Referral';
         } else if (lowerSource.includes('internal') || lowerSource.includes('ijp')) {
             normalizedSource = 'Internal';
-        } else if (lowerSource.includes('external') || lowerSource.includes('linkedin') || lowerSource.includes('applied') || lowerSource.includes('sourcing') || lowerSource.includes('whitley')) {
-            normalizedSource = 'External / Sourced';
+        }     } else if (lowerSource.includes('external') || lowerSource.includes('linkedin') || lowerSource.includes('linkedln') || lowerSource.includes('applied') || lowerSource.includes('sourcing') || lowerSource.includes('whitley')) {
+        normalizedSource = 'External / Sourced';
         } else if (rawSource && rawSource !== '') {
             normalizedSource = rawSource; // Auto-capture any new custom source channel dynamically
         }
