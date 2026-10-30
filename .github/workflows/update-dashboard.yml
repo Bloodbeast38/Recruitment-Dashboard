@@ -1,4 +1,3 @@
-
 name: Sync Excel to Dashboard Data
 
 on:
@@ -24,7 +23,7 @@ jobs:
       - name: Install Dependencies
         run: npm install xlsx
 
-      -       - name: Run Excel Processor
+      - name: Run Excel Processor
         run: node process-excel.js
 
       - name: Commit and Push data.json
@@ -32,4 +31,3 @@ jobs:
         with:
           commit_message: 'Auto-update dashboard data.json from Excel sync'
           file_pattern: 'data.json'
-          
