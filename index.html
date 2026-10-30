@@ -50,7 +50,7 @@
             </span>
           </h1>
           <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-            Enterprise Recruitment Health, SLA & Channel Sourcing • <span id="dataTimestamp" class="font-medium text-slate-700 dark:text-slate-300">146 Master Requisitions</span>
+            Enterprise Recruitment Health, SLA & Channel Sourcing • <span id="dataTimestamp" class="font-medium text-slate-700 dark:text-slate-300">Master Requisitions</span>
           </p>
         </div>
       </div>
@@ -61,17 +61,6 @@
           <i data-lucide="moon" class="w-4 h-4 text-slate-600 dark:hidden"></i>
           <span id="themeLabel">Theme</span>
         </button>
-
-        <button onclick="openSyncModal()" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-medium border border-slate-300 dark:border-slate-700 transition">
-          <i data-lucide="cloud" class="w-4 h-4 text-cyan-500"></i>
-          <span>OneDrive</span>
-        </button>
-
-        <label class="cursor-pointer inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-medium border border-slate-300 dark:border-slate-700 transition">
-          <i data-lucide="upload" class="w-4 h-4 text-emerald-500"></i>
-          <span>Upload .xlsx</span>
-          <input type="file" id="excelFileInput" accept=".xlsx, .xls" class="hidden" onchange="handleFileUpload(event)" />
-        </label>
 
         <button onclick="exportFilteredCSV()" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-medium border border-slate-300 dark:border-slate-700 transition">
           <i data-lucide="download" class="w-4 h-4 text-amber-500"></i>
@@ -181,7 +170,7 @@
 
       <div class="flex items-center gap-3 ml-auto">
         <span id="filteredRecordCount" class="text-xs font-medium text-slate-500 dark:text-slate-400">
-          Showing <span class="text-slate-900 dark:text-white font-bold" id="countDisplay">146</span> positions
+          Showing <span class="text-slate-900 dark:text-white font-bold" id="countDisplay">0</span> positions
         </span>
         <button onclick="resetAllFilters()" class="text-xs text-rose-500 hover:text-rose-600 dark:text-rose-400 dark:hover:text-rose-300 flex items-center gap-1 font-semibold hover:underline">
           <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
@@ -208,10 +197,10 @@
             <i data-lucide="layers" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white" id="kpiTotal">146</div>
+        <div class="text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white" id="kpiTotal">0</div>
         <div class="mt-1 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
           <span>Active Reqs</span>
-          <span class="text-indigo-600 dark:text-indigo-400 font-semibold" id="kpiTotalSub">India: 94 | USA: 52</span>
+          <span class="text-indigo-600 dark:text-indigo-400 font-semibold" id="kpiTotalSub">India: 0 | USA: 0</span>
         </div>
       </div>
 
@@ -222,10 +211,10 @@
             <i data-lucide="user-check" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="text-2xl lg:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400" id="kpiJoined">92</div>
+        <div class="text-2xl lg:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400" id="kpiJoined">0</div>
         <div class="mt-1 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
           <span>Closed Capacity</span>
-          <span class="text-emerald-600 dark:text-emerald-400 font-semibold" id="kpiJoinedSub">India: 56 | USA: 36</span>
+          <span class="text-emerald-600 dark:text-emerald-400 font-semibold" id="kpiJoinedSub">India: 0 | USA: 0</span>
         </div>
       </div>
 
@@ -236,10 +225,10 @@
             <i data-lucide="send" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="text-2xl lg:text-3xl font-extrabold text-amber-600 dark:text-amber-400" id="kpiOffered">9</div>
+        <div class="text-2xl lg:text-3xl font-extrabold text-amber-600 dark:text-amber-400" id="kpiOffered">0</div>
         <div class="mt-1 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
           <span>Pending DOJ</span>
-          <span class="text-amber-600 dark:text-amber-400 font-semibold" id="kpiOfferedSub">India: 8 | USA: 1</span>
+          <span class="text-amber-600 dark:text-amber-400 font-semibold" id="kpiOfferedSub">India: 0 | USA: 0</span>
         </div>
       </div>
 
@@ -250,10 +239,10 @@
             <i data-lucide="git-pull-request" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="text-2xl lg:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400" id="kpiActive">7</div>
+        <div class="text-2xl lg:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400" id="kpiActive">0</div>
         <div class="mt-1 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
           <span>In Interviews</span>
-          <span class="text-cyan-600 dark:text-cyan-400 font-semibold" id="kpiActiveSub">India: 5 | USA: 2</span>
+          <span class="text-cyan-600 dark:text-cyan-400 font-semibold" id="kpiActiveSub">India: 0 | USA: 0</span>
         </div>
       </div>
 
@@ -264,10 +253,10 @@
             <i data-lucide="pause-circle" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="text-2xl lg:text-3xl font-extrabold text-rose-600 dark:text-rose-400" id="kpiHold">37</div>
+        <div class="text-2xl lg:text-3xl font-extrabold text-rose-600 dark:text-rose-400" id="kpiHold">0</div>
         <div class="mt-1 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
           <span>Capacity Review</span>
-          <span class="text-rose-600 dark:text-rose-400 font-semibold" id="kpiHoldSub">23 Freeze | 12 Suspended</span>
+          <span class="text-rose-600 dark:text-rose-400 font-semibold" id="kpiHoldSub">Review required</span>
         </div>
       </div>
 
@@ -278,10 +267,10 @@
             <i data-lucide="zap" class="w-4 h-4"></i>
           </div>
         </div>
-        <div class="text-2xl lg:text-3xl font-extrabold text-purple-600 dark:text-purple-400" id="kpiAvgDays">19 <span class="text-sm font-medium text-slate-500 dark:text-slate-400">days</span></div>
+        <div class="text-2xl lg:text-3xl font-extrabold text-purple-600 dark:text-purple-400" id="kpiAvgDays">0 <span class="text-sm font-medium text-slate-500 dark:text-slate-400">days</span></div>
         <div class="mt-1 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
           <span>Offer Velocity</span>
-          <span class="text-purple-600 dark:text-purple-400 font-semibold">Median: 12d</span>
+          <span class="text-purple-600 dark:text-purple-400 font-semibold">YTD</span>
         </div>
       </div>
 
@@ -304,20 +293,20 @@
             </div>
             <div class="flex items-center justify-around my-2">
               <div onclick="setHireTypeFilter('New'); openDrillDownPopup('New Growth Requisitions');" class="cursor-pointer text-center p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition">
-                <div class="text-2xl font-black text-emerald-600 dark:text-emerald-400" id="intentNewCount">82</div>
+                <div class="text-2xl font-black text-emerald-600 dark:text-emerald-400" id="intentNewCount">0</div>
                 <div class="text-xs font-semibold text-slate-700 dark:text-slate-300 mt-0.5">New Headcount</div>
-                <div class="text-[10px] text-emerald-600 dark:text-emerald-500 font-bold" id="intentNewPct">56% Growth</div>
+                <div class="text-[10px] text-emerald-600 dark:text-emerald-500 font-bold" id="intentNewPct">0% Growth</div>
               </div>
               <div class="h-10 w-px bg-slate-200 dark:bg-slate-800"></div>
               <div onclick="setHireTypeFilter('Replacement'); openDrillDownPopup('Replacement Backfill Requisitions');" class="cursor-pointer text-center p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition">
-                <div class="text-2xl font-black text-cyan-600 dark:text-cyan-400" id="intentReplCount">63</div>
+                <div class="text-2xl font-black text-cyan-600 dark:text-cyan-400" id="intentReplCount">0</div>
                 <div class="text-xs font-semibold text-slate-700 dark:text-slate-300 mt-0.5">Replacements</div>
-                <div class="text-[10px] text-cyan-600 dark:text-cyan-500 font-bold" id="intentReplPct">44% Attrition</div>
+                <div class="text-[10px] text-cyan-600 dark:text-cyan-500 font-bold" id="intentReplPct">0% Attrition</div>
               </div>
             </div>
           </div>
           <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-            <span>63 Replaced Employees Tracked</span>
+            <span>Replaced Employees Tracked</span>
             <button onclick="setHireTypeFilter('Replacement'); openDrillDownPopup('Replacement Backfill Requisitions');" class="text-brand-600 dark:text-brand-400 hover:underline font-semibold flex items-center gap-1">
               View Backfills <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </button>
@@ -336,21 +325,21 @@
             </div>
             <div class="grid grid-cols-3 gap-2 text-center my-1">
               <div onclick="setChannelFilter('Internal'); openDrillDownPopup('Internal / IJP Candidates');" class="cursor-pointer p-2 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60 hover:scale-105 transition shadow-sm">
-                <div class="text-xl font-extrabold text-purple-600 dark:text-purple-400" id="channelInternalCount">40</div>
+                <div class="text-xl font-extrabold text-purple-600 dark:text-purple-400" id="channelInternalCount">0</div>
                 <div class="text-[10px] font-bold text-slate-700 dark:text-slate-300 uppercase mt-0.5">Internal</div>
               </div>
               <div onclick="setChannelFilter('Employee Referral'); openDrillDownPopup('Employee Referral Candidates');" class="cursor-pointer p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 hover:scale-105 transition shadow-sm">
-                <div class="text-xl font-extrabold text-emerald-600 dark:text-emerald-400" id="channelReferralCount">20</div>
+                <div class="text-xl font-extrabold text-emerald-600 dark:text-emerald-400" id="channelReferralCount">0</div>
                 <div class="text-[10px] font-bold text-slate-700 dark:text-slate-300 uppercase mt-0.5">Referrals</div>
               </div>
               <div onclick="setChannelFilter('External / Sourced'); openDrillDownPopup('External / Sourced Candidates');" class="cursor-pointer p-2 rounded-xl bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800/60 hover:scale-105 transition shadow-sm">
-                <div class="text-xl font-extrabold text-cyan-600 dark:text-cyan-400" id="channelExternalCount">19</div>
+                <div class="text-xl font-extrabold text-cyan-600 dark:text-cyan-400" id="channelExternalCount">0</div>
                 <div class="text-[10px] font-bold text-slate-700 dark:text-slate-300 uppercase mt-0.5">External</div>
               </div>
             </div>
           </div>
           <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-            <span>67 Open/Direct Unspecified</span>
+            <span>Normalized Channels</span>
             <button onclick="setChannelFilter('Employee Referral'); openDrillDownPopup('Employee Referral Candidates');" class="text-emerald-600 dark:text-emerald-400 hover:underline font-semibold flex items-center gap-1">
               View Referrals <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </button>
@@ -370,11 +359,11 @@
             <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
               <li class="flex items-start gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
-                <span><strong>23 Positions Paused:</strong> Pending capacity approval from Karuna & Dharmesh.</span>
+                <span><strong>Positions Paused / Freezed:</strong> Awaiting finalized capacity planning.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
-                <span><strong>9 Key Offers Awaiting Joining:</strong> Includes CFO, AI Engineers, & Senior HR Manager.</span>
+                <span><strong>Confirmed Offers Awaiting Joining:</strong> Active Q4 onboarding tracking.</span>
               </li>
             </ul>
           </div>
@@ -387,16 +376,16 @@
         </div>
       </div>
 
-      <!-- Velocity Charts Grid -->
+      <!-- Velocity Charts Grid (Full 12 Months Jan - Dec) -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm dark:shadow-lg flex flex-col justify-between transition-colors">
           <div class="flex items-center justify-between mb-4">
             <div>
               <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <i data-lucide="trending-up" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
-                Monthly & Quarterly Joiners Velocity (FY 2026)
+                Monthly & Quarterly Joiners Velocity (Jan - Dec 2026)
               </h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">India (56) vs. USA (36) onboarded capacity</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">India vs. USA onboarded capacity across all 12 months</p>
             </div>
             <div class="flex items-center gap-3 text-xs">
               <span class="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> India</span>
@@ -417,7 +406,7 @@
               </h3>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Distribution of requisitions across business units</p>
             </div>
-            <span class="text-xs text-slate-500 dark:text-slate-400">Engineering leads demand</span>
+            <span class="text-xs text-slate-500 dark:text-slate-400">Active Demand</span>
           </div>
           <div class="h-64 relative">
             <canvas id="deptDistChart"></canvas>
@@ -436,7 +425,7 @@
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Confirmed candidates with offer letters released and active onboarding tracking</p>
           </div>
           <span class="text-xs px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 font-semibold" id="runwayCountBadge">
-            9 Confirmed Offers
+            0 Confirmed Offers
           </span>
         </div>
         <div class="overflow-x-auto custom-scrollbar">
@@ -468,7 +457,7 @@
             <span class="text-xs font-bold uppercase text-emerald-600 dark:text-emerald-400">0 - 30 Days (On Track)</span>
             <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i>
           </div>
-          <div class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 mt-2" id="aging0to30">59</div>
+          <div class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 mt-2" id="aging0to30">0</div>
           <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Within standard hiring cycle</p>
         </div>
 
@@ -477,7 +466,7 @@
             <span class="text-xs font-bold uppercase text-amber-600 dark:text-amber-400">31 - 60 Days (Watchlist)</span>
             <i data-lucide="alert-circle" class="w-4 h-4 text-amber-500"></i>
           </div>
-          <div class="text-3xl font-extrabold text-amber-600 dark:text-amber-400 mt-2" id="aging31to60">25</div>
+          <div class="text-3xl font-extrabold text-amber-600 dark:text-amber-400 mt-2" id="aging31to60">0</div>
           <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Requires interview acceleration</p>
         </div>
 
@@ -486,7 +475,7 @@
             <span class="text-xs font-bold uppercase text-orange-600 dark:text-orange-400">61 - 90 Days (Critical)</span>
             <i data-lucide="alert-triangle" class="w-4 h-4 text-orange-500"></i>
           </div>
-          <div class="text-3xl font-extrabold text-orange-600 dark:text-orange-400 mt-2" id="aging61to90">13</div>
+          <div class="text-3xl font-extrabold text-orange-600 dark:text-orange-400 mt-2" id="aging61to90">0</div>
           <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Exceeding standard SLA threshold</p>
         </div>
 
@@ -495,7 +484,7 @@
             <span class="text-xs font-bold uppercase text-rose-600 dark:text-rose-400">90+ Days (Severe Breach)</span>
             <i data-lucide="flame" class="w-4 h-4 text-rose-500"></i>
           </div>
-          <div class="text-3xl font-extrabold text-rose-600 dark:text-rose-400 mt-2" id="aging90Plus">41</div>
+          <div class="text-3xl font-extrabold text-rose-600 dark:text-rose-400 mt-2" id="aging90Plus">0</div>
           <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Capacity deficit or frozen requisition</p>
         </div>
       </div>
@@ -534,7 +523,7 @@
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">High-priority requisitions requiring executive intervention</p>
           </div>
           <span class="text-xs px-2.5 py-1 rounded bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/30 font-semibold" id="criticalTableBadge">
-            54 Positions
+            0 Positions
           </span>
         </div>
         <div class="overflow-x-auto custom-scrollbar max-h-96">
@@ -570,7 +559,6 @@
               </h3>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Total requisitions owned by hiring managers</p>
             </div>
-            <span class="text-xs text-slate-500 dark:text-slate-400">Top: Kanan & Vijay</span>
           </div>
           <div class="h-72 relative">
             <canvas id="deptHeadChart"></canvas>
@@ -637,17 +625,15 @@
           </span>
         </div>
 
-        <div id="challengesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
-          <!-- Populated dynamically to filter by Geo -->
-        </div>
+        <div id="challengesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6"></div>
 
         <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
           <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
             <i data-lucide="pause-circle" class="w-4 h-4 text-rose-500 dark:text-rose-400"></i>
-            Internal Business Holds: 23 Positions Frozen Pending Capacity Plan
+            Internal Business Holds & Capacity Management
           </h4>
           <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">
-            Requisitions across Pune, Chennai, and Charlotte currently awaiting finalized headcount roadmap.
+            Requisitions across Pune, Chennai, and Charlotte awaiting finalized headcount roadmap.
           </p>
         </div>
       </div>
@@ -693,7 +679,7 @@
         </div>
 
         <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
-          <div id="paginationInfo">Showing 1 to 15 of 146 entries</div>
+          <div id="paginationInfo">Showing 0 entries</div>
           <div class="flex items-center gap-1.5" id="paginationControls"></div>
         </div>
       </div>
@@ -705,7 +691,6 @@
   <div id="drillDownModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6 transition-all duration-200">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-5xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
       
-      <!-- Modal Header -->
       <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/80 dark:bg-slate-950/60">
         <div>
           <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2" id="drillDownModalTitle">
@@ -727,7 +712,6 @@
         </div>
       </div>
 
-      <!-- Quick Search inside Modal -->
       <div class="px-6 py-2.5 bg-slate-100/60 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 text-xs">
         <div class="relative flex-1 max-w-sm">
           <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
@@ -736,7 +720,6 @@
         <span id="modalRowCount" class="font-semibold text-brand-600 dark:text-brand-400">0 Candidates Found</span>
       </div>
 
-      <!-- Modal Table Body -->
       <div class="overflow-y-auto overflow-x-auto flex-1 custom-scrollbar p-0">
         <table class="w-full text-left text-xs border-collapse">
           <thead class="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
@@ -752,13 +735,10 @@
               <th class="py-3 px-4">Status</th>
             </tr>
           </thead>
-          <tbody id="drillDownTableBody" class="divide-y divide-slate-200 dark:divide-slate-800/60 bg-white dark:bg-slate-900/40">
-            <!-- Populated dynamically -->
-          </tbody>
+          <tbody id="drillDownTableBody" class="divide-y divide-slate-200 dark:divide-slate-800/60 bg-white dark:bg-slate-900/40"></tbody>
         </table>
       </div>
 
-      <!-- Modal Footer -->
       <div class="px-6 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
         <span>Tip: Click any row in this popup to see full candidate comments & history.</span>
         <button onclick="closeDrillDownModal()" class="px-4 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold hover:bg-slate-300 dark:hover:bg-slate-700 transition">
@@ -779,195 +759,7 @@
     </div>
   </div>
 
-  <!-- POPUP MODAL 3: LIVE ONEDRIVE / EXCEL UPLOAD MODAL -->
-  <div id="syncModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-xl w-full p-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
-      <button onclick="closeSyncModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 dark:hover:text-white">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-          <i data-lucide="upload-cloud" class="w-5 h-5"></i>
-        </div>
-        <div>
-          <h3 class="text-base font-bold text-slate-900 dark:text-white">Upload Master Excel (.xlsx)</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Instantly refresh dashboard with your latest master file</p>
-        </div>
-      </div>
-      <div class="space-y-4 text-xs">
-        <p class="text-slate-600 dark:text-slate-300">
-          Select your updated master Excel workbook (e.g. <code>Weekly Report Master File- 2026.xlsx</code>). The application will automatically ingest the tracking sheet and update all metrics instantly.
-        </p>
-        <div>
-          <label class="cursor-pointer flex flex-col items-center justify-center p-6 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl hover:border-brand-500 transition bg-slate-50 dark:bg-slate-950/50">
-            <i data-lucide="file-spreadsheet" class="w-8 h-8 text-emerald-500 mb-2"></i>
-            <span class="font-semibold text-slate-700 dark:text-slate-300">Click to choose Excel file</span>
-            <span class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Supports .xlsx and .xls formats</span>
-            <input type="file" id="modalExcelInput" accept=".xlsx, .xls" class="hidden" onchange="handleFileUpload(event)" />
-          </label>
-        </div>
-        <div class="flex items-center justify-between pt-2">
-          <span id="syncStatus" class="text-slate-500 dark:text-slate-400 font-medium">Ready for upload</span>
-          <button onclick="closeSyncModal()" class="px-4 py-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold transition">
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script>
-    // COMPACT 146 MASTER RECORDS
-    const COMPACT_KEYS = ['id','geo','dept','squad','pos','head','type','replaced','empType','loc','open','offer','join','q','aging','timeToOffer','timeToClose','status','cand','rec','sourceChannel','sourceDetail','rag','buddy','backup','comm'];
-    const COMPACT_DATA = [
-      [1, "India", "Product", "Account", "Product Manager", "Ashok", "Replacement", "Bhargav/Mahesh", "Full-time", "Chennai", "2025-10-08", "2025-11-14", "2026-03-09", "Q1", 28, 28, 109, "Suspended", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Narsimha Leela Krishna - Backedout"],
-      [2, "USA", "Infosec", "Infosec", "CISO (Change of Role)", "Murthy", "Replacement", "Nate", "Full-time", "Charlotte", "2025-11-21", "2026-01-23", "2026-02-02", "Q1", 52, 46, 52, "Joined", "Supro", "Marissa", "Not Specified", "", "Green", "", "", "Eric Garcia decided to reject the offer on October 1, 2025."],
-      [3, "USA", "Product", "Payments", "Product Owner (Change of Role)", "Vijay", "New", "", "Full-time", "Charlotte", "2025-08-26", "2025-12-12", "2026-01-20", "Q1", 106, 79, 106, "Joined", "Melissa", "Marissa", "Not Specified", "", "Green", "", "", "Melissa will join in January 12, 2025"],
-      [4, "USA", "Engineering", "Payments", "Enterprise Architect", "Murthy", "New", "", "Full-time", "Charlotte", "2026-01-02", "2026-03-24", "2026-04-20", "Q2", 77, 58, 77, "Joined", "Lakshminarayan", "Andleeb", "Not Specified", "", "Green", "", "", ""],
-      [5, "India", "Engineering", "Payments", "Senior Software Engineer", "Vinay", "Replacement", "Revanth", "Full-time", "Chennai", "2025-10-28", "2025-12-12", "2026-01-20", "Q1", 34, 34, 61, "Joined", "Srinivasan", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
-      [6, "India", "DevOps", "DevOps", "DevOps Engineer", "Prathap", "New", "", "Full-time", "Chennai", "2026-01-02", "2026-03-04", "2026-03-05", "Q1", 44, 44, 45, "Joined", "Senthil R", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
-      [7, "India", "DevOps", "DevOps", "Senior DevOps Engineer", "Prathap", "New", "", "Full-time", "Pune", "2026-07-11", "", "", "Q3", 50, 0, 0, "Suspended", "", "Andleeb/Thirukumaran", "Not Specified", "", "Green", "", "", "Role changed to IT Admin (email from Aarthie)"],
-      [8, "India", "QA", "Payments", "Performance Tester", "Divya", "Replacement", "Mageshkumar", "Full-time", "Chennai", "2026-01-06", "2026-01-09", "2026-01-19", "Q1", 4, 4, 10, "Joined", "Pavithra Devi", "Andleeb", "Internal", "Internal", "Green", "", "", "Pavithra Devi early attrition"],
-      [9, "India", "Engineering", "PS", "Senior Software Engineer", "Kanan", "Replacement", "Nikhilesh", "Consultant", "Pune", "2025-10-15", "2026-03-13", "2026-03-23", "Q1", 108, 108, 114, "Joined", "Uttkarsh", "Vendor / Andleeb", "External / Sourced", "External", "Green", "", "", ""],
-      [10, "USA", "DevOps", "DevOps", "Director of Infrastructure", "Murthy", "New", "", "Full-time", "Charlotte", "2025-11-04", "2026-01-20", "2026-02-04", "Q1", 67, 56, 67, "Joined", "Manoj", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [11, "USA", "DevOps", "DevOps", "SecOps - Enterprise Governance", "Murthy", "New", "", "Full-time", "Charlotte", "2025-11-05", "", "", "Q4", 228, 0, 0, "Suspended", "", "Andleeb", "Not Specified", "", "Green", "", "", "Murthy asked to temp hold the req until the clarity on business need"],
-      [12, "USA", "Engineering", "Account", "Java Architect", "Ashok", "New", "", "Full-time", "Charlotte", "2025-11-18", "2026-02-23", "2026-04-17", "Q2", 109, 70, 109, "Joined", "Esther M", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [13, "India", "Engineering", "Trade", "Software Engineer", "Raju", "Replacement", "Manikandan S", "Full-time", "Chennai", "2026-01-02", "2026-02-04", "2026-05-04", "Q2", 24, 24, 87, "Joined", "Sridharan", "Thirukumaran", "Internal", "Internal", "Green", "", "", "Sridharan - Backup / Manikandan Resigned"],
-      [14, "USA", "Finance", "Finance", "Chief Finance Officer", "Booshan", "Replacement", "Adam", "Full-time", "Charlotte", "2025-12-18", "", "", "Q4", 197, 0, 0, "Offered", "Bill Gostkowski", "TPZ", "Not Specified", "", "Green", "", "", ""],
-      [15, "India", "Engineering", "Trade", "Software Engineer", "Raju", "Replacement", "Ambikeshwari", "Full-time", "Chennai", "2025-12-24", "2026-03-26", "2026-03-27", "Q1", 67, 67, 68, "Joined", "Elumalai", "Thirukumaran", "Internal", "Internal", "Green", "", "", "Ambikeshwari Resigned"],
-      [16, "USA", "Sales", "Sales", "VP of PreSales and Solution Consulting", "Karuna", "New", "", "Full-time", "USA-Remote", "2025-12-12", "2025-12-23", "2026-02-09", "Q1", 42, 8, 42, "Joined", "Romil", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [17, "USA", "Sales", "Sales", "VP of Sales - Payments", "Karuna", "New", "", "Full-time", "USA-Remote", "2025-11-20", "2025-12-24", "2026-01-09", "Q1", 37, 25, 37, "Joined", "Randy", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [18, "India", "HR", "HR", "HR Executive (HRBP)", "Bharath", "Replacement", "Baskaran D", "Full-time", "Chennai", "2025-12-22", "2026-01-25", "2026-01-28", "Q1", 195, 25, 28, "Joined", "Janani", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
-      [19, "India", "HR", "HR", "HR Ops", "Bharath", "Replacement", "Baskaran D", "Full-time", "Chennai", "2025-12-22", "2026-01-19", "2026-01-20", "Q1", 195, 21, 22, "Joined", "Abirami R", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
-      [20, "India", "QA", "PS", "Quality Analyst (C2H)", "Kanan", "Replacement", "Vineet K", "Consultant", "Pune", "2026-01-02", "2026-01-16", "2026-02-02", "Q1", 186, 11, 22, "Joined", "Shubhankar", "Vendor", "External / Sourced", "External", "Green", "", "", "DOJ Feb 4 - by Synechron"],
-      [21, "India", "Engineering", "Payments", "Software Engineer  (Rust)", "Prashant", "Replacement", "Ganesh", "Full-time", "Pune", "2026-01-12", "2026-01-30", "2026-02-05", "Q1", 15, 15, 19, "Joined", "Anil P", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
-      [22, "India", "Product", "Account", "Product Manager - VA", "Ashok", "New", "", "Full-time", "Pune", "2026-01-02", "2026-01-27", "2026-04-28", "Q2", 18, 18, 83, "Joined", "Dhawal", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
-      [23, "India", "QA", "Account", "QA Analyst", "Ashok", "New", "", "Full-time", "Chennai", "2026-01-21", "2026-01-30", "2026-03-12", "Q1", 8, 8, 37, "Joined", "Nikhil C Karanam", "Thirukumaran", "Internal", "Internal", "Green", "", "", "Nikhil early attrition"],
-      [24, "India", "QA", "Account", "QA Analyst", "Ashok", "New", "", "Full-time", "Chennai", "2026-01-21", "2026-02-04", "2026-03-02", "Q1", 11, 11, 29, "Joined", "Keerthika", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
-      [25, "India", "Product", "Payments", "Payment Owner", "Kasi", "Replacement", "Ravikumar Kasi", "Full-time", "Chennai", "2026-01-21", "2026-01-30", "2026-02-24", "Q1", 8, 8, 25, "Joined", "Ganesh", "Andleeb", "Internal", "Internal", "Green", "", "", "Sujata on hold"],
-      [26, "India", "Prod Support", "Support", "Production Support Engineer (FX)", "Mark D", "New", "", "Full-time", "India-Remote", "2026-01-21", "2026-01-30", "2026-02-05", "Q1", 173, 8, 12, "Joined", "Krishnaprasad", "Andleeb", "Employee Referral", "Emp Ref", "Green", "", "", ""],
-      [27, "India", "BA", "PS", "Business Analyst", "Kanan", "New", "", "Full-time", "Pune", "2026-01-27", "2026-02-04", "2026-04-10", "Q2", 7, 7, 54, "Joined", "Niraj T", "Andleeb", "Employee Referral", "Emp Ref", "Green", "", "", ""],
-      [28, "India", "Legal", "Support", "India Legal Assistant supporting US", "Hardik", "New", "", "Full-time", "India-Remote", "2026-01-27", "2026-02-11", "2026-02-17", "Q1", 169, 12, 16, "Joined", "Uzma Sohail", "Thirukumaran", "Employee Referral", "Emp Ref", "Green", "", "", ""],
-      [29, "India", "Product", "Digital", "Product Manager- DGx & OpenAPI", "Sajeesh", "New", "", "Full-time", "Pune", "2026-02-11", "", "2026-03-10", "Q1", 158, 0, 20, "Joined", "Alice Marks", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
-      [30, "India", "Engineering", "Digital", "Full-stack Engineer", "Sajeesh", "New", "", "Full-time", "Pune", "2026-02-11", "2026-03-04", "2026-03-26", "Q1", 16, 16, 32, "Joined", "Omkar Chavan", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
-      [31, "India", "BA", "Trade", "BA- FX", "Patrick", "New", "", "Full-time", "Chennai", "2026-05-02", "2026-06-01", "2026-06-02", "Q2", 22, 21, 22, "Joined", "Muthu Meenakshi", "Thirukumaran", "External / Sourced", "External", "Green", "", "", ""],
-      [32, "India", "BA", "Trade", "Business Analyst - IRD", "Patrick", "New", "", "Full-time", "Chennai", "2026-05-02", "2026-06-17", "2026-09-18", "Q3", 33, 33, 100, "Joined", "Kishore", "Thirukumaran", "Internal", "Internal", "Amber", "Karthikeyan", "Initial Interview", "Kishore accpeted our offer"],
-      [33, "India", "Engineering", "Account", "Full-stack Engineer", "Ashok", "New", "", "Full-time", "Chennai", "2026-02-11", "2026-04-29", "2026-05-20", "Q2", 56, 56, 71, "Joined", "Kalirajan", "Thirukumaran", "Internal", "Internal", "Green", "", "", "Sivakumar Backedout"],
-      [34, "India", "Program", "Payments", "Project Manager", "Ramesh", "New", "", "Full-time", "Pune", "2026-02-02", "2026-07-07", "2026-07-29", "Q3", 112, 112, 128, "Joined", "Naveen Kulkarni", "Andleeb", "Employee Referral", "Emp Ref", "Green", "Amit Kulkarni", "Initial Interview", "Naveen accepted our offered"],
-      [35, "India", "DevOps", "DevOps", "DevOps Engineer", "Prathap", "New", "", "Full-time", "Pune", "2026-05-02", "2026-06-11", "2026-06-15", "Q2", 29, 29, 31, "Joined", "Faheem", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
-      [36, "India", "DevOps", "DevOps", "DevOps Engineer", "Prathap", "New", "", "Full-time", "Chennai", "2026-05-02", "2026-06-05", "2026-06-08", "Q2", 25, 25, 26, "Joined", "Deepakraj J", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
-      [37, "India", "Infosec", "Infosec", "InfoSec Security Analyst", "Supro", "New", "", "Full-time", "Pune", "2026-03-29", "2026-07-03", "2026-07-08", "Q3", 70, 70, 73, "Joined", "Rajesh", "Andleeb", "Internal", "Internal", "Green", "", "Sourcing", "Swapnil/Gauresh / Nitesh declined our offer. Supro referral is looking remote"],
-      [38, "India", "Infosec", "Infosec", "InfoSec Audit & Compliance Engineer", "Supro", "New", "", "Full-time", "Pune", "2026-02-11", "2026-03-24", "2026-03-25", "Q1", 30, 30, 31, "Joined", "Sayyed Karim", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
-      [39, "India", "Program", "Payments", "Scrum Master", "Vijay", "Replacement", "Saravanan T", "Full-time", "Pune", "2026-02-10", "", "2026-03-05", "Q1", 159, 0, 18, "Joined", "Amit KS", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
-      [40, "India", "QA", "Payments", "Senior QA Analyst", "Vijay", "New", "", "Full-time", "Chennai", "2026-02-10", "2026-03-26", "2026-03-27", "Q1", 33, 33, 34, "Joined", "Abinaya D", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
-      [41, "India", "Engineering", "Payments", "Senior/Lead Engineer", "Vijay", "New", "", "Consultant", "Pune", "2026-03-23", "2026-05-11", "2026-05-14", "Q2", 36, 23, 25, "Joined", "Prachi", "Unassigned", "External / Sourced", "External", "Green", "", "", ""],
-      [42, "India", "Engineering", "Payments", "Senior/Lead Engineer", "Vijay", "New", "", "Full-time", "Pune", "2026-03-23", "2026-04-22", "2026-04-24", "Q2", 23, 0, 0, "Joined", "Mani Prathap", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
-      [43, "India", "HR", "HR", "Senior HR Executive", "Bharath", "Replacement", "Janani", "Full-time", "Chennai", "2026-03-31", "", "", "Q1", 124, 0, 0, "Suspended", "Keerthivasan", "Andleeb", "Not Specified", "", "Green", "", "", ""],
-      [44, "India", "Engineering", "Digital", "Open API Developer", "Sajeesh", "New", "", "Full-time", "Chennai", "2026-02-16", "2026-03-27", "2026-04-02", "Q2", 30, 30, 34, "Joined", "Ramya", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
-      [45, "India", "Infosec", "Infosec", "System Monitoring Engineer", "Supro", "New", "", "Full-time", "Remote", "", "", "", "", 0, 0, 0, "Suspended", "", "Unassigned", "Not Specified", "", "Green", "", "", "Supro has hold the req"],
-      [46, "India", "Engineering", "Payments", "Solution Architect", "Vijay", "New", "", "Full-time", "Pune", "2026-03-23", "2026-05-06", "2026-05-07", "Q2", 33, 33, 34, "Joined", "Shankar Gaikwad", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
-      [47, "India", "BA", "PS", "Sr.Business Analyst", "Kanan", "Replacement", "Jaspreet", "Full-time", "Pune", "2026-03-02", "2026-07-20", "2026-09-30", "Q3", 101, 101, 153, "Offered", "", "Andleeb", "External / Sourced", "Linkedin", "Green", "Prabu", "Sourcing", "Yasar Declined (30 -sept DOJ), Dhawal Interview happened with Nagesh. Ashok is waiting for an response for replacment confirmation from Karuna so that he can share the next action plan for Dhawal"],
-      [48, "India", "Prod Support", "Support", "Wire Support Sr", "Mark D", "New", "", "Full-time", "India-Remote", "2026-03-09", "2026-04-24", "2026-05-11", "Q2", 140, 35, 46, "Joined", "Yasar", "Unassigned", "Employee Referral", "Emp Ref", "Green", "", "", ""],
-      [49, "India", "Prod Support", "Support", "Instant Payment Support Sr", "Mark D", "New", "", "Full-time", "India-Remote", "2026-03-09", "2026-04-24", "2026-04-29", "Q2", 140, 35, 38, "Joined", "Prince", "Unassigned", "Internal", "Internal", "Green", "", "", ""],
-      [50, "USA", "Engineering", "Payments", "Lead Software Engineer  - ACH", "Vijay", "New", "", "Full-time", "Charlotte", "2026-02-16", "2026-05-07", "2026-07-21", "Q3", 112, 59, 112, "Joined", "Alka Lakhote", "Sindhu", "Not Specified", "", "Green", "", "", "H-1B approved, waiting on candidate to confirm start date."],
-      [51, "USA", "Engineering", "Digital", "Full Stack Developer", "Sajeesh", "New", "", "Full-time", "Charlotte", "2026-02-11", "", "", "Q1", 158, 0, 0, "L1 Process", "Anupam Babar", "Unassigned", "Not Specified", "", "Green", "", "", ""],
-      [52, "USA", "Product", "PS", "Business Analyst- ACH", "Kanan", "New", "", "Consultant", "Charlotte", "2026-02-03", "", "2026-02-13", "Q1", 9, 0, 9, "Joined", "Ramona Brown", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [53, "USA", "Product", "PS", "Developer", "Kanan", "New", "", "Consultant", "Charlotte", "", "", "2026-02-17", "Q1", 0, 0, 0, "Joined", "Narendra Kumar", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [54, "USA", "Product", "PS", "Project Manager", "Kanan", "New", "", "Consultant", "Charlotte", "", "", "2026-02-23", "Q1", 0, 0, 32911, "Joined", "Sagarika B", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [55, "USA", "Production Support", "Support", "ACH Support", "Mark D", "New", "", "Full-time", "Charlotte", "2026-03-02", "2026-05-29", "2026-06-17", "Q2", 78, 65, 78, "Joined", "Sai Narahari", "Sindhu", "Employee Referral", "Employee Referral - Ranjit", "Green", "", "", ""],
-      [56, "USA", "Production Support", "Support", "Capital Market Support", "Mark D", "New", "", "Full-time", "Charlotte", "2026-02-11", "2026-02-20", "2026-03-02", "Q1", 14, 8, 14, "Joined", "Manoj", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [57, "India", "Engineering", "Digital", "Full-stack Engineer", "Sajeesh", "New", "Full-time", "Full-time", "Pune", "2026-02-12", "2026-02-26", "2026-04-20", "Q2", 157, 11, 48, "Joined", "Meghali", "Unassigned", "Internal", "Internal", "Green", "", "", "Amruta & Viddesh Backedout"],
-      [58, "India", "Engineering", "Payments", "Performance Engineer", "Vijay", "Replacement", "Pavithra M", "Full-time", "Pune", "2026-06-15", "", "2026-10-12", "Q4", 70, 0, 86, "Temp Hold", "Urvashi T", "Andleeb", "Internal", "ijp", "Green", "", "", "Urvashi internal movement (Hariprasanth -offer declined)"],
-      [59, "India", "Engineering", "Account", "Compliance - AI Developer", "Ashok", "New", "", "Full-time", "Chennai", "2026-03-16", "2026-03-18", "2026-03-23", "Q1", 3, 3, 6, "Joined", "Vaishnavi", "Unassigned", "Employee Referral", "Emp Ref", "Green", "", "", ""],
-      [60, "USA", "HR", "HR", "Director HR", "Aarthie", "New", "", "Full-time", "Charlotte", "", "", "", "", 0, 0, 0, "JD Pending", "", "Marissa", "Not Specified", "", "Green", "", "", "JD pending with Aarthie"],
-      [61, "USA", "Product", "Others", "Program Manager", "Aarthie", "New", "", "Full-time", "Charlotte", "", "", "", "", 0, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", ""],
-      [62, "USA", "Product", "Others", "Chief Delivery Officer", "Aarthie", "New", "", "Full-time", "Charlotte", "", "", "", "", 0, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", ""],
-      [63, "USA", "HR", "HR", "Exec Assistant & Office Manager", "Aarthie", "New", "", "Full-time", "Charlotte", "2026-02-02", "2026-03-17", "2026-03-30", "Q1", 165, 32, 41, "Joined", "Andrea Clemons", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [64, "USA", "Marketing/Customer Success", "GTM", "Marketing Trainee Associate", "Marc", "New", "", "Full-time", "Charlotte", "2026-02-11", "", "", "Q1", 158, 0, 0, "Suspended", "", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [65, "USA", "DevOps", "DevOps", "DevOps Engineer", "Manoj", "Replacement", "Prathamesh", "Full-time", "Charlotte", "2026-04-09", "", "", "Q2", 117, 0, 0, "Suspended", "", "Sindhu", "Not Specified", "", "Green", "", "", "Adithya is on hold, This requirement is moved to India team"],
-      [66, "India", "Engineering", "Payments", "Enterprise Architect", "Murthy", "New", "", "Full-time/Consultant", "Pune", "2026-09-19", "", "", "Q3", 0, 0, 0, "Suspended", "", "Andleeb", "Not Specified", "", "Green", "", "", ""],
-      [67, "India", "Engineering", "Payments", "AI Engineer", "Vijay", "Replacement", "Mallika", "Full-time", "Pune", "2026-05-01", "2026-06-24", "2026-09-21", "Q3", 39, 39, 102, "Offered", "Shivam More", "Andleeb", "External / Sourced", "External", "Green", "Vikrant Singh", "Sourcing", ""],
-      [68, "India", "QA", "Digital", "Senior QA Analyst", "Sajeesh", "Replacement", "Priyanka Kapla", "Full-time", "Chennai", "2026-03-09", "2026-03-12", "2026-03-13", "Q1", 5, 4, 5, "Joined", "Mallika", "Unassigned", "Internal", "Internal", "Green", "", "", ""],
-      [69, "USA", "Support", "GTM", "Director, Client Onboarding", "Marc", "Replacement", "", "Full-time", "Charlotte", "2026-02-20", "2026-03-09", "2026-03-19", "Q1", 151, 12, 20, "Joined", "Abhijit C", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [70, "India", "QA", "Account", "QA Analyst", "Ashok", "Replacement", "Nikhil", "Full-time", "Chennai", "2026-03-18", "2026-04-10", "2026-04-20", "Q2", 18, 18, 24, "Joined", "Arul Anand", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
-      [71, "India", "Engineering", "PS", "Software Engineer", "Nitin", "Replacement", "Meghali", "Full-time", "Pune", "2026-03-23", "2026-03-24", "2026-03-25", "Q1", 130, 2, 3, "Joined", "Som Limbure", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
-      [72, "USA", "QA", "PS", "Automation Engineer", "Kanan", "New", "", "Full-time", "Charlotte", "2026-03-11", "2026-03-27", "2026-04-20", "Q2", 138, 13, 29, "Joined", "Shashank", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [73, "India", "Product", "Account", "Product Manager - Deposits & VA", "Ashok", "New", "", "Full-time", "Chennai", "2026-02-09", "2026-03-20", "2026-03-23", "Q1", 30, 30, 31, "Joined", "Arivumani N", "Thirukumaran", "Internal", "Internal", "Green", "", "", "Narasimha Backup"],
-      [74, "India", "Finance", "Finance", "Finance Analyst", "Dharani", "New", "", "Full-time", "Chennai", "2026-06-08", "2026-06-30", "2026-07-06", "Q3", 17, 17, 21, "Joined", "Vignesh", "Andleeb/Thirukumaran", "Not Specified", "", "Green", "", "Sourcing", "Vignesh DOJ 6th July"],
-      [75, "USA", "HR", "HR", "Recruiter", "Aarthie", "New", "", "Full-time", "Charlotte", "2026-03-31", "2026-04-10", "2026-04-20", "Q2", 124, 9, 15, "Joined", "Sindu", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [76, "India", "QA", "Payments", "Senior QA Analyst", "Vijay", "Replacement", "Sakshi Dhumal", "Full-time", "Pune", "2026-05-11", "2026-06-10", "2026-06-11", "Q2", 23, 23, 24, "Joined", "Utkarsh", "Andleeb", "Internal", "Internal", "Green", "", "", ""],
-      [77, "USA", "Support", "Support", "VP of Training", "Dharmesh", "New", "", "Full-time", "Remote - USA", "2026-04-17", "2026-04-22", "2026-05-19", "Q2", 111, 4, 23, "Joined", "Peter Ro", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [78, "USA", "Payments", "Payments", "AI Developer", "Vijay", "New", "", "Full-time", "Charlotte", "2026-04-13", "2026-05-01", "2026-05-18", "Q2", 115, 15, 26, "Joined", "Aditya Khandare", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [79, "USA", "Sales", "Sales", "Business Development Representative", "Jack", "Replacement", "Will", "Full-time", "Remote - USA", "2026-04-17", "2026-05-01", "2026-05-19", "Q2", 111, 11, 23, "Joined", "Eric Nowell", "Marissa", "Not Specified", "", "Green", "", "", ""],
-      [80, "USA", "PS", "PS", "Project Manager", "Kanan", "New", "", "Full-time", "Charlotte", "2026-04-20", "", "", "Q2", 110, 0, 0, "Suspended", "", "Kanan", "Not Specified", "", "Green", "", "", ""],
-      [81, "USA", "PS", "PS", "Tech Manager", "Kanan", "New", "", "Full-time", "Charlotte", "2026-04-22", "2026-06-12", "2026-08-03", "Q3", 108, 38, 74, "Joined", "Sirisha Meka", "Sindhu", "Not Specified", "", "Green", "", "", "Waiting on H-1B approval"],
-      [82, "India", "QA", "PS", "QA Lead", "Kanan", "Replacement", "Sachin Dhome", "Full-time", "Pune", "2026-06-11", "", "", "Q2", 72, 0, 0, "Position Freezed", "", "Andleeb/Thirukumaran", "Not Specified", "", "Green", "", "", "2 L1 Interview on hold. Waiting for Dharmesh to share resource capacity planning"],
-      [83, "USA", "DevOps", "DevOps", "IT Admin Consultant", "Murthy", "Replacement", "Suman", "Consultant", "Charlotte", "2026-04-16", "2026-05-18", "2026-06-08", "Q2", 112, 23, 38, "Joined", "Tejasri Balusu", "Sindhu", "External / Sourced", "Linkedln applied", "Green", "", "", ""],
-      [84, "India", "Engineering", "Digital", "Backend Developer", "Sajeesh", "Replacement", "Ramya", "Full-time", "Chennai", "2026-05-06", "2026-07-21", "2026-08-05", "Q3", 55, 55, 66, "Joined", "Thameenansari", "Thirukumaran", "Employee Referral", "Emp Ref", "Green", "Abdul R", "", "Venkatesh/ Gokulnath/ Sandeep/ GokulRaja declined our offer"],
-      [85, "India", "QA", "Trade", "QA Analyst", "Raju", "Replacement", "Satyasri", "Full-time", "Chennai", "2026-05-06", "2026-05-15", "2026-05-18", "Q2", 98, 8, 9, "Joined", "Nirmal", "Thirukumaran", "Internal", "Internal", "Green", "", "", ""],
-      [86, "India", "Engineering", "GTM", "API Integration Engineer", "Karuna", "New", "", "Full-time", "Pune", "2026-06-10", "2026-06-26", "2026-06-29", "Q2", 13, 13, 14, "Joined", "Shradha", "Unassigned", "Internal", "Internal", "Green", "", "", "Shradha- DOJ 29th June"],
-      [87, "USA", "Infosec", "Infosec", "Associate AI Engineer _InfoSec", "Supro", "New", "", "Full-time", "Charlotte", "2026-04-30", "2026-05-13", "2026-05-27", "Q2", 102, 10, 20, "Joined", "Shubham Bhojwani", "Sindhu", "Employee Referral", "Employee Referral - Supro", "Green", "", "", ""],
-      [88, "USA", "Account Galaxy", "Account", "Associate AI Engineer_Accounts", "Ashok", "New", "", "Full-time", "Charlotte", "2026-05-08", "2026-06-18", "2026-07-08", "Q3", 96, 30, 44, "Joined", "Tejashwini Padmashali", "Sindhu", "External / Sourced", "Linkedln sourcing", "Green", "", "", ""],
-      [89, "USA", "DevOps", "DevOps", "Associate AI Engineer_DecOps", "Manoj", "New", "", "Full-time", "Charlotte", "2026-04-30", "2026-05-19", "2026-08-03", "Q3", 102, 14, 68, "Joined", "Bladen Martin", "Sindhu", "Employee Referral", "Employee Referral - Supro", "Green", "", "", "Bladen selected"],
-      [90, "India", "Engineering", "PS", "Senior Software Engineer", "Kanan", "New", "", "Full-time", "Pune", "2026-06-01", "2026-07-09", "2026-07-14", "Q3", 29, 29, 32, "Joined", "Ajay Shinde", "Thirukumaran", "Not Specified", "", "Amber", "", "Initial Interview", "Ajay (14th July)  Scrum Master role changed to SSE"],
-      [91, "India", "Program", "PS", "Project Manager", "Kanan", "New", "", "Full-time", "Pune", "2026-05-11", "", "", "Q2", 95, 0, 0, "Suspended", "", "Unassigned", "Not Specified", "", "Green", "", "", ""],
-      [92, "USA", "Engineering", "PS", "Associate AI Engineer", "Kanan", "New", "", "Full-time", "Charlotte", "2026-05-08", "2026-05-29", "2026-07-06", "Q3", 96, 16, 42, "Joined", "Hrisheekesh Dandekar", "Sindhu", "Employee Referral", "Employee Referral - Supro", "Green", "", "", ""],
-      [93, "USA", "Engineering", "Trade", "Associate AI Engineer", "Brian", "New", "", "Full-time", "Charlotte", "2026-05-08", "2026-06-18", "2026-07-06", "Q3", 96, 30, 42, "Joined", "Kiran Dhanasekaran", "Sindhu", "Employee Referral", "Employee Referral - Supro", "Green", "", "", ""],
-      [94, "USA", "Engineering", "Digital", "Associate AI Engineer_Digital Galaxy", "Sajeesh", "New", "", "Full-time", "Charlotte", "2026-05-08", "2026-05-29", "2026-06-15", "Q2", 96, 16, 27, "Joined", "Shubham Salonki", "Sindhu", "External / Sourced", "Linkedln sourcing", "Green", "", "", ""],
-      [95, "USA", "Technology", "DevOps", "Data Architect", "Murthy", "New", "", "Full-time", "Charlotte", "2026-05-17", "2026-07-02", "2026-07-23", "Q3", 90, 34, 49, "Joined", "Narayanan Sundaram", "Sindhu", "Employee Referral", "Employee Referral - Deepak", "Green", "", "", "Narayana selected"],
-      [96, "India", "Engineering", "Trade", "Software Engineer", "Raju", "Replacement", "Zaki", "Full-time", "Chennai", "2026-05-29", "2026-07-21", "2026-10-01", "Q4", 38, 38, 90, "Offered", "Gowthamasaravanan", "Thirukumaran", "Internal", "Internal", "Amber", "Bala K", "Final Interview", "Gowtham (LWD 30 sept) / Sumithra L1 select (Immediate joiner)"],
-      [97, "India", "Program", "Payments", "Incident Management", "Kanan", "New", "", "Full-time", "Pune", "2026-05-27", "2026-07-27", "2026-10-01", "Q4", 44, 44, 92, "Offered", "Vishvendra", "Andleeb", "Employee Referral", "Emp Ref", "Green", "Amit Kulkarni", "Sourcing", "Vishvendra (1st Oct DOJ)"],
-      [98, "India", "Engineering", "PS", "Software Engineer", "Kanan", "Replacement", "Som Limbure", "Full-time", "Pune", "2026-05-26", "2026-07-03", "2026-07-07", "Q3", 29, 29, 31, "Joined", "Sukhbheer", "Thirukumaran", "Not Specified", "", "Green", "", "", "Sukbeer (Immidiate)"],
-      [99, "USA", "Finance", "Finance", "Commercial Contracts Manager", "Aarthie", "New", "", "Full-time", "Charlotte", "2026-05-29", "2026-06-30", "2026-07-13", "Q3", 81, 23, 32, "Joined", "Cystal Goodwin", "Sindhu", "External / Sourced", "Applied in Linkedln", "Green", "", "", ""],
-      [100, "India", "QA", "Payments", "Senior QA Analyst", "Divya", "Replacement", "Sathishkumar Rajendran", "Full-time", "Chennai", "2026-06-02", "2026-06-12", "2026-08-03", "Q3", 9, 9, 45, "Joined", "Sivaraj", "Thirukumaran", "Employee Referral", "Emp Ref", "Amber", "Kokilavani", "Initial Interview", "Sivaraj (3rd Aug). Pre-orientation scheduled on 16th July"],
-      [101, "USA", "Product", "Payments", "Business Analyst", "Vijay", "Replacement", "Melissa", "Full-time", "Charlotte", "2026-06-06", "", "", "Q2", 75, 0, 0, "Position Freezed", "", "Sindhu", "External / Sourced", "Whitley Recruitment", "Green", "", "", "Naveen has been selected. Offer approval is pending and will depend on Karuna's resource planning."],
-      [102, "USA", "Program", "PS", "Project Manager", "Kanan", "New", "", "Full-time", "Charlotte", "2026-06-04", "2026-08-07", "2026-09-09", "Q3", 77, 47, 70, "Joined", "Jasna Singh", "Sindhu", "External / Sourced", "Linkedln applied", "Green", "Mahendra", "", "Jasna has been shortlisted."],
-      [103, "India", "Engineering", "Payments", "Open API Developer", "Vijay", "Replacement", "BaskaranR", "Full-time", "Pune", "2026-07-26", "2026-07-26", "2026-07-26", "Q3", 0, 0, 0, "Internal Movement", "Shankar Gaikwad", "Andleeb", "Not Specified", "", "Green", "", "", "Shankar moved to Open API Team"],
-      [104, "India", "Support", "Support", "Production Support Engineer (FX)", "Anish", "Replacement", "Krishnaprasad", "Full-time", "India-Remote", "2026-06-30", "2026-08-21", "2026-08-25", "Q3", 39, 39, 41, "Joined", "Manish Piplodi", "Andleeb", "Not Specified", "", "Green", "", "", "Manish - Offered. Alok Ranjan (60 days) offer on hold,"],
-      [105, "India", "DevOps", "DevOps", "Trainee DevOps Engineer", "Prathap", "New", "", "Full-time", "Chennai", "2026-06-12", "2026-06-12", "2026-06-22", "Q2", 1, 1, 7, "Joined", "Prasanna", "Unassigned", "Internal", "Internal", "Green", "", "", ""],
-      [106, "India", "QA", "PS", "Senior QA Analyst", "Kanan", "Replacement", "Poonam (Contractor)", "Full-time", "Pune", "2026-06-12", "", "", "Q2", 71, 0, 0, "Position Freezed", "Ajay", "Andleeb/Thirukumaran", "Not Specified", "", "Green", "", "", "Ajay (Immediate joiner) offer on hold. Waiting for Dharmesh to share resource capacity planning"],
-      [107, "USA", "PS", "PS", "Business Analyst", "Kanan", "Replacement", "Ramona", "Full-time", "Charlotte", "2026-06-15", "2026-07-17", "2026-09-08", "Q3", 70, 25, 62, "Joined", "Nitin Anand", "Sindhu", "External / Sourced", "Linkedln applied", "Green", "Nagesh", "", "Nitin H1 B Approved."],
-      [108, "India", "QA", "PS", "Quality Analyst", "Kanan", "Replacement", "Namra", "Full-time", "Pune", "2026-06-12", "2026-06-26", "2026-06-29", "Q2", 11, 11, 12, "Joined", "Amol J", "Andleeb", "Internal", "Internal", "Green", "", "", "Amol joined on 29th June 2026"],
-      [109, "India", "Delivery", "PS", "Director", "Kanan", "New", "", "Full-time", "India-Remote", "2026-06-12", "", "2026-06-15", "Q2", 2, 0, 2, "Joined", "Nagesh Mududi", "Unassigned", "Internal", "Internal", "Green", "", "", "Internal movement from USA to India"],
-      [110, "India", "BA", "Payments", "Sr.Business Analyst", "Vijay", "Replacement", "Karthika C", "Full-time", "Chennai", "2026-06-24", "2026-07-20", "2026-10-01", "Q4", 19, 19, 72, "Offered", "Gayathri", "Andleeb", "Employee Referral", "Emp Ref", "Green", "Ganesh Kumar", "Sourcing", "Gayathri (1st Oct DOJ)"],
-      [111, "USA", "PS", "Account", "Solution Engineer", "Ashok", "New", "", "Full-time", "Charlotte", "2026-07-27", "", "", "Q3", 40, 0, 0, "Suspended", "", "Sindhu", "External / Sourced", "Linkedln applied", "Green", "", "", "Requirement is currently on hold until resource planning."],
-      [112, "USA", "Support", "Support", "Associate – Payment Production Support (Trainee)", "Anish", "New", "", "Full-time", "Charlotte", "2026-07-01", "2026-07-24", "2026-09-08", "Q3", 58, 18, 50, "Joined", "Rebanta", "Sindhu", "Employee Referral", "Employee Referral - Supro", "Green", "Anish", "", "Rebanta selected and offer has been sent. Waiting on EAD card to arrive. Projected start date is August 31, 2026"],
-      [113, "India", "Support", "Support", "Production Support Engineer", "Mark/Anish", "Replacement", "Muzammil", "Full-time", "India-Remote", "2026-07-01", "2026-07-30", "2026-08-03", "Q3", 22, 22, 24, "Joined", "Siddardha", "Thirukumaran", "Internal", "Internal", "Green", "", "", "Siddardha Joined - 3rd Aug"],
-      [114, "USA", "Support", "Support", "Associate - Payment Production Support(Trainee)", "Ranjith", "New", "", "Full-time", "Charlotte", "2026-07-01", "2026-07-22", "2026-08-03", "Q3", 4, 16, 24, "Joined", "Sharwari", "Sindhu", "Employee Referral", "Employee Referral - Sanket", "Green", "", "", "Sharwari selected"],
-      [115, "USA", "PS", "PS", "Associate - Implementation Analyst 1", "Kanan", "New", "", "Full-time", "Charlotte", "2026-07-10", "2026-08-10", "2026-09-08", "Q3", 51, 22, 43, "Joined", "Pranav", "Sindhu", "Employee Referral", "Employee Referral - Booshan", "Green", "Pradeep", "", "Pranav's offer has been sent. Waiting on EAD card to arrive. Projected start date is August 31, 2026"],
-      [116, "USA", "PS", "PS", "Associate - Implementation Analyst 2", "Kanan", "New", "", "Full-time", "Charlotte", "2026-07-10", "2026-08-18", "2026-09-01", "Q3", 51, 28, 38, "Joined", "Viranchi", "Sindhu", "External / Sourced", "Linkedln Soucing", "Green", "Srihari", "", "Viranchi joined on September 1, 2026"],
-      [117, "USA", "PS", "PS", "FX Business Analyst", "Kanan", "Replacement", "James", "Full-time", "Charlotte", "2026-07-08", "", "", "Q3", 53, 0, 0, "Position Freezed", "", "Sindhu", "External / Sourced", "Linkedln applied", "Green", "", "", "Dinesh has been selected, offer approval is pending and will depend on Dharmesh's resource planning."],
-      [118, "India", "Engineering", "Payments", "Senior Software Engineer", "Vijay", "Replacement", "Maniprathap", "Full-time", "Pune", "2026-07-27", "", "", "Q3", 40, 0, 0, "Position Freezed", "", "Andleeb", "Not Specified", "", "Green", "", "", "Vishal AI round, if selected the offer approval will on hold until resource capacity  plan is finalized and shared\u200b, Gaurav AI round rejected"],
-      [119, "India", "Engineering", "Payments", "Application Architect", "Vijay", "Replacement", "Shankar", "Full-time", "Chennai", "2026-08-13", "", "", "Q3", 27, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Hiring request not approved by Karuna"],
-      [120, "India", "Engineering", "Payments", "Senior Software Engineer", "Vijay", "Replacement", "Ganesh k", "Full-time", "Pune", "2026-08-10", "", "", "Q3", 30, 0, 0, "Position Freezed", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Interview are slowed down until resource capacity plan is finalized and shared \u200b"],
-      [121, "India", "Engineering", "Payments", "Associate Software Engineer", "Vijay", "Replacement", "Shubham J", "Full-time", "Pune", "2026-07-27", "", "", "Q3", 40, 0, 0, "Position Freezed", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Ankit is on AI round, if selected the offer approval will on hold until resource capacity plan is finalized and shared\u200b"],
-      [122, "USA", "PS", "Account", "Business Analyst", "Ashok", "New", "", "Full-time", "Charlotte", "2026-07-31", "", "", "Q3", 36, 0, 0, "Position Freezed", "", "Sindhu", "Not Specified", "", "Green", "", "", "Requirement is currently on hold until resource planning."],
-      [123, "USA", "PS", "Account", "Project Manager", "Ashok", "New", "", "Full-time", "Charlotte", "2026-07-31", "2026-09-16", "2026-10-05", "Q3", 36, 34, 47, "Offer Approval", "Rabhina", "Sindhu", "External / Sourced", "Linkedln Soucing", "Green", "Balaji Balamurugan", "", "Offered Rabhina, Aswin on hold"],
-      [124, "India", "QA", "Payments", "Senior QA Analyst", "Karuna", "Replacement", "Pankaj", "Full-time", "Pune", "2026-08-17", "", "", "Q3", 25, 0, 0, "Position Freezed", "Prathamesh Salunkhe", "Unassigned", "Not Specified", "", "Green", "", "", "Prathamesh (Immediate) offer on hold until resource capacity plan is finalized and shared\u200b"],
-      [125, "India", "Technology", "Technology", "IT Admin", "Supro", "New", "", "Full-time", "Pune", "2026-08-14", "2026-09-07", "2026-09-08", "Q3", 17, 17, 18, "Joined", "Mayur", "Unassigned", "Not Specified", "", "Green", "", "", "Mayur - DOJ 8th September"],
-      [126, "India", "Delivery", "PS", "Delivery Manager", "Kanan", "Replacement", "Satyavir/Kishore T", "Full-time", "Pune", "2026-08-05", "2026-08-13", "2026-08-17", "Q3", 7, 7, 9, "Joined", "Kishore T", "Andleeb", "Employee Referral", "Emp Ref", "Green", "", "Sourcing", "Kishore offered - DOJ 17th August"],
-      [127, "India", "Engineering", "Payments", "Senior Software Engineer", "Vijay", "Replacement", "Prachi", "Full-time", "Pune", "2026-08-11", "", "", "Q3", 29, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Interview are slowed down until resource capacity plan is finalized and shared \u200b"],
-      [128, "USA", "PS", "PS", "Business Analyst Payment", "Kanan", "Replacement", "Bhavana", "Full-time", "Charlotte", "2026-08-13", "", "", "Q3", 3, 0, 0, "Position Freezed", "", "Sindhu", "External / Sourced", "Linkedln Soucing", "Green", "", "", "Sujith has been selected, offer approval is pending and will depend on Dharmesh's resource planning."],
-      [129, "India", "Support", "Support", "Production Support Engineer ( Payments)", "Anish", "Replacement", "Kapil", "Full-time", "Remote", "2026-08-14", "", "", "Q3", 26, 0, 0, "HR Interview", "", "Unassigned", "Not Specified", "", "Green", "", "", "Mahendra HR Discussion"],
-      [130, "India", "Engineering", "Digital", "Associate Software Engineer", "Sajeesh", "Replacement", "Urvashi", "Full-time", "Pune", "2026-08-17", "", "", "Q3", 25, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Urvashi is planned to moved to Payments team - Performance Engineer role\u200b"],
-      [131, "India", "Finance", "Finance", "Account Executive", "Dharani", "Replacement", "Venkatesan", "Full-time", "Chennai", "2026-08-17", "", "", "Q3", 25, 0, 0, "Initial Interview", "", "Unassigned", "Not Specified", "", "Green", "", "", "3 L1 Interviews scheduled (Sudhakar, Shanmugam & Mahendra)"],
-      [132, "USA", "Engineering", "AI", "Associate AI Engineer", "", "New", "", "Full-time", "Charlotte", "2026-08-21", "", "", "Q3", 21, 0, 0, "Suspended", "", "Sindhu", "Not Specified", "", "Green", "", "", ""],
-      [133, "India", "Engineering", "Digital", "Associate Software Engineer", "Sajeesh", "Replacement", "Sai Shree", "Full-time", "Chennai", "2026-08-17", "", "", "Q3", 25, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "The Requirement is currently on hold until resource capacity plan is finalized and shared\u200b"],
-      [134, "India", "Technology", "Technology", "Junior IT Admin", "Supro", "New", "", "Full-time", "Chennai", "2026-08-17", "", "", "Q3", 25, 0, 0, "Initial Interview", "", "Thirukumaran", "Not Specified", "", "Green", "", "", "Rakesh - kept on hold by Amit wants to interview few more candidates and finalize (Immediate joiners are scheduled)"],
-      [135, "India", "QA", "Payments", "Associate QA", "Vijay", "Replacement", "Gaurav D", "Full-time", "Pune", "2026-08-14", "", "", "Q3", 26, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "The Requirement is currently on hold until resource capacity plan is finalized and shared\u200b"],
-      [136, "India", "Support", "Support", "Production Support Engineer ( Payments)", "Anish", "Replacement", "Prince", "Full-time", "Remote", "2026-08-28", "", "", "Q3", 16, 0, 0, "Initial Interview", "", "Unassigned", "Not Specified", "", "Green", "", "", "Initial Interviews : Mahendra , Yogesh\u200b"],
-      [137, "India", "HR", "HR", "Senior HR Manager", "Aarthie", "Replacement", "Bharathkumar  M", "Full-time", "Chennai", "2026-08-17", "2026-09-21", "2026-09-23", "Q3", 25, 26, 28, "Offered", "Vishnukumar", "Unassigned", "External / Sourced", "External", "Green", "", "Sourcing", ""],
-      [138, "India", "Marketing", "GTM", "Director Marketing", "Suja", "New", "", "Full-time", "Remote", "2026-08-31", "2026-09-05", "2026-09-16", "Q3", 15, 5, 13, "Offered", "Indu k", "Unassigned", "Not Specified", "", "Green", "", "", ""],
-      [139, "India", "Marketing", "GTM", "Marketing Manager", "Suja", "New", "", "Full-time", "Remote", "2026-08-31", "2026-09-15", "2026-09-21", "Q3", 15, 12, 16, "Offered", "Karthick", "Unassigned", "Not Specified", "", "Green", "", "", "Karthick - Offer in progress"],
-      [140, "India", "Engineering", "Payments", "Associate Software Engineer", "Vijay", "Replacement", "Pradyumna", "Full-time", "Pune", "2026-09-07", "", "", "Q3", 10, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "The Requirement is currently on hold until resource capacity plan is finalized and shared\u200b"],
-      [141, "India", "Engineering", "Payments", "Associate Software Engineer", "Vijay", "Replacement", "Yogesh Y", "Full-time", "Pune", "2026-09-07", "", "", "Q3", 10, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "The Requirement is currently on hold until resource capacity plan is finalized and shared\u200b"],
-      [142, "India", "Engineering", "Payments", "Associate Software Engineer", "Vijay", "Replacement", "Vikrant J", "Full-time", "Pune", "2026-09-07", "", "", "Q3", 10, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "The Requirement is currently on hold until resource capacity plan is finalized and shared\u200b"],
-      [143, "India", "Engineering", "Payments", "Software Engineer", "Vijay", "Replacement", "Bhavik P", "Full-time", "Pune", "2026-09-09", "", "", "Q3", 8, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "The Requirement is currently on hold until resource capacity plan is finalized and shared\u200b"],
-      [144, "India", "DevOps", "DevOps", "Senior DevOps Engineer", "Manoj", "Replacement", "Prathamesh", "Full-time", "Pune/Chennai", "2026-09-03", "", "", "Q3", 12, 0, 0, "Sourcing", "", "Unassigned", "Not Specified", "", "Green", "", "", "Sourcing in progress"],
-      [145, "India", "Delivery", "PS", "Delivery Manager", "Kanan", "Replacement", "Satyavir/Kishore T", "Full-time", "Pune", "2026-09-07", "", "", "Q3", 10, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Sourcing in progress"],
-      [146, "India", "Engineering", "PS", "Senior Software Engineer", "Kanan", "Replacement", "Nitin", "Full-time", "Pune", "2026-09-14", "", "", "Q3", 5, 0, 0, "Position Freezed", "", "Unassigned", "Not Specified", "", "Green", "", "", "Sourcing in progress"]
-    ];
-
     let masterRecords = [];
     const filterState = {
       geo: 'ALL', quarter: 'ALL', status: 'ALL', channel: 'ALL',
@@ -979,8 +771,8 @@
     const CHALLENGES_DATA = [
       { geo: "India", dept: "Infosec", head: "Supro", title: "Infosec Analyst Offer Declines & Notice Periods", bottleneck: "3 candidates (Swapnil, Nitesh, Gauresh) declined offers. Limited pool of candidates with short notice.", solution: "Opened search to specialized consulting firms. Schedule the interview with shorter notice period.", tagGeo: "bg-indigo-500/20 text-indigo-700 dark:text-indigo-300" },
       { geo: "India", dept: "Payments", head: "Ramesh", title: "Project Manager Drop-offs & WFO Preference", bottleneck: "2 candidates (Bhavik/Harsh) declined our offer. High Notice period candidates. Candidates preferred only working in office.", solution: "Shared the role with the consulting firms. Ex-employee (Naveen) scheduled with Ramesh this week Friday.", tagGeo: "bg-indigo-500/20 text-indigo-700 dark:text-indigo-300" },
-      { geo: "USA", dept: "Finance", head: "Booshan", title: "Chief Financial Officer (CFO) Strategic Search", bottleneck: "The CFO search yielded limited qualified candidates, with the talent pool failing to meet the strategic and technical requirements of the role.", solution: "Partner with a specialized executive search firm to broaden the CFO candidate pipeline and access passive, high-caliber talent.", tagGeo: "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300" },
-      { geo: "USA", dept: "DevOps", head: "Manoj S.", title: "DevOps Technical Competency & Integrity Concerns", bottleneck: "Current applicants are either demonstrating indications of interview integrity concerns or are failing to meet required technical competencies for the role.", solution: "We plan to expand visibility on LinkedIn as an immediate next step and will evaluate engaging a third-party recruiting firm.", tagGeo: "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300" }
+      { geo: "USA", dept: "Finance", head: "Booshan", title: "Chief Financial Officer (CFO) Strategic Search", bottleneck: "The CFO search yielded limited qualified candidates, with the talent pool failing to meet the strategic requirements.", solution: "Partner with a specialized executive search firm to broaden the CFO candidate pipeline.", tagGeo: "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300" },
+      { geo: "USA", dept: "DevOps", head: "Manoj S.", title: "DevOps Technical Competency & Integrity Concerns", bottleneck: "Current applicants are either demonstrating interview integrity concerns or failing to meet technical competencies.", solution: "Expand visibility on LinkedIn and engage a third-party recruiting firm.", tagGeo: "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300" }
     ];
 
     function initTheme() {
@@ -1002,23 +794,24 @@
     }
 
     window.addEventListener('DOMContentLoaded', async () => {
-  initTheme();
-  try {
-    const response = await fetch('data.json');
-    if (response.ok) {
-      masterRecords = await response.json();
-    } else {
-      throw new Error('Failed to load data.json');
-    }
-  } catch (err) {
-    console.warn("Could not load data.json, using fallback records.", err);
-  }
+      initTheme();
+      try {
+        const response = await fetch('data.json');
+        if (response.ok) {
+          masterRecords = await response.json();
+        } else {
+          throw new Error('Failed to load data.json');
+        }
+      } catch (err) {
+        console.warn("Could not load data.json, using empty array.", err);
+        masterRecords = [];
+      }
 
-  document.getElementById('dataTimestamp').textContent = masterRecords.length + ' Master Requisitions';
-  populateDropdowns();
-  applyFiltersAndRender();
-  lucide.createIcons();
-});
+      document.getElementById('dataTimestamp').textContent = masterRecords.length + ' Master Requisitions';
+      populateDropdowns();
+      applyFiltersAndRender();
+      lucide.createIcons();
+    });
 
     function switchTab(tabName) {
       document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -1199,25 +992,32 @@
       const aging61to90 = data.filter(d => d.aging > 60 && d.aging <= 90).length;
       const aging90Plus = data.filter(d => d.aging > 90).length;
 
-      const e0 = document.getElementById('aging0to30'); if(e0) e0.textContent = aging0to30;
-      const e30 = document.getElementById('aging31to60'); if(e30) e30.textContent = aging31to60;
-      const e60 = document.getElementById('aging61to90'); if(e60) e60.textContent = aging61to90;
-      const e90 = document.getElementById('aging90Plus'); if(e90) e90.textContent = aging90Plus;
+      document.getElementById('aging0to30').textContent = aging0to30;
+      document.getElementById('aging31to60').textContent = aging31to60;
+      document.getElementById('aging61to90').textContent = aging61to90;
+      document.getElementById('aging90Plus').textContent = aging90Plus;
     }
 
     function getGridColor() { return document.documentElement.classList.contains('dark') ? '#1e293b' : '#e2e8f0'; }
     function getTickColor() { return document.documentElement.classList.contains('dark') ? '#94a3b8' : '#64748b'; }
 
+    // RENDER CHARTS (Full 12 Months Jan - Dec)
     function renderAllCharts(data) {
       const ctxM = document.getElementById('monthlyJoinersChart');
       if (ctxM) {
         if (charts.monthly) charts.monthly.destroy();
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
-        const indM = Array(9).fill(0), usaM = Array(9).fill(0);
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const indM = Array(12).fill(0), usaM = Array(12).fill(0);
         data.filter(d => d.status === 'Joined').forEach(d => {
           if (d.join) {
-            const m = parseInt(d.join.split('-')[1], 10) - 1;
-            if (m >= 0 && m < 9) { if (d.geo === 'India') indM[m]++; else usaM[m]++; }
+            const parts = d.join.split('-');
+            if (parts.length >= 2) {
+              const m = parseInt(parts[1], 10) - 1;
+              if (m >= 0 && m < 12) {
+                if (d.geo === 'India') indM[m]++;
+                else if (d.geo === 'USA') usaM[m]++;
+              }
+            }
           }
         });
         charts.monthly = new Chart(ctxM, {
@@ -1237,7 +1037,7 @@
       if (ctxD) {
         if (charts.dept) charts.dept.destroy();
         const counts = {};
-        data.forEach(d => counts[d.dept] = (counts[d.dept] || 0) + 1);
+        data.forEach(d => { if (d.dept) counts[d.dept] = (counts[d.dept] || 0) + 1; });
         const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 6);
         charts.dept = new Chart(ctxD, {
           type: 'bar',
@@ -1322,10 +1122,6 @@
       if (!container) return;
       container.innerHTML = '';
       const filtered = CHALLENGES_DATA.filter(c => filterState.geo === 'ALL' || c.geo === filterState.geo);
-      if (filtered.length === 0) {
-        container.innerHTML = `<div class="col-span-2 text-center py-10 text-slate-400">No specific executive challenges logged for this region filter.</div>`;
-        return;
-      }
       filtered.forEach(c => {
         container.innerHTML += `
           <div class="bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-xl p-4.5 space-y-3 p-5">
@@ -1357,8 +1153,7 @@
       if (!tbody) return;
       tbody.innerHTML = '';
       const critical = data.filter(d => d.aging > 60).sort((a, b) => b.aging - a.aging);
-      const badge = document.getElementById('criticalTableBadge');
-      if (badge) badge.textContent = `${critical.length} Positions`;
+      document.getElementById('criticalTableBadge').textContent = `${critical.length} Positions`;
 
       if (critical.length === 0) {
         tbody.innerHTML = `<tr><td colspan="9" class="text-center py-6 text-slate-400">No critical aging positions match current filter.</td></tr>`;
@@ -1631,107 +1426,6 @@
       document.getElementById('detailModal').classList.add('flex');
     }
     function closeDetailModal() { document.getElementById('detailModal').classList.add('hidden'); document.getElementById('detailModal').classList.remove('flex'); }
-    function openSyncModal() { document.getElementById('syncModal').classList.remove('hidden'); document.getElementById('syncModal').classList.add('flex'); }
-    function closeSyncModal() { document.getElementById('syncModal').classList.add('hidden'); document.getElementById('syncModal').classList.remove('flex'); }
-    
-    // Robust Excel File Upload Handler
-    function handleFileUpload(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const statusEl = document.getElementById('syncStatus');
-      if (statusEl) statusEl.textContent = 'Reading Excel file...';
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        try {
-          const data = new Uint8Array(e.target.result);
-          const workbook = XLSX.read(data, { type: 'array', cellDates: true });
-          
-          let targetSheetName = workbook.SheetNames.find(name => 
-            name.toLowerCase().includes('master') || name.toLowerCase().includes('2026')
-          );
-          if (!targetSheetName && workbook.SheetNames.length > 0) {
-            targetSheetName = workbook.SheetNames[0];
-          }
-
-          const worksheet = workbook.Sheets[targetSheetName];
-          const rawData = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
-          
-          if (!rawData || rawData.length === 0) {
-            alert("The selected sheet appears to be empty.");
-            return;
-          }
-
-          let headerRowIdx = 0;
-          for (let i = 0; i < Math.min(10, rawData.length); i++) {
-            const rowStr = rawData[i].map(cell => String(cell).toLowerCase()).join(" ");
-            if (rowStr.includes("positions") || rowStr.includes("geo") || rowStr.includes("status") || rowStr.includes("sr no")) {
-              headerRowIdx = i;
-              break;
-            }
-          }
-
-          const parsedData = XLSX.utils.sheet_to_json(worksheet, { range: headerRowIdx, defval: "" });
-          if (parsedData.length === 0) {
-            alert("Could not extract rows from the Excel sheet.");
-            return;
-          }
-
-          masterRecords = parsedData
-            .filter(row => row['Positions'] || row['Geo'] || row['Status'] || row['Sr No'])
-            .map((row, index) => ({
-              id: Number(row['Sr No'] || row['id'] || (index + 1)),
-              geo: String(row['Geo'] || 'India').trim(),
-              dept: String(row['Department'] || row['Practice'] || 'General').trim(),
-              squad: String(row['Squads'] || row['Project'] || '-').trim(),
-              pos: String(row['Positions'] || 'Unnamed Position').trim(),
-              head: String(row['Dept Head'] || '-').trim(),
-              type: String(row['New/Replacement'] || 'New').trim(),
-              replaced: String(row['Replaced Employee Name'] || row['Replaced Employee'] || '').trim(),
-              empType: String(row['Full-Time/Consultant'] || 'Full-time').trim(),
-              loc: String(row['Hiring Location'] || '-').trim(),
-              open: parseExcelDate(row['Position Open Date']),
-              offer: parseExcelDate(row['Date Offered']),
-              join: parseExcelDate(row['Joining Date']),
-              q: String(row['Quarter Joining'] || 'Q1').trim(),
-              aging: Number(row['Aging (Days)'] || 0),
-              timeToOffer: Number(row['Position Offered'] || 0),
-              timeToClose: Number(row['Position Closed'] || 0),
-              status: String(row['Status'] || 'Open').trim(),
-              cand: String(row['Offered Candidates'] || '').trim(),
-              rec: String(row['Recruiter'] || row['Recruiter Name'] || 'Unassigned').trim(),
-              sourceChannel: String(row['Applied/ Sourced/ Reffered (Internal/External)'] || 'External / Sourced').trim(),
-              sourceDetail: '',
-              rag: String(row['RAG Status'] || 'Green').trim(),
-              buddy: String(row['Buddy - Onboarding'] || '').trim(),
-              backup: String(row['Back-up Plans'] || '').trim(),
-              comm: String(row['Comments'] || row['Remarks '] || '').trim()
-            }));
-
-          applyFiltersAndRender();
-          if (statusEl) statusEl.textContent = `Successfully loaded ${masterRecords.length} records!`;
-          setTimeout(() => closeSyncModal(), 1500);
-          alert(`Successfully loaded ${masterRecords.length} requisitions from sheet: "${targetSheetName}"!`);
-
-        } catch (err) {
-          console.error("Error parsing Excel file:", err);
-          alert("Failed to parse Excel file. Please ensure it is a valid .xlsx or .xls file.");
-          if (statusEl) statusEl.textContent = 'Parse error.';
-        }
-      };
-      reader.readAsArrayBuffer(file);
-    }
-
-    function parseExcelDate(value) {
-      if (!value) return '';
-      if (value instanceof Date) return value.toISOString().split('T')[0];
-      if (typeof value === 'number') {
-        const utcDays = Math.floor(value - 25569);
-        const dateObj = new Date(utcDays * 86400 * 1000);
-        return !isNaN(dateObj.getTime()) ? dateObj.toISOString().split('T')[0] : String(value);
-      }
-      return String(value);
-    }
 
     function exportFilteredCSV() {
       const data = getFilteredData();
@@ -1749,6 +1443,8 @@
 
     function populateDropdowns() {
       const d = document.getElementById('deptSelect'), r = document.getElementById('recruiterSelect');
+      d.innerHTML = '<option value="ALL">All Departments</option>';
+      r.innerHTML = '<option value="ALL">All Recruiters</option>';
       [...new Set(masterRecords.map(x => x.dept))].filter(Boolean).sort().forEach(x => { d.add(new Option(x, x)); });
       [...new Set(masterRecords.map(x => x.rec))].filter(Boolean).sort().forEach(x => { r.add(new Option(x, x)); });
     }
