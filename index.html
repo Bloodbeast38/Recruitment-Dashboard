@@ -140,7 +140,7 @@
           </span>
           <button onclick="setChannelFilter('ALL')" id="ch-ALL" class="ch-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition bg-brand-600 text-white shadow-sm">All</button>
           <button onclick="setChannelFilter('Internal')" id="ch-Internal" class="ch-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800">🔄 Internal</button>
-          <button onclick="setChannelFilter('Employee Referral')" id="ch-Employee Referral" class="ch-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800">🤝 Referral</button>
+          <button onclick="setChannelFilter('Employee Referral')" id="ch-EmployeeReferral" class="ch-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800">🤝 Referral</button>
           <button onclick="setChannelFilter('External / Sourced')" id="ch-External / Sourced" class="ch-btn px-2.5 py-1 text-xs font-semibold rounded-lg transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800">🌐 External</button>
         </div>
 
@@ -849,14 +849,18 @@
       if (btn) { btn.classList.add('bg-brand-600', 'text-white', 'shadow-sm'); btn.classList.remove('text-slate-600', 'dark:text-slate-400'); }
       applyFiltersAndRender();
     }
-    function setChannelFilter(ch) {
+        function setChannelFilter(ch) {
       filterState.channel = ch;
       document.querySelectorAll('.ch-btn').forEach(b => {
         b.classList.remove('bg-brand-600', 'text-white', 'shadow-sm');
         b.classList.add('text-slate-600', 'dark:text-slate-400');
       });
-      const btn = document.getElementById('ch-' + ch);
-      if (btn) { btn.classList.add('bg-brand-600', 'text-white', 'shadow-sm'); btn.classList.remove('text-slate-600', 'dark:text-slate-400'); }
+      const safeId = 'ch-' + ch.replace(/\s+/g, '');
+      const btn = document.getElementById(safeId) || document.getElementById('ch-' + ch);
+      if (btn) { 
+        btn.classList.add('bg-brand-600', 'text-white', 'shadow-sm'); 
+        btn.classList.remove('text-slate-600', 'dark:text-slate-400'); 
+      }
       applyFiltersAndRender();
     }
     function setDeptFilter(dept) { filterState.dept = dept; applyFiltersAndRender(); }
