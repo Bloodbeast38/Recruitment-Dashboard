@@ -1001,18 +1001,24 @@
       if (label) label.textContent = isDark ? 'Light' : 'Dark';
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      initTheme();
-      masterRecords = COMPACT_DATA.map(row => {
-        const obj = {};
-        COMPACT_KEYS.forEach((k, i) => obj[k] = row[i]);
-        return obj;
-      });
-      document.getElementById('dataTimestamp').textContent = masterRecords.length + ' Master Requisitions';
-      populateDropdowns();
-      applyFiltersAndRender();
-      lucide.createIcons();
-    });
+    window.addEventListener('DOMContentLoaded', async () => {
+  initTheme();
+  try {
+    const response = await fetch('data.json');
+    if (response.ok) {
+      masterRecords = await response.json();
+    } else {
+      throw new Error('Failed to load data.json');
+    }
+  } catch (err) {
+    console.warn("Could not load data.json, using fallback records.", err);
+  }
+
+  document.getElementById('dataTimestamp').textContent = masterRecords.length + ' Master Requisitions';
+  populateDropdowns();
+  applyFiltersAndRender();
+  lucide.createIcons();
+});
 
     function switchTab(tabName) {
       document.querySelectorAll('.tab-btn').forEach(btn => {
