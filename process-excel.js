@@ -24,15 +24,17 @@ function findVal(row, keys, defaultVal = '') {
     return defaultVal;
 }
 
-function getQuarter(dateStr) {
-    if (!dateStr) return 'Q1';
+function getQuarterAndMonth(dateStr) {
+    if (!dateStr) return { q: 'Q1', monthIdx: 0 };
     const d = new Date(dateStr);
-    if (isNaN(d.getTime())) return 'Q1';
-    const m = d.getMonth() + 1;
-    if (m >= 1 && m <= 3) return 'Q1';
-    if (m >= 4 && m <= 6) return 'Q2';
-    if (m >= 7 && m <= 9) return 'Q3';
-    return 'Q4';
+    if (isNaN(d.getTime())) return { q: 'Q1', monthIdx: 0 };
+    const m = d.getMonth() + 1; // 1 to 12
+    const monthIdx = d.getMonth(); // 0 to 11
+    let q = 'Q1';
+    if (m >= 4 && m <= 6) q = 'Q2';
+    else if (m >= 7 && m <= 9) q = 'Q3';
+    else if (m >= 10 && m <= 12) q = 'Q4';
+    return { q, monthIdx };
 }
 
 const masterRecords = parsedData
@@ -43,11 +45,28 @@ const masterRecords = parsedData
     })
     .map((row, index) => {
         const joinDate = parseDate(findVal(row, ['Joining Date', 'Joined Date']));
+        const dateInfo = getQuarterAndMonth(joinDate);
+        
         const explicitQ = String(findVal(row, ['Quarter Joining', 'Quarter'], '')).trim();
-        const finalQ = (explicitQ && explicitQ !== '' && explicitQ !== 'undefined') ? explicitQ : getQuarter(joinDate);
+        const finalQ = (explicitQ && explicitQ !== '' && explicitQ !== 'undefined') ? explicitQ : dateInfo.q;
         
         let statusVal = String(findVal(row, ['Status', 'Hiring Status'], 'Open')).trim();
-        if (!statusVal || statusVal === '') statusVal = 'Open';
+        if (!statusVal) statusVal = 'Open';
+
+        // Future-proof autonomous channel & referral classifier
+        let rawSource = String(findVal(row, ['Applied/ Sourced/ Reffered (Internal/External)', 'Channel', 'Source'], 'External')).trim();
+        let normalizedSource = 'External / Sourced';
+        const lowerSource = rawSource.toLowerCase();
+        
+        if (lowerSource.includes('ref') || lowerSource.includes('referral')) {
+            normalizedSource = 'Employee Referral';
+        } else if (lowerSource.includes('internal') || lowerSource.includes('ijp')) {
+            normalizedSource = 'Internal';
+        } else if (lowerSource.includes('external') || lowerSource.includes('linkedin') || lowerSource.includes('applied') || lowerSource.includes('sourcing') || lowerSource.includes('whitley')) {
+            normalizedSource = 'External / Sourced';
+        } else if (rawSource && rawSource !== '') {
+            normalizedSource = rawSource; // Auto-capture any new custom source channel dynamically
+        }
 
         return {
             id: Number(findVal(row, ['Sr No', 'id', 'No'], index + 1)),
@@ -63,6 +82,7 @@ const masterRecords = parsedData
             open: parseDate(findVal(row, ['Position Open Date', 'Open Date'])),
             offer: parseDate(findVal(row, ['Date Offered', 'Offer Date'])),
             join: joinDate,
+            monthIdx: dateInfo.monthIdx,
             q: finalQ,
             aging: Number(findVal(row, ['Aging (Days)', 'Aging'], 0)),
             timeToOffer: Number(findVal(row, ['Position Offered', 'Time to Offer'], 0)),
@@ -70,8 +90,8 @@ const masterRecords = parsedData
             status: statusVal,
             cand: String(findVal(row, ['Offered Candidates', 'Candidate Name', 'Candidate'], '')).trim(),
             rec: String(findVal(row, ['Recruiter', 'Recruiter Name'], 'Unassigned')).trim(),
-            sourceChannel: String(findVal(row, ['Applied/ Sourced/ Reffered (Internal/External)', 'Channel', 'Source'], 'External / Sourced')).trim(),
-            sourceDetail: '',
+            sourceChannel: normalizedSource,
+            sourceDetail: rawSource,
             rag: String(findVal(row, ['RAG Status', 'RAG'], 'Green')).trim(),
             buddy: String(findVal(row, ['Buddy - Onboarding', 'Buddy'], '')).trim(),
             backup: String(findVal(row, ['Back-up Plans', 'Backup'], '')).trim(),
@@ -80,7 +100,7 @@ const masterRecords = parsedData
     });
 
 fs.writeFileSync('data.json', JSON.stringify(masterRecords, null, 2));
-console.log(`Successfully compiled ${masterRecords.length} records into data.json.`);
+console.log(`Successfully compiled ${masterRecords.length} records into data.json with autonomous mapping.`);
 
 function parseDate(value) {
     if (!value) return '';
