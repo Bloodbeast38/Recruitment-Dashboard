@@ -28,8 +28,8 @@ function getQuarterAndMonth(dateStr) {
     if (!dateStr) return { q: 'Q1', monthIdx: 0 };
     const d = new Date(dateStr);
     if (isNaN(d.getTime())) return { q: 'Q1', monthIdx: 0 };
-    const m = d.getMonth() + 1; // 1 to 12
-    const monthIdx = d.getMonth(); // 0 to 11
+    const m = d.getMonth() + 1;
+    const monthIdx = d.getMonth();
     let q = 'Q1';
     if (m >= 4 && m <= 6) q = 'Q2';
     else if (m >= 7 && m <= 9) q = 'Q3';
@@ -53,8 +53,7 @@ const masterRecords = parsedData
         let statusVal = String(findVal(row, ['Status', 'Hiring Status'], 'Open')).trim();
         if (!statusVal) statusVal = 'Open';
 
-        // Future-proof autonomous channel & referral classifier
-                let rawSource = String(findVal(row, ['Applied/ Sourced/ Reffered (Internal/External)', 'Applied/ Sourced/ Referred (Internal/External)', 'Channel', 'Source'], 'External')).trim();
+        let rawSource = String(findVal(row, ['Applied/ Sourced/ Reffered (Internal/External)', 'Applied/ Sourced/ Referred (Internal/External)', 'Channel', 'Source'], 'External')).trim();
         let normalizedSource = 'External / Sourced';
         const lowerSource = rawSource.toLowerCase();
         
@@ -62,10 +61,10 @@ const masterRecords = parsedData
             normalizedSource = 'Employee Referral';
         } else if (lowerSource.includes('internal') || lowerSource.includes('ijp')) {
             normalizedSource = 'Internal';
-        }     } else if (lowerSource.includes('external') || lowerSource.includes('linkedin') || lowerSource.includes('linkedln') || lowerSource.includes('applied') || lowerSource.includes('sourcing') || lowerSource.includes('whitley')) {
-        normalizedSource = 'External / Sourced';
+        } else if (lowerSource.includes('external') || lowerSource.includes('linkedin') || lowerSource.includes('linkedln') || lowerSource.includes('applied') || lowerSource.includes('sourcing') || lowerSource.includes('whitley')) {
+            normalizedSource = 'External / Sourced';
         } else if (rawSource && rawSource !== '') {
-            normalizedSource = rawSource; // Auto-capture any new custom source channel dynamically
+            normalizedSource = rawSource;
         }
 
         return {
@@ -100,7 +99,7 @@ const masterRecords = parsedData
     });
 
 fs.writeFileSync('data.json', JSON.stringify(masterRecords, null, 2));
-console.log(`Successfully compiled ${masterRecords.length} records into data.json with autonomous mapping.`);
+console.log(`Successfully compiled ${masterRecords.length} records into data.json.`);
 
 function parseDate(value) {
     if (!value) return '';
